@@ -149,6 +149,12 @@ VALUES
   ('In Progress'), -- ID 3
   ('Done'); -- ID 4
 
-INSERT INTO tasks (title, task_description, priority, status_id, project_id)
+INSERT INTO priority (status)
 VALUES 
-  ('Seeds', 'Making api seeds', 'High', 3, 1);
+  ('None'), -- ID 1
+  ('Low'), -- ID 2
+  ('High'), -- ID 3
+
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+VALUES 
+  ('Seeds', 'Making api seeds', 3, 3, 1);

@@ -26,5 +26,11 @@ name AS (
 )
 INSERT INTO kanban_status (status)
 
-INSERT INTO tasks (title, task_description, priority, status_id, project_id)
-VALUES ('Seeds', 'Making api seeds', 'High', 3, 1)
+INSERT INTO priority (status)
+VALUES 
+  ('None'), -- ID 1
+  ('Low'), -- ID 2
+  ('High'), -- ID 3
+
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+VALUES ('Seeds', 'Making api seeds', 3, 3, 1)

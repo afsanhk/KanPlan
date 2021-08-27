@@ -26,11 +26,16 @@ CREATE TABLE kanban_status (
   status VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE priority (
+  id SERIAL PRIMARY KEY NOT NULL,
+  priority VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
   task_description VARCHAR(255) NOT NULL,
-  priority VARCHAR(255) NOT NULL,
+  priority_id INTEGER REFERENCES priority(id) ON DELETE CASCADE,
   status_id INTEGER REFERENCES kanban_status(id) ON DELETE CASCADE,
   project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
   plan_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
