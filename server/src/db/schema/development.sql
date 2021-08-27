@@ -153,7 +153,7 @@ INSERT INTO priority (priority_name)
 VALUES 
   ('None'), -- ID 1
   ('Low'), -- ID 2
-  ('High'), -- ID 3
+  ('High'); -- ID 3
 
 INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
 VALUES 
