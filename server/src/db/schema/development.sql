@@ -203,5 +203,20 @@ VALUES
   (17,44);
 
 INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
-VALUES 
-  ('Seeds', 'Making api seeds', 3, 3, 1);
+VALUES
+-- Kanplan
+  -- To-Do (ID1)
+  ('API Routes', 'Set up API Routes', 3, 1, 1),
+  ('React Components', 'Build react components', 2, 1, 1),
+  ('Kanban DnD', 'Build Kanban containers and drag and drop', 2, 1, 1),
+  -- Late (ID2)
+  ('Relax', 'Relax a bit', 1, 2, 1),
+  -- In-progress (ID3)
+  ('Seeds', 'Making api seeds', 3, 3, 1),
+  ('Gantt Research', 'Find a good library to use for the gantt chart', 3, 2, 1),
+  ('React Component - Storybook Testing', 'Test components in storybook', 3, 2, 1),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 2, 1),
+  -- Done (ID4)
+  ('ERD', 'Plan data relations with team', 2, 4, 1),
+  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
+  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1);
