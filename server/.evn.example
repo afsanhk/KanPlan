@@ -1,5 +1,5 @@
-PGHOST=
-PGUSER=
-PGDATABASE=
-PGPASSWORD=
-PGPORT=
+PGHOST=localhost
+PGUSER=development
+PGDATABASE=kanplan_development
+PGPASSWORD=development
+PGPORT=5432
