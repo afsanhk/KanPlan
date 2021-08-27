@@ -22,7 +22,7 @@ module.exports = (db) => {
 };
 //
 
-// // Buggy query with 33 tasks and only one project
+// // Buggy query with 33 tasks and only one project -- it is returning for each team member
 // `SELECT projects.*,
 //               users.user_name as manager_name,
 //               array_agg(DISTINCT project_members.user_id) AS team_members,
