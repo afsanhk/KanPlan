@@ -4,18 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js",
+    "error": "TEST_ERROR=true node ./src/index.js",
+    "reset": "psql -U development -d scheduler_development < ./src/db/schema/create.sql && psql -U development -d scheduler_development < ./src/db/schema/development.sql",
+    "test:server": "NODE_ENV=test npm start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
-    "socket.io": "^4.1.3"
+    "pg": "^8.7.1",
+    "socket.io": "^4.1.3",
+    "ws": "^8.2.0"
   }
 }
