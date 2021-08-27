@@ -219,4 +219,24 @@ VALUES
   -- Done (ID4)
   ('ERD', 'Plan data relations with team', 2, 4, 1),
   ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
-  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1);
+  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1),
+
+-- OnlyFriends
+  -- To-Do (ID1)
+  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2),
+  -- Late (ID2)
+  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2),
+  -- In-progress (ID3)
+  ('Figure out the back-end', 'Server no bueno', 2, 3, 2),
+  -- Done (ID4)
+  ('Figure out a name!', 'onlyFrands', 1, 4, 2),
+
+-- DevCommunity 
+  -- To-Do (ID1)
+  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3),
+  -- Late (ID2)
+  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3),
+  -- In-progress (ID3)
+  ('Planning!', 'So many documents so little time.', 2, 3, 3),
+  -- Done (ID4)
+  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
