@@ -149,6 +149,59 @@ VALUES
   ('In Progress'), -- ID 3
   ('Done'); -- ID 4
 
-INSERT INTO tasks (title, task_description, priority, status_id, project_id)
+INSERT INTO priorities (priority_name)
 VALUES 
-  ('Seeds', 'Making api seeds', 'High', 3, 1);
+  ('None'), -- ID 1
+  ('Low'), -- ID 2
+  ('High'); -- ID 3
+
+INSERT INTO project_members(project_id, user_id)
+VALUES
+  (1,1), -- KanPlan
+  (1,2),
+  (1,3),
+  (2,4), -- OF
+  (2,5), 
+  (2,6),
+  (3,7), -- Dev Community
+  (3,8),
+  (4,9), -- Fete 
+  (4,10),
+  (5,11), -- Rosh and Mohammad
+  (5,12),
+  (6,13), -- David, Jamie and Mohamed
+  (6,14),
+  (6,15),
+  (7,16), -- NoshFeast
+  (7,17), 
+  (7,18),
+  (8,19), -- Kathy and Emeka
+  (8,20),
+  (9,21), -- Mona and Sarath
+  (9,22),
+  (10,23), -- Farid and Cameron
+  (10,24),
+  (11,25), -- Sniffles
+  (11,26),
+  (11,27),
+  (12,28), -- RegexViz
+  (12,29), 
+  (13,30), -- Lotify
+  (13,31),
+  (13,32),
+  (14,33), -- Find Shelter 
+  (14,34),
+  (14,35),
+  (15,36), -- hotelCalifornia
+  (15,37), 
+  (15,38),
+  (16,39), -- ssaap 
+  (16,40),
+  (16,41), 
+  (17,42), -- gg
+  (17,43),
+  (17,44);
+
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+VALUES 
+  ('Seeds', 'Making api seeds', 3, 3, 1);
