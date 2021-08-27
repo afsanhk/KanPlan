@@ -149,7 +149,7 @@ VALUES
   ('In Progress'), -- ID 3
   ('Done'); -- ID 4
 
-INSERT INTO priority (status)
+INSERT INTO priority (priority_name)
 VALUES 
   ('None'), -- ID 1
   ('Low'), -- ID 2
