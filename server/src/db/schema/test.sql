@@ -26,7 +26,7 @@ name AS (
 )
 INSERT INTO kanban_status (status)
 
-INSERT INTO priority (status)
+INSERT INTO priority (priority_name)
 VALUES 
   ('None'), -- ID 1
   ('Low'), -- ID 2

@@ -28,7 +28,7 @@ CREATE TABLE kanban_status (
 
 CREATE TABLE priority (
   id SERIAL PRIMARY KEY NOT NULL,
-  priority VARCHAR(255) NOT NULL
+  priority_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE tasks (
