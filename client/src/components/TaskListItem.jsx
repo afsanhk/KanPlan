@@ -11,12 +11,14 @@ import IconButton from '@material-ui/core/IconButton';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
-
 const useStyles = makeStyles({
   listItem: {
     '&:hover': {
       backgroundColor: '#f5f5f5',
     }
+  },
+  icon: {
+    margin: '5px',
   }
 }) 
 
@@ -31,19 +33,18 @@ export default function TaskListItem(props) {
         <ListItemIcon>
 
           {/* onClick will trigger the edit modal */}
-          <IconButton >
-            <EditOutlinedIcon />
+          <IconButton size='small' className={classes.icon}>
+            <EditOutlinedIcon/>
           </IconButton>
 
           {/* onClick will trigger the delete modal */}
-          <IconButton >
-            <DeleteOutlinedIcon />
+          <IconButton size='small' className={classes.icon}>
+            <DeleteOutlinedIcon/>
           </IconButton>
 
         </ListItemIcon>
 
     </ListItem>
-
   )
 }
 

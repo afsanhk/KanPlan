@@ -17,7 +17,7 @@ export default function TaskList(props) {
   })
 
   return (
-    <List component="nav" aria-label="contacts" >
+    <List>
       {parsedTaskList}
     </List>
   )

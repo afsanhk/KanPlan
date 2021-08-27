@@ -5,6 +5,7 @@ import { storiesOf } from "@storybook/react";
 
 import TaskListItem from "./TaskListItem";
 import TaskList from  "./TaskList";
+import HomepageMyWork from  "./HomepageMyWork";
 
 
 const userTasks = [
@@ -24,4 +25,7 @@ storiesOf("TaskListItem", module)
   .add("Initial", () => <TaskListItem title='Test' />)
 
 storiesOf("TaskList", module)
-.add("Initial", () => <TaskList tasks={userTasks} />)
+  .add("Initial", () => <TaskList tasks={userTasks} />)
+
+storiesOf("HomepageMyWork", module)
+  .add("Initial", () => <HomepageMyWork tasks={userTasks} />)
