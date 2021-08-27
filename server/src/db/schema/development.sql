@@ -144,10 +144,10 @@ VALUES
 
 INSERT INTO kanban_status (name)
 VALUES 
-  ('To-Do'),
-  ('Late'),
-  ('In Progress'),
-  ('Done');
+  ('To-Do'), -- ID 1
+  ('Late'), -- ID 2
+  ('In Progress'), -- ID 3
+  ('Done'); -- ID 4
 
 INSERT INTO tasks (title, description, priority, status_id, project_id)
 VALUES 
