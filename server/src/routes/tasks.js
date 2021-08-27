@@ -7,7 +7,8 @@ module.exports = (db) => {
       FROM tasks 
       JOIN priorities ON tasks.priority_id = priorities.id
       JOIN projects ON tasks.project_id = projects.id
-      JOIN kanban_status ON tasks.status_id = kanban_status.id`
+      JOIN kanban_status ON tasks.status_id = kanban_status.id
+      ORDER BY tasks.id`
     ).then(({ rows: tasks }) => {
       response.json(tasks);
     });

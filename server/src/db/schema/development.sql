@@ -75,6 +75,7 @@
 -- JOIN available_interviewers
 -- ON a.day_id = available_interviewers.day_id;
 
+-- Users
 INSERT INTO users (user_name, email)
 VALUES 
   ('TJ Jung', 'thisis@email.com'), -- ID 1
@@ -122,6 +123,7 @@ VALUES
   ('William Wang', 'william@example.com'), -- ID 43
   ('Minghui Tan', 'minghui@example.com'); -- ID 44
 
+-- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES 
   ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
@@ -155,6 +157,7 @@ VALUES
   ('Low'), -- ID 2
   ('High'); -- ID 3
 
+-- Project Members
 INSERT INTO project_members(project_id, user_id)
 VALUES
   (1,1), -- KanPlan
@@ -202,6 +205,86 @@ VALUES
   (17,43),
   (17,44);
 
+-- Tasks
 INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
-VALUES 
-  ('Seeds', 'Making api seeds', 3, 3, 1);
+VALUES
+-- Kanplan
+  -- To-Do (ID1)
+  ('API Routes', 'Set up API Routes', 3, 1, 1),
+  ('React Components', 'Build react components', 2, 1, 1),
+  ('Kanban DnD', 'Build Kanban containers and drag and drop', 2, 1, 1),
+  -- Late (ID2)
+  ('Relax', 'Relax a bit', 1, 2, 1),
+  -- In-progress (ID3)
+  ('Seeds', 'Making api seeds', 3, 3, 1),
+  ('Gantt Research', 'Find a good library to use for the gantt chart', 3, 2, 1),
+  ('React Component - Storybook Testing', 'Test components in storybook', 3, 2, 1),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 2, 1),
+  -- Done (ID4)
+  ('ERD', 'Plan data relations with team', 2, 4, 1),
+  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
+  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1),
+
+-- OnlyFriends
+  -- To-Do (ID1)
+  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2),
+  -- Late (ID2)
+  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2),
+  -- In-progress (ID3)
+  ('Figure out the back-end', 'Server no bueno', 2, 3, 2),
+  -- Done (ID4)
+  ('Figure out a name!', 'onlyFrands', 1, 4, 2),
+
+-- DevCommunity 
+  -- To-Do (ID1)
+  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3),
+  -- Late (ID2)
+  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3),
+  -- In-progress (ID3)
+  ('Planning!', 'So many documents so little time.', 2, 3, 3),
+  -- Done (ID4)
+  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
+
+-- user_tasks
+INSERT INTO user_tasks(task_id, user_id)
+VALUES
+-- KanPlan
+  (1,2),
+  (2,1),
+  (2,2),
+  (2,3),
+  (3,1),
+  (4,1),
+  (4,2),
+  (4,3),
+  (5,1),
+  (5,2),
+  (6,1),
+  (6,2),
+  (7,3),
+  (8,1),
+  (8,2),
+  (9,1),
+  (9,2),
+  (9,3),
+  (10,3),
+  (11,1),
+  (11,2),
+  (11,3),
+-- OnlyFrands
+  (12,4),
+  (12,5),
+  (12,6),
+  (13,4),
+  (13,5),
+  (13,6),
+  (14,4),
+  (14,5),
+  (15,4),
+  (15,5),
+  (15,6),
+-- DevCommunity
+  (16,7),
+  (17,8),
+  (18,7),
+  (19,8);
