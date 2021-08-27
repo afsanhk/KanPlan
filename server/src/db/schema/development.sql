@@ -75,6 +75,7 @@
 -- JOIN available_interviewers
 -- ON a.day_id = available_interviewers.day_id;
 
+-- Users
 INSERT INTO users (user_name, email)
 VALUES 
   ('TJ Jung', 'thisis@email.com'), -- ID 1
@@ -122,6 +123,7 @@ VALUES
   ('William Wang', 'william@example.com'), -- ID 43
   ('Minghui Tan', 'minghui@example.com'); -- ID 44
 
+-- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES 
   ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
@@ -155,6 +157,7 @@ VALUES
   ('Low'), -- ID 2
   ('High'); -- ID 3
 
+-- Project Members
 INSERT INTO project_members(project_id, user_id)
 VALUES
   (1,1), -- KanPlan
@@ -202,6 +205,7 @@ VALUES
   (17,43),
   (17,44);
 
+-- Tasks
 INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
 VALUES
 -- Kanplan
@@ -240,3 +244,5 @@ VALUES
   ('Planning!', 'So many documents so little time.', 2, 3, 3),
   -- Done (ID4)
   ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
+
+  -- user_tasks
