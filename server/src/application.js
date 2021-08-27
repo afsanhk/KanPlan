@@ -43,7 +43,9 @@ module.exports = function application(ENV) {
       .then(([create, seed]) => {
         app.get('/api/debug/reset', (request, response) => {
           db.query(create)
-            .then(() => db.query(seed))
+            .then((result) => {
+              db.query(seed);
+            })
             .then(() => {
               console.log('Database Reset');
               response.status(200).send('Database Reset');
