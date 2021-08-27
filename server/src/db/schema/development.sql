@@ -75,7 +75,7 @@
 -- JOIN available_interviewers
 -- ON a.day_id = available_interviewers.day_id;
 
-INSERT INTO users (name, email)
+INSERT INTO users (user_name, email)
 VALUES 
   ('TJ Jung', 'thisis@email.com'), -- ID 1
   ('Afsanul Khan', '1@1.com'), -- ID 2
@@ -122,7 +122,7 @@ VALUES
   ('William Wang', 'william@example.com'), -- ID 43
   ('Minghui Tan', 'minghui@example.com'); -- ID 44
 
-INSERT INTO projects (name, manager_id, description)
+INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES 
   ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
   ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area'), -- ID 2
@@ -142,13 +142,13 @@ VALUES
   ('Super Secret awesome amazing project', 39, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
   ('gg', 42, 'social platform for reviewing and recommending video games'); -- ID 17
 
-INSERT INTO kanban_status (name)
+INSERT INTO kanban_status (status)
 VALUES 
   ('To-Do'), -- ID 1
   ('Late'), -- ID 2
   ('In Progress'), -- ID 3
   ('Done'); -- ID 4
 
-INSERT INTO tasks (title, description, priority, status_id, project_id)
+INSERT INTO tasks (title, task_description, priority, status_id, project_id)
 VALUES 
   ('Seeds', 'Making api seeds', 'High', 3, 1);
