@@ -5,7 +5,7 @@ module.exports = (db) => {
     db.query(
       `SELECT tasks.*, priority_name, proj_name, status 
       FROM tasks 
-      JOIN priority ON tasks.priority_id = priority.id
+      JOIN priorities ON tasks.priority_id = priorities.id
       JOIN projects ON tasks.project_id = projects.id
       JOIN kanban_status ON tasks.status_id = kanban_status.id`
     ).then(({ rows: tasks }) => {
