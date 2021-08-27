@@ -134,13 +134,13 @@ VALUES
   ('Kathy and Emekas Project', 19, 'TBD'), -- ID 8
   ('Mona and Saraths Project', 21, 'TBD'), -- ID 9
   ('Farid and Camerons Project', 23, 'TBD'), -- ID 10
-  ('SNIFFLES', 3, 'An app to discover other dog owners within your area sharing similar features to dating apps.'), -- ID 11
-  ('RegexViz', 2, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
-  ('Lotify', 3, 'A location-based to-do list - app pops up a reminder when you are near the location.'), -- ID 13
-  ('findShelter', 1, 'A shelter management software - serve the homeless '), -- ID 14
-  ('hotelCalifornia', 1, 'Allows conveners post last minute requests or chat real time with the hotel crue'), -- ID 15
-  ('Super Secret awesome amazing project', 2, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
-  ('gg', 3, 'social platform for reviewing and recommending video games'); -- ID 17
+  ('SNIFFLES', 25, 'An app to discover other dog owners within your area sharing similar features to dating apps.'), -- ID 11
+  ('RegexViz', 28, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
+  ('Lotify', 30, 'A location-based to-do list - app pops up a reminder when you are near the location.'), -- ID 13
+  ('findShelter', 33, 'A shelter management software - serve the homeless '), -- ID 14
+  ('hotelCalifornia', 36, 'Allows conveners post last minute requests or chat real time with the hotel crue'), -- ID 15
+  ('Super Secret awesome amazing project', 39, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
+  ('gg', 42, 'social platform for reviewing and recommending video games'); -- ID 17
 
 INSERT INTO kanban_status (name)
 VALUES 
