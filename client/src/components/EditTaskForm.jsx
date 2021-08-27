@@ -37,7 +37,17 @@ function EditTaskForm(props) {
             />
           </div>
 
-          <div className="task-form-body-dropdowns-date"></div>
+          <div className="task-form-body-dropdowns-date">
+            <label>
+              <h3>Start Date</h3>
+              <input type="text" />
+            </label>
+
+            <label>
+              <h3>End Date</h3>
+              <input type="text" />
+            </label>
+          </div>
 
           <div className="task-form-body-dropdowns-status">
             <Autocomplete
