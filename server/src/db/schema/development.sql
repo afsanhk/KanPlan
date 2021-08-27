@@ -76,12 +76,15 @@
 -- ON a.day_id = available_interviewers.day_id;
 
 INSERT INTO users (name, email)
-Values ('TJ Jung', 'thisis@email.com'),
-  ('Afsanul Khan', 'hello@notmail.com'),
+VALUES 
+  ('TJ Jung', 'thisis@email.com'),
+  ('Afsanul Khan', '1@1.com'),
   ('Veronica Leung', 'chicken@soup.com');
 
+
 INSERT INTO projects (name, manager_id, description)
-VALUES ('KanPlan', 1, 'Project management(not boring!)'),
+VALUES 
+  ('KanPlan', 1, 'Project management(not boring!)'),
   ('Fete', 2, 'TBD'),
   ('Dev Community', 3, 'A social media platform for developers to interact with each other across the globe.'),
   ('onlyFriends', 2, 'A tinder-style app to meet new friends with similar interests in your area'),
@@ -95,10 +98,11 @@ VALUES ('KanPlan', 1, 'Project management(not boring!)'),
   ('gg', 3, 'social platform for reviewing and recommending video games');
 
 INSERT INTO kanban_status (name)
-VALUES ('To-Do'),
-    ('Late'),
-    ('In Progress'),
-    ('Done');
+VALUES 
+  ('To-Do'),
+  ('Late'),
+  ('In Progress'),
+  ('Done');
 
 INSERT INTO tasks (title, description, priority, status_id, project_id)
 VALUES ('Seeds', 'Making api seeds', 'High', 3, 1);
