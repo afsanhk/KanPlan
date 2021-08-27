@@ -77,25 +77,70 @@
 
 INSERT INTO users (name, email)
 VALUES 
-  ('TJ Jung', 'thisis@email.com'),
-  ('Afsanul Khan', '1@1.com'),
-  ('Veronica Leung', 'chicken@soup.com');
-
+  ('TJ Jung', 'thisis@email.com'), -- ID 1
+  ('Afsanul Khan', '1@1.com'), -- ID 2
+  ('Veronica Leung', 'chicken@soup.com'), -- ID 3
+  ('Kleir Miranda', 'kleir@example.com'), -- ID 4
+  ('Mitch Aldrich', 'mitch@example.com'), -- ID 5
+  ('Beatrice Kwan', 'beatrice@example.com'), -- ID 6
+  ('Maggie Zhao', 'maggie@example.com'), -- ID 7
+  ('Eliza Wong', 'eliza@example.com'), -- ID 8
+  ('Sarah Avery', 'sarah@example.com'), -- ID 9
+  ('Matt Banks', 'matt@example.com'), -- ID 10
+  ('Roshanak Akbarifar', 'roshanak@example.com'), -- ID 11
+  ('Mohammad Mozaffari', 'mohammad@example.com'), -- ID 12
+  ('David O', 'david@example.com'), -- ID 13
+  ('Jamie Huff', 'jamie@example.com'), -- ID 14
+  ('Mohamed Ali', 'mohamed@example.com'), -- ID 15
+  ('Cathy Li', 'cathy@example.com'), -- ID 16
+  ('Hadjira Haya', 'hadjira@example.com'), -- ID 17
+  ('Shivani Konuguru', 'shivani@example.com'), -- ID 18
+  ('Kathy Tam', 'kathy@example.com'), -- ID 19
+  ('Emeka Asogwa', 'emeka@example.com'), -- ID 20
+  ('Mona Waseem', 'mona@example.com'), -- ID 21
+  ('Sarath Thampuran', 'sarath@example.com'), -- ID 22
+  ('Farid Asadpour', 'farid@example.com'), -- ID 23
+  ('Cameron Uniac', 'cameron@example.com'), -- ID 24
+  ('Anthony Chan', 'anthony@example.com'), -- ID 25
+  ('Catherine Hiu', 'catherine@example.com'), -- ID 26
+  ('Lawrence Lin', 'lawrence@example.com'), -- ID 27
+  ('Alex Mozgovoy', 'alex@example.com'), -- ID 28
+  ('Yves Candau', 'yves@example.com'), -- ID 29
+  ('Janice Han', 'janice@example.com'), -- ID 30
+  ('Luana Teixeira', 'luana@example.com'), -- ID 31
+  ('Raphaella Robles', 'raphaella@example.com'), -- ID 32
+  ('Shaun Purslow', 'shaun@example.com'), -- ID 33
+  ('Emmanuel Etti', 'emmanuel@example.com'), -- ID 34
+  ('Ricardo Gomes', 'ricardo@example.com'), -- ID 35
+  ('Iuliia Sutygina', 'iuliia@example.com'), -- ID 36
+  ('Akshay Seth', 'akshay@example.com'), -- ID 37
+  ('Victor Huang', 'victor@example.com'), -- ID 38
+  ('Matt MacDonald', 'mattmacdonald@example.com'), -- ID 39
+  ('Mathew McLeod', 'matmcleod@example.com'), -- ID 40
+  ('Kyle Cruz', 'kyle@example.com'), -- ID 41
+  ('Sylas Serne', 'sylas@example.com'), -- ID 42
+  ('William Wang', 'william@example.com'), -- ID 43
+  ('Minghui Tan', 'minghui@example.com'); -- ID 44
 
 INSERT INTO projects (name, manager_id, description)
 VALUES 
-  ('KanPlan', 1, 'Project management(not boring!)'),
-  ('Fete', 2, 'TBD'),
-  ('Dev Community', 3, 'A social media platform for developers to interact with each other across the globe.'),
-  ('onlyFriends', 2, 'A tinder-style app to meet new friends with similar interests in your area'),
-  ('NoshFeast', 2, 'An app focused on takeout orders; Users can order from and pick up at the restaurants.'),
-  ('SNIFFLES', 3, 'An app to discover other dog owners within your area sharing similar features to dating apps.'),
-  ('RegexViz', 2, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'),
-  ('Lotify', 3, 'A location-based to-do list - app pops up a reminder when you are near the location.'),
-  ('findShelter', 1, 'A shelter management software - serve the homeless '),
-  ('hotelCalifornia', 1, 'Allows conveners post last minute requests or chat real time with the hotel crue'),
-  ('Super Secret awesome amazing project', 2, 'Address independant delivery amazingness (Skip but way better)'),
-  ('gg', 3, 'social platform for reviewing and recommending video games');
+  ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
+  ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area'), -- ID 2
+  ('Dev Community', 7, 'A social media platform for developers to interact with each other across the globe.'), -- ID 3
+  ('Fete', 9, 'TBD'), -- ID 4
+  ('Roshanak and Mohammads Project', 11, 'TBD'), -- ID 5
+  ('David, Jamie and Mohameds Project', 13, 'TBD'), -- ID 6
+  ('NoshFeast', 16, 'An app focused on takeout orders; Users can order from and pick up at the restaurants.'), -- ID 7
+  ('Kathy and Emekas Project', 19, 'TBD'), -- ID 8
+  ('Mona and Saraths Project', 21, 'TBD'), -- ID 9
+  ('Farid and Camerons Project', 23, 'TBD'), -- ID 10
+  ('SNIFFLES', 3, 'An app to discover other dog owners within your area sharing similar features to dating apps.'), -- ID 11
+  ('RegexViz', 2, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
+  ('Lotify', 3, 'A location-based to-do list - app pops up a reminder when you are near the location.'), -- ID 13
+  ('findShelter', 1, 'A shelter management software - serve the homeless '), -- ID 14
+  ('hotelCalifornia', 1, 'Allows conveners post last minute requests or chat real time with the hotel crue'), -- ID 15
+  ('Super Secret awesome amazing project', 2, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
+  ('gg', 3, 'social platform for reviewing and recommending video games'); -- ID 17
 
 INSERT INTO kanban_status (name)
 VALUES 
@@ -105,4 +150,5 @@ VALUES
   ('Done');
 
 INSERT INTO tasks (title, description, priority, status_id, project_id)
-VALUES ('Seeds', 'Making api seeds', 'High', 3, 1);
+VALUES 
+  ('Seeds', 'Making api seeds', 'High', 3, 1);
