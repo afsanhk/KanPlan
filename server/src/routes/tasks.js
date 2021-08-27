@@ -3,7 +3,11 @@ const router = require("express").Router();
 module.exports = (db) => {
   router.get("/tasks", (request, response) => {
     db.query(
-      `SELECT tasks.*,priority_name FROM tasks JOIN priority ON tasks.priority_id = priority.id`
+      `SELECT tasks.*, priority_name, proj_name, status 
+      FROM tasks 
+      JOIN priority ON tasks.priority_id = priority.id
+      JOIN projects ON tasks.project_id = projects.id
+      JOIN kanban_status ON tasks.status_id = kanban_status.id`
     ).then(({ rows: tasks }) => {
       response.json(tasks);
     });
