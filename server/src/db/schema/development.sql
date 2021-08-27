@@ -155,10 +155,6 @@ VALUES
   ('Low'), -- ID 2
   ('High'); -- ID 3
 
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
-VALUES 
-  ('Seeds', 'Making api seeds', 3, 3, 1);
-
 INSERT INTO project_members(project_id, user_id)
 VALUES
   (1,1), -- KanPlan
@@ -205,3 +201,7 @@ VALUES
   (17,42), -- gg
   (17,43),
   (17,44);
+
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+VALUES 
+  ('Seeds', 'Making api seeds', 3, 3, 1);
