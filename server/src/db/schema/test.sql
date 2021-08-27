@@ -11,9 +11,9 @@ email AS (
     ('afsanhk@gmail.com'),
     ('tungtungleung233@hotmail.com')
 )
-INSERT INTO users (name, email)
+INSERT INTO users (user_name, email)
 
-INSERT INTO projects (name, manager_id, description)
+INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES ('KanPlan', 1, 'Project management(not boring!)')
 
 WITH
@@ -24,7 +24,7 @@ name AS (
     ('In Progress'),
     ('Done')
 )
-INSERT INTO kanban_status (name)
+INSERT INTO kanban_status (status)
 
-INSERT INTO tasks (title, description, priority, status_id, project_id)
+INSERT INTO tasks (title, task_description, priority, status_id, project_id)
 VALUES ('Seeds', 'Making api seeds', 'High', 3, 1)
