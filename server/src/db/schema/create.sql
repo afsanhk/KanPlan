@@ -54,3 +54,5 @@ CREATE TABLE user_tasks (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE
 );
+
+-- random test comment
