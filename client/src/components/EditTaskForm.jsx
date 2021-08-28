@@ -29,6 +29,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
   const [status, setStatus] = useState(null);
   const [priority, setPriority] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
+  const [description, setDescription] = useState(null);
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
@@ -40,6 +41,9 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
   };
 
   const handleClick = () => {
+    if (clickDesc) {
+      console.log(description);
+    }
     setClickDesc(!clickDesc);
   };
 
@@ -75,6 +79,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
+                onChange={(event) => setDescription(event.target.value)}
               />
 
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
