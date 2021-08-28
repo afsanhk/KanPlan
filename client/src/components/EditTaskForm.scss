@@ -39,11 +39,11 @@
     div {
       width: 80%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
 
       label {
         input {
-          width: 192px;
+          padding: 10px;
         }
       }
     }
@@ -57,7 +57,7 @@
     div.task-form-body-dropdowns-status-div {
       display: flex;
       width: 80%;
-      justify-content: space-between;
+      justify-content: space-around;
     }
   }
 
@@ -92,7 +92,7 @@
     div.task-form-body-members-div {
       display: flex;
       width: 80%;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-wrap: wrap;
 
       div.team-member {

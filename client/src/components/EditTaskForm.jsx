@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TeamMember from './TeamMember';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import AddIcon from '@material-ui/icons/Add';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
 import './EditTaskForm.scss';
 
-const projectNames = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 }
-];
+const useStyles = makeStyles({
+  teamMemberButton: {
+    color: '#bdbdbd'
+  }
+});
 
-function EditTaskForm(props) {
+function EditTaskForm({ userProjects, taskStatus, taskPriority }) {
+  const classes = useStyles();
+
+  const [currentUsers, setCurrentUsers] = useState(null);
+  const [currentProject, setCurrentProject] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [priority, setPriority] = useState(null);
+
+  // getTeamMembers function = helper function to return a array of team members of specific project
+  const getTeamMembers = (projectName) => {
+    if (projectName) {
+      const currentProjectObj = userProjects.filter((project) => project.proj_name === projectName);
+
+      return currentProjectObj[0].proj_users;
+    }
+  };
+
+  useEffect(() => {
+    setCurrentUsers(getTeamMembers(currentProject));
+  }, [currentProject]);
+
   return (
     <div>
       <header className="task-form-header">
@@ -33,10 +53,15 @@ function EditTaskForm(props) {
           <div className="task-form-body-dropdowns-project">
             <Autocomplete
               id="combo-box-demo"
-              options={projectNames}
-              getOptionLabel={(option) => option.title}
+              options={userProjects}
+              getOptionLabel={(option) => option.proj_name}
               style={{ width: '80%' }}
-              renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
+              renderInput={(params) => (
+                <>
+                  {setCurrentProject(params.inputProps.value)}
+                  <TextField {...params} label="Project Title" variant="outlined" />
+                </>
+              )}
             />
           </div>
 
@@ -58,39 +83,50 @@ function EditTaskForm(props) {
             <div className="task-form-body-dropdowns-status-div">
               <Autocomplete
                 id="combo-box-demo"
-                options={projectNames}
-                getOptionLabel={(option) => option.title}
+                options={taskStatus}
+                getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
-                renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                renderInput={(params) => (
+                  <>
+                    {setStatus(params.inputProps.value)}
+                    <TextField {...params} label="Status" variant="outlined" />
+                  </>
+                )}
               />
               <Autocomplete
                 id="combo-box-demo"
-                options={projectNames}
-                getOptionLabel={(option) => option.title}
+                options={taskPriority}
+                getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
-                renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
+                renderInput={(params) => (
+                  <>
+                    {setPriority(params.inputProps.value)}
+                    <TextField {...params} label="Priority" variant="outlined" />
+                  </>
+                )}
               />
             </div>
           </div>
         </div>
 
-        <div className="task-form-body-members-title">
-          <div>
-            <h2>Team Members</h2>
-            <div className="add-button">
-              <AddIcon />
+        {currentUsers && (
+          <>
+            <div className="task-form-body-members-title">
+              <div>
+                <h2>Team Members</h2>
+                <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="task-form-body-members">
-          <div className="task-form-body-members-div">
-            <TeamMember name="Afsan" remove border />
-            <TeamMember name="Person X" remove border />
-            <TeamMember name="TJ" remove border />
-            <TeamMember name="Veronica" remove border />
-          </div>
-        </div>
+            <div className="task-form-body-members">
+              <div className="task-form-body-members-div">
+                {currentUsers.map((user, index) => (
+                  <TeamMember key={index} name={user.name} remove border />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <footer className="task-form-footer"></footer>
