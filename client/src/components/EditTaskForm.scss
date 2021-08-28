@@ -47,16 +47,10 @@
     display: flex;
     justify-content: center;
 
-    div {
-      width: 80%;
+    div.task-form-body-dropdowns-date-helper {
+      width: 100%;
       display: flex;
       justify-content: space-around;
-
-      label {
-        input {
-          padding: 10px;
-        }
-      }
     }
   }
 
@@ -67,7 +61,7 @@
 
     div.task-form-body-dropdowns-status-div {
       display: flex;
-      width: 80%;
+      width: 100%;
       justify-content: space-around;
     }
   }
