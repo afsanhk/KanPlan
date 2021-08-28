@@ -26,10 +26,8 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
 
   const [currentUsers, setCurrentUsers] = useState(null);
   const [currentProject, setCurrentProject] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [priority, setPriority] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [description, setDescription] = useState(null);
+  const [state, setState] = useState({ description: tasks.description });
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
@@ -41,13 +39,11 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
   };
 
   const handleClick = () => {
-    if (clickDesc) {
-      console.log(description);
-    }
     setClickDesc(!clickDesc);
   };
 
   useEffect(() => {
+    setState((prev) => ({ ...prev, proj_name: currentProject }));
     setCurrentUsers(getTeamMembers(currentProject));
   }, [currentProject]);
 
@@ -61,7 +57,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
         <div className="task-form-body-description">
           {!clickDesc ? (
             <>
-              <p>{tasks.description}</p>
+              <p>{state.description}</p>
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -79,7 +75,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setDescription(event.target.value)}
+                onChange={(event) => setState((prev) => ({ ...prev, description: event.target.value }))}
               />
 
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
@@ -109,12 +105,12 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
             <div>
               <label>
                 <h3>Start Date</h3>
-                <input type="text" />
+                <input type="text" onChange={(event) => setState((prev) => ({ ...prev, startDate: event.target.value }))} />
               </label>
 
               <label>
                 <h3>End Date</h3>
-                <input type="text" />
+                <input type="text" onChange={(event) => setState((prev) => ({ ...prev, endDate: event.target.value }))} />
               </label>
             </div>
           </div>
@@ -126,24 +122,16 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 options={taskStatus}
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
-                renderInput={(params) => (
-                  <>
-                    {setStatus(params.inputProps.value)}
-                    <TextField {...params} label="Status" variant="outlined" />
-                  </>
-                )}
+                renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText }))}
               />
               <Autocomplete
                 id="combo-box-demo"
                 options={taskPriority}
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
-                renderInput={(params) => (
-                  <>
-                    {setPriority(params.inputProps.value)}
-                    <TextField {...params} label="Priority" variant="outlined" />
-                  </>
-                )}
+                renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
+                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText }))}
               />
             </div>
           </div>
@@ -171,7 +159,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
 
       <footer className="task-form-footer">
         <div>
-          <ConfirmButton saving />
+          <ConfirmButton saving data={state} />
           <ConfirmButton deleting />
         </div>
       </footer>
