@@ -121,7 +121,8 @@ VALUES
   ('Kyle Cruz', 'kyle@example.com'), -- ID 41
   ('Sylas Serne', 'sylas@example.com'), -- ID 42
   ('William Wang', 'william@example.com'), -- ID 43
-  ('Minghui Tan', 'minghui@example.com'); -- ID 44
+  ('Minghui Tan', 'minghui@example.com'), -- ID 44
+  ('Multi User', 'multi@example.com'); -- ID 45
 
 -- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
@@ -163,9 +164,11 @@ VALUES
   (1,1), -- KanPlan
   (1,2),
   (1,3),
+  (1,45),
   (2,4), -- OF
   (2,5), 
   (2,6),
+  (2,45),
   (3,7), -- Dev Community
   (3,8),
   (4,9), -- Fete 
@@ -217,9 +220,9 @@ VALUES
   ('Relax', 'Relax a bit', 1, 2, 1),
   -- In-progress (ID3)
   ('Seeds', 'Making api seeds', 3, 3, 1),
-  ('Gantt Research', 'Find a good library to use for the gantt chart', 3, 2, 1),
-  ('React Component - Storybook Testing', 'Test components in storybook', 3, 2, 1),
-  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 2, 1),
+  ('Gantt Research', 'Find a good library to use for the gantt chart', 2, 3, 1),
+  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1),
   -- Done (ID4)
   ('ERD', 'Plan data relations with team', 2, 4, 1),
   ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
