@@ -1,7 +1,7 @@
 .team-member {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 5px 15px 5px 15px;
 
   // .team-member-button {
   //   display: flex;
@@ -12,7 +12,7 @@
   //   height: 30px;
   //   border-radius: 50%;
   //   color: white;
-  // } 
+  // }
 }
 
 //border only shows if props.border is true
@@ -35,7 +35,7 @@
 
   p {
     font-size: 25px;
-    margin: 10px 0; 
+    margin: 10px 0;
     padding-left: 10px;
   }
 }
