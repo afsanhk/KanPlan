@@ -4,23 +4,31 @@ import TeamMember from './TeamMember';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
 import './EditTaskForm.scss';
+import ConfirmButton from './ConfirmButton';
+import { IconButton } from '@material-ui/core';
 
 const useStyles = makeStyles({
   teamMemberButton: {
     color: '#bdbdbd'
+  },
+  icon: {
+    margin: '5px'
   }
 });
 
-function EditTaskForm({ userProjects, taskStatus, taskPriority }) {
+function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
   const classes = useStyles();
 
   const [currentUsers, setCurrentUsers] = useState(null);
   const [currentProject, setCurrentProject] = useState(null);
   const [status, setStatus] = useState(null);
   const [priority, setPriority] = useState(null);
+  const [clickDesc, setClickDesc] = useState(false);
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
@@ -31,6 +39,10 @@ function EditTaskForm({ userProjects, taskStatus, taskPriority }) {
     }
   };
 
+  const handleClick = () => {
+    setClickDesc(!clickDesc);
+  };
+
   useEffect(() => {
     setCurrentUsers(getTeamMembers(currentProject));
   }, [currentProject]);
@@ -38,15 +50,38 @@ function EditTaskForm({ userProjects, taskStatus, taskPriority }) {
   return (
     <div>
       <header className="task-form-header">
-        <h1>Task Title</h1>
+        <h1>{tasks.title}</h1>
       </header>
 
       <div className="task-form-body">
         <div className="task-form-body-description">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta corporis voluptatem assumenda labore, sequi eos odio autem voluptates, officia incidunt ipsum tenetur aperiam! Aliquid
-            accusantium quod voluptatum corrupti sint quisquam?
-          </p>
+          {!clickDesc ? (
+            <>
+              <p>{tasks.description}</p>
+              <IconButton size="small" className={classes.icon} onClick={handleClick}>
+                <EditOutlinedIcon />
+              </IconButton>
+            </>
+          ) : (
+            <>
+              <TextField
+                id="standard-full-width"
+                label="Description"
+                style={{ margin: 8 }}
+                placeholder="Write description"
+                fullWidth
+                multiline
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+
+              <IconButton size="small" className={classes.icon} onClick={handleClick}>
+                <SaveOutlinedIcon />
+              </IconButton>
+            </>
+          )}
         </div>
 
         <div className="task-form-body-dropdowns">
@@ -129,7 +164,12 @@ function EditTaskForm({ userProjects, taskStatus, taskPriority }) {
         )}
       </div>
 
-      <footer className="task-form-footer"></footer>
+      <footer className="task-form-footer">
+        <div>
+          <ConfirmButton saving />
+          <ConfirmButton deleting />
+        </div>
+      </footer>
     </div>
   );
 }

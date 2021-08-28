@@ -2,16 +2,22 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1)
-    }
-  }
-}));
-
 function ConfirmButton({ saving, deleting, cancelling }) {
-  return <Button variant="contained">Default</Button>;
+  return (
+    <>
+      {saving && (
+        <Button variant="contained" color="primary">
+          Save
+        </Button>
+      )}
+      {deleting && (
+        <Button variant="contained" color="secondary">
+          Delete
+        </Button>
+      )}
+      {cancelling && <Button variant="contained">Cancel</Button>}
+    </>
+  );
 }
 
 export default ConfirmButton;

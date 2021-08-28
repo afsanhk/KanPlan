@@ -20,11 +20,15 @@ import ConfirmButton from './ConfirmButton';
 const userTasks = [
   {
     id: 1,
-    title: 'Test1'
+    title: 'Test1',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta corporis voluptatem assumenda labore, sequi eos odio autem voluptates, officia incidunt ipsum tenetur aperiam! Aliquid accusantium quod voluptatum corrupti sint quisquam?'
   },
   {
     id: 2,
-    title: 'Test2'
+    title: 'Test2',
+    description:
+      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta corporis voluptatem assumenda labore, sequi eos odio autem voluptates, officia incidunt ipsum tenetur aperiam! Aliquid accusantium quod voluptatum corrupti sint quisquam?'
   }
 ];
 
@@ -80,7 +84,7 @@ storiesOf('TeamMember', module)
 
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
-storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm userProjects={userProjects} taskStatus={taskStatus} taskPriority={taskPriority} />);
+storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={userTasks[0]} userProjects={userProjects} taskStatus={taskStatus} taskPriority={taskPriority} />);
 
 storiesOf('ProjectNameDescription', module)
   .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[0].proj_users} />)
