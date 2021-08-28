@@ -1,6 +1,6 @@
 @use '../styles/base';
 
-.user-tasks-title {
+.homepage-tasks-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,7 +8,7 @@
   border-bottom: 2px base.$dark-grey solid;
   margin: 15px 0;
 
-  .user-tasks-left {
+  .homepage-tasks-left {
     display: flex;
     align-items: center;
 
@@ -17,7 +17,7 @@
       }
   }
   
-  .user-tasks-right {
+  .homepage-tasks-right {
     align-items: center;
     margin: 0;
   }

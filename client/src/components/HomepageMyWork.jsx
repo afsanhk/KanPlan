@@ -15,12 +15,12 @@ export default function HomepageMyWork(props) {
     <div>
       <h2><strong>My Work</strong></h2>
   
-      <div className='user-tasks-title'>
-        <div className='user-tasks-left'>
-            <CheckCircleOutlinedIcon />
+      <div className='homepage-tasks-title'>
+        <div className='homepage-tasks-left'>
+          <CheckCircleOutlinedIcon />
           <h3>Tasks</h3>
         </div>
-        <div className='user-tasks-right'>
+        <div className='homepage-tasks-right'>
           <IconButton size='medium' >
             <AddCircleIcon />
           </IconButton>

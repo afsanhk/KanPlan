@@ -1,0 +1,12 @@
+@use '../styles/base';
+
+.homepage-assigned-title {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  margin-top: 15px;
+  
+  h3 {
+    margin: 5px 0 0 5px;
+  }
+}

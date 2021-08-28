@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import { storiesOf } from "@storybook/react";
 // import { action } from "@storybook/addon-actions";
@@ -6,6 +6,7 @@ import { storiesOf } from "@storybook/react";
 import TaskListItem from "./TaskListItem";
 import TaskList from  "./TaskList";
 import HomepageMyWork from  "./HomepageMyWork";
+import HomepageImportantUpdates from  "./HomepageImportantUpdates";
 
 
 const userTasks = [
@@ -29,3 +30,6 @@ storiesOf("TaskList", module)
 
 storiesOf("HomepageMyWork", module)
   .add("Initial", () => <HomepageMyWork tasks={userTasks} />)
+  
+storiesOf("HomepageImportantUpdates", module)
+.add("Initial", () => <HomepageImportantUpdates />)
