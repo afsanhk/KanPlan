@@ -21,6 +21,9 @@ const useStyles = makeStyles({
   }
 });
 
+const today = new Date();
+const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
+
 function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
   const classes = useStyles();
 
@@ -92,26 +95,35 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
               options={userProjects}
               getOptionLabel={(option) => option.proj_name}
               style={{ width: '80%' }}
-              renderInput={(params) => (
-                <>
-                  {setCurrentProject(params.inputProps.value)}
-                  <TextField {...params} label="Project Title" variant="outlined" />
-                </>
-              )}
+              renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
+              onChange={(value) => setCurrentProject(value.target.innerText)}
             />
           </div>
 
           <div className="task-form-body-dropdowns-date">
-            <div>
-              <label>
-                <h3>Start Date</h3>
-                <input type="text" onChange={(event) => setState((prev) => ({ ...prev, startDate: event.target.value }))} />
-              </label>
-
-              <label>
-                <h3>End Date</h3>
-                <input type="text" onChange={(event) => setState((prev) => ({ ...prev, endDate: event.target.value }))} />
-              </label>
+            <div className="task-form-body-dropdowns-date-helper">
+              <TextField
+                id="date"
+                label="Start Date"
+                type="date"
+                defaultValue={currentDate}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={(event) => setState((prev) => ({ ...prev, startDate: event.target.value }))}
+              />
+              <TextField
+                id="date"
+                label="End Date"
+                type="date"
+                defaultValue={currentDate}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={(event) => setState((prev) => ({ ...prev, endDate: event.target.value }))}
+              />
             </div>
           </div>
 
