@@ -217,9 +217,9 @@ VALUES
   ('Relax', 'Relax a bit', 1, 2, 1),
   -- In-progress (ID3)
   ('Seeds', 'Making api seeds', 3, 3, 1),
-  ('Gantt Research', 'Find a good library to use for the gantt chart', 3, 2, 1),
-  ('React Component - Storybook Testing', 'Test components in storybook', 3, 2, 1),
-  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 2, 1),
+  ('Gantt Research', 'Find a good library to use for the gantt chart', 2, 3, 1),
+  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1),
   -- Done (ID4)
   ('ERD', 'Plan data relations with team', 2, 4, 1),
   ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
