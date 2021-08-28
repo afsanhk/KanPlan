@@ -121,7 +121,8 @@ VALUES
   ('Kyle Cruz', 'kyle@example.com'), -- ID 41
   ('Sylas Serne', 'sylas@example.com'), -- ID 42
   ('William Wang', 'william@example.com'), -- ID 43
-  ('Minghui Tan', 'minghui@example.com'); -- ID 44
+  ('Minghui Tan', 'minghui@example.com'), -- ID 44
+  ('Multi User', 'multi@example.com'); -- ID 45
 
 -- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
@@ -163,9 +164,11 @@ VALUES
   (1,1), -- KanPlan
   (1,2),
   (1,3),
+  (1,45),
   (2,4), -- OF
   (2,5), 
   (2,6),
+  (2,45),
   (3,7), -- Dev Community
   (3,8),
   (4,9), -- Fete 
