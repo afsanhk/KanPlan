@@ -85,10 +85,10 @@ function EditTaskForm(props) {
 
         <div className="task-form-body-members">
           <div className="task-form-body-members-div">
-            <TeamMember name="Afsan" remove />
-            <TeamMember name="Person X" remove />
-            <TeamMember name="TJ" remove />
-            <TeamMember name="Veronica" remove />
+            <TeamMember name="Afsan" remove border />
+            <TeamMember name="Person X" remove border />
+            <TeamMember name="TJ" remove border />
+            <TeamMember name="Veronica" remove border />
           </div>
         </div>
       </div>

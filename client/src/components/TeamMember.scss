@@ -1,31 +1,41 @@
 .team-member {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 200px;
-  border-radius: 15px;
   padding: 15px;
+
+  // .team-member-button {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   background-color: rgba(64, 64, 64, 0.2);
+  //   width: 30px;
+  //   height: 30px;
+  //   border-radius: 50%;
+  //   color: white;
+  // } 
+}
+
+//border only shows if props.border is true
+.team-member-border {
   border: 3px dashed rgba(64, 64, 64, 0.4);
-  cursor: pointer;
-
-  .team-member-name {
-    flex-grow: 1;
-    font-size: 25px;
-    padding-left: 10px;
-  }
-
-  .team-member-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(64, 64, 64, 0.2);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    color: white;
-  }
+  border-radius: 15px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
 
   &:hover {
     box-shadow: 1px 1px 6px rgba(#000, 0.2);
+    cursor: pointer;
+  }
+}
+
+.team-member-name {
+  display: flex;
+  align-items: center;
+
+  p {
+    font-size: 25px;
+    margin: 10px 0; 
+    padding-left: 10px;
   }
 }
