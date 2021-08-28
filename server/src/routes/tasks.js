@@ -3,7 +3,10 @@ const router = require("express").Router();
 module.exports = (db) => {
   router.get("/tasks", (request, response) => {
     db.query(
-      `SELECT tasks.*, priority_name, proj_name, status 
+      `SELECT tasks.*, 
+              proj_name, 
+              priority_name, 
+              status 
       FROM tasks 
       JOIN priorities ON tasks.priority_id = priorities.id
       JOIN projects ON tasks.project_id = projects.id
