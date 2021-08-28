@@ -15,6 +15,7 @@ import TeamMember from './TeamMember';
 import ProjectNameDescription from './ProjectNameDescription';
 
 import HomepageMyProjects from './HomepageMyProjects';
+import ConfirmButton from './ConfirmButton';
 
 const userTasks = [
   {
@@ -59,23 +60,30 @@ storiesOf('TaskListItem', module).add('Initial', () => <TaskListItem title="Test
 
 storiesOf('TaskList', module).add('Initial', () => <TaskList tasks={userTasks} />);
 
+storiesOf('ConfirmButton', module)
+  .add('Save', () => <ConfirmButton saving />)
+  .add('Delete', () => <ConfirmButton deleting />)
+  .add('Cancel', () => <ConfirmButton cancelling />);
+
 storiesOf('HomepageMyWork', module).add('Initial', () => <HomepageMyWork tasks={userTasks} />);
 
-storiesOf('TeamMember', module).add('Add', () => <TeamMember add border name="User" />);
-storiesOf('TeamMember', module).add('Remove', () => <TeamMember remove border name="User" />);
-storiesOf('TeamMember', module).add('Just name', () => (
-  <>
-    <TeamMemberName name="User" />
-    <TeamMemberName name="User2" />
-  </>
-));
-storiesOf('TeamMember', module).add('No name', () => <TeamMemberName />);
+storiesOf('TeamMember', module)
+  .add('Add', () => <TeamMember add border name="User" />)
+  .add('Remove', () => <TeamMember remove border name="User" />)
+  .add('Just name', () => (
+    <>
+      <TeamMemberName name="User" />
+      <TeamMemberName name="User2" />
+    </>
+  ))
+  .add('No name', () => <TeamMemberName />);
 
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
 storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm userProjects={userProjects} taskStatus={taskStatus} taskPriority={taskPriority} />);
 
-storiesOf('ProjectNameDescription', module).add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[0].proj_users} />);
-storiesOf('ProjectNameDescription', module).add('Homepage (10 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[2].proj_users} />);
+storiesOf('ProjectNameDescription', module)
+  .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[0].proj_users} />)
+  .add('Homepage (10 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[2].proj_users} />);
 
 storiesOf('HomepageMyProjects', module).add('Intial (10 users)', () => <HomepageMyProjects userProjects={userProjects} />);

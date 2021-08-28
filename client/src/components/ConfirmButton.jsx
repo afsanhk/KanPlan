@@ -5,17 +5,13 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
+      margin: theme.spacing(1)
+    }
+  }
 }));
 
-function buttons() {
-  return (
-    <div>
-      <Button
-    </div>
-  )
+function ConfirmButton({ saving, deleting, cancelling }) {
+  return <Button variant="contained">Default</Button>;
 }
 
-export default buttons
+export default ConfirmButton;
