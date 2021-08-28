@@ -142,7 +142,9 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
             <div className="task-form-body-members-title">
               <div>
                 <h2>Team Members</h2>
-                <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
+                <IconButton size="medium">
+                  <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
+                </IconButton>
               </div>
             </div>
 
