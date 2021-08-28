@@ -1,0 +1,106 @@
+.task-form-header {
+  padding: 20px 20px 0px 20px;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: center;
+
+  h1 {
+    width: 80%;
+  }
+}
+
+.task-form-body {
+  .task-form-body-description {
+    padding: 10px;
+    font-size: 1.3em;
+    display: flex;
+    justify-content: center;
+
+    p {
+      width: 80%;
+    }
+  }
+  .task-form-body-dropdowns {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+
+    .task-form-body-dropdowns-project {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .task-form-body-dropdowns-date {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+
+    div {
+      width: 80%;
+      display: flex;
+      justify-content: space-between;
+
+      label {
+        input {
+          width: 192px;
+        }
+      }
+    }
+  }
+
+  .task-form-body-dropdowns-status {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+
+    div.task-form-body-dropdowns-status-div {
+      display: flex;
+      width: 80%;
+      justify-content: space-between;
+    }
+  }
+
+  .task-form-body-members-title {
+    display: flex;
+    justify-content: center;
+
+    div {
+      border-bottom: 2px solid black;
+      width: 80%;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+
+      .add-button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(64, 64, 64, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+    }
+  }
+
+  .task-form-body-members {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    div.task-form-body-members-div {
+      display: flex;
+      width: 80%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      div.team-member {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .task-form-footer {
+  }
+}
