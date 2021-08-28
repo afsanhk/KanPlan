@@ -56,3 +56,4 @@ CREATE TABLE user_tasks (
 );
 
 -- random test comment
+-- another random test comment
