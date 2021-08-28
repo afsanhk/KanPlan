@@ -1,17 +1,17 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get("/kanbantasks", (request, response) => {
+  router.get("/kanban/project/:id", (request, response) => {
+    const values = [request.params.id];
     db.query(
-      `SELECT tasks.*, 
-              proj_name, 
-              priority_name, 
-              status 
-      FROM tasks 
-      JOIN priorities ON tasks.priority_id = priorities.id
-      JOIN projects ON tasks.project_id = projects.id
-      JOIN kanban_status ON tasks.status_id = kanban_status.id
-      ORDER BY tasks.id`
+      `SELECT kanban_status.*,
+              array_agg(DISTINCT tasks.id) AS task_id 
+      FROM kanban_status 
+      JOIN tasks ON kanban_status.id = tasks.status_id
+      WHERE tasks.project_id = $1
+      GROUP BY kanban_status.id
+      ORDER BY kanban_status.id`,
+      values
     ).then(({ rows: tasks }) => {
       response.json(tasks);
     });
