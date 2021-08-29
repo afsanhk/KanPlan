@@ -2,8 +2,8 @@ import React from 'react';
 import {FrappeGantt, Task, ViewMode} from 'frappe-gantt-react';
 
 /* 
-Tasks need to be fed to FrappeGant as the default 'Task' class extracted at the top of this file
-The tasks mapped to the new Task class have to be in an object formation with keys 
+Tasks need to be fed to FrappeGant as the default 'Task' class extracted at the top of this file.
+The tasks mapped to the new Task class have to be in an object formation with keys:
   { id, name, start, end, progress, dependencies }
 Since our task data is much more robust:
   { id, title, task_description, priority_id, status_id, project_id, plan_start, plan_end, proj_name, priority_name, status, task_users}
@@ -59,7 +59,6 @@ function Gantt({projectTasks}) {
     }
   })
   .map(x => new Task(x));
-
 
   return (
     <FrappeGantt
