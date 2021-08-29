@@ -19,6 +19,10 @@ import ConfirmButton from './ConfirmButton';
 
 import NavBar from './NavBar';
 
+import HomepageChartA from './HomepageChartA';
+import HomepageChartB from './HomepageChartB';
+
+
 
 const userTasks = [
   {
@@ -96,3 +100,7 @@ storiesOf('ProjectNameDescription', module)
 storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects userProjects={userProjects} />);
 
 storiesOf('NavBar', module).add('Intial', () => <NavBar  />);
+
+
+storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  />);
+storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  />);
