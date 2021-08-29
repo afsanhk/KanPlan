@@ -1,4 +1,4 @@
-const projectGantt = () => {
+const ProjectGantt = () => {
   return (
     <div>
       <h1>This will show the project Gantt.</h1>
@@ -6,4 +6,4 @@ const projectGantt = () => {
   );
 };
 
-export default projectGantt;
+export default ProjectGantt;

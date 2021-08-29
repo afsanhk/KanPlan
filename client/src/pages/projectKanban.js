@@ -1,4 +1,4 @@
-const projectKanban = () => {
+const ProjectKanban = () => {
   return (
     <div>
       <h1>This will show the project Kanban.</h1>
@@ -6,4 +6,4 @@ const projectKanban = () => {
   );
 };
 
-export default projectKanban;
+export default ProjectKanban;

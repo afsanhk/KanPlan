@@ -1,4 +1,4 @@
-const projectOverview = () => {
+const ProjectOverview = () => {
   return (
     <div>
       <h1>This will show the project overview.</h1>
@@ -6,4 +6,4 @@ const projectOverview = () => {
   );
 };
 
-export default projectOverview;
+export default ProjectOverview;
