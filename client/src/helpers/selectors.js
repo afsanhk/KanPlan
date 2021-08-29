@@ -414,6 +414,8 @@ const state = {
   users,
 };
 
-console.log("getTasksForProject", getTasksForProject(state, 1));
-console.log("getProjectsForUser - 1 Project", getProjectsForUser(state, 1));
-console.log("getProjectsForUser - Multiple Projects", getProjectsForUser(state, 45));
+// console.log("getTasksForProject", getTasksForProject(state, 1));
+// console.log("getProjectsForUser - 1 Project", getProjectsForUser(state, 1));
+// console.log("getProjectsForUser - Multiple Projects", getProjectsForUser(state, 45));
+
+export { getProjectsForUser, getTasksForProject };
