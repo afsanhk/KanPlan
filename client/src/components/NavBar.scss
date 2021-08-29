@@ -1,10 +1,9 @@
 @use '../styles/base';
 
-
 .nav-top {
   display: flex;
   flex-direction: column;
-  
+
   img {
     margin: 10px; //for styling, maybe remove logo margin, make logo area white bg?
   }

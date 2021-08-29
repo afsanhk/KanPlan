@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Components & Pages
 import NavBar from './components/NavBar';
-import UserDashboard from './pages/UserDashboard';
-import UserProjects from './pages/UserProjects';
-import ProjectOverview from './pages/ProjectOverview';
-import ProjectKanban from './pages/ProjectKanban';
-import ProjectGantt from './pages/ProjectGantt';
+import UserDashboard from './pages/userDashboard';
+import UserProjects from './pages/userProjects';
+import ProjectOverview from './pages/projectOverview';
+import ProjectKanban from './pages/projectKanban';
+import ProjectGantt from './pages/projectGantt';
 
 // Styling
 import './App.scss';
@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <h1>KanPlan!</h1>
+        {/* <h1>KanPlan!</h1> */}
         <NavBar />
         <Switch>
           <Route exact path="/">
