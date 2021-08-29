@@ -26,7 +26,7 @@ function TeamMember({ add, remove, name, border, removeUser }) {
         </IconButton>
       )}
       {remove && (
-        <IconButton size="small" onClick={(name) => removeUser}>
+        <IconButton size="small" onClick={console.log('click')}>
           <RemoveCircleIcon className={classes.teamMemberButton} fontSize="large" />
         </IconButton>
       )}
