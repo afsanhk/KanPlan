@@ -321,14 +321,18 @@ const tasks = [
 const state = {
   projects,
   tasks,
+  user: { user_projects: [1, 2, 3, 4] },
 };
 
 const ProjectGantt = () => {
+  // Need to fix this!
+  let projectTasks = getTasksForProject(state, 2).map((taskid) => state.tasks[taskid]);
+  console.log("projectTasks", projectTasks);
   return (
     <div>
       <h1>This will show the project Gantt.</h1>
       <section className="ganttContainer" style={{ marginLeft: "140px" }}>
-        <Gantt projectTasks={state.tasks} />
+        <Gantt projectTasks={projectTasks} />
       </section>
     </div>
   );
