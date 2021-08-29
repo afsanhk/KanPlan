@@ -6,7 +6,9 @@ import {Pie} from 'react-chartjs-2';
 import './HomepageCharts.scss'
 
 
-function HomepageChartC(props) {
+function HomepageChartB(props) {
+
+  const { information } = props
 
   const chartData = {
     labels: ['Late', 'To-Do', 'In Progress',
@@ -25,7 +27,7 @@ function HomepageChartC(props) {
           '#e99426',
           '#14752d',
         ],
-        data: [3, 2, 6, 4], //need to pass in props!
+        data: information, //need to pass in props!
       }
     ]
   }
@@ -61,4 +63,4 @@ function HomepageChartC(props) {
   )
 }
 
-export default HomepageChartC
+export default HomepageChartB

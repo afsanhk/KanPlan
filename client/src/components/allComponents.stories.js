@@ -23,6 +23,7 @@ import KanbanBoard from './KanbanBoard';
 
 import HomepageChartA from './HomepageChartA';
 import HomepageChartB from './HomepageChartB';
+import HomepageCharts from './HomepageCharts';
 
 
 
@@ -61,6 +62,8 @@ const userProjects = [
     proj_users: [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }, { name: 'E' }, { name: 'F' }, { name: 'G' }, { name: 'H' }, { name: 'I' }, { name: 'J' }]
   }
 ];
+
+const chartData = [1, 2, 3, 4]
 
 const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
 
@@ -109,5 +112,6 @@ storiesOf('Kanban', module)
   .add('In Progress', () => <KanbanBoard status={'In Progress'} tasks={userTasks} />)
   .add('Done', () => <KanbanBoard status={'Done'} tasks={userTasks} />);
 
-storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  />);
-storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  />);
+storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  information={'3'}/>);
+storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  information={chartData}/>);
+storiesOf('HomepageCharts', module).add('Charts', () => <HomepageCharts  />);

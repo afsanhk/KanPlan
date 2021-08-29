@@ -6,26 +6,29 @@ import {Doughnut} from 'react-chartjs-2';
 import './HomepageCharts.scss'
 
 
-const plugins = [{
-  beforeDraw: function(chart) {
-    const width = chart.width,
-    height = chart.height,
-    ctx = chart.ctx;
-    ctx.restore();
-    const fontSize = (height / 70).toFixed(2);
-    ctx.font = fontSize + "em sans-serif";
-    ctx.fillStyle = "rgb(79 190 255)"; //changes the colour of the middle text
-    ctx.textBaseline = "top";
-    const text = "3", //pass in props here too
-    textX = Math.round((width - ctx.measureText(text).width) / 2),
-    textY = height / 2;
-    ctx.fillText(text, textX, textY);
-    ctx.save();
-  } 
-}]
 
 
 function HomepageChartA(props) {
+  
+  const { information } = props;
+  
+  const plugins = [{
+    beforeDraw: function(chart) {
+      const width = chart.width,
+      height = chart.height,
+      ctx = chart.ctx;
+      ctx.restore();
+      const fontSize = (height / 70).toFixed(2);
+      ctx.font = fontSize + "em sans-serif";
+      ctx.fillStyle = "rgb(79 190 255)"; //changes the colour of the middle text
+      ctx.textBaseline = "top";
+      const text = information, //pass in props here too
+      textX = Math.round((width - ctx.measureText(text).width) / 2),
+      textY = height / 2;
+      ctx.fillText(text, textX, textY);
+      ctx.save();
+    } 
+  }]
 
   const chartData = {
     datasets: [
@@ -36,7 +39,7 @@ function HomepageChartA(props) {
         hoverBackgroundColor: [
           'rgb(79 190 255)' //same value as backgroundColor
         ],
-        data: [3], //need to pass in props!
+        data: [information], //need to pass in props!
         borderWidth: 0,
         cutout: '90%'
       }
