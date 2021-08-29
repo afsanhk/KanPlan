@@ -18,6 +18,7 @@ import Modal from '@material-ui/core/Modal';
 
 import './EditTaskForm.scss';
 
+// material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
     color: '#bdbdbd'
