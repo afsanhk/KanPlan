@@ -119,7 +119,7 @@ projectTasks.forEach((task) => {
   }
 });
 
-console.log(initialData);
+// console.log(initialData);
 
 const lateTasks = projectTasks.filter((task) => task.status === 'Late');
 const toDoTasks = projectTasks.filter((task) => task.status === 'To-Do');
@@ -199,7 +199,7 @@ const ProjectKanban = () => {
           {state.columnOrder.map((columnId) => {
             const column = state.columns[columnId];
             const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-            console.log(tasks);
+            // console.log(tasks);
 
             return <KanbanBoard key={column.id} column={column} tasks={tasks} />;
           })}
