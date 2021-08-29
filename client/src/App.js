@@ -38,6 +38,7 @@ function App() {
           <Route path="/project/gantt">
             <ProjectGantt />
           </Route>
+          {/* Do we want a 404 page? */}
         </Switch>
       </Router>
     </div>
