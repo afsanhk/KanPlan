@@ -1,13 +1,40 @@
+@use '../styles/base';
+
 .canvas-container-chartA {
   height: 40vh;
-  width: 50vh;
+  width: 35vh;
+  padding: 30px
 }
 
 .canvas-container-chartB {
   height: 40vh;
-  width: 50vh;
+  width: 35vh;
+  padding-left: 30px
 }
 
 .homepage-charts {
   display: flex;
+  justify-content: space-around;
+}
+
+.homepage-chart-B-legend{
+  display: flex;
+  align-items: center;
+
+}
+
+.homepage-chart-legend-late {
+  color: base.$red-dark;
+}
+
+.homepage-chart-legend-to-do {
+  color: base.$purple-dark;
+}
+
+.homepage-chart-legend-in-progress {
+  color: base.$orange-dark;
+}
+
+.homepage-chart-legend-done {
+  color: base.$green-dark;
 }
