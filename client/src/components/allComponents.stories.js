@@ -90,6 +90,81 @@ const taskPriority = [{ name: "High" }, { name: "Low" }, { name: "None" }];
 const lorem =
   "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta corporis voluptatem assumenda labore, sequi eos odio autem voluptates, officia incidunt ipsum tenetur aperiam! Aliquid accusantium quod voluptatum corrupti sint quisquam";
 
+// For Gantt Layout
+const projectTasks = [
+  {
+    id: 1,
+    title: "API Routes",
+    task_description: "Set up API Routes",
+    priority_id: 3,
+    status_id: 1,
+    project_id: 1,
+    plan_start: "2021-08-26T18:08:57.766Z",
+    plan_end: "2021-08-27T18:08:57.766Z",
+    proj_name: "KanPlan",
+    priority_name: "High",
+    status: "To-Do",
+    task_users: [2],
+  },
+  {
+    id: 2,
+    title: "React Components",
+    task_description: "Build react components",
+    priority_id: 2,
+    status_id: 1,
+    project_id: 1,
+    plan_start: "2021-08-29T18:08:57.766Z",
+    plan_end: "2021-09-06T18:08:57.766Z",
+    proj_name: "KanPlan",
+    priority_name: "Low",
+    status: "To-Do",
+    task_users: [1, 2, 3],
+  },
+  {
+    id: 3,
+    title: "Kanban DnD",
+    task_description: "Build Kanban containers and drag and drop",
+    priority_id: 2,
+    status_id: 1,
+    project_id: 1,
+    plan_start: "2021-08-29T18:08:57.766Z",
+    plan_end: "2021-09-03T18:08:57.766Z",
+    proj_name: "KanPlan",
+    priority_name: "Low",
+    status: "To-Do",
+    task_users: [1],
+  },
+  {
+    id: 4,
+    title: "Relax",
+    task_description: "Relax a bit",
+    priority_id: 1,
+    status_id: 2,
+    project_id: 1,
+    plan_start: "2021-09-01T18:08:57.766Z",
+    plan_end: "2021-09-03T18:08:57.766Z",
+    proj_name: "KanPlan",
+    priority_name: "None",
+    status: "Late",
+    task_users: [1, 2, 3],
+  },
+  {
+    id: 5,
+    title: "Seeds",
+    task_description: "Making api seeds",
+    priority_id: 3,
+    status_id: 3,
+    project_id: 1,
+    plan_start: "2021-09-01T18:08:57.766Z",
+    plan_end: "2021-09-02T18:08:57.766Z",
+    proj_name: "KanPlan",
+    priority_name: "High",
+    status: "In Progress",
+    task_users: [1, 2],
+  },
+];
+
+// Stories
 storiesOf("TaskListItem", module).add("Initial", () => (
   <TaskListItem title="Test" />
 ));
@@ -173,4 +248,6 @@ storiesOf("HomepageCharts", module).add("Chart B", () => (
 ));
 storiesOf("HomepageCharts", module).add("Charts", () => <HomepageCharts />);
 
-storiesOf("Gantt", module).add("Basic", () => <Gantt />);
+storiesOf("Gantt", module).add("Basic", () => (
+  <Gantt projectTasks={projectTasks} />
+));
