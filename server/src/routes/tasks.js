@@ -16,7 +16,7 @@ module.exports = (db) => {
       GROUP BY tasks.id, proj_name, priority_name, status
       ORDER BY tasks.id`
     ).then(({ rows: tasks }) => {
-      response.json(tasks);
+      response.json(tasks.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
     });
   });
 
