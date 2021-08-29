@@ -50,6 +50,10 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
     setCurrentUsers(getTeamMembers(currentProject));
   }, [currentProject]);
 
+  const removeUser = (user_name) => {
+    console.log('removing user', user_name);
+  };
+
   return (
     <div>
       <header className="task-form-header">
@@ -163,7 +167,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
             <div className="task-form-body-members">
               <div className="task-form-body-members-div">
                 {currentUsers.map((user, index) => (
-                  <TeamMember key={index} name={user.name} remove border />
+                  <TeamMember key={index} name={user.name} remove border removeUser={removeUser} />
                 ))}
               </div>
             </div>

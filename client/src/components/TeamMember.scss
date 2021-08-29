@@ -18,6 +18,7 @@
 //border only shows if props.border is true
 .team-member-border {
   border: 3px dashed rgba(64, 64, 64, 0.4);
+  max-height: 40px;
   border-radius: 15px;
   width: 200px;
   display: flex;

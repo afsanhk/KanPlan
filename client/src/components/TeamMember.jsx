@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 });
 
-function TeamMember({ add, remove, name, border }) {
+function TeamMember({ add, remove, name, border, removeUser }) {
   const classes = useStyles();
 
   return (
@@ -26,7 +26,7 @@ function TeamMember({ add, remove, name, border }) {
         </IconButton>
       )}
       {remove && (
-        <IconButton size="small" onClick={() => console.log(this)}>
+        <IconButton size="small" onClick={(name) => removeUser}>
           <RemoveCircleIcon className={classes.teamMemberButton} fontSize="large" />
         </IconButton>
       )}
