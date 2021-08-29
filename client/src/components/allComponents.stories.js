@@ -18,15 +18,13 @@ import HomepageMyProjects from './HomepageMyProjects';
 import ConfirmButton from './ConfirmButton';
 
 import NavBar from './NavBar';
-<<<<<<< HEAD
+
+import KanbanBoard from './KanbanBoard';
 
 import HomepageChartA from './HomepageChartA';
 import HomepageChartB from './HomepageChartB';
 
 
-=======
-import KanbanBoard from './KanbanBoard';
->>>>>>> master
 
 const userTasks = [
   {
