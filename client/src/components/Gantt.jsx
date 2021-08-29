@@ -47,7 +47,7 @@ We do 2 maps, first one is to convert our structure into the required structure.
 // ].map((x) => new Task(x));
 function Gantt({projectTasks}) {
 
-  const tasks = projectTasks && 
+  const tasks = projectTasks[0] && 
   projectTasks.map(el => {
     return {
       id: el.id,
@@ -61,16 +61,19 @@ function Gantt({projectTasks}) {
   .map(x => new Task(x));
 
   return (
-    <FrappeGantt
-      tasks={tasks}
-      viewMode={ViewMode.Week}
-      onClick={(task) => console.log(task)}
-      onDateChange={(task, start, end) => console.log(task, start, end)}
-      onProgressChange={(task, progress) => console.log(task, progress)}
-      onTasksChange={(tasks) => console.log(tasks)}
-      // // https://github.com/mohammed-io/frappe-gantt-react/blob/master/src/App.tsx
-      // // onViewChange={this._func} --> something to do with class state = {mode: ViewMode.___} 
-    />
+    <>
+      {!projectTasks[0] ? <h1>Ha-ha no data for a Gantt!</h1> :
+      <FrappeGantt
+        tasks={tasks}
+        viewMode={ViewMode.Week}
+        onClick={(task) => console.log(task)}
+        onDateChange={(task, start, end) => console.log(task, start, end)}
+        onProgressChange={(task, progress) => console.log(task, progress)}
+        onTasksChange={(tasks) => console.log(tasks)}
+        // // https://github.com/mohammed-io/frappe-gantt-react/blob/master/src/App.tsx
+        // // onViewChange={this._func} --> something to do with class state = {mode: ViewMode.___} 
+      />}
+    </>
   )
 }
 

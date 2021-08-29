@@ -470,7 +470,7 @@ const exampleState = {
 
 const ProjectGantt = () => {
   // Need to fix this!
-  let projectTasks = getTasksForProject(exampleState, 3).map((i) => exampleState.tasks[i]);
+  let projectTasks = getTasksForProject(exampleState, 4).map((i) => exampleState.tasks[i]);
   console.log("projectTasks", projectTasks);
   return (
     <div>
