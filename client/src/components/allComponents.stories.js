@@ -97,4 +97,8 @@ storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects 
 
 storiesOf('NavBar', module).add('Intial', () => <NavBar />);
 
-storiesOf('Kanban', module).add('Board', () => <KanbanBoard />);
+storiesOf('Kanban', module)
+  .add('Late', () => <KanbanBoard status={'Late'} tasks={userTasks} />)
+  .add('To-Do', () => <KanbanBoard status={'To-Do'} tasks={userTasks} />)
+  .add('In Progress', () => <KanbanBoard status={'In Progress'} tasks={userTasks} />)
+  .add('Done', () => <KanbanBoard status={'Done'} tasks={userTasks} />);

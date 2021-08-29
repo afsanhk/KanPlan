@@ -1,13 +1,13 @@
 .kanban-board {
-  border: 2px solid grey;
+  border: none;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: red;
 
   .kanban-board-header {
     background: white;
     display: flex;
     justify-content: center;
+    border: 2px solid grey;
   }
 
   .kanban-board-body {
