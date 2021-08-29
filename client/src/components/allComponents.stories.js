@@ -112,6 +112,6 @@ storiesOf('Kanban', module)
   .add('In Progress', () => <KanbanBoard status={'In Progress'} tasks={userTasks} />)
   .add('Done', () => <KanbanBoard status={'Done'} tasks={userTasks} />);
 
-storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  information={'3'}/>);
-storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  information={chartData}/>);
+storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  chartInformation={'8'} chartTitle='Projects Managing' chartColor='#0099ff' />);
+storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  chartInformation={chartData}/>);
 storiesOf('HomepageCharts', module).add('Charts', () => <HomepageCharts  />);

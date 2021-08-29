@@ -8,7 +8,7 @@ import './HomepageCharts.scss'
 
 function HomepageChartB(props) {
 
-  const { information } = props
+  const { chartInformation } = props
 
   const chartData = {
     labels: ['Late', 'To-Do', 'In Progress',
@@ -27,12 +27,12 @@ function HomepageChartB(props) {
           '#e99426',
           '#14752d',
         ],
-        data: information, //need to pass in props!
+        data: chartInformation, //need to pass in props!
       }
     ]
   }
   return (
-    <div className='canvas-container'>
+    <div className='canvas-container-chartB'>
       <Pie
         data={chartData}
         spacing={30}
@@ -42,12 +42,12 @@ function HomepageChartB(props) {
               display:true,
               text:'Task Tracker:',
               font: {
-                size: 30
+                size: 22
               },
             },
             legend:{
-              display: true,
-              position: 'bottom',
+              display: false,
+              position: 'right',
               labels:{
                 font:{
                   size: 15
