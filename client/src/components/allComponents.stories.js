@@ -17,8 +17,6 @@ import ProjectNameDescription from "./ProjectNameDescription";
 import HomepageMyProjects from "./HomepageMyProjects";
 import ConfirmButton from "./ConfirmButton";
 
-import NavBar from "./NavBar";
-
 import KanbanBoard from "./KanbanBoard";
 import ProjectKanban from "../pages/ProjectKanban";
 
@@ -209,8 +207,6 @@ storiesOf("ProjectNameDescription", module)
   ));
 
 storiesOf("HomepageMyProjects", module).add("Intial", () => <HomepageMyProjects userProjects={userProjects} />);
-
-storiesOf("NavBar", module).add("Intial", () => <NavBar />);
 
 storiesOf("Kanban", module).add("Project Kanban", () => <ProjectKanban />);
 
