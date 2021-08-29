@@ -462,7 +462,7 @@ const tasks = {
   },
 };
 
-const state = {
+const exampleState = {
   projects,
   tasks,
   users: { user_projects: [1, 2, 3, 4] },
@@ -470,7 +470,7 @@ const state = {
 
 const ProjectGantt = () => {
   // Need to fix this!
-  let projectTasks = getTasksForProject(state, 2).map((taskid) => state.tasks[taskid]);
+  let projectTasks = getTasksForProject(exampleState, 3).map((i) => exampleState.tasks[i]);
   console.log("projectTasks", projectTasks);
   return (
     <div>

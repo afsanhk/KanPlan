@@ -1,6 +1,6 @@
 // Returns an array of tasks for the given project
 function getTasksForProject(state, projectID) {
-  return state.projects[projectID];
+  return state.projects[projectID].project_tasks;
 }
 
 // Returns an array of projects for the given user
@@ -558,11 +558,11 @@ const state = {
   users,
 };
 
-console.log("-----------getTasksForProject-----------");
-console.log(getTasksForProject(state, 1));
+// console.log("-----------getTasksForProject-----------");
+// console.log(getTasksForProject(state, 1));
 
-console.log("\n-----------getTasksForProject-----------");
-console.log("1 Project:", getProjectsForUser(state, 1));
-console.log("Multiple Projects", getProjectsForUser(state, 45));
+// console.log("\n-----------getTasksForProject-----------");
+// console.log("1 Project:", getProjectsForUser(state, 1));
+// console.log("Multiple Projects", getProjectsForUser(state, 45));
 
-// export { getProjectsForUser, getTasksForProject };
+export { getProjectsForUser, getTasksForProject };
