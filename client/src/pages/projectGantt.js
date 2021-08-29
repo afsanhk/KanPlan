@@ -1,48 +1,48 @@
-import Gantt from "../components/Gantt";
+import Gantt from '../components/Gantt';
 
 const projectTasks = [
   {
     id: 1,
-    title: "API Routes",
-    task_description: "Set up API Routes",
+    title: 'API Routes',
+    task_description: 'Set up API Routes',
     priority_id: 3,
     status_id: 1,
     project_id: 1,
-    plan_start: "2021-08-26T18:08:57.766Z",
-    plan_end: "2021-08-27T18:08:57.766Z",
-    proj_name: "KanPlan",
-    priority_name: "High",
-    status: "To-Do",
-    task_users: [2],
+    plan_start: '2021-08-26T18:08:57.766Z',
+    plan_end: '2021-08-27T18:08:57.766Z',
+    proj_name: 'KanPlan',
+    priority_name: 'High',
+    status: 'To-Do',
+    task_users: [2]
   },
   {
     id: 2,
-    title: "React Components",
-    task_description: "Build react components",
+    title: 'React Components',
+    task_description: 'Build react components',
     priority_id: 2,
     status_id: 1,
     project_id: 1,
-    plan_start: "2021-08-29T18:08:57.766Z",
-    plan_end: "2021-09-06T18:08:57.766Z",
-    proj_name: "KanPlan",
-    priority_name: "Low",
-    status: "To-Do",
-    task_users: [1, 2, 3],
+    plan_start: '2021-08-29T18:08:57.766Z',
+    plan_end: '2021-09-06T18:08:57.766Z',
+    proj_name: 'KanPlan',
+    priority_name: 'Low',
+    status: 'To-Do',
+    task_users: [1, 2, 3]
   },
   {
     id: 3,
-    title: "Kanban DnD",
-    task_description: "Build Kanban containers and drag and drop",
+    title: 'Kanban DnD',
+    task_description: 'Build Kanban containers and drag and drop',
     priority_id: 2,
     status_id: 1,
     project_id: 1,
-    plan_start: "2021-08-29T18:08:57.766Z",
-    plan_end: "2021-09-03T18:08:57.766Z",
-    proj_name: "KanPlan",
-    priority_name: "Low",
-    status: "To-Do",
-    task_users: [1],
-  },
+    plan_start: '2021-08-29T18:08:57.766Z',
+    plan_end: '2021-09-03T18:08:57.766Z',
+    proj_name: 'KanPlan',
+    priority_name: 'Low',
+    status: 'To-Do',
+    task_users: [1]
+  }
 ];
 
 const ProjectGantt = () => {
