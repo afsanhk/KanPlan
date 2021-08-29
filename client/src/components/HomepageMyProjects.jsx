@@ -7,7 +7,6 @@ export default function HomepageMyProjects(props) {
 
   const { userProjects } = props;
 
-  
   // //this assumes that this component will recieve a prop containing all projects cross-referenced by user
   const parsedProjects = userProjects.map(proj => {
     return(
@@ -19,14 +18,11 @@ export default function HomepageMyProjects(props) {
       )
     })
     
-    console.log(parsedProjects)
-  
   return (
     <div className='homepage-my-projects'>
       <h2><strong>My Projects</strong></h2>
       <div>
         {parsedProjects}
-
       </div>
     </div>
   );
