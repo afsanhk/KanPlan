@@ -5,6 +5,7 @@ import { IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import './KanbanBoard.scss';
+import KanbanTask from './KanbanTask';
 
 const backgroundColor = {
   Late: 'rgb(213, 60, 60)',
@@ -22,7 +23,13 @@ function KanbanBoard({ status, tasks }) {
         </h2>
       </header>
 
-      <div className="kanban-board-body"></div>
+      <div className="kanban-board-body">
+        <div className="kanban-board-body-div">
+          {tasks.map((task) => (
+            <KanbanTask task={task} />
+          ))}
+        </div>
+      </div>
 
       <footer className="kanban-board-footer">
         <div className="kanban-board-footer-div">

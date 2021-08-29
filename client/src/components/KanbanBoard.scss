@@ -2,6 +2,9 @@
   border: none;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  min-width: 350px;
+  margin-bottom: 50px;
+  width: 22%;
 
   .kanban-board-header {
     background: white;
@@ -13,6 +16,10 @@
   .kanban-board-body {
     display: flex;
     justify-content: center;
+
+    .kanban-board-body-div {
+      width: 90%;
+    }
   }
 
   .kanban-board-footer {
@@ -20,10 +27,16 @@
     display: flex;
     justify-content: center;
 
-    div.kanban-board-footer-div {
+    .kanban-board-footer-div {
       font-weight: bold;
-      width: 80%;
+      width: 90%;
+      margin: 10px;
       display: flex;
+      align-items: center;
+
+      p {
+        margin: 0;
+      }
 
       svg {
         color: white;
