@@ -18,7 +18,7 @@ function KanbanBoard({ status, tasks }) {
     <div className="kanban-board" style={{ backgroundColor: backgroundColor[status] }}>
       <header className="kanban-board-header">
         <h2>
-          {status} ({tasks.length})
+          {status.toUpperCase()} ({tasks.length})
         </h2>
       </header>
 
