@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Droppable } from 'react-beautiful-dnd';
+
 import { IconButton } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -14,23 +16,27 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-function KanbanBoard({ status, tasks }) {
+function KanbanBoard({ tasks, column }) {
   return (
-    <div className="kanban-board" style={{ backgroundColor: backgroundColor[status] }}>
+    <div className="kanban-board" style={{ backgroundColor: backgroundColor[column.title] }}>
       <header className="kanban-board-header">
         <h2>
-          {status.toUpperCase()} ({tasks.length})
+          {column.title.toUpperCase()} ({tasks.length})
         </h2>
       </header>
 
-      <div className="kanban-board-body">
-        <div className="kanban-board-body-div">
-          {tasks.map((task) => (
-            <KanbanTask task={task} />
-          ))}
-        </div>
-      </div>
-
+      <Droppable droppableId={column.id}>
+        {(provided, snapshot) => (
+          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+            <div className="kanban-board-body-div">
+              {tasks.map((task, index) => (
+                <KanbanTask key={task.id} task={task} index={index} />
+              ))}
+              {provided.placeholder}
+            </div>
+          </div>
+        )}
+      </Droppable>
       <footer className="kanban-board-footer">
         <div className="kanban-board-footer-div">
           <IconButton size="small">

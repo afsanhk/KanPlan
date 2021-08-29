@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import KanbanBoard from '../components/KanbanBoard';
+
+import { DragDropContext } from 'react-beautiful-dnd';
+
 import './ProjectKanban.scss';
 
 // For Kanban Layout
@@ -79,42 +82,44 @@ const projectTasks = [
 const initialData = {
   tasks: {},
   columns: {
-    Late: {
+    'column-1': {
       id: 'column-1',
       title: 'Late',
-      taskNames: []
+      taskIds: []
     },
-    'To-Do': {
+    'column-2': {
       id: 'column-2',
       title: 'To-Do',
-      taskNames: []
+      taskIds: []
     },
-    'In Progress': {
+    'column-3': {
       id: 'column-3',
       title: 'In Progress',
-      taskNames: []
+      taskIds: []
     },
-    Done: {
+    'column-4': {
       id: 'column-4',
       title: 'Done',
-      taskNames: []
+      taskIds: []
     }
   },
-  columnOrder: ['Late', 'To-Do', 'In Progress', 'Done']
+  columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
 };
 
 projectTasks.forEach((task) => {
   initialData.tasks[task.title] = task;
   if (task.status === 'Late') {
-    initialData.columns['Late'].taskNames.push(task.title);
+    initialData.columns['column-1'].taskIds.push(task.title);
   } else if (task.status === 'To-Do') {
-    initialData.columns['To-Do'].taskNames.push(task.title);
+    initialData.columns['column-2'].taskIds.push(task.title);
   } else if (task.status === 'In Progress') {
-    initialData.columns['In Progress'].taskNames.push(task.title);
+    initialData.columns['column-3'].taskIds.push(task.title);
   } else if (task.status === 'Done') {
-    initialData.columns['Done'].taskNames.push(task.title);
+    initialData.columns['column-4'].taskIds.push(task.title);
   }
 });
+
+console.log(initialData);
 
 const lateTasks = projectTasks.filter((task) => task.status === 'Late');
 const toDoTasks = projectTasks.filter((task) => task.status === 'To-Do');
@@ -189,13 +194,23 @@ const ProjectKanban = () => {
   return (
     <div className="project-kanban">
       <h1>This will show the project Kanban.</h1>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="project-kanban-board">
+          {state.columnOrder.map((columnId) => {
+            const column = state.columns[columnId];
+            const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
+            console.log(tasks);
 
-      <div className="project-kanban-board">
-        <KanbanBoard status={'Late'} tasks={lateTasks} />
-        <KanbanBoard status={'To-Do'} tasks={toDoTasks} />
-        <KanbanBoard status={'In Progress'} tasks={inProgressTasks} />
-        <KanbanBoard status={'Done'} tasks={doneTasks} />
-      </div>
+            return <KanbanBoard key={column.id} column={column} tasks={tasks} />;
+          })}
+        </div>
+        {/* <div className="project-kanban-board">
+          <KanbanBoard status={'Late'} tasks={lateTasks} />
+          <KanbanBoard status={'To-Do'} tasks={toDoTasks} />
+          <KanbanBoard status={'In Progress'} tasks={inProgressTasks} />
+          <KanbanBoard status={'Done'} tasks={doneTasks} />
+        </div> */}
+      </DragDropContext>
     </div>
   );
 };

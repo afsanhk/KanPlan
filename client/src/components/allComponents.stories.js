@@ -184,12 +184,7 @@ storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects 
 
 storiesOf('NavBar', module).add('Intial', () => <NavBar />);
 
-storiesOf('Kanban', module)
-  .add('Late', () => <KanbanBoard status={'Late'} tasks={projectTasks.filter((task) => task.status === 'Late')} />)
-  .add('To-Do', () => <KanbanBoard status={'To-Do'} tasks={projectTasks.filter((task) => task.status === 'To-Do')} />)
-  .add('In Progress', () => <KanbanBoard status={'In Progress'} tasks={projectTasks.filter((task) => task.status === 'In Progress')} />)
-  .add('Done', () => <KanbanBoard status={'Done'} tasks={projectTasks.filter((task) => task.status === 'Done')} />)
-  .add('Project Kanban', () => <ProjectKanban />);
+storiesOf('Kanban', module).add('Project Kanban', () => <ProjectKanban />);
 
 storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA chartInformation={'8'} chartTitle="Projects Managing" chartColor="#0099ff" />);
 storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB chartInformation={chartData} />);
