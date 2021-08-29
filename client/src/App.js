@@ -1,6 +1,8 @@
 // Libraries and frameworks
-import React from "react";
+import React, {} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import useApplicationData from "./hooks/useApplicationData";
 
 // Components & Pages
 import NavBar from "./components/NavBar";
@@ -14,6 +16,10 @@ import ProjectGantt from "./pages/ProjectGantt";
 import "./App.scss";
 
 function App() {
+
+  const {state} = useApplicationData()
+
+
   return (
     <div className="App">
       <Router>
@@ -22,6 +28,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <UserDashboard />
+            {console.log(state.tasks)}
           </Route>
           <Route path="/projects">
             <UserProjects />
