@@ -465,13 +465,11 @@ const tasks = {
 const exampleState = {
   projects,
   tasks,
-  users: { user_projects: [1, 2, 3, 4] },
 };
 
 const ProjectGantt = () => {
-  // Need to fix this!
-  let projectTasks = getTasksForProject(exampleState, 4).map((i) => exampleState.tasks[i]);
-  console.log("projectTasks", projectTasks);
+  // Change the project id in the getTasksForProject function to see changes in the Gantt
+  let projectTasks = getTasksForProject(exampleState, 1).map((i) => exampleState.tasks[i]);
   return (
     <div>
       <h1>This will show the project Gantt.</h1>
