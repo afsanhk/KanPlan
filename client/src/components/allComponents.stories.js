@@ -18,11 +18,15 @@ import HomepageMyProjects from './HomepageMyProjects';
 import ConfirmButton from './ConfirmButton';
 
 import NavBar from './NavBar';
+<<<<<<< HEAD
 
 import HomepageChartA from './HomepageChartA';
 import HomepageChartB from './HomepageChartB';
 
 
+=======
+import KanbanBoard from './KanbanBoard';
+>>>>>>> master
 
 const userTasks = [
   {
@@ -99,8 +103,13 @@ storiesOf('ProjectNameDescription', module)
 
 storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects userProjects={userProjects} />);
 
-storiesOf('NavBar', module).add('Intial', () => <NavBar  />);
+storiesOf('NavBar', module).add('Intial', () => <NavBar />);
 
+storiesOf('Kanban', module)
+  .add('Late', () => <KanbanBoard status={'Late'} tasks={userTasks} />)
+  .add('To-Do', () => <KanbanBoard status={'To-Do'} tasks={userTasks} />)
+  .add('In Progress', () => <KanbanBoard status={'In Progress'} tasks={userTasks} />)
+  .add('Done', () => <KanbanBoard status={'Done'} tasks={userTasks} />);
 
 storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA  />);
 storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB  />);

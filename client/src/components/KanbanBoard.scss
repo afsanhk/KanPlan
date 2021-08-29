@@ -1,0 +1,33 @@
+.kanban-board {
+  border: none;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  .kanban-board-header {
+    background: white;
+    display: flex;
+    justify-content: center;
+    border: 2px solid grey;
+  }
+
+  .kanban-board-body {
+    display: flex;
+    justify-content: center;
+  }
+
+  .kanban-board-footer {
+    color: white;
+    display: flex;
+    justify-content: center;
+
+    div.kanban-board-footer-div {
+      font-weight: bold;
+      width: 80%;
+      display: flex;
+
+      svg {
+        color: white;
+      }
+    }
+  }
+}
