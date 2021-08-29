@@ -15,10 +15,19 @@
   align-items: center;
 
   .nav-avatar {
-    border: solid black 2px;
+    border: solid base.$dark-grey 2px;
   }
 }
 
 .nav-bottom-list {
   width: 100%;
+}
+
+.navlink {
+  text-decoration: none;
+  color: base.$dark-grey; //changes color of icons 
+}
+
+.pomodoro-icon {
+  color: base.$dark-grey;
 }

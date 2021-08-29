@@ -21,12 +21,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* <h1>KanPlan!</h1> */}
         <NavBar />
         <Switch>
           <Route exact path="/">
             <UserDashboard />
-            {console.log(state.tasks)}
           </Route>
           <Route path="/projects">
             <UserProjects />

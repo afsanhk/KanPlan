@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import KanPlanLogo from '../images/KanPlanLogo.jpg';
 import './NavBar.scss';
@@ -13,6 +14,7 @@ import AlarmIcon from '@material-ui/icons/Alarm';
 import Avatar from '@material-ui/core/Avatar';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 const theme = createTheme({
   overrides: {
@@ -41,7 +43,27 @@ const theme = createTheme({
   }
 });
 
+const useStyles = makeStyles({
+  selected: {
+    backgroundColor: '#f5f5f5',
+  }
+})
+
 function NavBar() {
+
+  const { pathname } = useLocation();  //extracts pathname from current url location
+  const classes = useStyles();
+
+  const activePage = function () {
+    if (['/'].includes(pathname)) {
+      return 'homepage'
+    }
+
+    if (['/projects'].includes(pathname)) {
+      return 'projects'
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Drawer variant="permanent" anchor="left">
@@ -49,19 +71,23 @@ function NavBar() {
           <img src={KanPlanLogo} alt="logo" width="100" height="100" />
           <div className="nav-body">
             <List>
-              <ListItem button>
-                <ListItemText primary={<HomeIcon fontSize="large" />} secondary="Home" alignItems="center" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary={<AppsIcon fontSize="large" />} secondary="Projects" alignItems="center" />
-              </ListItem>
+              <NavLink to='/' className='navlink'>
+                <ListItem button className={activePage() === 'homepage' ? classes.selected : ''}>
+                  <ListItemText primary={<HomeIcon fontSize="large" />} secondary="Home" alignItems="center" />
+                </ListItem>
+              </NavLink>
+              <NavLink to='/projects' className='navlink'>
+                <ListItem button className={activePage() === 'projects' ? classes.selected : ''} >
+                  <ListItemText primary={<AppsIcon fontSize="large" />} secondary="Projects" alignItems="center" />
+                </ListItem>
+              </NavLink>
             </List>
           </div>
         </div>
         <div className="nav-bottom">
           <List className="nav-bottom-list">
-            <ListItem button>
-              <ListItemText primary={<AlarmIcon fontSize="large" />} secondary="Pomodoro" alignItems="center" />
+            <ListItem button >
+              <ListItemText primary={<AlarmIcon fontSize="large" className={'pomodoro-icon'} />} secondary="Pomodoro" alignItems="center" />
             </ListItem>
           </List>
           <Avatar alt="" src="" className="nav-avatar" />
