@@ -1,0 +1,25 @@
+@use '../styles/base';
+
+
+.nav-top {
+  display: flex;
+  flex-direction: column;
+  
+  img {
+    margin: 10px; //for styling, maybe remove logo margin, make logo area white bg?
+  }
+}
+
+.nav-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .nav-avatar {
+    border: solid black 2px;
+  }
+}
+
+.nav-bottom-list {
+  width: 100%;
+}

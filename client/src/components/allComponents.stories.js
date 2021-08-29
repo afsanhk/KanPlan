@@ -17,6 +17,9 @@ import ProjectNameDescription from './ProjectNameDescription';
 import HomepageMyProjects from './HomepageMyProjects';
 import ConfirmButton from './ConfirmButton';
 
+import NavBar from './NavBar';
+
+
 const userTasks = [
   {
     id: 1,
@@ -90,4 +93,6 @@ storiesOf('ProjectNameDescription', module)
   .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[0].proj_users} />)
   .add('Homepage (10 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[2].proj_users} />);
 
-storiesOf('HomepageMyProjects', module).add('Intial (10 users)', () => <HomepageMyProjects userProjects={userProjects} />);
+storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects userProjects={userProjects} />);
+
+storiesOf('NavBar', module).add('Intial', () => <NavBar  />);
