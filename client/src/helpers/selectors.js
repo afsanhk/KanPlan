@@ -1,7 +1,14 @@
-import Gantt from "../components/Gantt";
+// Returns an array of tasks for the given project
+function getTasksForProject(state, projectID) {
+  return state.projects[projectID].project_tasks;
+}
 
-import { getProjectsForUser, getTasksForProject } from "../helpers/selectors";
+// Returns an array of projects for the given user
+function getProjectsForUser(state, userID) {
+  return state.users[userID].user_projects;
+}
 
+// TEST DATA
 const projects = {
   1: {
     id: 1,
@@ -462,22 +469,100 @@ const tasks = {
   },
 };
 
-const exampleState = {
+const users = {
+  1: {
+    id: 1,
+    user_name: "TJ Jung",
+    email: "thisis@email.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [2, 3, 4, 5, 6, 8, 9, 11],
+    user_projects: [1],
+  },
+  2: {
+    id: 2,
+    user_name: "Afsanul Khan",
+    email: "1@1.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [1, 2, 4, 5, 6, 8, 9, 11],
+    user_projects: [1],
+  },
+  3: {
+    id: 3,
+    user_name: "Veronica Leung",
+    email: "chicken@soup.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [2, 4, 7, 9, 10, 11],
+    user_projects: [1],
+  },
+  4: {
+    id: 4,
+    user_name: "Kleir Miranda",
+    email: "kleir@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [12, 13, 14, 15],
+    user_projects: [2],
+  },
+  5: {
+    id: 5,
+    user_name: "Mitch Aldrich",
+    email: "mitch@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [12, 13, 14, 15],
+    user_projects: [2],
+  },
+  6: {
+    id: 6,
+    user_name: "Beatrice Kwan",
+    email: "beatrice@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [12, 13, 15],
+    user_projects: [2],
+  },
+  7: {
+    id: 7,
+    user_name: "Maggie Zhao",
+    email: "maggie@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [16, 18],
+    user_projects: [3],
+  },
+  8: {
+    id: 8,
+    user_name: "Eliza Wong",
+    email: "eliza@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [17, 19],
+    user_projects: [3],
+  },
+  9: {
+    id: 9,
+    user_name: "Sarah Avery",
+    email: "sarah@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [null],
+    user_projects: [4],
+  },
+  45: {
+    id: 45,
+    user_name: "Multi User",
+    email: "multi@example.com",
+    last_login: "2021-08-30T01:36:10.309Z",
+    user_tasks: [null],
+    user_projects: [1, 2],
+  },
+};
+
+const state = {
   projects,
   tasks,
+  users,
 };
 
-const ProjectGantt = () => {
-  // Change the project id in the getTasksForProject function to see changes in the Gantt
-  let projectTasks = getTasksForProject(exampleState, 1).map((i) => exampleState.tasks[i]);
-  return (
-    <div>
-      <h1>This will show the project Gantt.</h1>
-      <section className="ganttContainer" style={{ marginLeft: "140px" }}>
-        <Gantt projectTasks={projectTasks} />
-      </section>
-    </div>
-  );
-};
+// console.log("-----------getTasksForProject-----------");
+// console.log(getTasksForProject(state, 1));
 
-export default ProjectGantt;
+// console.log("\n-----------getTasksForProject-----------");
+// console.log("1 Project:", getProjectsForUser(state, 1));
+// console.log("Multiple Projects", getProjectsForUser(state, 45));
+
+export { getProjectsForUser, getTasksForProject };

@@ -11,7 +11,7 @@ module.exports = (db) => {
       JOIN project_members ON project_members.user_id = users.id
       GROUP BY users.id`
     ).then(({ rows: users }) => {
-      response.json(users);
+      response.json(users.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
     });
   });
 
