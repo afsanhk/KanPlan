@@ -6,18 +6,17 @@ import ConfirmButton from './ConfirmButton';
 
 // material-ui icons
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 
 // material-ui cores/lab
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IconButton } from '@material-ui/core';
+import { Backdrop, Fade, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import './AddTaskForm.scss';
+import AddUserForm from './AddUserForm';
 
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
@@ -27,27 +26,12 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     margin: '5px'
   },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }));
-
-// modal style function
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
 
 // get today's date yyyy-mm-dd
 const today = new Date();
@@ -70,25 +54,35 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, proj_users }) {
+function AddTaskForm({ proj_name, team_members, users }) {
   const classes = useStyles();
 
-  const [assignees, setAssignees] = useState([]);
+  const [currentUsers, setCurrentUsers] = useState([]);
+  const [teamMembers, setTeamMembers] = useState(team_members);
   const [state, setState] = useState({ plan_start: currentDate, plan_end: currentDate, task_users: [] });
 
   // modal state
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const removeAssignee = (user_name) => {
-    setAssignees((prev) => {
-      const newUsers = [...prev].filter((user) => user.name !== user_name);
+  const removeUser = (user_id) => {
+    setCurrentUsers((prev) => {
+      const newUsers = [...prev].filter((id) => id !== user_id);
+      setState((prev) => ({ ...prev, task_users: newUsers }));
+      return newUsers;
+    });
+  };
+
+  // add user from modal to Assignees
+  const addUser = (user_id) => {
+    setCurrentUsers((prev) => {
+      const newUsers = [...prev, user_id];
+      setState((prev) => ({ ...prev, task_users: newUsers }));
       return newUsers;
     });
   };
 
   const consoleData = () => {
-    setState((prev) => ({ ...prev, task_users: assignees }));
+    setState((prev) => ({ ...prev, task_users: currentUsers }));
     console.log(state);
   };
 
@@ -101,14 +95,6 @@ function AddTaskForm({ proj_name, proj_users }) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // modal html and css
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-    </div>
-  );
 
   return (
     <div>
@@ -140,19 +126,21 @@ function AddTaskForm({ proj_name, proj_users }) {
           </div>
         </div>
         <div className="task-form-body-description">
-          <TextField
-            id="standard-full-width"
-            label="Task Description"
-            style={{ margin: 8 }}
-            placeholder="Write task description"
-            fullWidth
-            multiline
-            margin="normal"
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
-          />
+          <div className="task-form-body-description-div">
+            <TextField
+              id="standard-full-width"
+              label="Task Description"
+              style={{ margin: 8 }}
+              placeholder="Write task description"
+              fullWidth
+              multiline
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
+            />
+          </div>
         </div>
 
         <div className="task-form-body-dropdowns">
@@ -195,7 +183,7 @@ function AddTaskForm({ proj_name, proj_users }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
@@ -203,30 +191,43 @@ function AddTaskForm({ proj_name, proj_users }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
               />
             </div>
           </div>
         </div>
 
-        {assignees && (
+        {currentUsers && (
           <>
             <div className="task-form-body-members-title">
-              <div style={{ borderBottom: assignees > 0 ? '2px solid black' : 'none' }}>
+              <div className="task-form-body-members-title-div">
                 <h2>Assignees</h2>
                 <IconButton size="small" onClick={handleOpen}>
                   <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
                 </IconButton>
-                <Modal open={open} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">
-                  {body}
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={open}>
+                    <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} projectName={proj_name} />
+                  </Fade>
                 </Modal>
               </div>
             </div>
 
             <div className="task-form-body-members">
-              <div className="task-form-body-members-div" style={{ height: assignees > 0 ? '160px' : 'auto' }}>
-                {assignees.map((user, index) => (
-                  <TeamMember key={index} name={user.name} remove border removeUser={removeAssignee} />
+              <div className="task-form-body-members-div" style={{ height: currentUsers.length ? '160px' : '0' }}>
+                {currentUsers.map((id, index) => (
+                  <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
                 ))}
               </div>
             </div>

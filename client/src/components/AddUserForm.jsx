@@ -1,11 +1,49 @@
 import React from 'react';
 import TeamMember from './TeamMember';
 
-function AddUserForm({ users, userIDs }) {
-  const userIdToName = (userIDs) => {};
+import { makeStyles } from '@material-ui/core';
+
+// material-ui styles
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    width: '500px',
+    height: '300px',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  header: {
+    paddingLeft: '20px',
+    borderBottom: '3px solid black',
+    marginBottom: '30px'
+  },
+  container: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    maxHeight: '160px',
+    overflow: 'auto'
+  }
+}));
+
+function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName }) {
+  const classes = useStyles();
+
+  const filteredIDs = teamMembers.filter((id) => !currentUsers.includes(id));
+  const userIdToName = filteredIDs.map((id) => ({ id: id, name: users[id].user_name }));
+
   return (
-    <div className="add-user-form">
-      <TeamMember />
+    <div className={classes.paper}>
+      <div className={classes.header}>{userIdToName.length ? <h1>Add user from {projectName} project</h1> : <h1>No more user!</h1>}</div>
+
+      <div className={classes.container}>{userIdToName && userIdToName.map((user) => <TeamMember key={user.id} id={user.id} name={user.name} add border addUser={addUser} />)}</div>
     </div>
   );
 }

@@ -14,14 +14,14 @@ const useStyles = makeStyles({
   }
 });
 
-function TeamMember({ add, remove, name, border, removeUser, id }) {
+function TeamMember({ id, name, add, remove, border, removeUser, addUser }) {
   const classes = useStyles();
 
   return (
     <div className={`team-member ${border ? 'team-member-border' : ''}`}>
       <TeamMemberName name={name} />
       {add && (
-        <IconButton size="small">
+        <IconButton size="small" onClick={() => addUser(id)}>
           <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
         </IconButton>
       )}

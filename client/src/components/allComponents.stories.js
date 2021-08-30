@@ -350,7 +350,7 @@ storiesOf('TeamMember', module)
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
 storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
-storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} proj_users={projects['1'].proj_users} />);
+storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} team_members={projects['1'].team_members} users={users} />);
 
 storiesOf('ProjectNameDescription', module)
   .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} team_members={userProjects[0].team_members} state={state} />)
