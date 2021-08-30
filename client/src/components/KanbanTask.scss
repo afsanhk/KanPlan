@@ -15,8 +15,10 @@
       margin: 0;
     }
   }
-  .kanban-task-body {
-  }
-  .kanban-task-footer {
+  .kanban-task-footer-div {
+    margin-right: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 }

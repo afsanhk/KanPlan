@@ -45,24 +45,23 @@ const theme = createTheme({
 
 const useStyles = makeStyles({
   selected: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f5f5f5'
   }
-})
+});
 
 function NavBar() {
-
-  const { pathname } = useLocation();  //extracts pathname from current url location
+  const { pathname } = useLocation(); //extracts pathname from current url location
   const classes = useStyles();
 
   const activePage = function () {
     if (['/'].includes(pathname)) {
-      return 'homepage'
+      return 'homepage';
     }
 
     if (['/projects'].includes(pathname)) {
-      return 'projects'
+      return 'projects';
     }
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,25 +70,28 @@ function NavBar() {
           <img src={KanPlanLogo} alt="logo" width="100" height="100" />
           <div className="nav-body">
             <List>
-              <NavLink to='/' className='navlink'>
+              <NavLink to="/" className="navlink">
                 <ListItem button className={activePage() === 'homepage' ? classes.selected : ''}>
                   <ListItemText primary={<HomeIcon fontSize="large" />} secondary="Home" alignItems="center" />
                 </ListItem>
               </NavLink>
-              <NavLink to='/projects' className='navlink'>
-                <ListItem button className={activePage() === 'projects' ? classes.selected : ''} >
+              <NavLink to="/projects" className="navlink">
+                <ListItem button className={activePage() === 'projects' ? classes.selected : ''}>
                   <ListItemText primary={<AppsIcon fontSize="large" />} secondary="Projects" alignItems="center" />
                 </ListItem>
               </NavLink>
-              <NavLink to='/project/gantt' className='navLink'> 
+              <NavLink to="/project/gantt" className="navLink">
                 <li>Gantt Placeholder</li>
+              </NavLink>
+              <NavLink to="/project/kanban" className="navLink">
+                <li>Kanban Placeholder</li>
               </NavLink>
             </List>
           </div>
         </div>
         <div className="nav-bottom">
           <List className="nav-bottom-list">
-            <ListItem button >
+            <ListItem button>
               <ListItemText primary={<AlarmIcon fontSize="large" className={'pomodoro-icon'} />} secondary="Pomodoro" alignItems="center" />
             </ListItem>
           </List>

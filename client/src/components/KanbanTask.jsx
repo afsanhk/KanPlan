@@ -39,7 +39,7 @@ function KanbanTask({ task, index }) {
 
           <footer className="kanban-task-footer">
             {task.task_users && (
-              <div className="project-grouped-users">
+              <div className="kanban-task-footer-div">
                 <AvatarGroup max={4}>{parsedUsers}</AvatarGroup>
               </div>
             )}

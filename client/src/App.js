@@ -1,29 +1,29 @@
 // Libraries and frameworks
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import useApplicationData from "./hooks/useApplicationData";
+import useApplicationData from './hooks/useApplicationData';
 
 // Components & Pages
-import NavBar from "./components/NavBar";
-import UserDashboard from "./pages/UserDashboard";
-import UserProjects from "./pages/UserProjects";
-import ProjectOverview from "./pages/ProjectOverview";
-import ProjectKanban from "./pages/ProjectKanban";
-import ProjectGantt from "./pages/ProjectGantt";
+import NavBar from './components/NavBar';
+import UserDashboard from './pages/UserDashboard';
+import UserProjects from './pages/UserProjects';
+import ProjectOverview from './pages/ProjectOverview';
+import ProjectKanban from './pages/ProjectKanban';
+import ProjectGantt from './pages/ProjectGantt';
 
 // Styling
-import "./App.scss";
+import './App.scss';
 
 // Helpers
-import { getProjectsForUser } from "./helpers/selectors";
+import { getProjectsForUser } from './helpers/selectors';
 
 function App() {
   const { state } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-  const projectID = 1;
+  const projectID = 0;
   return (
     <div className="App">
       <Router>
@@ -41,7 +41,7 @@ function App() {
           </Route>
           {/* This will need to change to become a dynamic link. */}
           <Route path="/project/kanban">
-            <ProjectKanban />
+            <ProjectKanban state={state} projectID={projectID} />
           </Route>
           {/* This will need to change to become a dynamic link. */}
           <Route path="/project/gantt">
