@@ -397,5 +397,12 @@ storiesOf("Project Overview Table", module)
 
 storiesOf("Project Page", module)
   .add("Icon Container", () => <h1>IconContainer</h1>)
-  .add("ProjectListItem/ProjectNameDescription", () => <ProjectListItem />)
-  .add("ProjectList", () => <ProjectList projects={userProjects} />);
+  .add("ProjectListItem", () => (
+    <ProjectListItem
+      name="KanPlan"
+      team_members={[1, 2, 3]}
+      description="Project management(not boring!)"
+      state={state}
+    />
+  ))
+  .add("ProjectList", () => <ProjectList projects={userProjects} state={state} />);
