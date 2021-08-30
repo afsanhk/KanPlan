@@ -347,7 +347,7 @@ storiesOf('TeamMember', module)
 
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
-storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} userProjects={projectsArray} />);
+storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
 storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} proj_users={projects['1'].proj_users} />);
 
 storiesOf('ProjectNameDescription', module)

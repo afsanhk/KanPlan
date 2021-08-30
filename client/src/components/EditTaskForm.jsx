@@ -68,22 +68,22 @@ const status_id = {
   Done: 4
 };
 
-function EditTaskForm({ tasks, userProjects }) {
+function EditTaskForm({ tasks, projects, users }) {
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
     if (projectName) {
-      const currentProjectObj = userProjects.filter((project) => project.proj_name === projectName);
+      const currentProjectObj = projects.filter((project) => project.proj_name === projectName);
 
-      return currentProjectObj[0].proj_users;
+      return currentProjectObj[0].team_members;
     }
   };
 
-  const [currentUsers, setCurrentUsers] = useState(null);
+  const [currentUsers, setCurrentUsers] = useState(tasks.task_users);
   const [currentProject, setCurrentProject] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ task_description: tasks.description, plan_start: currentDate, plan_end: currentDate });
+  const [state, setState] = useState({ task_description: tasks.task_description, plan_start: currentDate, plan_end: currentDate });
 
   // modal state
   const [modalStyle] = React.useState(getModalStyle);
@@ -93,17 +93,10 @@ function EditTaskForm({ tasks, userProjects }) {
     setClickDesc(!clickDesc);
   };
 
-  useEffect(() => {
-    if (currentProject) {
-      setCurrentUsers(() => getTeamMembers(currentProject));
-    }
-    setState((prev) => ({ ...prev, proj_name: currentProject, proj_users: currentUsers }));
-  }, [currentProject]);
-
-  const removeUser = (user_name) => {
+  const removeUser = (user_id) => {
     setCurrentUsers((prev) => {
-      const newUsers = [...prev].filter((user) => user.name !== user_name);
-      setState((prev) => ({ ...prev, proj_users: newUsers }));
+      const newUsers = [...prev].filter((id) => id !== user_id);
+      setState((prev) => ({ ...prev, task_users: newUsers }));
       return newUsers;
     });
   };
@@ -125,6 +118,11 @@ function EditTaskForm({ tasks, userProjects }) {
       <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
     </div>
   );
+
+  useEffect(() => {
+    setCurrentUsers(getTeamMembers(currentProject));
+    setState((prev) => ({ ...prev, task_users: currentUsers }));
+  }, [currentProject]);
 
   return (
     <div>
@@ -163,18 +161,16 @@ function EditTaskForm({ tasks, userProjects }) {
             </div>
           )}
         </div>
-
         <div className="task-form-body-dropdowns">
           <div className="task-form-body-dropdowns-project">
             <Autocomplete
               id="combo-box-demo"
-              options={userProjects}
+              options={projects}
               getOptionLabel={(option) => option.proj_name}
               style={{ width: '80%' }}
               renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
               onChange={(value) => {
                 setCurrentProject(value.target.innerText);
-                setCurrentUsers(getTeamMembers(value.target.innerText));
               }}
             />
           </div>
@@ -214,7 +210,7 @@ function EditTaskForm({ tasks, userProjects }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
@@ -222,12 +218,11 @@ function EditTaskForm({ tasks, userProjects }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
               />
             </div>
           </div>
         </div>
-
         {currentUsers && (
           <>
             <div className="task-form-body-members-title">
@@ -244,8 +239,8 @@ function EditTaskForm({ tasks, userProjects }) {
 
             <div className="task-form-body-members">
               <div className="task-form-body-members-div">
-                {currentUsers.map((user, index) => (
-                  <TeamMember key={index} name={user.name} remove border removeUser={removeUser} />
+                {currentUsers.map((id, index) => (
+                  <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
                 ))}
               </div>
             </div>
