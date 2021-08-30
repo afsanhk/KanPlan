@@ -3,9 +3,9 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 import './ProjectListItem.scss'
 
+import LinkIconContainer from './LinkIconContainer';
+
 export default function ProjectListItem ({name, description, team_members, state}) {
-  
-  console.log(team_members)
 
   const parsedUsers = team_members.map(user => {
     const userDetails = state.users[user]
@@ -25,7 +25,7 @@ export default function ProjectListItem ({name, description, team_members, state
       <p className="project-body">{description}</p>
       <footer className="project-footer">
         <div className="nav-icon-container">
-          Test
+          <LinkIconContainer/>
         </div>
           {team_members && 
             <div class='project-grouped-users'>
