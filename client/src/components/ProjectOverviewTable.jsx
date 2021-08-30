@@ -93,7 +93,7 @@ export default function ProjectOverviewTable({projectTasks}) {
     return { id: projectTasks.id, title: projectTasks.title, users: projectTasks.task_users, status: projectTasks.status, priority_name: projectTasks.priority_name, plan_start: projectTasks.plan_start, plan_end: projectTasks.plan_end };
   }
   
-  const rows = projectTasks.map(el => createData(el));
+  const rows = projectTasks[0] && projectTasks.map(el => createData(el));
 
   return (
     <TableContainer component={Paper}>
@@ -110,7 +110,7 @@ export default function ProjectOverviewTable({projectTasks}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {projectTasks[0] && rows.map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.title}
@@ -158,6 +158,16 @@ export default function ProjectOverviewTable({projectTasks}) {
               </StyledTableCell>
             </StyledTableRow>
           ))}
+          {/* This might need to change */}
+          <StyledTableRow>
+            <StyledTableCell>Add a Task!</StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+            <StyledTableCell></StyledTableCell>
+          </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>
