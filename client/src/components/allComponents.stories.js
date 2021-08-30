@@ -37,7 +37,7 @@ const projects = {
     planned_end: '2021-08-30T01:36:10.309Z',
     proj_description: 'Project management(not boring!)',
     manager_name: 'TJ Jung',
-    team_members: [1, 2, 3, 4, 5, 6, 7, 8, 9, 45],
+    team_members: [1, 2, 3, 45],
     project_tasks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
   },
   2: {
