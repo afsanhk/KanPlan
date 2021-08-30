@@ -27,8 +27,10 @@ import Gantt from "./Gantt";
 
 import ProjectOverviewTable from "./ProjectOverviewTable";
 
+import LinkIconContainer from "./LinkIconContainer";
 import ProjectListItem from "./ProjectListItem";
 import ProjectList from "./ProjectList";
+import { Link } from "@material-ui/core";
 
 // TEST DATA
 const projects = {
@@ -396,7 +398,7 @@ storiesOf("Project Overview Table", module)
   .add("No Data", () => <ProjectOverviewTable projectTasks={[null]} />);
 
 storiesOf("Project Page", module)
-  .add("Icon Container", () => <h1>IconContainer</h1>)
+  .add("Icon Container", () => <LinkIconContainer project={userProjects[0]} />)
   .add("ProjectListItem", () => (
     <ProjectListItem
       name="KanPlan"
