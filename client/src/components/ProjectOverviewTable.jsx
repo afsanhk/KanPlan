@@ -7,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import FlagIcon from '@material-ui/icons/Flag';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -26,26 +27,33 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein, something, somethingElse) {
-  return { name, calories, fat, carbs, protein, something, somethingElse };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 'A', 'B'),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 'A', 'B'),
-  createData('Eclair', 262, 16.0, 24, 6.0, 'A', 'B'),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 'A', 'B'),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 'A', 'B'),
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
 
-export default function CustomizedTables() {
+const flagStyles = {
+  High: {
+    color: 'rgb(213, 60, 60)'
+  },
+  Low: {
+    color: 'rgb(251, 175, 60)'
+  },
+  None: {
+    display: 'none'
+  }
+};
+
+export default function CustomizedTables({projectTasks}) {
   const classes = useStyles();
+
+  // Array of task objects in projectTasks
+  function createData(projectTasks) {
+    return { id: projectTasks.id, title: projectTasks.title, users: projectTasks.task_users, status: projectTasks.status, priority_name: projectTasks.priority_name, plan_start: projectTasks.plan_start, plan_end: projectTasks.plan_end };
+  }
+  
+  const rows = projectTasks.map(el => createData(el));
 
   return (
     <TableContainer component={Paper}>
@@ -63,16 +71,16 @@ export default function CustomizedTables() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.title}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.something}</StyledTableCell>
-              <StyledTableCell align="right">{row.somethingElse}</StyledTableCell>
+              <StyledTableCell align="right">{row.users}</StyledTableCell>
+              <StyledTableCell align="right">{row.status}</StyledTableCell>
+              <StyledTableCell align="right"><FlagIcon style={flagStyles[row.priority_name]} /></StyledTableCell>
+              <StyledTableCell align="right">{row.plan_start}</StyledTableCell>
+              <StyledTableCell align="right">{row.plan_end}</StyledTableCell>
+              <StyledTableCell align="right">Contains icons</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

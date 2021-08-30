@@ -253,13 +253,13 @@ const projectTasks = [
     title: "API Routes",
     task_description: "Set up API Routes",
     priority_id: 3,
-    status_id: 1,
+    status_id: 4,
     project_id: 1,
     plan_start: "2021-08-26T18:08:57.766Z",
     plan_end: "2021-08-27T18:08:57.766Z",
     proj_name: "KanPlan",
     priority_name: "High",
-    status: "To-Do",
+    status: "Done",
     task_users: [2],
   },
   {
@@ -388,4 +388,4 @@ storiesOf("Gantt", module)
   .add("Basic", () => <Gantt projectTasks={projectTasks} />)
   .add("No Data", () => <Gantt projectTasks={[null]} />);
 
-storiesOf("Project Overview Table", module).add("Basic", () => <CustomizedTables />);
+storiesOf("Project Overview Table", module).add("Basic", () => <CustomizedTables projectTasks={projectTasks} />);
