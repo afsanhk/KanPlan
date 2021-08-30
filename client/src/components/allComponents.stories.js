@@ -389,4 +389,6 @@ storiesOf("Gantt", module)
   .add("Basic", () => <Gantt projectTasks={projectTasks} />)
   .add("No Data", () => <Gantt projectTasks={[null]} />);
 
-storiesOf("Project Overview Table", module).add("Basic", () => <ProjectOverviewTable projectTasks={projectTasks} />);
+storiesOf("Project Overview Table", module)
+  .add("Basic", () => <ProjectOverviewTable projectTasks={projectTasks} />)
+  .add("No Data", () => <ProjectOverviewTable projectTasks={[null]} />);
