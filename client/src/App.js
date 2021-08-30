@@ -1,22 +1,22 @@
 // Libraries and frameworks
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import useApplicationData from './hooks/useApplicationData';
+import useApplicationData from "./hooks/useApplicationData";
 
 // Components & Pages
-import NavBar from './components/NavBar';
-import UserDashboard from './pages/UserDashboard';
-import UserProjects from './pages/UserProjects';
-import ProjectOverview from './pages/ProjectOverview';
-import ProjectKanban from './pages/ProjectKanban';
-import ProjectGantt from './pages/ProjectGantt';
+import NavBar from "./components/NavBar";
+import UserDashboard from "./pages/UserDashboard";
+import UserProjects from "./pages/UserProjects";
+import ProjectOverview from "./pages/ProjectOverview";
+import ProjectKanban from "./pages/ProjectKanban";
+import ProjectGantt from "./pages/ProjectGantt";
 
 // Styling
-import './App.scss';
+import "./App.scss";
 
 // Helpers
-import { getProjectsForUser } from './helpers/selectors';
+import { getProjectsForUser } from "./helpers/selectors";
 
 function App() {
   const { state } = useApplicationData();
