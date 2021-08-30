@@ -81,6 +81,9 @@ function NavBar() {
                   <ListItemText primary={<AppsIcon fontSize="large" />} secondary="Projects" alignItems="center" />
                 </ListItem>
               </NavLink>
+              <NavLink to='/project/gantt' className='navLink'> 
+                <li>Gantt Placeholder</li>
+              </NavLink>
             </List>
           </div>
         </div>
