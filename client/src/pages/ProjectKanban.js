@@ -84,10 +84,6 @@ const projectTasks = [
 ];
 
 const ProjectKanban = () => {
-  // const data = useApplicationData();
-  // const tasksData = data.state.tasks.filter((task) => task.proj_name === 'KanPlan');
-  // console.log(tasksData);
-
   const initialData = {
     tasks: {},
     columns: {
