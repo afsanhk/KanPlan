@@ -392,3 +392,8 @@ storiesOf("Gantt", module)
 storiesOf("Project Overview Table", module)
   .add("Basic", () => <ProjectOverviewTable projectTasks={projectTasks} />)
   .add("No Data", () => <ProjectOverviewTable projectTasks={[null]} />);
+
+storiesOf("Project Page", module)
+  .add("Icon Container", () => <h1>IconContainer</h1>)
+  .add("ProjectListItem/ProjectNameDescription", () => <h1>ProjectListitem</h1>)
+  .add("ProjectList", () => <h1>ProjectList</h1>);
