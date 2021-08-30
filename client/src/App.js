@@ -15,9 +15,15 @@ import ProjectGantt from "./pages/ProjectGantt";
 // Styling
 import "./App.scss";
 
+// Helpers
+import { getProjectsForUser } from "./helpers/selectors";
+
 function App() {
   const { state } = useApplicationData();
 
+  // Change this projectID to see reflected changes in gantt based on state.
+  // In reality we will need to pass this in based on which project we are routing from
+  const projectID = 1;
   return (
     <div className="App">
       <Router>
@@ -39,7 +45,7 @@ function App() {
           </Route>
           {/* This will need to change to become a dynamic link. */}
           <Route path="/project/gantt">
-            <ProjectGantt />
+            <ProjectGantt state={state} projectID={projectID} />
           </Route>
           {/* Do we want a 404 page? */}
         </Switch>
