@@ -6,9 +6,13 @@ import {Pie} from 'react-chartjs-2';
 import './HomepageCharts.scss'
 
 
-function HomepageChartB(props) {
+function HomepageChartB({ chartInformation }) {
 
-  const { chartInformation } = props
+  const lateCount = chartInformation.late
+  const toDoCount = chartInformation.toDo
+  const inProgressCount = chartInformation.inProgress
+  const doneCount = chartInformation.done
+
 
   const chartData = {
     labels: ['Late', 'To-Do', 'In Progress',
@@ -27,7 +31,7 @@ function HomepageChartB(props) {
           '#e99426',
           '#14752d',
         ],
-        data: chartInformation, //need to pass in props!
+        data: [lateCount, toDoCount, inProgressCount, doneCount], //need to pass in props!
       }
     ]
   }

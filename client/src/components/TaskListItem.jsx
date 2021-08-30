@@ -22,13 +22,13 @@ const useStyles = makeStyles({
   }
 }) 
 
-export default function TaskListItem(props) {
+export default function TaskListItem({ task }) {
 
   const classes = useStyles();
 
   return (
     <ListItem className={classes.listItem}>
-        <ListItemText primary={props.title} />
+        <ListItemText primary={task.title} />
 
         <ListItemIcon>
 
