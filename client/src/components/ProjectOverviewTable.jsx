@@ -20,10 +20,13 @@ import TeamMemberName from './TeamMemberName';
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
 // https://www.delftstack.com/howto/javascript/javascript-convert-timestamp-to-date/
-const convertTimestampStringToDMY = function(timestampString) {
+const convertTimestampStringToYMD = function(timestampString) {
   let timestampActual = Date.parse(timestampString);
   let dateActual = new Date(timestampActual);
-  let dateDMYString = `${dateActual.getDate()} - ${(dateActual.getMonth()+1)} - ${dateActual.getFullYear()}`
+  const day = dateActual.getDate().toString().length < 2 ? '0' + dateActual.getDate().toString(): dateActual.getDate().toString();
+  const month = (dateActual.getMonth()+1).toString().length < 2 ? '0' + (dateActual.getMonth()+1).toString() : (dateActual.getMonth()+1).toString();
+  const year = dateActual.getFullYear();
+  let dateDMYString = `${year}-${month}-${day}`
   return dateDMYString;
 }
 
@@ -46,11 +49,22 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 700,
   },
-});
+  icon: {
+    margin: '5px'
+  },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  }
+}));
 
 const flagStyles = {
   High: {
@@ -108,8 +122,32 @@ export default function CustomizedTables({projectTasks}) {
               {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
               <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: 'white' }}>{row.status.toUpperCase()}</StyledTableCell>
               <StyledTableCell align="center"><FlagIcon style={flagStyles[row.priority_name]} /></StyledTableCell>
-              <StyledTableCell align="center">{convertTimestampStringToDMY(row.plan_start)}</StyledTableCell>
-              <StyledTableCell align="center">{convertTimestampStringToDMY(row.plan_end)}</StyledTableCell>
+              <StyledTableCell align="center">
+                <TextField
+                  id="date"
+                  label="Start Date"
+                  type="date"
+                  defaultValue={convertTimestampStringToYMD(row.plan_start)}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  onChange={() => console.log('Changed something in the start date table!')}
+                />
+                </StyledTableCell>
+              <StyledTableCell align="center">
+                <TextField
+                  id="date"
+                  label="End Date"
+                  type="date"
+                  defaultValue={convertTimestampStringToYMD(row.plan_end)}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  onChange={() => console.log('Changed something in the end date table!')}
+                />
+              </StyledTableCell>
               <StyledTableCell align="center">
                 <IconButton size="small">
                   <EditOutlinedIcon />
