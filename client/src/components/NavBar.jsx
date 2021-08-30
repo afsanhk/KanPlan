@@ -64,7 +64,7 @@ function NavBar() {
           <div className="nav-body">
             <List>
               <NavLink to="/" className="navlink">
-                <ListItem button className={activePage() === 'homepage' ? classes.selected : '', classes.navBarButton } alignItems="center">
+                <ListItem button className={[activePage() === 'homepage' ? classes.selected : '', classes.navBarButton] } alignItems="center">
                   <ListItemText 
                     primary={<HomeIcon className={classes.navBarIcon} />} 
                     secondary={<Typography variant='h7'>Home</Typography>}  
@@ -72,7 +72,7 @@ function NavBar() {
                 </ListItem>
               </NavLink>
               <NavLink to="/projects" className="navlink">
-                <ListItem button className={activePage() === 'projects' ? classes.selected : '', classes.navBarButton }>
+                <ListItem button className={[activePage() === 'projects' ? classes.selected : '', classes.navBarButton] }>
                   <ListItemText 
                     primary={<AppsIcon className={classes.navBarIcon} />} 
                     secondary={<Typography variant='h7'>Projects</Typography>}

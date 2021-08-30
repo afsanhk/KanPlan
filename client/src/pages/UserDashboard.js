@@ -23,7 +23,7 @@ const UserDashboard = ({ state, userID }) => {
   return (
     <div className='userDashboard' >
       <div className='userDashboard-header'>
-        <h1>Hello {name}</h1>
+        <h1>Hello, {name}!</h1>
         <p>"The future depends on what you do today" - Gandhi</p>
       </div>
       <div className='userDashboard-body'>

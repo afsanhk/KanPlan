@@ -1,28 +1,45 @@
 @use '../styles/base';
 
-
+.homepage-charts {
+  display: flex;
+  justify-content: space-around;
+  height: 29vh;
+  background-color: base.$off-white;
+  border: base.$border;
+  border-radius: base.$border-radius;
+  padding: 15px;
+  align-items: center;
+}
 
 .canvas-container-chartA {
-  height: 40vh;
-  width: 35vh;
+  height: 25vh;
+  width: 30vh;
   padding: 30px
 }
 
 .canvas-container-chartB {
-  height: 40vh;
-  width: 35vh;
-  padding-left: 30px
-}
-
-.homepage-charts {
-  display: flex;
-  justify-content: space-around;
+  height: 25vh;
+  width: 30vh;
+  padding: 30px 0 30px 0
 }
 
 .homepage-chart-B-legend{
   display: flex;
   align-items: center;
+  // height: 20vh;
 
+  ul {
+    padding-left: 0;
+  }
+
+  div {
+    display: flex;
+
+    p {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+  }
 }
 
 .homepage-chart-legend-late {
@@ -39,10 +56,4 @@
 
 .homepage-chart-legend-done {
   color: base.$green-dark;
-}
-
-.listItem {
-  font-size: 25px;
-  padding-top: 0;
-  padding-bottom: 0;
 }
