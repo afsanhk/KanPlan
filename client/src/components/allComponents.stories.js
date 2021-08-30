@@ -66,10 +66,6 @@ const userProjects = [
 
 const chartData = [1, 2, 3, 4];
 
-const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
-
-const taskPriority = [{ name: 'High' }, { name: 'Low' }, { name: 'None' }];
-
 const lorem =
   'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta corporis voluptatem assumenda labore, sequi eos odio autem voluptates, officia incidunt ipsum tenetur aperiam! Aliquid accusantium quod voluptatum corrupti sint quisquam';
 
@@ -172,10 +168,8 @@ storiesOf('TeamMember', module)
 
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
-storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={userTasks[0]} userProjects={userProjects} taskStatus={taskStatus} taskPriority={taskPriority} />);
-storiesOf('AddTaskForm', module).add('Initial', () => (
-  <AddTaskForm proj_name={userProjects[0].proj_name} taskStatus={taskStatus} taskPriority={taskPriority} proj_users={userProjects[0].proj_users} />
-));
+storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={userTasks[0]} userProjects={userProjects} />);
+storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={userProjects[0].proj_name} proj_users={userProjects[0].proj_users} />);
 
 storiesOf('ProjectNameDescription', module)
   .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} proj_users={userProjects[0].proj_users} />)

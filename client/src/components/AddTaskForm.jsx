@@ -53,20 +53,32 @@ function getModalStyle() {
 const today = new Date();
 const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
 
-function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
+// task status and prioirty list
+const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
+const taskPriority = [{ name: 'High' }, { name: 'Low' }, { name: 'None' }];
+
+const priority_id = {
+  None: 1,
+  Low: 2,
+  High: 3
+};
+
+const status_id = {
+  'To-Do': 1,
+  Late: 2,
+  'In progress': 3,
+  Done: 4
+};
+
+function AddTaskForm({ proj_name, proj_users }) {
   const classes = useStyles();
 
   const [assignees, setAssignees] = useState([]);
-  const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ plan_start: currentDate, plan_end: currentDate, task_users: [] });
 
   // modal state
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setClickDesc(!clickDesc);
-  };
 
   const removeAssignee = (user_name) => {
     setAssignees((prev) => {
@@ -76,7 +88,7 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
   };
 
   const consoleData = () => {
-    setState((prev) => ({ ...prev, assignees: assignees }));
+    setState((prev) => ({ ...prev, task_users: assignees }));
     console.log(state);
   };
 
@@ -111,19 +123,35 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
       </div>
 
       <div className="task-form-body">
+        <div className="task-form-body-title">
+          <div className="task-form-body-title-div">
+            <TextField
+              id="standard-full-width"
+              label="Task title"
+              style={{ margin: 8 }}
+              placeholder="Write task title"
+              multiline
+              margin="normal"
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
+            />
+          </div>
+        </div>
         <div className="task-form-body-description">
           <TextField
             id="standard-full-width"
-            label="Description"
+            label="Task Description"
             style={{ margin: 8 }}
-            placeholder="Write description"
+            placeholder="Write task description"
             fullWidth
             multiline
             margin="normal"
             InputLabelProps={{
               shrink: true
             }}
-            onChange={(event) => setState((prev) => ({ ...prev, description: event.target.value }))}
+            onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
           />
         </div>
 
@@ -143,7 +171,7 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, startDate: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
               />
               <TextField
                 id="date"
@@ -154,7 +182,7 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, endDate: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
               />
             </div>
           </div>
@@ -167,7 +195,7 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
@@ -175,7 +203,7 @@ function AddTaskForm({ proj_name, proj_users, taskStatus, taskPriority }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText }))}
+                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
               />
             </div>
           </div>
