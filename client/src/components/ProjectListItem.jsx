@@ -1,6 +1,8 @@
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
+import './ProjectListItem.scss'
+
 export default function ProjectListItem ({name, description, team_members, state}) {
   
   console.log(team_members)
@@ -16,15 +18,23 @@ export default function ProjectListItem ({name, description, team_members, state
   
   return (
     <article className="project">
-      <h3>{name}</h3>
-      <p>{description}</p>
-      {team_members && 
-        <div class='project-grouped-users'>
-          <AvatarGroup max={4}>
-            {parsedUsers}
-          </AvatarGroup>
+      <header className="project-header">
+        <h3>{name}</h3>
+        <div>Project Progress: Goes brrrrrrrrr......</div>
+      </header>
+      <p className="project-body">{description}</p>
+      <footer className="project-footer">
+        <div className="nav-icon-container">
+          Test
         </div>
-      }
+          {team_members && 
+            <div class='project-grouped-users'>
+              <AvatarGroup max={4}>
+                {parsedUsers}
+              </AvatarGroup>
+            </div>
+          }
+      </footer>
     </article>
   )
 }
