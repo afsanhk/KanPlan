@@ -26,7 +26,9 @@ import HomepageCharts from "./HomepageCharts";
 import Gantt from "./Gantt";
 
 import ProjectOverviewTable from "./ProjectOverviewTable";
-import ProjectOverview from "../pages/ProjectOverview";
+
+import ProjectListItem from "./ProjectListItem";
+import ProjectList from "./ProjectList";
 
 // TEST DATA
 const projects = {
@@ -395,5 +397,5 @@ storiesOf("Project Overview Table", module)
 
 storiesOf("Project Page", module)
   .add("Icon Container", () => <h1>IconContainer</h1>)
-  .add("ProjectListItem/ProjectNameDescription", () => <h1>ProjectListitem</h1>)
-  .add("ProjectList", () => <h1>ProjectList</h1>);
+  .add("ProjectListItem/ProjectNameDescription", () => <ProjectListItem />)
+  .add("ProjectList", () => <ProjectList projects={userProjects} />);
