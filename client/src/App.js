@@ -15,22 +15,22 @@ import ProjectGantt from './pages/ProjectGantt';
 // Styling
 import './App.scss';
 
-// Helpers
-import { getProjectsForUser } from './helpers/selectors';
-
 function App() {
   const { state } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-  const projectID = 0;
+  const projectID = 2;
+  const userID = 1;
+
+
   return (
     <div className="App">
       <Router>
         <NavBar />
         <Switch>
           <Route exact path="/">
-            <UserDashboard />
+            <UserDashboard state={state} userID={userID} />
           </Route>
           <Route path="/projects">
             <UserProjects />
