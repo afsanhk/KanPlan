@@ -1,0 +1,19 @@
+.userDashboard {
+  // display: flex;
+
+}
+
+.userDashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.userDashboard-body {
+  display: flex;
+  // flex-direction: row;
+  align-items: flex-start;
+  height: 550px;
+
+}

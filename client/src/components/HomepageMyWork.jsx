@@ -9,7 +9,7 @@ import TaskList from "./TaskList"
 
 export default function HomepageMyWork({ tasks }) {
   return (
-    <div>
+    <div className="homepage-my-work">
       <h2><strong>My Work</strong></h2>
   
       <div className='homepage-tasks-title'>
