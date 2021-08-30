@@ -20,14 +20,13 @@ const theme = createTheme({
 });
 
 
-export default function ProjectNameDescription(props) {
+export default function ProjectNameDescription({ proj_name, proj_description, team_members, state }) {
 
-  const { proj_name, proj_description, proj_users } = props;
-
-  const parsedUsers = proj_users.map(user => {
+  const parsedUsers = team_members.map(user => {
+    const userDetails = state.users[user]
     return (
-      <Avatar alt={user.name} >
-        {user.name[0]}
+      <Avatar alt={userDetails.user_name} >
+        {userDetails.user_name[0]}
       </Avatar>
     )
   })
@@ -37,7 +36,7 @@ export default function ProjectNameDescription(props) {
       <article className='project-name-description'>
         <h3>{proj_name}</h3>
         <p>{proj_description}</p>
-        {proj_users && 
+        {team_members && 
           <div class='project-grouped-users'>
             <AvatarGroup max={4}>
               {parsedUsers}

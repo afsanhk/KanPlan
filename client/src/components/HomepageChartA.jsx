@@ -8,9 +8,7 @@ import './HomepageCharts.scss'
 
 
 
-function HomepageChartA(props) {
-  
-  const { chartInformation, chartTitle, chartColor } = props;
+function HomepageChartA({ chartInformation, chartTitle, chartColor }) {
   
   const plugins = [{
     beforeDraw: function(chart) {
@@ -39,7 +37,7 @@ function HomepageChartA(props) {
         hoverBackgroundColor: [
           chartColor //same value as backgroundColor
         ],
-        data: [chartInformation], //need to pass in props!
+        data: [1], //always keep this >0, so the donut will show
         borderWidth: 0,
         cutout: '90%'
       }

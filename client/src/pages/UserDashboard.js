@@ -1,7 +1,38 @@
-const UserDashboard = () => {
+import React from 'react';
+
+//components
+import HomepageMyWork from '../components/HomepageMyWork';
+import HomepageImportantUpdates from '../components/HomepageImportantUpdates';
+import HomepageMyProjects from '../components/HomepageMyProjects';
+import HomepageCharts from '../components/HomepageCharts';
+
+//helpers
+import {  getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTaskStatuses } from '../helpers/selectors';
+
+
+const UserDashboard = ({ state, userID }) => {
+
+  const name = state.users[userID].user_name;
+  const tasks = getTasksForUser(state, userID)
+  const projects = getProjectsForUser(state, userID).map(index => state.projects[index]) //array (of objs) with all project details
+  const projectsManaging = getProjectsManagingForUser(state, userID)
+  const projectsWorkingOn = getProjectsForUser(state, userID).length
+  const taskStatuses = getTaskStatuses(state, userID)
+
   return (
     <div>
-      <h1>This will show the user dashboard.</h1>
+      <div>
+        <h1>Hello {name}</h1>
+        <p>"The future depends on what you do today" - Gandhi</p>
+      </div>
+      <div>
+        <HomepageMyWork tasks={tasks}/>
+        <HomepageImportantUpdates/>
+        <HomepageMyProjects projects={projects} state={state} />
+      </div>
+      <div>
+        <HomepageCharts projectsManaging={projectsManaging} projectsWorkingOn={projectsWorkingOn} tasks={tasks} taskStatuses={taskStatuses} />
+      </div>
     </div>
   );
 };

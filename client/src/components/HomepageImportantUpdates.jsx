@@ -26,10 +26,13 @@ const useStyles = makeStyles({
     height: '2px',
     backgroundColor: '#757575'
   }
-  
 })
 
-export default function HomepageImportantUpdates(props) {
+const randomBadgeNumber = function () { //limit to max 10
+  return Math.floor(Math.random() * 10);
+}
+
+export default function HomepageImportantUpdates() {
 
   const classes = useStyles();
 
@@ -47,19 +50,19 @@ export default function HomepageImportantUpdates(props) {
         <ListItem button>
           <ListAltIcon className={classes.listItemIcon}/>
           <ListItemText primary="New Tasks" />
-          <Badge badgeContent={4} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider lighter='true' />
         <ListItem button>
           <EventBusyIcon className={classes.listItemIcon}/>
           <ListItemText primary="Late Tasks" />
-          <Badge badgeContent={2} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider />
         <ListItem button>
           <AssignmentOutlinedIcon className={classes.listItemIcon}/>
           <ListItemText primary="New Projects" />
-          <Badge badgeContent={1} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider />
       </List>
@@ -76,19 +79,19 @@ export default function HomepageImportantUpdates(props) {
         <ListItem button>
           <MessageOutlinedIcon className={classes.listItemIcon}/>
           <ListItemText primary="Private Messages" />
-          <Badge badgeContent={7} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider lighter='true' />
         <ListItem button>
           <ForumOutlinedIcon className={classes.listItemIcon}/>
           <ListItemText primary="Team Messages" />
-          <Badge badgeContent={3} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider />
         <ListItem button>
           <LocalOfferOutlinedIcon className={classes.listItemIcon}/>
           <ListItemText primary="Mentions" />
-          <Badge badgeContent={1} color="primary" />
+          <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
         <Divider />
       </List>

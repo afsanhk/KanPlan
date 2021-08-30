@@ -24,33 +24,46 @@ const theme = createTheme({
 });
 
 
-function HomepageCharts() {
+function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tasks }) {
+
   return (
     <ThemeProvider theme={theme}>
       <div className='homepage-charts'>
-        <HomepageChartA chartInformation={5} chartTitle='Projects Managing:' chartColor='#0099ff' />
-        <HomepageChartA chartInformation={1} chartTitle='Projects Working On:' chartColor='#ff6699' />
+        <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing:' chartColor='#0099ff' />
+        <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On:' chartColor='#ff6699' />
+        {tasks[0] && 
         <div className='homepage-chart-B-legend'>
-          <HomepageChartB chartInformation={[1,2,3,4]} />
+          <HomepageChartB chartInformation={ taskStatuses } />
           <List>
+            {taskStatuses.late > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-late' />
               <ListItemText>Late</ListItemText>
             </ListItem>
+            }
+            {taskStatuses.toDo > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-to-do' />
               <ListItemText>To-Do</ListItemText>
             </ListItem>
+            }
+            {taskStatuses.inProgress > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-in-progress' />
               <ListItemText>In Progress</ListItemText>
             </ListItem>
+            }
+            {taskStatuses.done > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-done' />
               <ListItemText>Done</ListItemText>
             </ListItem>
+            }
           </List>
-        </div>
+        </div>}
+        {!tasks[0] && 
+        <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor='#4d9900' />
+        }
       </div>
     </ThemeProvider>
   )

@@ -7,10 +7,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import "./HomepageMyWork.scss"
 import TaskList from "./TaskList"
 
-export default function HomepageMyWork(props) {
-
-  const { tasks } = props
-
+export default function HomepageMyWork({ tasks }) {
   return (
     <div>
       <h2><strong>My Work</strong></h2>
@@ -27,7 +24,8 @@ export default function HomepageMyWork(props) {
         </div>
       </div>
 
-      <TaskList tasks={tasks} />
+      {tasks[0] && <TaskList tasks={tasks} />}
+      {!tasks[0] && <div>No tasks</div>}
 
     </div>
   );
