@@ -5,29 +5,35 @@ import HomepageChartB from './HomepageChartB'
 
 import './HomepageCharts.scss'
 
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 
-const theme = createTheme({
-  overrides: {
-    // Style sheet name ⚛️
-    MuiListItem: {
-      root: {
-        'padding-top': 0,
-        'padding-bottom': 0,
-      } 
-    },
-  },
-});
+import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
+
+// const theme = createTheme({
+//   overrides: {
+//     // Style sheet name ⚛️
+//     MuiListItem: {
+//       root: {
+//         'padding-top': 0,
+//         'padding-bottom': 0,
+//       } 
+//     },
+//   },
+// });
+
+const useStyles = makeStyles({
+  
+}) 
 
 
 function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tasks }) {
 
+  const classes = useStyles();
+
   return (
-    <ThemeProvider theme={theme}>
       <div className='homepage-charts'>
         <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing:' chartColor='#0099ff' />
         <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On:' chartColor='#ff6699' />
@@ -38,25 +44,25 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
             {taskStatuses.late > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-late' />
-              <ListItemText>Late</ListItemText>
+              <ListItemText className ='listItem'>Late</ListItemText>
             </ListItem>
             }
             {taskStatuses.toDo > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-to-do' />
-              <ListItemText>To-Do</ListItemText>
+              <ListItemText className ='listItem'>To-Do</ListItemText>
             </ListItem>
             }
             {taskStatuses.inProgress > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-in-progress' />
-              <ListItemText>In Progress</ListItemText>
+              <ListItemText className ='listItem'>In Progress</ListItemText>
             </ListItem>
             }
             {taskStatuses.done > 0 && 
             <ListItem>
               <StopRoundedIcon className='homepage-chart-legend-done' />
-              <ListItemText>Done</ListItemText>
+              <ListItemText className ='listItem'>Done</ListItemText>
             </ListItem>
             }
           </List>
@@ -65,7 +71,6 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
         <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor='#4d9900' />
         }
       </div>
-    </ThemeProvider>
   )
 }
 

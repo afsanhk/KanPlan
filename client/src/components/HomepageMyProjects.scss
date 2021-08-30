@@ -1,13 +1,19 @@
 @use '../styles/base';
 
 .homepage-my-projects {
+  height: 50vh;
+  width: 30vw;
+  background-color: base.$off-white;
+  border: base.$border;
+  border-radius: base.$border-radius;
+  padding: 15px;
+  overflow: auto;
 
-    h2 {
-      border-bottom: 2px base.$dark-grey solid;
-      padding-bottom: 20px;
-      margin: 15px 0;
-    }
-
-
+  h2 {
+    border-bottom: 2px base.$dark-grey solid;
+    padding-bottom: 20px;
+    margin: 15px 0;
+  }
+  
 
 }

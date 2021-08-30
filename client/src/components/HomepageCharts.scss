@@ -1,5 +1,7 @@
 @use '../styles/base';
 
+
+
 .canvas-container-chartA {
   height: 40vh;
   width: 35vh;
@@ -37,4 +39,10 @@
 
 .homepage-chart-legend-done {
   color: base.$green-dark;
+}
+
+.listItem {
+  font-size: 25px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
