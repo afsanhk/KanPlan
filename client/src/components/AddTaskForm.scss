@@ -5,7 +5,7 @@
   justify-content: center;
 
   h1 {
-    width: 80%;
+    width: 90%;
   }
 }
 
@@ -15,7 +15,7 @@
   justify-content: center;
 
   .task-form-project_name-div {
-    width: 80%;
+    width: 90%;
     padding-left: 10px;
 
     .MuiListItemText-primary {
@@ -32,6 +32,14 @@
 }
 
 .task-form-body {
+  .task-form-body-title {
+    display: flex;
+    justify-content: center;
+
+    .task-form-body-title-div {
+      width: 90%;
+    }
+  }
   .task-form-body-description {
     padding: 10px;
     font-size: 1.3em;
@@ -40,7 +48,7 @@
     position: relative;
 
     p {
-      width: 80%;
+      width: 90%;
     }
 
     button {
@@ -50,7 +58,7 @@
     }
 
     .MuiFormControl-root {
-      width: 80%;
+      width: 90%;
     }
   }
   .task-form-body-dropdowns {
@@ -94,7 +102,7 @@
     margin-top: 30px;
 
     div {
-      width: 80%;
+      width: 90%;
       justify-content: space-between;
       display: flex;
       align-items: center;
@@ -118,7 +126,7 @@
     justify-content: center;
     div.task-form-body-members-div {
       display: flex;
-      width: 80%;
+      width: 90%;
       justify-content: space-around;
       flex-wrap: wrap;
       overflow: auto;

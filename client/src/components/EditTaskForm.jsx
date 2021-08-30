@@ -52,17 +52,24 @@ function getModalStyle() {
 const today = new Date();
 const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
 
-function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
+// task status and priority list
+const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
+const taskPriority = [{ name: 'High' }, { name: 'Low' }, { name: 'None' }];
+const priority_id = {
+  None: 1,
+  Low: 2,
+  High: 3
+};
+
+const status_id = {
+  'To-Do': 1,
+  Late: 2,
+  'In progress': 3,
+  Done: 4
+};
+
+function EditTaskForm({ tasks, userProjects }) {
   const classes = useStyles();
-
-  const [currentUsers, setCurrentUsers] = useState(null);
-  const [currentProject, setCurrentProject] = useState(null);
-  const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ description: tasks.description });
-
-  // modal state
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
@@ -73,25 +80,32 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
     }
   };
 
+  const [currentUsers, setCurrentUsers] = useState(null);
+  const [currentProject, setCurrentProject] = useState(null);
+  const [clickDesc, setClickDesc] = useState(false);
+  const [state, setState] = useState({ task_description: tasks.description, plan_start: currentDate, plan_end: currentDate });
+
+  // modal state
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
   const handleClick = () => {
     setClickDesc(!clickDesc);
   };
 
   useEffect(() => {
-    setState((prev) => ({ ...prev, proj_name: currentProject }));
-    setCurrentUsers(getTeamMembers(currentProject));
+    if (currentProject) {
+      setCurrentUsers(() => getTeamMembers(currentProject));
+    }
+    setState((prev) => ({ ...prev, proj_name: currentProject, proj_users: currentUsers }));
   }, [currentProject]);
 
   const removeUser = (user_name) => {
     setCurrentUsers((prev) => {
       const newUsers = [...prev].filter((user) => user.name !== user_name);
+      setState((prev) => ({ ...prev, proj_users: newUsers }));
       return newUsers;
     });
-  };
-
-  const consoleData = () => {
-    setState((prev) => ({ ...prev, proj_users: currentUsers }));
-    console.log(state);
   };
 
   // modal open function
@@ -121,14 +135,14 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
       <div className="task-form-body">
         <div className="task-form-body-description">
           {!clickDesc ? (
-            <>
-              <p>{state.description}</p>
+            <div className="task-form-body-description-div">
+              <p>{state.task_description}</p>
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
                 <EditOutlinedIcon />
               </IconButton>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="task-form-body-description-div">
               <TextField
                 id="standard-full-width"
                 label="Description"
@@ -140,13 +154,13 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, description: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
               />
 
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
                 <SaveOutlinedIcon />
               </IconButton>
-            </>
+            </div>
           )}
         </div>
 
@@ -158,7 +172,10 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
               getOptionLabel={(option) => option.proj_name}
               style={{ width: '80%' }}
               renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
-              onChange={(value) => setCurrentProject(value.target.innerText)}
+              onChange={(value) => {
+                setCurrentProject(value.target.innerText);
+                setCurrentUsers(getTeamMembers(value.target.innerText));
+              }}
             />
           </div>
 
@@ -173,7 +190,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, startDate: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
               />
               <TextField
                 id="date"
@@ -184,7 +201,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, endDate: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
               />
             </div>
           </div>
@@ -197,7 +214,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
@@ -205,7 +222,7 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText }))}
+                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
               />
             </div>
           </div>
@@ -238,7 +255,12 @@ function EditTaskForm({ tasks, userProjects, taskStatus, taskPriority }) {
 
       <footer className="task-form-footer">
         <div>
-          <ConfirmButton saving consoleData={consoleData} />
+          <ConfirmButton
+            saving
+            consoleData={() => {
+              console.log(state);
+            }}
+          />
           <ConfirmButton deleting />
         </div>
       </footer>
