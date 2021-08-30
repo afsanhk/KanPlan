@@ -225,7 +225,7 @@ function AddTaskForm({ proj_name, team_members, users }) {
             </div>
 
             <div className="task-form-body-members">
-              <div className="task-form-body-members-div" style={{ height: currentUsers.length ? '160px' : '0' }}>
+              <div className="task-form-body-members-div">
                 {currentUsers.map((id, index) => (
                   <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
                 ))}
