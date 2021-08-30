@@ -10,7 +10,8 @@ export default function LinkIconContainer ({project}) {
   const useStyles = makeStyles(() => ({
     icon: {
       margin: '5px',
-      color: 'black'
+      color: 'black',
+      height: '40px'
     },
   }));
 

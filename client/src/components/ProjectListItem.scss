@@ -3,6 +3,7 @@ article {
   margin: 20px;
   border-radius: 15px;
   padding: 15px;
+  padding-bottom: 2px;
 
   .project-header {
     display: flex;
@@ -27,5 +28,12 @@ article {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    // From LinkIconContainer
+    .nav-icon-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+    }
   }
 }
