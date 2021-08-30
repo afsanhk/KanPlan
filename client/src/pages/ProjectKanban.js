@@ -119,13 +119,6 @@ projectTasks.forEach((task) => {
   }
 });
 
-// console.log(initialData);
-
-const lateTasks = projectTasks.filter((task) => task.status === 'Late');
-const toDoTasks = projectTasks.filter((task) => task.status === 'To-Do');
-const inProgressTasks = projectTasks.filter((task) => task.status === 'In Progress');
-const doneTasks = projectTasks.filter((task) => task.status === 'Done');
-
 const ProjectKanban = () => {
   const [state, setState] = useState(initialData);
 
@@ -166,6 +159,7 @@ const ProjectKanban = () => {
     }
 
     const startTaskIds = Array.from(start.taskIds);
+    const currentTask = startTaskIds[source.index];
     startTaskIds.splice(source.index, 1);
     const newStart = {
       ...start,
@@ -174,9 +168,29 @@ const ProjectKanban = () => {
 
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
+
     const newFinish = {
       ...finish,
       taskIds: finishTaskIds
+    };
+
+    const columnToStatus = {
+      'column-1': {
+        status: 'Late',
+        status_id: 2
+      },
+      'column-2': {
+        status: 'To-Do',
+        status_id: 1
+      },
+      'column-3': {
+        status: 'In Progress',
+        status_id: 3
+      },
+      'column-4': {
+        status: 'Done',
+        status_id: 4
+      }
     };
 
     const newState = {
@@ -185,9 +199,17 @@ const ProjectKanban = () => {
         ...state.columns,
         [newStart.id]: newStart,
         [newFinish.id]: newFinish
+      },
+      tasks: {
+        ...state.tasks,
+        [currentTask]: {
+          ...state.tasks[currentTask],
+          ...columnToStatus[destination.droppableId]
+        }
       }
     };
 
+    console.log(newState);
     setState(newState);
   };
 
@@ -199,17 +221,10 @@ const ProjectKanban = () => {
           {state.columnOrder.map((columnId) => {
             const column = state.columns[columnId];
             const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
-            // console.log(tasks);
 
             return <KanbanBoard key={column.id} column={column} tasks={tasks} />;
           })}
         </div>
-        {/* <div className="project-kanban-board">
-          <KanbanBoard status={'Late'} tasks={lateTasks} />
-          <KanbanBoard status={'To-Do'} tasks={toDoTasks} />
-          <KanbanBoard status={'In Progress'} tasks={inProgressTasks} />
-          <KanbanBoard status={'Done'} tasks={doneTasks} />
-        </div> */}
       </DragDropContext>
     </div>
   );

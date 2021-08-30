@@ -26,8 +26,8 @@ function KanbanBoard({ tasks, column }) {
       </header>
 
       <Droppable droppableId={column.id}>
-        {(provided, snapshot) => (
-          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+        {(provided) => (
+          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps}>
             <div className="kanban-board-body-div">
               {tasks.map((task, index) => (
                 <KanbanTask key={task.id} task={task} index={index} />
@@ -37,6 +37,7 @@ function KanbanBoard({ tasks, column }) {
           </div>
         )}
       </Droppable>
+
       <footer className="kanban-board-footer">
         <div className="kanban-board-footer-div">
           <IconButton size="small">

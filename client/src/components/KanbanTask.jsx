@@ -7,9 +7,16 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 import './KanbanTask.scss';
 
-const flagColor = {
-  Late: 'rgb(251, 175, 60)',
-  'In Progress': 'rgb(213, 60, 60)'
+const flagStyles = {
+  High: {
+    color: 'rgb(213, 60, 60)'
+  },
+  Low: {
+    color: 'rgb(251, 175, 60)'
+  },
+  None: {
+    display: 'none'
+  }
 };
 
 function KanbanTask({ task, index }) {
@@ -18,13 +25,12 @@ function KanbanTask({ task, index }) {
   });
 
   return (
-    <Draggable draggableId={task.title} index={index}>
-      {(provided, snapshot) => (
-        <div className="kanban-task" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={snapshot.isDragging}>
+    <Draggable key={task.id} draggableId={task.title} index={index}>
+      {(provided) => (
+        <div className="kanban-task" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
           <header className="kanban-task-header">
             <h3>{task.title}</h3>
-            {task.status === 'Late' && <FlagIcon style={{ color: flagColor[task.status] }} />}
-            {task.status === 'In Progress' && <FlagIcon style={{ color: flagColor[task.status] }} />}
+            <FlagIcon style={flagStyles[task.priority_name]} />
           </header>
 
           <div className="kanban-task-body">
