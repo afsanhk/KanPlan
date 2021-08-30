@@ -12,9 +12,22 @@ import FlagIcon from '@material-ui/icons/Flag';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 
+// Project Components
 import TeamMemberName from './TeamMemberName';
 
+// Helper function -- converts String Timestamp to String Date in DMY format
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
+// https://www.delftstack.com/howto/javascript/javascript-convert-timestamp-to-date/
+const convertTimestampStringToDMY = function(timestampString) {
+  let timestampActual = Date.parse(timestampString);
+  let dateActual = new Date(timestampActual);
+  let dateDMYString = `${dateActual.getDate()} - ${(dateActual.getMonth()+1)} - ${dateActual.getFullYear()}`
+  return dateDMYString;
+}
+
+// https://material-ui.com/customization/default-theme/ --> Use this to figure out how to navigate the theme.
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -88,13 +101,15 @@ export default function CustomizedTables({projectTasks}) {
               <StyledTableCell component="th" scope="row">
                 {row.title}
               </StyledTableCell>
-              <StyledTableCell align="center">
-                {row.users.map((name,index) => <TeamMemberName key={index} name={name}/>)}
-                </StyledTableCell>
-              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status] }}>{row.status}</StyledTableCell>
+              {/* Afsan: Must be a better way to do this horizontal view of users. */}
+              <StyledTableCell align="center" style={{display:'flex', flexDirection:'row'}}>
+                {row.users.map((name,index) => <TeamMemberName key={index}/>)}
+              </StyledTableCell>
+              {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
+              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: 'white' }}>{row.status.toUpperCase()}</StyledTableCell>
               <StyledTableCell align="center"><FlagIcon style={flagStyles[row.priority_name]} /></StyledTableCell>
-              <StyledTableCell align="center">{row.plan_start}</StyledTableCell>
-              <StyledTableCell align="center">{row.plan_end}</StyledTableCell>
+              <StyledTableCell align="center">{convertTimestampStringToDMY(row.plan_start)}</StyledTableCell>
+              <StyledTableCell align="center">{convertTimestampStringToDMY(row.plan_end)}</StyledTableCell>
               <StyledTableCell align="center">
                 <IconButton size="small">
                   <EditOutlinedIcon />
