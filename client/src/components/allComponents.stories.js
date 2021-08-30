@@ -25,7 +25,8 @@ import HomepageCharts from "./HomepageCharts";
 
 import Gantt from "./Gantt";
 
-import CustomizedTables from "./ProjectOverviewTable";
+import ProjectOverviewTable from "./ProjectOverviewTable";
+import ProjectOverview from "../pages/ProjectOverview";
 
 // TEST DATA
 const projects = {
@@ -388,4 +389,4 @@ storiesOf("Gantt", module)
   .add("Basic", () => <Gantt projectTasks={projectTasks} />)
   .add("No Data", () => <Gantt projectTasks={[null]} />);
 
-storiesOf("Project Overview Table", module).add("Basic", () => <CustomizedTables projectTasks={projectTasks} />);
+storiesOf("Project Overview Table", module).add("Basic", () => <ProjectOverviewTable projectTasks={projectTasks} />);

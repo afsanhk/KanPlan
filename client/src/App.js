@@ -23,7 +23,6 @@ function App() {
   const projectID = 2;
   const userID = 1;
 
-
   return (
     <div className="App">
       <Router>
@@ -37,7 +36,7 @@ function App() {
           </Route>
           {/* This will need to change to become a dynamic link. */}
           <Route path="/project/overview">
-            <ProjectOverview />
+            <ProjectOverview state={state} projectID={projectID} />
           </Route>
           {/* This will need to change to become a dynamic link. */}
           <Route path="/project/kanban">

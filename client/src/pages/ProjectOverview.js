@@ -1,4 +1,4 @@
-const ProjectOverview = () => {
+const ProjectOverview = ({ state, ProjectOverview }) => {
   return (
     <div>
       <h1>This will show the project overview.</h1>

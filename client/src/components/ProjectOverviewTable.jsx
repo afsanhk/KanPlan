@@ -85,7 +85,7 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function CustomizedTables({projectTasks}) {
+export default function ProjectOverviewTable({projectTasks}) {
   const classes = useStyles();
 
   // Array of task objects in projectTasks
