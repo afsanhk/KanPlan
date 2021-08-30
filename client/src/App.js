@@ -27,27 +27,29 @@ function App() {
     <div className="App">
       <Router>
         <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <UserDashboard state={state} userID={userID} />
-          </Route>
-          <Route path="/projects">
-            <UserProjects />
-          </Route>
-          {/* This will need to change to become a dynamic link. */}
-          <Route path="/project/overview">
-            <ProjectOverview state={state} projectID={projectID} />
-          </Route>
-          {/* This will need to change to become a dynamic link. */}
-          <Route path="/project/kanban">
-            <ProjectKanban state={state} projectID={projectID} />
-          </Route>
-          {/* This will need to change to become a dynamic link. */}
-          <Route path="/project/gantt">
-            <ProjectGantt state={state} projectID={projectID} />
-          </Route>
-          {/* Do we want a 404 page? */}
-        </Switch>
+        <div className="body">
+          <Switch>
+            <Route exact path="/">
+              <UserDashboard state={state} userID={userID} />
+            </Route>
+            <Route path="/projects">
+              <UserProjects />
+            </Route>
+            {/* This will need to change to become a dynamic link. */}
+            <Route path="/project/overview">
+              <ProjectOverview />
+            </Route>
+            {/* This will need to change to become a dynamic link. */}
+            <Route path="/project/kanban">
+              <ProjectKanban state={state} projectID={projectID} />
+            </Route>
+            {/* This will need to change to become a dynamic link. */}
+            <Route path="/project/gantt">
+              <ProjectGantt state={state} projectID={projectID} />
+            </Route>
+            {/* Do we want a 404 page? */}
+          </Switch>
+        </div>
       </Router>
     </div>
   );

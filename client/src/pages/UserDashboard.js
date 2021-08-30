@@ -9,6 +9,7 @@ import HomepageCharts from '../components/HomepageCharts';
 //helpers
 import {  getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTaskStatuses } from '../helpers/selectors';
 
+import './UserDashboard.scss'
 
 const UserDashboard = ({ state, userID }) => {
 
@@ -20,17 +21,17 @@ const UserDashboard = ({ state, userID }) => {
   const taskStatuses = getTaskStatuses(state, userID)
 
   return (
-    <div>
-      <div>
+    <div className='userDashboard' >
+      <div className='userDashboard-header'>
         <h1>Hello {name}</h1>
         <p>"The future depends on what you do today" - Gandhi</p>
       </div>
-      <div>
+      <div className='userDashboard-body'>
         <HomepageMyWork tasks={tasks}/>
         <HomepageImportantUpdates/>
         <HomepageMyProjects projects={projects} state={state} />
       </div>
-      <div>
+      <div className='userDashboard-footer'>
         <HomepageCharts projectsManaging={projectsManaging} projectsWorkingOn={projectsWorkingOn} tasks={tasks} taskStatuses={taskStatuses} />
       </div>
     </div>

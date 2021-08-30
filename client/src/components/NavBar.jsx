@@ -8,6 +8,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import AppsIcon from '@material-ui/icons/Apps';
 import AlarmIcon from '@material-ui/icons/Alarm';
@@ -20,24 +21,8 @@ const theme = createTheme({
   overrides: {
     MuiDrawer: {
       paper: {
-        'justify-content': 'space-between'
-      }
-    },
-    MuiListItem: {
-      root: {
-        'text-align': 'center'
-      }
-    },
-    MuiButtonBase: {
-      root: {
-        'margin-top': '10px'
-      }
-    },
-    MuiAvatar: {
-      root: {
-        width: '75px',
-        height: '75px',
-        margin: '10px 0 20px 0'
+        'justify-content': 'space-between',
+        width: '120px',
       }
     }
   }
@@ -46,7 +31,15 @@ const theme = createTheme({
 const useStyles = makeStyles({
   selected: {
     backgroundColor: '#f5f5f5'
-  }
+  },
+  navBarButton: {
+    'text-align': 'center',
+    'margin-top': '10px',
+    color: '#757575'
+  },
+  navBarIcon: {
+    fontSize: '45px'
+  },
 });
 
 function NavBar() {
@@ -65,34 +58,58 @@ function NavBar() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Drawer variant="permanent" anchor="left">
+      <Drawer variant="permanent" anchor="left" className='navBar'>
         <div className="nav-top">
           <img src={KanPlanLogo} alt="logo" width="100" height="100" />
           <div className="nav-body">
             <List>
               <NavLink to="/" className="navlink">
-                <ListItem button className={activePage() === 'homepage' ? classes.selected : ''}>
-                  <ListItemText primary={<HomeIcon fontSize="large" />} secondary="Home" alignItems="center" />
+                <ListItem button className={activePage() === 'homepage' ? classes.selected : '', classes.navBarButton } alignItems="center">
+                  <ListItemText 
+                    primary={<HomeIcon className={classes.navBarIcon} />} 
+                    secondary={<Typography variant='h7'>Home</Typography>}  
+                  />
                 </ListItem>
               </NavLink>
               <NavLink to="/projects" className="navlink">
-                <ListItem button className={activePage() === 'projects' ? classes.selected : ''}>
-                  <ListItemText primary={<AppsIcon fontSize="large" />} secondary="Projects" alignItems="center" />
+                <ListItem button className={activePage() === 'projects' ? classes.selected : '', classes.navBarButton }>
+                  <ListItemText 
+                    primary={<AppsIcon className={classes.navBarIcon} />} 
+                    secondary={<Typography variant='h7'>Projects</Typography>}
+                  />
                 </ListItem>
               </NavLink>
-              <NavLink to="/project/gantt" className="navLink">
-                <li>Gantt Placeholder</li>
+              <NavLink to="/project/overview">
+                <ListItem>
+                    <ListItemText className={classes.navBarButton}>
+                    Project Overview
+                    </ListItemText>
+                  </ListItem>
               </NavLink>
-              <NavLink to="/project/kanban" className="navLink">
-                <li>Kanban Placeholder</li>
+              <NavLink to="/project/gantt">
+                <ListItem>
+                  <ListItemText className={classes.navBarButton}>
+                    Gantt Placeholder
+                  </ListItemText>
+                </ListItem>
+              </NavLink>
+              <NavLink to="/project/kanban">
+                <ListItem>
+                    <ListItemText className={classes.navBarButton}>
+                    Kanban Placeholder
+                    </ListItemText>
+                  </ListItem>
               </NavLink>
             </List>
           </div>
         </div>
         <div className="nav-bottom">
           <List className="nav-bottom-list">
-            <ListItem button>
-              <ListItemText primary={<AlarmIcon fontSize="large" className={'pomodoro-icon'} />} secondary="Pomodoro" alignItems="center" />
+            <ListItem button className={ classes.navBarButton  }>
+              <ListItemText 
+                primary={<AlarmIcon fontSize="large" className={ classes.navBarIcon } />} 
+                secondary={<Typography variant='h7'>Pomodoro</Typography>}
+              />
             </ListItem>
           </List>
           <Avatar alt="" src="" className="nav-avatar" />

@@ -37,7 +37,7 @@ export default function HomepageImportantUpdates() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div className='homepage-important-updates'>
       <h2><strong>Important Updates</strong></h2>
   
       <div className='homepage-assigned-title'>

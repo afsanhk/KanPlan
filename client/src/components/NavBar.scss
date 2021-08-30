@@ -1,5 +1,7 @@
 @use '../styles/base';
 
+
+
 .nav-top {
   display: flex;
   flex-direction: column;
@@ -16,6 +18,9 @@
 
   .nav-avatar {
     border: solid base.$dark-grey 2px;
+    width: 75px;
+    height: 75px;
+    margin :10px 0 20px 0;
   }
 }
 
@@ -26,8 +31,4 @@
 .navlink {
   text-decoration: none;
   color: base.$dark-grey; //changes color of icons 
-}
-
-.pomodoro-icon {
-  color: base.$dark-grey;
 }
