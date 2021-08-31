@@ -20,16 +20,16 @@ function HomepageChartB({ chartInformation }) {
     datasets: [
       {
         backgroundColor: [
-          '#ff4d4d', //red => late
-          '#b055c4', //purple => to-do
-          '#f2b25e', //orange => in progress
-          '#409255', //green => done
+          '#d53c3c', //red => late
+          '#8976b9', //purple => to-do
+          '#fbaf3c', //orange => in progress
+          '#6aa84f', //green => done
         ],
         hoverBackgroundColor: [
-          '#ce3d4b', 
-          '#9a2bb2', 
-          '#e99426',
-          '#14752d',
+          '#db4f4f', 
+          '#9f89d6', 
+          '#ffbd59',
+          '#7bbf5e',
         ],
         data: [lateCount, toDoCount, inProgressCount, doneCount], //need to pass in props!
       }

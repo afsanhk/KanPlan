@@ -1,6 +1,7 @@
-@use '../styles/base';
+@use './base';
 
 .user-projects {
+  padding: 3vh 40px;
   height: 94vh;
   // overflow: auto;
 }

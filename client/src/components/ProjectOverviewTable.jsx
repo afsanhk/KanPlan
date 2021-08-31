@@ -33,20 +33,20 @@ const convertTimestampStringToYMD = function(timestampString) {
 // https://material-ui.com/customization/default-theme/ --> Use this to figure out how to navigate the theme.
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#757575',
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 18,
   }
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
+  // root: {
+  //   '&:nth-of-type(odd)': {
+  //     backgroundColor: theme.palette.action.hover,
+  //   },
+  // },
 }))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
@@ -120,7 +120,7 @@ export default function ProjectOverviewTable({projectTasks}) {
                 {row.users.map((name,index) => <TeamMemberName key={index}/>)}
               </StyledTableCell>
               {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: 'white' }}>{row.status.toUpperCase()}</StyledTableCell>
+              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: 'white' }}><strong>{row.status.toUpperCase()}</strong></StyledTableCell>
               <StyledTableCell align="center"><FlagIcon style={flagStyles[row.priority_name]} /></StyledTableCell>
               <StyledTableCell align="center">
                 <TextField

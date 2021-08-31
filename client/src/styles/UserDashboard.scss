@@ -1,4 +1,8 @@
-@use '../styles/base';
+@use './base';
+
+.userDashboard {
+  padding: 3vh 40px;  
+}
 
 .userDashboard-header {
   display: flex;
