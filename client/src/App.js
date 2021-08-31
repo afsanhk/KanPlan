@@ -13,51 +13,47 @@ import ProjectKanban from "./pages/ProjectKanban";
 import ProjectGantt from "./pages/ProjectGantt";
 
 // Styling
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import "./styles/App.scss";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1e88e5',
-      dark: '#4b9fea' //this color is actually lighter, is visible when hovering over buttons
+      main: "#1e88e5",
+      dark: "#4b9fea", //this color is actually lighter, is visible when hovering over buttons
     },
     secondary: {
-      main: '#e03838',
-      dark: '#ff5252' //this color is actually lighter, is visible when hovering over buttons
-    }
+      main: "#e03838",
+      dark: "#ff5252", //this color is actually lighter, is visible when hovering over buttons
+    },
   },
   typography: {
     fontSize: 16,
     h3: {
-      fontSize: '3.4rem',
-    }
+      fontSize: "3.4rem",
+    },
   },
   overrides: {
     // Style sheet name ⚛️
     MuiAvatar: {
       root: {
-        width: '30px',
-        height: '30px',
-        'font-size': '15px',
+        width: "30px",
+        height: "30px",
+        "font-size": "15px",
       },
       colorDefault: {
-        'background-color': '#1e88e5',
-      } 
+        "background-color": "#1e88e5",
+      },
     },
   },
-})
+});
 
 function App() {
   const { state } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-<<<<<<< HEAD
-  const projectID = 1;
-=======
   const projectID = 2;
->>>>>>> master
   const userID = 1;
 
   return (
