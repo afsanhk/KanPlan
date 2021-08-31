@@ -5,7 +5,7 @@
   justify-content: center;
 
   h1 {
-    width: 90%;
+    width: 80%;
   }
 }
 
@@ -15,7 +15,7 @@
   justify-content: center;
 
   .task-form-project_name-div {
-    width: 90%;
+    width: 80%;
     padding-left: 10px;
 
     .MuiListItemText-primary {
@@ -37,30 +37,26 @@
     justify-content: center;
 
     .task-form-body-title-div {
-      width: 90%;
+      width: 80%;
     }
   }
   .task-form-body-description {
-    padding: 10px;
     font-size: 1.3em;
     display: flex;
     justify-content: center;
     position: relative;
 
-    p {
-      width: 90%;
-    }
+    div.task-form-body-description-div {
+      width: 80%;
 
-    button {
-      position: absolute;
-      top: 25px;
-      right: 20px;
-    }
-
-    .MuiFormControl-root {
-      width: 90%;
+      button {
+        position: absolute;
+        top: 25px;
+        right: 20px;
+      }
     }
   }
+
   .task-form-body-dropdowns {
     margin-top: 0px;
     display: flex;
@@ -73,7 +69,7 @@
   }
 
   .task-form-body-dropdowns-date {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 
@@ -85,7 +81,7 @@
   }
 
   .task-form-body-dropdowns-status {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 
@@ -99,10 +95,10 @@
   .task-form-body-members-title {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
 
-    div {
-      width: 90%;
+    div.task-form-body-members-title-div {
+      width: 80%;
       justify-content: space-between;
       display: flex;
       align-items: center;
@@ -121,13 +117,15 @@
   }
 
   .task-form-body-members {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
+
     div.task-form-body-members-div {
       display: flex;
-      width: 90%;
+      width: 80%;
       justify-content: space-around;
+      max-height: 160px;
       flex-wrap: wrap;
       overflow: auto;
 
@@ -141,7 +139,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 30px;
 
   div {
     display: flex;
