@@ -10,7 +10,6 @@ import { getTasksForProject } from "../helpers/selectors";
 import "../styles/ProjectOverview.scss";
 
 const ProjectOverview = ({ state }) => {
-  // Chicken will be renamed to projectID
   let { projectID } = useParams();
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
