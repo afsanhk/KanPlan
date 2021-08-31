@@ -43,7 +43,19 @@ function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName, a
 
   return (
     <div className={classes.paper}>
-      <div className={classes.header}>{userIdToName.length ? <h1>Add user from {projectName} project</h1> : <h1>No more user!</h1>}</div>
+      <div className={classes.header}>
+        {!all ? (
+          userIdToName.length ? (
+            <h1>Add user from {projectName} project</h1>
+          ) : (
+            <h1>No more user!</h1>
+          )
+        ) : allUsersWithoutCurrent.length ? (
+          <h1>Add user from all projects</h1>
+        ) : (
+          <h1>No more user!</h1>
+        )}
+      </div>
 
       <div className={classes.container}>
         {userIdToName && (all ? allUsersWithoutCurrent : userIdToName).map((user) => <TeamMember key={user.id} id={user.id} name={user.name} add border addUser={addUser} />)}

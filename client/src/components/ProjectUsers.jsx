@@ -11,6 +11,9 @@ import { Backdrop, Fade, IconButton, makeStyles, Modal } from '@material-ui/core
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddUserForm from './AddUserForm';
 
+// scss
+import './ProjectUsers.scss';
+
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
@@ -75,41 +78,43 @@ function ProjectUsers({ users, project }) {
       {console.log(users, project)}
 
       <div className="project-users-body">
-        {currentUsers.includes(managerId) && (
-          <>
-            <div className="project-users-body-manager">Project Manager:</div>
-            <div>
+        <div className="project-users-body-div">
+          {currentUsers.includes(managerId) && (
+            <>
+              <div className="project-users-body-manager">Project Manager:</div>
               <TeamMember id={managerId} name={users[managerId].user_name} border />
-            </div>
-          </>
-        )}
-        <div className="project-users-body-users">
-          {currentUsers.map((id, index) => (
-            <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
-          ))}
+            </>
+          )}
         </div>
-        <div className="project-users-body-add-user">
-          <div className="project-users-body-add-user-div">
-            <IconButton size="small" onClick={handleOpen}>
-              <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
-            </IconButton>
-            <div>Add new user</div>
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              className={classes.modal}
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500
-              }}
-            >
-              <Fade in={open}>
-                <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} all />
-              </Fade>
-            </Modal>
+        <div className="project-users-body-users">
+          <div className="project-users-body-users-div">
+            {currentUsers.map((id, index) => (
+              <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
+            ))}
+          </div>
+          <div className="project-users-body-add-user">
+            <div className="project-users-body-add-user-div">
+              <IconButton size="small" onClick={handleOpen}>
+                <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
+              </IconButton>
+              <p>Add new user</p>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500
+                }}
+              >
+                <Fade in={open}>
+                  <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} all />
+                </Fade>
+              </Modal>
+            </div>
           </div>
         </div>
       </div>
