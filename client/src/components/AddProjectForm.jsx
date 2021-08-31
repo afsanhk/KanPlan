@@ -61,7 +61,9 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-team-members">
             <h3>Choose some additional team members!</h3>
-            {parsedTeamMembers}
+            <div className="team-member-container">
+              {parsedTeamMembers}
+            </div>
           </div>
         </form>
       </div>
