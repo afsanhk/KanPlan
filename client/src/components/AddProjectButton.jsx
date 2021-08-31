@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import "../styles/AddProjectButton.scss"
 
-export default function AddProjectButton ({userID}) {
+export default function AddProjectButton ({state, userID}) {
 
   const [drawerShow, setDrawerShow] = useState({right: false});
 
