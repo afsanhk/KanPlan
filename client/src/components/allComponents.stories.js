@@ -419,4 +419,4 @@ storiesOf("Project Page", module)
 
 storiesOf("Add Projects", module)
   .add("Button & Drawer", () => <AddProjectButton />)
-  .add("Add Project Form", () => <AddProjectForm />);
+  .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />);
