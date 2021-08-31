@@ -418,5 +418,5 @@ storiesOf("Project Page", module)
   .add("ProjectList", () => <ProjectList projects={userProjects} state={state} />);
 
 storiesOf("Add Projects", module)
-  .add("Button & Drawer", () => <AddProjectButton />)
-  .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />);
+  .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />)
+  .add("Button & Drawer", () => <AddProjectButton state={state} userID={1} />);
