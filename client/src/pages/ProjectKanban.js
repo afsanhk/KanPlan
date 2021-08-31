@@ -7,7 +7,7 @@ import { getTasksForProject } from '../helpers/selectors';
 import KanbanBoard from '../components/KanbanBoard';
 
 // import css
-import './ProjectKanban.scss';
+import '../styles/ProjectKanban.scss';
 
 const ProjectKanban = ({ projectID, state }) => {
   let projectTasks;

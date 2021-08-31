@@ -9,7 +9,7 @@ import HomepageCharts from '../components/HomepageCharts';
 //helpers
 import {  getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTaskStatuses } from '../helpers/selectors';
 
-import './UserDashboard.scss'
+import '../styles/UserDashboard.scss'
 
 const UserDashboard = ({ state, userID }) => {
 

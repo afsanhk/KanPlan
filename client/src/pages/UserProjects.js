@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
 
-import './UserProjects.scss'
+import '../styles/UserProjects.scss'
 
 const useStyles = makeStyles({
   newProjectButton: {
