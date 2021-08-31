@@ -84,7 +84,9 @@ function App() {
                 <Route path="/project/:projectID/gantt">
                   <ProjectGantt state={state} projectID={projectID} />
                 </Route>
-                {/* Do we want a 404 page? */}
+                <Route path="*">
+                  <h1>404 - Not Found</h1>
+                </Route>
               </Switch>
             </div>
           )}
