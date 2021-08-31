@@ -56,7 +56,7 @@ export default function AddProjectForm ({state, userID, close}) {
           </div>
 
           <div className="add-project-form-team-members">
-            <h3>Choose some additional team members! --> NEED TO REUSE MODAL COMPONENTS HERE!</h3>
+            <h3>Choose some additional team members! --> NEED TO REUSE USERS MODAL COMPONENTS HERE!</h3>
             <TeamMember add/>
           </div>
 
