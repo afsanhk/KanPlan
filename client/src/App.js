@@ -59,7 +59,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {loading ? (
-        <h1>{"Loading"}</h1>
+        <h1>Loading</h1>
       ) : (
         <div className="App">
           <Router>
