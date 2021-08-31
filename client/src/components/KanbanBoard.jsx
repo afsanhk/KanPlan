@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 
 import { Droppable } from 'react-beautiful-dnd';
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function KanbanBoard({ tasks, column, state, projectID }) {
+function KanbanBoard({ tasks, column, state, projectID, tempState, setTempState }) {
   const classes = useStyles();
 
   // modal state
@@ -83,7 +83,16 @@ function KanbanBoard({ tasks, column, state, projectID }) {
             }}
           >
             <Fade in={open}>
-              <AddTaskForm proj_name={state.projects[projectID].proj_name} team_members={state.projects[projectID].team_members} users={state.users} close={handleClose} />
+              <AddTaskForm
+                proj_name={state.projects[projectID].proj_name}
+                team_members={state.projects[projectID].team_members}
+                users={state.users}
+                close={handleClose}
+                projectID={projectID}
+                status={column.title}
+                tempState={tempState}
+                setTempState={setTempState}
+              />
             </Fade>
           </Modal>
         </div>

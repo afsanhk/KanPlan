@@ -2,11 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-function ConfirmButton({ saving, deleting, cancelling, consoleData, close }) {
+function ConfirmButton({ saving, deleting, cancelling, consoleData, close, error, updateData }) {
   return (
     <>
-      {saving && (
-        <Button variant="contained" color="primary" onClick={consoleData}>
+      {saving && !error && (
+        <Button variant="contained" color="primary" onClick={updateData}>
+          Save
+        </Button>
+      )}
+      {saving && error && (
+        <Button variant="contained" color="primary" disabled>
           Save
         </Button>
       )}

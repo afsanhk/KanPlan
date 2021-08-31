@@ -50,16 +50,17 @@ const priority_id = {
 const status_id = {
   'To-Do': 1,
   Late: 2,
-  'In progress': 3,
+  'In Progress': 3,
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users, close }) {
+function AddTaskForm({ proj_name, team_members, users, close, projectID, status, tempState, setTempState }) {
   const classes = useStyles();
 
   const [currentUsers, setCurrentUsers] = useState([]);
   const [teamMembers, setTeamMembers] = useState(team_members);
-  const [state, setState] = useState({ plan_start: currentDate, plan_end: currentDate, task_users: [] });
+  const [error, setError] = useState(true);
+  const [state, setState] = useState({ plan_start: currentDate, plan_end: currentDate, task_users: [], proj_name: proj_name, project_id: projectID, status: status, status_id: status_id[status] });
 
   // modal state
   const [open, setOpen] = React.useState(false);
@@ -81,9 +82,16 @@ function AddTaskForm({ proj_name, team_members, users, close }) {
     });
   };
 
+  // console log data
   const consoleData = () => {
     setState((prev) => ({ ...prev, task_users: currentUsers }));
     console.log(state);
+  };
+
+  const updateData = () => {
+    const taskID = Object.keys(tempState.tasks).length + 1;
+    setTempState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: { ...state, id: taskID } } }));
+    close();
   };
 
   // modal open function
@@ -95,6 +103,10 @@ function AddTaskForm({ proj_name, team_members, users, close }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setError(!state.title || !state.task_description || !state.priority_name);
+  }, [state]);
 
   return (
     <div className="task-form">
@@ -180,6 +192,7 @@ function AddTaskForm({ proj_name, team_members, users, close }) {
               <Autocomplete
                 id="combo-box-demo"
                 options={taskStatus}
+                inputValue={status}
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
@@ -237,7 +250,7 @@ function AddTaskForm({ proj_name, team_members, users, close }) {
 
       <footer className="task-form-footer">
         <div>
-          <ConfirmButton saving consoleData={consoleData} />
+          {error ? <ConfirmButton saving error /> : <ConfirmButton saving consoleData={consoleData} updateData={updateData} />}
           <ConfirmButton cancelling close={close} />
         </div>
       </footer>
