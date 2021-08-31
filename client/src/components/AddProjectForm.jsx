@@ -50,10 +50,16 @@ export default function AddProjectForm ({state, userID, close}) {
             onChange={(event) => setProjectDesc(event.target.value)}
           />
 
-          <span className="add-project-form-PM">
+          <div className="add-project-form-PM">
             <h3>Project Manager</h3>
             <TeamMember name={userObj.user_name}/>
-          </span>
+          </div>
+
+          <div className="add-project-form-team-members">
+            <h3>Choose some additional team members! --> NEED TO REUSE MODAL COMPONENTS HERE!</h3>
+            <TeamMember add/>
+          </div>
+
         </form>
           <ConfirmButton saving consoleData={handleSubmit}/>
           <ConfirmButton cancelling close={close}/>
