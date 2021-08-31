@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-function ConfirmButton({ saving, deleting, cancelling, consoleData }) {
+function ConfirmButton({ saving, deleting, cancelling, consoleData, close }) {
   return (
     <>
       {saving && (
@@ -15,7 +15,11 @@ function ConfirmButton({ saving, deleting, cancelling, consoleData }) {
           Delete
         </Button>
       )}
-      {cancelling && <Button variant="contained">Cancel</Button>}
+      {cancelling && (
+        <Button variant="contained" onClick={close}>
+          Cancel
+        </Button>
+      )}
     </>
   );
 }

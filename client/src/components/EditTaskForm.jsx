@@ -115,7 +115,7 @@ function EditTaskForm({ tasks, projects, users }) {
   }, []);
 
   return (
-    <div>
+    <div className="task-form">
       <header className="task-form-header">
         <h1>{tasks.title}</h1>
       </header>

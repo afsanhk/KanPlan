@@ -228,23 +228,28 @@ const ProjectKanban = ({ projectID, state }) => {
 
   return (
     <div className="project-kanban">
-      <div className="project-overview-header">
-        <div className="project-overview-title">
+      <div className="project-kanban-header">
+        <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
           <LinkIconContainer />
         </div>
         <p>{projectDescription}</p>
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="project-kanban-board">
-          {kanbanState.columnOrder.map((columnId) => {
-            const column = kanbanState.columns[columnId];
-            const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
 
-            return <KanbanBoard key={column.id} column={column} tasks={tasks} />;
-          })}
+      <div className="project-kanban-body">
+        <div className="project-kanban-body-div">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <div className="project-kanban-board">
+              {kanbanState.columnOrder.map((columnId) => {
+                const column = kanbanState.columns[columnId];
+                const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
+
+                return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} />;
+              })}
+            </div>
+          </DragDropContext>
         </div>
-      </DragDropContext>
+      </div>
     </div>
   );
 };
