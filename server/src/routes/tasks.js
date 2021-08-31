@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 module.exports = (db) => {
-  router.get("/tasks", (request, response) => {
+  router.get('/tasks', (request, response) => {
     db.query(
       `SELECT tasks.*, 
               proj_name, 
@@ -18,6 +18,41 @@ module.exports = (db) => {
     ).then(({ rows: tasks }) => {
       response.json(tasks.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
     });
+  });
+
+  router.post('/tasks', (request, response) => {
+    const { title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users, project_id } = request.body;
+    console.log(title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users);
+
+    db.query(
+      `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
+       VALUES ($1::text, $2::text, $3::integer, $4::integer, $5::integer, $6, $7)
+       RETURNING id;
+      `,
+      [title, task_description, priority_id, status_id, project_id, plan_start, plan_end]
+    )
+      .then((res) => {
+        if (task_users.length) {
+          let query = '';
+          const task_id = res.rows[0].id;
+          for (const user_id of task_users) {
+            query += '(' + task_id + ',' + user_id + ')';
+            if (!(task_users.indexOf(user_id) === task_users.length - 1)) {
+              query += ',\n';
+            }
+          }
+          db.query(
+            `
+            INSERT INTO user_tasks(task_id, user_id)
+            VALUES ${query};
+            `
+          ).catch((error) => console.log(error));
+        }
+      })
+      .then(() => {
+        response.status(204).json({});
+      })
+      .catch((error) => console.log(error));
   });
 
   return router;
