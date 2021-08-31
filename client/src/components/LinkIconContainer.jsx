@@ -6,7 +6,10 @@ import ListAltIcon from '@material-ui/icons/ListAlt'; // Project Kanban
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 import Icon from '@material-ui/core/Icon';
-import { loadCSS } from 'fg-loadcss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrello } from '@fortawesome/free-brands-svg-icons'
+// import { faTrello } from '@fortawesome/free-solid-svg-icons'
+
 
 import '../styles/LinkIconContainer.scss'
 
@@ -24,17 +27,6 @@ const useStyles = makeStyles(() => ({
 export default function LinkIconContainer ({project}) {
   
 
-  React.useEffect(() => {
-    const node = loadCSS(
-      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
-      document.querySelector('#font-awesome-css'),
-    );
-
-    return () => {
-      node.parentNode.removeChild(node);
-    };
-  }, []);
-
   const classes = useStyles();
   
   return (
@@ -48,7 +40,7 @@ export default function LinkIconContainer ({project}) {
         <p>Gantt</p>
       </Button>
       <Button size="small" className={classes.button} onClick={()=>console.log("Link to project kanban!")}>
-      <Icon className="fab fa-trello" />
+      <FontAwesomeIcon icon={faTrello} className='Kanban-icon' />
         <p>Kanban</p>
       </Button>
       <Button size="small" className={classes.button} onClick={()=>console.log("Pop up users modal!")}>
