@@ -25,8 +25,8 @@ const UserDashboard = ({ state, userID }) => {
       <div className='userDashboard-header'>
         <h1>Hello, {name}!</h1>
         <div className='inspirational-quote'>
-          <p><em>"Well begun is half done."</em></p>
-          <p>Aristotle</p>
+          <p><em>"Burn that excel spread sheet"</em></p>
+          <p>Kanye West</p>
         </div>
       </div>
       <div className='userDashboard-body'>

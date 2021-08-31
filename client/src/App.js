@@ -54,8 +54,8 @@ function App() {
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-  const projectID = 2;
-  const userID = 1;
+  const projectID = 1;
+  const userID = 45;
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,7 +84,9 @@ function App() {
                 <Route path="/project/:projectID/gantt">
                   <ProjectGantt state={state} projectID={projectID} />
                 </Route>
-                {/* Do we want a 404 page? */}
+                <Route path="*">
+                  <h1>404 - Not Found</h1>
+                </Route>
               </Switch>
             </div>
           )}
