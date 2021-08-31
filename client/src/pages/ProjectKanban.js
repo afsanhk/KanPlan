@@ -223,11 +223,17 @@ const ProjectKanban = ({ projectID, state }) => {
     setKanbanState(newState);
   };
 
+  const projectTitle = state.projects[projectID].proj_name;
+  const projectDescription = state.projects[projectID].proj_description;
+
   return (
     <div className="project-kanban">
-      <div className="project-kanban-header">
-        <h1>This will show the project Kanban.</h1>
-        <LinkIconContainer />
+      <div className="project-overview-header">
+        <div className="project-overview-title">
+          <h1>{projectTitle}</h1>
+          <LinkIconContainer />
+        </div>
+        <p>{projectDescription}</p>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="project-kanban-board">
