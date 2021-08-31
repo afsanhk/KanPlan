@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Drawer, Button, makeStyles, TextField} from '@material-ui/core';
+import {Drawer, Button, makeStyles} from '@material-ui/core';
 import AddIcon from "@material-ui/icons/Add";
 
 import "../styles/AddProjectButton.scss"
