@@ -236,7 +236,7 @@ const ProjectKanban = ({ state }) => {
       <div className="project-kanban-header">
         <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer />
+          <LinkIconContainer projectID={projectID} />
         </div>
         <p>{projectDescription}</p>
       </div>
