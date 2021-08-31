@@ -37,7 +37,6 @@ export default function AddProjectForm ({state, userID}) {
             margin="normal"
             onChange={(event) => setProjectDesc(event.target.value)}
           />
-          
         </form>
       </div>
     </>

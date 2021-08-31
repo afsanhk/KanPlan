@@ -3,6 +3,7 @@ import {Drawer, Button, makeStyles, TextField} from '@material-ui/core';
 import AddIcon from "@material-ui/icons/Add";
 
 import "../styles/AddProjectButton.scss"
+import AddProjectForm from './AddProjectForm';
 
 export default function AddProjectButton ({state, userID}) {
 
@@ -38,7 +39,9 @@ export default function AddProjectButton ({state, userID}) {
         >
           New Project
       </Button>
-      <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)}>AddProjectForm</Drawer>
+      <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)}>
+        <AddProjectForm state={state} userID={userID} />
+      </Drawer>
     </>
   )
 }
