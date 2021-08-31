@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
-import ListAltIcon from '@material-ui/icons/ListAlt'; // Project Kanban
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
-import Icon from '@material-ui/core/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrello } from '@fortawesome/free-brands-svg-icons'
 // import { faTrello } from '@fortawesome/free-solid-svg-icons'

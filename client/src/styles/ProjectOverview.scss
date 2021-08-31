@@ -1,7 +1,7 @@
 @use './base';
 
 .project-overview {
-  height: 100vh;
+  height: auto;
   // overflow: auto;
 }
 
@@ -19,5 +19,10 @@
 }
 
 .project-overview-body {
-  padding: 5vh 40px;
+  padding: 5vh 60px;
 }
+
+.project-overview-table {
+  width: 85vh
+}
+

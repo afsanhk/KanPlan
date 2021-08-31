@@ -1,8 +1,9 @@
 import React from "react";
 
-import IconButton from '@material-ui/core/IconButton'; 
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+// if we implement the 'add task' feature from Dashboard -->
+// import IconButton from '@material-ui/core/IconButton'; 
+// import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import "../styles/HomepageMyWork.scss"
 import TaskList from "./TaskList"
