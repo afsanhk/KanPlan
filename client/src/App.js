@@ -11,6 +11,7 @@ import UserProjects from "./pages/UserProjects";
 import ProjectOverview from "./pages/ProjectOverview";
 import ProjectKanban from "./pages/ProjectKanban";
 import ProjectGantt from "./pages/ProjectGantt";
+import LoadingCircle from "./components/LoadingCircle";
 
 // Styling
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -58,12 +59,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {loading ? (
-        <h1>Loading</h1>
-      ) : (
-        <div className="App">
-          <Router>
-            <NavBar />
+      <div className="App">
+        <Router>
+          <NavBar />
+          {loading ? (
+            <LoadingCircle />
+          ) : (
             <div className="body">
               <Switch>
                 <Route exact path="/">
@@ -87,9 +88,9 @@ function App() {
                 {/* Do we want a 404 page? */}
               </Switch>
             </div>
-          </Router>
-        </div>
-      )}
+          )}
+        </Router>
+      </div>
     </ThemeProvider>
   );
 }
