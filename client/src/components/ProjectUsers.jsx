@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // components
 import ConfirmButton from './ConfirmButton';
@@ -55,7 +55,7 @@ function ProjectUsers({ users, project }) {
   const removeUser = (user_id) => {
     setCurrentUsers((prev) => {
       const newUsers = [...prev].filter((id) => id !== user_id);
-      setState((prev) => ({ ...prev, task_users: newUsers }));
+      setState((prev) => ({ ...prev, team_members: newUsers }));
       return newUsers;
     });
   };
@@ -64,18 +64,26 @@ function ProjectUsers({ users, project }) {
   const addUser = (user_id) => {
     setCurrentUsers((prev) => {
       const newUsers = [...prev, user_id];
-      setState((prev) => ({ ...prev, task_users: newUsers }));
+      setState((prev) => ({ ...prev, team_members: newUsers }));
       return newUsers;
     });
   };
+
+  // console log function
+  const consoleData = () => {
+    setState((prev) => ({ ...prev, team_members: currentUsers }));
+    console.log(state);
+  };
+
+  useEffect(() => {
+    setState((prev) => ({ ...prev, team_members: currentUsers }));
+  }, []);
 
   return (
     <div className="project-users">
       <header className="project-users-header">
         <h1>Users</h1>
       </header>
-
-      {console.log(users, project)}
 
       <div className="project-users-body">
         <div className="project-users-body-div">
@@ -120,7 +128,7 @@ function ProjectUsers({ users, project }) {
       </div>
 
       <footer className="project-users-footer">
-        <ConfirmButton saving />
+        <ConfirmButton saving consoleData={consoleData} />
       </footer>
     </div>
   );
