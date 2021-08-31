@@ -38,8 +38,16 @@ const useStyles = makeStyles({
     color: '#757575'
   },
   navBarIcon: {
-    fontSize: '45px'
+    fontSize: '45px',
   },
+  navBarAvatar: 
+  {
+    border: 'solid #757575 4px',
+    width: '80px',
+    height: '80px',
+    margin :'10px 0 20px 0',
+    // 'background-color': '#0d47a1'
+  }
 });
 
 function NavBar() {
@@ -112,7 +120,7 @@ function NavBar() {
               />
             </ListItem>
           </List>
-          <Avatar alt="" src="" className="nav-avatar" />
+          <Avatar alt="" src="" className={classes.navBarAvatar} />
         </div>
       </Drawer>
     </ThemeProvider>

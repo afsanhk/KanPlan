@@ -24,7 +24,10 @@ const UserDashboard = ({ state, userID }) => {
     <div className='userDashboard' >
       <div className='userDashboard-header'>
         <h1>Hello, {name}!</h1>
-        <p>"The future depends on what you do today" - Gandhi</p>
+        <div className='inspirational-quote'>
+          <p><em>"Well begun is half done."</em></p>
+          <p>Aristotle</p>
+        </div>
       </div>
       <div className='userDashboard-body'>
         <HomepageMyWork tasks={tasks}/>

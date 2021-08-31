@@ -13,7 +13,25 @@ import ProjectKanban from "./pages/ProjectKanban";
 import ProjectGantt from "./pages/ProjectGantt";
 
 // Styling
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import "./App.scss";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1e88e5',
+    },
+    secondary: {
+      main: '#0d47a1',
+    },
+  },
+  typography: {
+    fontSize: 16,
+    h3: {
+      fontSize: '3.4rem',
+    }
+  }
+})
 
 function App() {
   const { state } = useApplicationData();
@@ -21,37 +39,39 @@ function App() {
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   const projectID = 3;
-  const userID = 1;
+  const userID = 2;
 
   return (
-    <div className="App">
-      <Router>
-        <NavBar />
-        <div className="body">
-          <Switch>
-            <Route exact path="/">
-              <UserDashboard state={state} userID={userID} />
-            </Route>
-            <Route path="/projects">
-              <UserProjects />
-            </Route>
-            {/* This will need to change to become a dynamic link. */}
-            <Route path="/project/overview">
-              <ProjectOverview state={state} projectID={projectID} />
-            </Route>
-            {/* This will need to change to become a dynamic link. */}
-            <Route path="/project/kanban">
-              <ProjectKanban state={state} projectID={projectID} />
-            </Route>
-            {/* This will need to change to become a dynamic link. */}
-            <Route path="/project/gantt">
-              <ProjectGantt state={state} projectID={projectID} />
-            </Route>
-            {/* Do we want a 404 page? */}
-          </Switch>
-        </div>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Router>
+          <NavBar />
+          <div className="body">
+            <Switch>
+              <Route exact path="/">
+                <UserDashboard state={state} userID={userID} />
+              </Route>
+              <Route path="/projects">
+                <UserProjects />
+              </Route>
+              {/* This will need to change to become a dynamic link. */}
+              <Route path="/project/overview">
+                <ProjectOverview state={state} projectID={projectID} />
+              </Route>
+              {/* This will need to change to become a dynamic link. */}
+              <Route path="/project/kanban">
+                <ProjectKanban state={state} projectID={projectID} />
+              </Route>
+              {/* This will need to change to become a dynamic link. */}
+              <Route path="/project/gantt">
+                <ProjectGantt state={state} projectID={projectID} />
+              </Route>
+              {/* Do we want a 404 page? */}
+            </Switch>
+          </div>
+        </Router>
+      </div>
+    </ThemeProvider>
   );
 }
 

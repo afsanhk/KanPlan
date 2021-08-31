@@ -1,4 +1,4 @@
-
+@use '../styles/base';
 
 .userDashboard-header {
   display: flex;
@@ -6,11 +6,21 @@
   justify-content: space-between;
   margin-bottom: 20px;
   height: 9vh;
+
+  .inspirational-quote {
+    text-align: right;
+    
+    p {
+      color: base.$dark-grey;
+      margin: 4px 0;
+      padding-right: 15px;
+      font-size: 20px;
+    }
+  }
 }
 
 .userDashboard-body {
   display: flex;
   align-items: flex-start;
   margin-bottom: 30px;
-
 }

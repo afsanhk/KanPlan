@@ -21,9 +21,10 @@ import "./HomepageImportantUpdates.scss"
 const useStyles = makeStyles({
   listItemIcon: {
     margin: '0 15px',
+    color: '#757575'
   },
   darkerDivider: {
-    height: '2px',
+    height: '1px',
     backgroundColor: '#757575'
   }
 })
@@ -45,7 +46,7 @@ export default function HomepageImportantUpdates() {
           <h3>Assigned To Me</h3>
       </div>
       
-      <List dense>
+      <List>
         <Divider className={classes.darkerDivider}/>
         <ListItem button>
           <ListAltIcon className={classes.listItemIcon}/>
@@ -67,14 +68,13 @@ export default function HomepageImportantUpdates() {
         <Divider />
       </List>
 
-      <br />
   
       <div className='homepage-assigned-title'>
           <AlternateEmailIcon />
           <h3>Messages and Mentions</h3>
       </div>
       
-      <List dense>
+      <List>
         <Divider className={classes.darkerDivider}/>
         <ListItem button>
           <MessageOutlinedIcon className={classes.listItemIcon}/>
