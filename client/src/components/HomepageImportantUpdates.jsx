@@ -16,14 +16,15 @@ import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
-import "./HomepageImportantUpdates.scss"
+import "../styles/HomepageImportantUpdates.scss"
 
 const useStyles = makeStyles({
   listItemIcon: {
     margin: '0 15px',
+    color: '#757575'
   },
   darkerDivider: {
-    height: '2px',
+    height: '1px',
     backgroundColor: '#757575'
   }
 })
@@ -45,7 +46,7 @@ export default function HomepageImportantUpdates() {
           <h3>Assigned To Me</h3>
       </div>
       
-      <List dense>
+      <List>
         <Divider className={classes.darkerDivider}/>
         <ListItem button>
           <ListAltIcon className={classes.listItemIcon}/>
@@ -64,17 +65,15 @@ export default function HomepageImportantUpdates() {
           <ListItemText primary="New Projects" />
           <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
-        <Divider />
       </List>
 
-      <br />
   
       <div className='homepage-assigned-title'>
           <AlternateEmailIcon />
           <h3>Messages and Mentions</h3>
       </div>
       
-      <List dense>
+      <List>
         <Divider className={classes.darkerDivider}/>
         <ListItem button>
           <MessageOutlinedIcon className={classes.listItemIcon}/>
@@ -93,7 +92,6 @@ export default function HomepageImportantUpdates() {
           <ListItemText primary="Mentions" />
           <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
-        <Divider />
       </List>
 
     </div>

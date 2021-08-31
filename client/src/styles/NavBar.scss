@@ -1,4 +1,4 @@
-@use '../styles/base';
+@use './base';
 
 
 
@@ -15,13 +15,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .nav-avatar {
-    border: solid base.$dark-grey 2px;
-    width: 75px;
-    height: 75px;
-    margin :10px 0 20px 0;
-  }
 }
 
 .nav-bottom-list {

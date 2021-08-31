@@ -1,7 +1,7 @@
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
-import './ProjectListItem.scss'
+import '../styles/ProjectListItem.scss'
 
 import LinkIconContainer from './LinkIconContainer';
 
@@ -19,7 +19,7 @@ export default function ProjectListItem ({name, description, team_members, state
   return (
     <article className="project">
       <header className="project-header">
-        <h3>{name}</h3>
+        <h2>{name}</h2>
         <div>Project Progress: Goes brrrrrrrrr......</div>
       </header>
       <p className="project-body">{description}</p>

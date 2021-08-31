@@ -18,7 +18,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-import './EditTaskForm.scss';
+import '../styles/EditTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
 // material-ui styles

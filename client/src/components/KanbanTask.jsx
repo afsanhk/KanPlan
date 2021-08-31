@@ -5,7 +5,7 @@ import FlagIcon from '@material-ui/icons/Flag';
 import { Avatar } from '@material-ui/core';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
-import './KanbanTask.scss';
+import '../styles/KanbanTask.scss';
 
 const flagStyles = {
   High: {

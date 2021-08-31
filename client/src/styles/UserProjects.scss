@@ -1,0 +1,13 @@
+@use './base';
+
+.user-projects {
+  padding: 3vh 40px;
+  height: 94vh;
+  // overflow: auto;
+}
+
+.user-projects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

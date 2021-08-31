@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "./HomepageMyProjects.scss"
+import "../styles/HomepageMyProjects.scss"
 import ProjectNameDescription from "./ProjectNameDescription"
 
 export default function HomepageMyProjects({ projects, state }) {

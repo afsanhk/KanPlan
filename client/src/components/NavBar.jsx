@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import KanPlanLogo from '../images/KanPlanLogo.jpg';
-import './NavBar.scss';
+import '../styles/NavBar.scss';
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -35,11 +35,18 @@ const useStyles = makeStyles({
   navBarButton: {
     'text-align': 'center',
     'margin-top': '10px',
-    color: '#757575'
+    color: '#545454'
   },
   navBarIcon: {
-    fontSize: '45px'
+    fontSize: '45px',
   },
+  navBarAvatar: 
+  {
+    border: 'solid #545454 4px',
+    width: '80px',
+    height: '80px',
+    margin :'10px 0 20px 0',
+  }
 });
 
 function NavBar() {
@@ -64,7 +71,7 @@ function NavBar() {
           <div className="nav-body">
             <List>
               <NavLink to="/" className="navlink">
-                <ListItem button className={activePage() === 'homepage' ? classes.selected : '', classes.navBarButton } alignItems="center">
+                <ListItem button className={[activePage() === 'homepage' ? classes.selected : '', classes.navBarButton] } alignItems="center">
                   <ListItemText 
                     primary={<HomeIcon className={classes.navBarIcon} />} 
                     secondary={<Typography variant='h7'>Home</Typography>}  
@@ -72,7 +79,7 @@ function NavBar() {
                 </ListItem>
               </NavLink>
               <NavLink to="/projects" className="navlink">
-                <ListItem button className={activePage() === 'projects' ? classes.selected : '', classes.navBarButton }>
+                <ListItem button className={[activePage() === 'projects' ? classes.selected : '', classes.navBarButton] }>
                   <ListItemText 
                     primary={<AppsIcon className={classes.navBarIcon} />} 
                     secondary={<Typography variant='h7'>Projects</Typography>}
@@ -112,7 +119,7 @@ function NavBar() {
               />
             </ListItem>
           </List>
-          <Avatar alt="" src="" className="nav-avatar" />
+          <Avatar alt="" src="" className={classes.navBarAvatar} />
         </div>
       </Drawer>
     </ThemeProvider>

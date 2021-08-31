@@ -1,21 +1,30 @@
-
-
-//colours
 $off-white: #fcfcfc;
 $light-grey: #f5f5f5;
 $medium-grey: #bdbdbd;
 $dark-grey: #757575;
+$dark-dark-grey: #545454; //but not black
 
-$red-light: #ff4d4d;
-$red-dark: #ce3d4b;
-$purple-light: #b055c4;
-$purple-dark: #9a2bb2;
-$orange-light: #f2b25e;
-$orange-dark: #e99426;
-$green-light: #409255;
-$green-dark: #14752d;
+$red-light: #db4f4f;
+$red-dark: #d53c3c; 
+$purple-light: #9f89d6;
+$purple-dark: #8976b9;
+$orange-light: #ffbd59;
+$orange-dark: #fbaf3c; 
+$green-light: #7bbf5e;
+$green-dark: #6aa84f;
 
-$sample-blue: rgb(79 190 255); //delete later, using just for contrasting colours
+$blue-primary: #1e88e5;
+$blue-primary-light: #4b9fea;
+$blue-primary-dark: #155fa0;
 
-$border: 3px $medium-grey solid;
+$blue-secondary: #0d47a1;
+$blue-secondary-light: #3d6bb3;
+$blue-secondary-dark: #093170;
+
+$red-primary: #e03838;
+$red-primary-light: #ff5252;
+
+
+
+$border-grey: 3px $medium-grey solid;
 $border-radius: 8px;

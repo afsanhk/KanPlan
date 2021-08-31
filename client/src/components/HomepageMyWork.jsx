@@ -4,8 +4,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import "./HomepageMyWork.scss"
+import "../styles/HomepageMyWork.scss"
 import TaskList from "./TaskList"
+
 
 export default function HomepageMyWork({ tasks }) {
   return (
@@ -17,11 +18,11 @@ export default function HomepageMyWork({ tasks }) {
           <CheckCircleOutlinedIcon />
           <h3>Tasks</h3>
         </div>
-        <div className='homepage-tasks-right'>
+        {/* <div className='homepage-tasks-right'>
           <IconButton size='medium' >
             <AddCircleIcon />
           </IconButton>
-        </div>
+        </div> */}
       </div>
 
       {tasks[0] && <TaskList tasks={tasks} />}

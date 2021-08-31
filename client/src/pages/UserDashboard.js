@@ -9,7 +9,7 @@ import HomepageCharts from '../components/HomepageCharts';
 //helpers
 import {  getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTaskStatuses } from '../helpers/selectors';
 
-import './UserDashboard.scss'
+import '../styles/UserDashboard.scss'
 
 const UserDashboard = ({ state, userID }) => {
 
@@ -23,8 +23,11 @@ const UserDashboard = ({ state, userID }) => {
   return (
     <div className='userDashboard' >
       <div className='userDashboard-header'>
-        <h1>Hello {name}</h1>
-        <p>"The future depends on what you do today" - Gandhi</p>
+        <h1>Hello, {name}!</h1>
+        <div className='inspirational-quote'>
+          <p><em>"Well begun is half done."</em></p>
+          <p>Aristotle</p>
+        </div>
       </div>
       <div className='userDashboard-body'>
         <HomepageMyWork tasks={tasks}/>

@@ -1,12 +1,12 @@
-@use '../styles/base';
+@use './base';
 
 .homepage-my-projects {
-  height: 50vh;
+  height: 45vh;
   width: 30vw;
   background-color: base.$off-white;
-  border: base.$border;
+  border: base.$border-grey;
   border-radius: base.$border-radius;
-  padding: 15px;
+  padding: 15px 30px;
   overflow: auto;
 
   h2 {
