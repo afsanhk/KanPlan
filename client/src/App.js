@@ -74,8 +74,8 @@ function App() {
                   <UserProjects state={state} userID={userID} />
                 </Route>
                 {/* This will need to change to become a dynamic link. rename :chicken to :projectID */}
-                <Route path="/project/:chicken/overview">
-                  <ProjectOverview state={state} projectID={projectID} />
+                <Route path="/project/:projectID/overview">
+                  <ProjectOverview state={state} />
                 </Route>
                 {/* This will need to change to become a dynamic link. */}
                 <Route path="/project/kanban">
