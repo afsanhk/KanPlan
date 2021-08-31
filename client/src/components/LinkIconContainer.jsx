@@ -30,24 +30,24 @@ export default function LinkIconContainer ({projectID}) {
   return (
     <div className='nav-icons'>
       <NavLink to={`/project/${projectID}/overview`} className="iconNavLink">
-        <Button size="small" className={classes.button} onClick={()=>console.log("Link to user dashboard!")}>
+        <Button size="small" className={classes.button}>
           <DashboardIcon></DashboardIcon>
           <p>Overview</p>
         </Button>
       </NavLink>
       <NavLink to={`/project/${projectID}/gantt`} className="iconNavLink">
-        <Button size="small" className={classes.button} onClick={()=>console.log("Link to project gantt!")}>
+        <Button size="small" className={classes.button}>
           <AssessmentIcon className='Gantt-icon'/>
           <p>Gantt</p>
         </Button>
       </NavLink>
       <NavLink to={`/project/${projectID}/kanban`} className="iconNavLink">
-        <Button size="small" className={classes.button} onClick={()=>console.log("Link to project kanban!")}>
+        <Button size="small" className={classes.button}>
         <FontAwesomeIcon icon={faTrello} className='Kanban-icon' />
           <p>Kanban</p>
         </Button>
       </NavLink>
-      <Button size="small" className={classes.button} onClick={()=>console.log("Pop up users modal!")}>
+      <Button size="small" className={classes.button}>
         <PeopleIcon />
         <p>Users</p>
       </Button>

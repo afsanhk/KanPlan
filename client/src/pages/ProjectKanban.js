@@ -17,7 +17,7 @@ const ProjectKanban = ({ state }) => {
   let { projectID } = useParams();
   console.log(projectID);
 
-  if (state) {
+  if (state && getTasksForProject(state, projectID)[0]) {
     projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   } else {
     // For Kanban Layout
