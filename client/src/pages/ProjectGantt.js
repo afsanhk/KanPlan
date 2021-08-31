@@ -1,12 +1,17 @@
+import { useParams } from "react-router";
+
 import Gantt from "../components/Gantt";
+import LinkIconContainer from "../components/LinkIconContainer";
 
 import { getTasksForProject } from "../helpers/selectors";
 
-const ProjectGantt = ({ state, projectID }) => {
+const ProjectGantt = ({ state }) => {
+  const { projectID } = useParams();
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   return (
     <div>
       <h1>This will show the project Gantt.</h1>
+      <LinkIconContainer projectID={projectID} />
       <h1>Currently showing for {state.projects[projectID].proj_name}</h1>
       <section className="ganttContainer" style={{ marginLeft: "140px" }}>
         <Gantt projectTasks={projectTasks} />

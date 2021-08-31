@@ -73,16 +73,15 @@ function App() {
                 <Route path="/projects">
                   <UserProjects state={state} userID={userID} />
                 </Route>
-                {/* This will need to change to become a dynamic link. */}
-                <Route path="/project/overview">
-                  <ProjectOverview state={state} projectID={projectID} />
+                <Route path="/project/:projectID/overview">
+                  <ProjectOverview state={state} />
                 </Route>
-                {/* This will need to change to become a dynamic link. */}
-                <Route path="/project/kanban">
+                {/* This will need to change to become a dynamic link. Change :chicken to :projectID later */}
+                <Route path="/project/:projectID/kanban">
                   <ProjectKanban state={state} projectID={projectID} />
                 </Route>
                 {/* This will need to change to become a dynamic link. */}
-                <Route path="/project/gantt">
+                <Route path="/project/:projectID/gantt">
                   <ProjectGantt state={state} projectID={projectID} />
                 </Route>
                 {/* Do we want a 404 page? */}

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import { getTasksForProject } from '../helpers/selectors';
@@ -10,12 +11,16 @@ import LinkIconContainer from '../components/LinkIconContainer';
 // import css
 import '../styles/ProjectKanban.scss';
 
-const ProjectKanban = ({ projectID, state }) => {
-  const [tempState, setTempState] = useState(state);
+const ProjectKanban = ({ state }) => {
   let projectTasks;
+  // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
+  let { projectID } = useParams();
+  console.log(projectID);
 
-  if (tempState) {
-    projectTasks = getTasksForProject(tempState, projectID).map((i) => tempState.tasks[i]);
+  const [tempState, setTempState] = useState(state);
+
+  if (state && getTasksForProject(state, projectID)[0]) {
+    projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   } else {
     // For Kanban Layout
     projectTasks = [
@@ -233,7 +238,7 @@ const ProjectKanban = ({ projectID, state }) => {
       <div className="project-kanban-header">
         <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer />
+          <LinkIconContainer projectID={projectID} />
         </div>
         <p>{projectDescription}</p>
       </div>
