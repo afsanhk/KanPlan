@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
@@ -9,7 +9,6 @@ import Icon from '@material-ui/core/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrello } from '@fortawesome/free-brands-svg-icons'
 // import { faTrello } from '@fortawesome/free-solid-svg-icons'
-
 
 import '../styles/LinkIconContainer.scss'
 
@@ -25,20 +24,23 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function LinkIconContainer ({projectID}) {
-  
 
   const classes = useStyles();
   
   return (
     <div className='nav-icons'>
-      <Button size="small" className={classes.button} onClick={()=>console.log("Link to user dashboard!")}>
-        <DashboardIcon />
-        <p>Overview</p>
-      </Button>
-      <Button size="small" className={classes.button} onClick={()=>console.log("Link to project gantt!")}>
-        <AssessmentIcon className='Gantt-icon'/>
-        <p>Gantt</p>
-      </Button>
+      <NavLink to={`/project/${projectID}/overview`} className="iconNavLink">
+        <Button size="small" className={classes.button} onClick={()=>console.log("Link to user dashboard!")}>
+          <DashboardIcon></DashboardIcon>
+          <p>Overview</p>
+        </Button>
+      </NavLink>
+      <NavLink to="/" className="iconNavLink">
+        <Button size="small" className={classes.button} onClick={()=>console.log("Link to project gantt!")}>
+          <AssessmentIcon className='Gantt-icon'/>
+          <p>Gantt</p>
+        </Button>
+      </NavLink>
       <Button size="small" className={classes.button} onClick={()=>console.log("Link to project kanban!")}>
       <FontAwesomeIcon icon={faTrello} className='Kanban-icon' />
         <p>Kanban</p>

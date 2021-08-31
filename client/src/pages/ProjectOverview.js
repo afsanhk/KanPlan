@@ -14,9 +14,9 @@ const ProjectOverview = ({ state, projectID }) => {
   let { chicken } = useParams();
   console.log(chicken);
 
-  const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-  const projectTitle = state.projects[projectID].proj_name;
-  const projectDescription = state.projects[projectID].proj_description;
+  const projectTasks = getTasksForProject(state, chicken).map((i) => state.tasks[i]);
+  const projectTitle = state.projects[chicken].proj_name;
+  const projectDescription = state.projects[chicken].proj_description;
 
   return (
     <div className="project-overview">
