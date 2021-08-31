@@ -35,14 +35,14 @@ const useStyles = makeStyles({
   navBarButton: {
     'text-align': 'center',
     'margin-top': '10px',
-    color: '#757575'
+    color: '#545454'
   },
   navBarIcon: {
     fontSize: '45px',
   },
   navBarAvatar: 
   {
-    border: 'solid #757575 4px',
+    border: 'solid #545454 4px',
     width: '80px',
     height: '80px',
     margin :'10px 0 20px 0',

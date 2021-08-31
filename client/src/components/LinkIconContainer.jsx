@@ -1,40 +1,45 @@
-import { IconButton } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
 import ListAltIcon from '@material-ui/icons/ListAlt'; // Project Kanban
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
+import './LinkIconContainer.scss'
+
 export default function LinkIconContainer ({project}) {
   
   const useStyles = makeStyles(() => ({
-    icon: {
-      margin: '5px',
-      color: 'black',
-      height: '40px'
+    button: {
+      'margin-right': '5px',
+      color: '#093170',
+      height: '40px',
+      padding: '10px 8px',
+      'text-transform': 'none',
+      'font-size': '16px',
     },
   }));
 
   const classes = useStyles();
   
   return (
-    <>
-      <IconButton size="small" className={classes.icon} onClick={()=>console.log("Link to user dashboard!")}>
+    <div className='nav-icons'>
+      <Button size="small" className={classes.button} onClick={()=>console.log("Link to user dashboard!")}>
         <DashboardIcon />
-        <p className="iconName">Overview</p>
-      </IconButton>
-      <IconButton size="small" className={classes.icon} onClick={()=>console.log("Link to project gantt!")}>
+        <p>Overview</p>
+      </Button>
+      <Button size="small" className={classes.button} onClick={()=>console.log("Link to project gantt!")}>
         <AssessmentIcon />
-        <p className="iconName">Gantt</p>
-      </IconButton>
-      <IconButton size="small" className={classes.icon} onClick={()=>console.log("Link to project kanban!")}>
+        <p>Gantt</p>
+      </Button>
+      <Button size="small" className={classes.button} onClick={()=>console.log("Link to project kanban!")}>
         <ListAltIcon />
-        <p className="iconName">Kanban</p>
-      </IconButton>
-      <IconButton size="small" className={classes.icon} onClick={()=>console.log("Pop up users modal!")}>
+        <p>Kanban</p>
+      </Button>
+      <Button size="small" className={classes.button} onClick={()=>console.log("Pop up users modal!")}>
         <PeopleIcon />
-        <p className="iconName">Users</p>
-      </IconButton>
-    </>
+        <p>Users</p>
+      </Button>
+    </div>
   )
 }

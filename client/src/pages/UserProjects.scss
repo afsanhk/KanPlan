@@ -1,0 +1,12 @@
+@use '../styles/base';
+
+.user-projects {
+  height: 94vh;
+  // overflow: auto;
+}
+
+.user-projects-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

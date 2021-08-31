@@ -20,10 +20,12 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#1e88e5',
+      dark: '#4b9fea' //this color is actually lighter, is visible when hovering over buttons
     },
     secondary: {
-      main: '#0d47a1',
-    },
+      main: '#e03838',
+      dark: '#ff5252' //this color is actually lighter, is visible when hovering over buttons
+    }
   },
   typography: {
     fontSize: 16,
@@ -52,7 +54,7 @@ function App() {
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   const projectID = 3;
-  const userID = 2;
+  const userID = 45;
 
   return (
     <ThemeProvider theme={theme}>

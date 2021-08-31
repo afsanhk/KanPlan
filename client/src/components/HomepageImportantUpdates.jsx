@@ -65,7 +65,6 @@ export default function HomepageImportantUpdates() {
           <ListItemText primary="New Projects" />
           <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
-        <Divider />
       </List>
 
   
@@ -93,7 +92,6 @@ export default function HomepageImportantUpdates() {
           <ListItemText primary="Mentions" />
           <Badge badgeContent={randomBadgeNumber()} color="primary" />
         </ListItem>
-        <Divider />
       </List>
 
     </div>

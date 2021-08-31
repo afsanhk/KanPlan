@@ -1,0 +1,12 @@
+@use '../styles/base';
+
+.nav-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  color: rgba(base.$blue-primary-dark, 0.4);
+
+  p {
+    margin-left: 4px;
+  }
+}
