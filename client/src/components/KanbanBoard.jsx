@@ -54,9 +54,7 @@ function KanbanBoard({ tasks, column, state, projectID }) {
         {(provided) => (
           <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps}>
             <div className="kanban-board-body-div">
-              {tasks.map((task, index) => (
-                <KanbanTask key={task.id} task={task} index={index} state={state} />
-              ))}
+              {tasks && tasks.map((task, index) => <KanbanTask key={task.id} task={task} index={index} state={state} />)}
               {provided.placeholder}
             </div>
           </div>
