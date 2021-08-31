@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
 import TeamMemberName from './TeamMemberName';
-import './TeamMember.scss';
+import '../styles/TeamMember.scss';
 
 const useStyles = makeStyles({
   teamMemberButton: {

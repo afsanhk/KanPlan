@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import "./HomepageMyWork.scss"
+import "../styles/HomepageMyWork.scss"
 import TaskList from "./TaskList"
 
 

@@ -1,7 +1,7 @@
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
-import './ProjectListItem.scss'
+import '../styles/ProjectListItem.scss'
 
 import LinkIconContainer from './LinkIconContainer';
 

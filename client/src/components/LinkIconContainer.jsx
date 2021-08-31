@@ -5,7 +5,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt'; // Project Kanban
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
-import './LinkIconContainer.scss'
+import '../styles/LinkIconContainer.scss'
 
 export default function LinkIconContainer ({project}) {
   

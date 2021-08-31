@@ -6,7 +6,7 @@ import { IconButton } from '@material-ui/core';
 
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-import './KanbanBoard.scss';
+import '../styles/KanbanBoard.scss';
 import KanbanTask from './KanbanTask';
 
 const backgroundColor = {

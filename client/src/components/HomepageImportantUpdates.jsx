@@ -16,7 +16,7 @@ import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
-import "./HomepageImportantUpdates.scss"
+import "../styles/HomepageImportantUpdates.scss"
 
 const useStyles = makeStyles({
   listItemIcon: {

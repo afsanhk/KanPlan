@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import KanPlanLogo from '../images/KanPlanLogo.jpg';
-import './NavBar.scss';
+import '../styles/NavBar.scss';
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';

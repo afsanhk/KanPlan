@@ -54,7 +54,7 @@ function App() {
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   const projectID = 3;
-  const userID = 45;
+  const userID = 1;
 
   return (
     <ThemeProvider theme={theme}>

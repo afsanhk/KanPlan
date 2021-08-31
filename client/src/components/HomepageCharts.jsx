@@ -3,7 +3,7 @@ import React from 'react'
 import HomepageChartA from './HomepageChartA'
 import HomepageChartB from './HomepageChartB'
 
-import './HomepageCharts.scss'
+import '../styles/HomepageCharts.scss'
 
 import StopRoundedIcon from '@material-ui/icons/StopRounded';
 

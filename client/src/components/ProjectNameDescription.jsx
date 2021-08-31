@@ -3,7 +3,7 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
-import './ProjectNameDescription.scss'
+import '../styles/ProjectNameDescription.scss'
 
 export default function ProjectNameDescription({ proj_name, proj_description, team_members, state }) {
 

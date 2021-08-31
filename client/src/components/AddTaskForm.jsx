@@ -15,7 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import './AddTaskForm.scss';
+import '../styles/AddTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
 // material-ui styles

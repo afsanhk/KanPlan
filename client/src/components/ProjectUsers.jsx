@@ -12,7 +12,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddUserForm from './AddUserForm';
 
 // scss
-import './ProjectUsers.scss';
+import '../styles/ProjectUsers.scss';
 
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
