@@ -32,6 +32,7 @@ import LinkIconContainer from './LinkIconContainer';
 import ProjectListItem from './ProjectListItem';
 import ProjectList from './ProjectList';
 import { Link } from '@material-ui/core';
+import ProjectUsers from './ProjectUsers';
 
 // TEST DATA
 const projects = {
@@ -357,6 +358,7 @@ storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImpo
 
 storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
 storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} team_members={projects['1'].team_members} users={users} />);
+storiesOf('ProjectUsers', module).add('Initial', () => <ProjectUsers users={users} project={projectsArray[0]} />);
 
 storiesOf('ProjectNameDescription', module)
   .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} team_members={userProjects[0].team_members} state={state} />)

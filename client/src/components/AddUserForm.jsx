@@ -33,9 +33,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName }) {
+function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName, all }) {
   const classes = useStyles();
 
+  const allUsers = Object.keys(users).map((key) => ({ id: users[key].id, name: users[key].user_name }));
+  const allUsersWithoutCurrent = allUsers.filter((user) => !currentUsers.includes(user.id));
   const filteredIDs = teamMembers.filter((id) => !currentUsers.includes(id));
   const userIdToName = filteredIDs.map((id) => ({ id: id, name: users[id].user_name }));
 
@@ -43,7 +45,9 @@ function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName })
     <div className={classes.paper}>
       <div className={classes.header}>{userIdToName.length ? <h1>Add user from {projectName} project</h1> : <h1>No more user!</h1>}</div>
 
-      <div className={classes.container}>{userIdToName && userIdToName.map((user) => <TeamMember key={user.id} id={user.id} name={user.name} add border addUser={addUser} />)}</div>
+      <div className={classes.container}>
+        {userIdToName && (all ? allUsersWithoutCurrent : userIdToName).map((user) => <TeamMember key={user.id} id={user.id} name={user.name} add border addUser={addUser} />)}
+      </div>
     </div>
   );
 }
