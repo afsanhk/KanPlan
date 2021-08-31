@@ -11,12 +11,15 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 
 // material-ui cores/lab
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IconButton } from '@material-ui/core';
+import { IconButton, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 import './EditTaskForm.scss';
+import AddUserForm from './AddUserForm';
 
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
@@ -26,27 +29,12 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     margin: '5px'
   },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }));
-
-// modal style function
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
 
 // get today's date yyyy-mm-dd
 const today = new Date();
@@ -68,42 +56,44 @@ const status_id = {
   Done: 4
 };
 
-function EditTaskForm({ tasks, userProjects }) {
+function EditTaskForm({ tasks, projects, users }) {
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
   const getTeamMembers = (projectName) => {
     if (projectName) {
-      const currentProjectObj = userProjects.filter((project) => project.proj_name === projectName);
+      const currentProjectObj = projects.filter((project) => project.proj_name === projectName);
 
-      return currentProjectObj[0].proj_users;
+      return currentProjectObj[0].team_members;
     }
   };
 
-  const [currentUsers, setCurrentUsers] = useState(null);
-  const [currentProject, setCurrentProject] = useState(null);
+  const [currentUsers, setCurrentUsers] = useState(tasks.task_users);
+  const [teamMembers, setTeamMembers] = useState(null);
+  // const [currentProject, setCurrentProject] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ task_description: tasks.description, plan_start: currentDate, plan_end: currentDate });
+  const [state, setState] = useState({ task_description: tasks.task_description, plan_start: currentDate, plan_end: currentDate });
 
-  // modal state
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setClickDesc(!clickDesc);
   };
 
-  useEffect(() => {
-    if (currentProject) {
-      setCurrentUsers(() => getTeamMembers(currentProject));
-    }
-    setState((prev) => ({ ...prev, proj_name: currentProject, proj_users: currentUsers }));
-  }, [currentProject]);
-
-  const removeUser = (user_name) => {
+  // remove user from Assignees
+  const removeUser = (user_id) => {
     setCurrentUsers((prev) => {
-      const newUsers = [...prev].filter((user) => user.name !== user_name);
-      setState((prev) => ({ ...prev, proj_users: newUsers }));
+      const newUsers = [...prev].filter((id) => id !== user_id);
+      setState((prev) => ({ ...prev, task_users: newUsers }));
+      return newUsers;
+    });
+  };
+
+  // add user from modal to Assignees
+  const addUser = (user_id) => {
+    setCurrentUsers((prev) => {
+      const newUsers = [...prev, user_id];
+      setState((prev) => ({ ...prev, task_users: newUsers }));
       return newUsers;
     });
   };
@@ -118,13 +108,11 @@ function EditTaskForm({ tasks, userProjects }) {
     setOpen(false);
   };
 
-  // modal html and css
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-    </div>
-  );
+  useEffect(() => {
+    // setCurrentUsers(getTeamMembers(currentProject));
+    setTeamMembers(getTeamMembers(tasks.proj_name));
+    setState((prev) => ({ ...prev, proj_name: tasks.proj_name, task_users: currentUsers }));
+  }, []);
 
   return (
     <div>
@@ -136,7 +124,7 @@ function EditTaskForm({ tasks, userProjects }) {
         <div className="task-form-body-description">
           {!clickDesc ? (
             <div className="task-form-body-description-div">
-              <p>{state.task_description}</p>
+              <ListItemText primary="Task Description" secondary={state.task_description} />
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -145,7 +133,7 @@ function EditTaskForm({ tasks, userProjects }) {
             <div className="task-form-body-description-div">
               <TextField
                 id="standard-full-width"
-                label="Description"
+                label="Task Description"
                 style={{ margin: 8 }}
                 placeholder="Write description"
                 fullWidth
@@ -163,20 +151,21 @@ function EditTaskForm({ tasks, userProjects }) {
             </div>
           )}
         </div>
-
         <div className="task-form-body-dropdowns">
           <div className="task-form-body-dropdowns-project">
-            <Autocomplete
+            {/* <Autocomplete
               id="combo-box-demo"
-              options={userProjects}
+              options={projects}
               getOptionLabel={(option) => option.proj_name}
               style={{ width: '80%' }}
               renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
               onChange={(value) => {
                 setCurrentProject(value.target.innerText);
-                setCurrentUsers(getTeamMembers(value.target.innerText));
               }}
-            />
+            /> */}
+            <div className="task-form-body-dropdowns-project-div">
+              <ListItemText primary="Project Name" secondary={tasks.proj_name} />
+            </div>
           </div>
 
           <div className="task-form-body-dropdowns-date">
@@ -214,7 +203,7 @@ function EditTaskForm({ tasks, userProjects }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
@@ -222,7 +211,7 @@ function EditTaskForm({ tasks, userProjects }) {
                 getOptionLabel={(option) => option.name}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
               />
             </div>
           </div>
@@ -232,20 +221,33 @@ function EditTaskForm({ tasks, userProjects }) {
           <>
             <div className="task-form-body-members-title">
               <div>
-                <h2>Team Members</h2>
+                <h2>Assignees</h2>
                 <IconButton size="small" onClick={handleOpen}>
                   <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
                 </IconButton>
-                <Modal open={open} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">
-                  {body}
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={open}>
+                    <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} projectName={tasks.proj_name} />
+                  </Fade>
                 </Modal>
               </div>
             </div>
 
             <div className="task-form-body-members">
               <div className="task-form-body-members-div">
-                {currentUsers.map((user, index) => (
-                  <TeamMember key={index} name={user.name} remove border removeUser={removeUser} />
+                {currentUsers.map((id, index) => (
+                  <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
                 ))}
               </div>
             </div>
