@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {Drawer, Button, makeStyles} from '@material-ui/core';
 import AddIcon from "@material-ui/icons/Add";
 
-import "../styles/AddProjectForm.scss"
+import "../styles/AddProjectButton.scss"
 
-export default function AddProjectForm ({userID}) {
+export default function AddProjectButton ({userID}) {
 
   const [drawerShow, setDrawerShow] = useState({right: false});
 
