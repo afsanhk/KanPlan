@@ -1,9 +1,11 @@
 import {useState} from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
+
+import ConfirmButton from './ConfirmButton';
 
 import "../styles/AddProjectForm.scss" 
 
-export default function AddProjectForm ({state, userID}) {
+export default function AddProjectForm ({state, userID, close}) {
 
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
@@ -11,6 +13,8 @@ export default function AddProjectForm ({state, userID}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log(userID, projectName, projectDesc)
   }
 
   return (
@@ -37,7 +41,14 @@ export default function AddProjectForm ({state, userID}) {
             margin="normal"
             onChange={(event) => setProjectDesc(event.target.value)}
           />
+
         </form>
+        <Button type="submit">
+          <ConfirmButton saving consoleData={() => console.log("Something should happen!")}/>
+        </Button>
+        <Button>
+          <ConfirmButton cancelling close={close}/>
+        </Button>
       </div>
     </>
   )

@@ -40,7 +40,7 @@ export default function AddProjectButton ({state, userID}) {
           New Project
       </Button>
       <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)}>
-        <AddProjectForm state={state} userID={userID} />
+        <AddProjectForm state={state} userID={userID} close={toggleDrawer('right',false)} />
       </Drawer>
     </>
   )
