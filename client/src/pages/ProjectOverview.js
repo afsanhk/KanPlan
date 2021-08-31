@@ -21,7 +21,7 @@ const ProjectOverview = ({ state }) => {
       <div className="project-overview-header">
         <div className="project-overview-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer />
+          <LinkIconContainer projectID={projectID} />
         </div>
         <p>{projectDescription}</p>
       </div>
