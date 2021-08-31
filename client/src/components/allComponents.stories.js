@@ -353,6 +353,7 @@ storiesOf("TeamMember", module)
       <TeamMemberName name="User2" />
     </>
   ))
+<<<<<<< HEAD
   .add("No name", () => <TeamMemberName />);
 
 storiesOf("HomepageImportantUpdates", module).add("Initial", () => <HomepageImportantUpdates />);
@@ -416,6 +417,35 @@ storiesOf("Project Page", module)
     />
   ))
   .add("ProjectList", () => <ProjectList projects={userProjects} state={state} />);
+=======
+  .add('No name', () => <TeamMemberName />);
+
+storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
+
+storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
+storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} team_members={projects['1'].team_members} users={users} />);
+storiesOf('ProjectUsers', module).add('Initial', () => <ProjectUsers users={users} project={projectsArray[0]} />);
+
+storiesOf('ProjectNameDescription', module)
+  .add('Homepage (3 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} team_members={userProjects[0].team_members} state={state} />)
+  .add('Homepage (10 users)', () => <ProjectNameDescription proj_name="Project Name" proj_description={lorem} team_members={userProjects[2].team_members} state={state} />);
+
+storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects projects={userProjects} state={state} />);
+
+// storiesOf('Kanban', module).add('Project Kanban', () => <ProjectKanban />);
+
+storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA chartInformation={'8'} chartTitle="Projects Managing" chartColor="#0099ff" />);
+storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB chartInformation={chartData} />);
+storiesOf('HomepageCharts', module).add('Charts', () => <HomepageCharts projectsManaging={0} projectsWorkingOn={10} tasks={userTasks} taskStatuses={chartData} />);
+
+storiesOf('Gantt', module)
+  .add('Basic', () => <Gantt projectTasks={projectTasks} />)
+  .add('No Data', () => <Gantt projectTasks={[null]} />);
+
+storiesOf('Project Overview Table', module)
+  .add('Basic', () => <ProjectOverviewTable projectTasks={projectTasks} />)
+  .add('No Data', () => <ProjectOverviewTable projectTasks={[null]} />);
+>>>>>>> master
 
 storiesOf("Add Projects", module)
   .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />)

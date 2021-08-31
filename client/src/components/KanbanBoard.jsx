@@ -83,7 +83,14 @@ function KanbanBoard({ tasks, column, state, projectID }) {
             }}
           >
             <Fade in={open}>
-              <AddTaskForm proj_name={state.projects[projectID].proj_name} team_members={state.projects[projectID].team_members} users={state.users} close={handleClose} />
+              <AddTaskForm
+                proj_name={state.projects[projectID].proj_name}
+                team_members={state.projects[projectID].team_members}
+                users={state.users}
+                close={handleClose}
+                projectID={projectID}
+                status={column.title}
+              />
             </Fade>
           </Modal>
         </div>
