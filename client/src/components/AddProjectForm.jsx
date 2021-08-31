@@ -21,6 +21,12 @@ export default function AddProjectForm({ state, userID, close }) {
 
   const userObj = state && state.users[userID];
 
+  // This is for demonstration purposes to TJ and Veronica only. Ends at next //
+  const potentialTeamMembers = [2,3,4,5,6]
+  const parsedTeamMembers = potentialTeamMembers.map(id => {
+    return (<TeamMember name={state.users[id].user_name} border add/>)
+  });
+
   return (
     <div className="add-project-form-container">
       <h1 className="add-project-form-title">Add a project</h1>
@@ -55,12 +61,12 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-team-members">
             <h3>Choose some additional team members!</h3>
-            <TeamMember border add />
-            <h3>NEED TO REUSE USERS MODAL COMPONENTS HERE!</h3>
+            {parsedTeamMembers}
           </div>
         </form>
       </div>
       <div class="add-project-form-buttons">
+
         <ConfirmButton saving handleSubmit={handleSubmit} addProject />
         <ConfirmButton cancelling close={close} />
       </div>
