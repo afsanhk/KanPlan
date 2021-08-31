@@ -11,7 +11,7 @@ const UserProjects = ({ state, userID }) => {
     <div className="user-projects">
       <div className="user-projects-header">
         <h1>All Projects</h1>
-        <AddProjectButton userID={userID} />
+        <AddProjectButton state={state} userID={userID} />
       </div>
       {userProjects && <ProjectList state={state} projects={userProjects} />}
     </div>
