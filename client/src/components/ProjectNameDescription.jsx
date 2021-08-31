@@ -2,27 +2,15 @@ import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
 import './ProjectNameDescription.scss'
 
-
-const useStyles = makeStyles({
-  projectAvatar: {
-    'background-color': '#1e88e5',
-    'font-size': '15px',
-    width: '30px',
-    height: '30px',
-  }
-}) 
-
 export default function ProjectNameDescription({ proj_name, proj_description, team_members, state }) {
-  const classes = useStyles();
 
   const parsedUsers = team_members.map(user => {
     const userDetails = state.users[user]
     return (
-      <Avatar alt={userDetails.user_name} className={classes.projectAvatar}>
+      <Avatar alt={userDetails.user_name}>
         {userDetails.user_name[0]}
       </Avatar>
     )

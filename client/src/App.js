@@ -30,7 +30,20 @@ const theme = createTheme({
     h3: {
       fontSize: '3.4rem',
     }
-  }
+  },
+  overrides: {
+    // Style sheet name ⚛️
+    MuiAvatar: {
+      root: {
+        width: '30px',
+        height: '30px',
+        'font-size': '15px',
+      },
+      colorDefault: {
+        'background-color': '#1e88e5',
+      } 
+    },
+  },
 })
 
 function App() {

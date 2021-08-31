@@ -46,7 +46,6 @@ const useStyles = makeStyles({
     width: '80px',
     height: '80px',
     margin :'10px 0 20px 0',
-    // 'background-color': '#0d47a1'
   }
 });
 
