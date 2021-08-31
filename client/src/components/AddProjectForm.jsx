@@ -30,8 +30,6 @@ export default function AddProjectForm () {
 
   return (
     <> 
-      <h1>This will show the AddProjectForm</h1>
-      <p>Hue hue hue hue</p>
       <Button
           variant='contained'
           startIcon={<AddIcon />}
@@ -40,7 +38,7 @@ export default function AddProjectForm () {
         >
           New Project
       </Button>
-      <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)} >AddProjectForm</Drawer>
+      <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)}>AddProjectForm</Drawer>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import ProjectList from "../components/ProjectList";
 import { getProjectsForUser } from "../helpers/selectors";
-
+import AddProjectForm from "../components/AddProjectForm";
 import "../styles/UserProjects.scss";
 
 const UserProjects = ({ state, userID }) => {
@@ -11,6 +11,7 @@ const UserProjects = ({ state, userID }) => {
     <div className="user-projects">
       <div className="user-projects-header">
         <h1>All Projects</h1>
+        <AddProjectForm />
       </div>
       {userProjects && <ProjectList state={state} projects={userProjects} />}
     </div>
