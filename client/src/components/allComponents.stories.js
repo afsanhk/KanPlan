@@ -366,7 +366,7 @@ storiesOf('ProjectNameDescription', module)
 
 storiesOf('HomepageMyProjects', module).add('Intial', () => <HomepageMyProjects projects={userProjects} state={state} />);
 
-storiesOf('Kanban', module).add('Project Kanban', () => <ProjectKanban />);
+// storiesOf('Kanban', module).add('Project Kanban', () => <ProjectKanban />);
 
 storiesOf('HomepageCharts', module).add('Chart A', () => <HomepageChartA chartInformation={'8'} chartTitle="Projects Managing" chartColor="#0099ff" />);
 storiesOf('HomepageCharts', module).add('Chart B', () => <HomepageChartB chartInformation={chartData} />);
