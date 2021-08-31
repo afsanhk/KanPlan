@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {Drawer, Button} from '@material-ui/core';
+import {Drawer, Button, makeStyles} from '@material-ui/core';
+import AddIcon from "@material-ui/icons/Add";
+
+import "../styles/AddProjectForm.scss"
 
 export default function AddProjectForm () {
 
@@ -13,11 +16,30 @@ export default function AddProjectForm () {
     setDrawerShow(prev => ({...prev, [anchor]: open }));
   };
 
+  const useStyles = makeStyles({
+    newProjectButton: {
+      backgroundColor: '#3d6bb3',
+      color: '#fcfcfc',
+      '&:hover': {
+        backgroundColor: '#1e88e5',
+      }
+    }
+  }) 
+
+  const classes = useStyles();
+
   return (
     <> 
       <h1>This will show the AddProjectForm</h1>
       <p>Hue hue hue hue</p>
-      <Button onClick={toggleDrawer('right', true)}>Add Project Form</Button>
+      <Button
+          variant='contained'
+          startIcon={<AddIcon />}
+          className={classes.newProjectButton}
+          onClick={toggleDrawer('right', true)}
+        >
+          New Project
+      </Button>
       <Drawer style= {{width: '1000px'}} anchor={'right'} open={drawerShow['right']} onClose={toggleDrawer('right',false)} >AddProjectForm</Drawer>
     </>
   )
