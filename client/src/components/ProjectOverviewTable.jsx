@@ -8,14 +8,20 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FlagIcon from '@material-ui/icons/Flag';
+import Avatar from '@material-ui/core/Avatar';
+
 // Refer to EditTaskForm
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 // Project Components
 import TeamMemberName from './TeamMemberName';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+
+import '../styles/ProjectOverviewTable.scss'
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -33,38 +39,60 @@ const convertTimestampStringToYMD = function(timestampString) {
 // https://material-ui.com/customization/default-theme/ --> Use this to figure out how to navigate the theme.
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: '#757575',
-    color: theme.palette.common.white,
+    backgroundColor: '#f5f5f5',
+    color: '#545454',
+    padding: '10px',
+    fontSize: 19,
+    fontWeight: 'bold',
   },
   body: {
+    backgroundColor: '#fcfcfc',
     fontSize: 18,
+    padding: '20px',
+    align: 'center',
+    border: '3px solid #f5f5f5'
   }
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
-  // root: {
-  //   '&:nth-of-type(odd)': {
-  //     backgroundColor: theme.palette.action.hover,
-  //   },
-  // },
+  tableRow: {
+    "&:hover": {
+      backgroundColor: "blue !important"
+    }
+  }
 }))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 700,
+    minWidth: 650,
+    border: '3px solid #f5f5f5',
+    'border-bottom-left-radius': '8px',
+    'background-color': '#f5f5f5',
+  },
+  columnTasks: {
+    padding: '0 0 0 30px',
+  },
+  columnTaskTitle: {
+    color: '#545454'
+  },
+  columnActions: {
+    padding: '10px',
   },
   icon: {
-    margin: '5px'
+    margin: '2px'
   },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
+  rowAddTask: {
+    border: 0,
+    backgroundColor: 'rgba(9, 49, 112, 0.3)',
+    color: '#fcfcfc', 
+  },
+  rowAddTaskHyperlink: {
+    '&:hover': {
+      cursor: 'pointer'
+    }
   }
 }));
+
 
 const flagStyles = {
   High: {
@@ -85,22 +113,30 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({projectTasks}) {
+export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
   const classes = useStyles();
 
   // Array of task objects in projectTasks
   function createData(projectTasks) {
-    return { id: projectTasks.id, title: projectTasks.title, users: projectTasks.task_users, status: projectTasks.status, priority_name: projectTasks.priority_name, plan_start: projectTasks.plan_start, plan_end: projectTasks.plan_end };
+    return { 
+      id: projectTasks.id, 
+      title: projectTasks.title, 
+      users: projectTasks.task_users, 
+      status: projectTasks.status, 
+      priority_name: projectTasks.priority_name, 
+      plan_start: projectTasks.plan_start, 
+      plan_end: projectTasks.plan_end 
+    };
   }
   
   const rows = projectTasks[0] && projectTasks.map(el => createData(el));
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} elevation={0} >
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Tasks</StyledTableCell>
+            <StyledTableCell className={classes.columnTasks}>Tasks</StyledTableCell>
             <StyledTableCell align="center">Users</StyledTableCell>
             <StyledTableCell align="center">Status</StyledTableCell>
             <StyledTableCell align="center">Priority</StyledTableCell>
@@ -112,16 +148,32 @@ export default function ProjectOverviewTable({projectTasks}) {
         <TableBody>
           {projectTasks[0] && rows.map((row) => (
             <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
                 {row.title}
               </StyledTableCell>
-              {/* Afsan: Must be a better way to do this horizontal view of users. */}
-              <StyledTableCell align="center" style={{display:'flex', flexDirection:'row'}}>
-                {row.users.map((name,index) => <TeamMemberName key={index}/>)}
+              <StyledTableCell >
+                <AvatarGroup className='overview-table-avatar'>
+                  {row.users.map((userID, index) => {
+                    if (row.users.length === 1) {
+                      return ( 
+                        <>
+                          <Avatar name={projectUsers[userID]['user_name']} key={index}/>
+                          <p className='overview-table-avatar-name'>{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                        </>
+                      )
+                    }
+
+                    return (
+                      <Avatar alt={projectUsers[userID]['user_name']} key={index}>
+                        {projectUsers[userID]['user_name'][0]}
+                      </Avatar>
+                    )
+                  })}
+                </AvatarGroup>
               </StyledTableCell>
               {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: 'white' }}><strong>{row.status.toUpperCase()}</strong></StyledTableCell>
-              <StyledTableCell align="center"><FlagIcon style={flagStyles[row.priority_name]} /></StyledTableCell>
+              <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc' }}><strong>{row.status.toUpperCase()}</strong></StyledTableCell>
+              <StyledTableCell align="center"><FlagIcon style={flagStyles[row.priority_name]} fontSize="large" /></StyledTableCell>
               <StyledTableCell align="center">
                 <TextField
                   id="date"
@@ -148,25 +200,29 @@ export default function ProjectOverviewTable({projectTasks}) {
                   onChange={() => console.log('Changed something in the end date table!')}
                 />
               </StyledTableCell>
-              <StyledTableCell align="center">
+              <StyledTableCell align="center" className={classes.columnActions} style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px'}}>
                 <IconButton size="small">
-                  <EditOutlinedIcon />
+                  <EditOutlinedIcon className={classes.icon} onClick={() => {console.log('go to edit task modal')}}/>
                 </IconButton>
                 <IconButton size="small">
-                  <DeleteIcon />
+                  <DeleteIcon className={classes.icon} onClick={() => {console.log('go to delete task modal')}}/>
                 </IconButton>
               </StyledTableCell>
             </StyledTableRow>
           ))}
-          {/* This might need to change */}
-          <StyledTableRow>
-            <StyledTableCell>Add a Task!</StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell></StyledTableCell>
+          <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={() => {console.log('go to add task modal')}}>
+            <StyledTableCell className={classes.rowAddTask} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
+              <div className='overview-table-add-task'>
+                <AddCircleIcon />
+                <p><strong>Add a Task!</strong></p>
+              </div>
+            </StyledTableCell>
+            <StyledTableCell className={classes.rowAddTask} />
+            <StyledTableCell className={classes.rowAddTask} />
+            <StyledTableCell className={classes.rowAddTask} />
+            <StyledTableCell className={classes.rowAddTask} />
+            <StyledTableCell className={classes.rowAddTask} />
+            <StyledTableCell className={classes.rowAddTask} style={{borderTopRightRadius: '25px', borderBottomRightRadius: '25px'}}/>
           </StyledTableRow>
         </TableBody>
       </Table>

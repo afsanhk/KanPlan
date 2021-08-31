@@ -5,7 +5,7 @@ import ProjectOverviewTable from "../components/ProjectOverviewTable";
 import LinkIconContainer from "../components/LinkIconContainer";
 
 // Helpers
-import { getTasksForProject } from "../helpers/selectors";
+import { getTasksForProject, getUsersForProject } from "../helpers/selectors";
 
 import "../styles/ProjectOverview.scss";
 
@@ -13,6 +13,7 @@ const ProjectOverview = ({ state }) => {
   let { projectID } = useParams();
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
+  const projectUsers = getUsersForProject(state, projectID)
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
 
@@ -25,8 +26,8 @@ const ProjectOverview = ({ state }) => {
         </div>
         <p>{projectDescription}</p>
       </div>
-      <div className="project-overview-body">
-        <ProjectOverviewTable projectTasks={projectTasks} />
+      <div className='project-overview-body'>
+        <ProjectOverviewTable projectTasks={projectTasks} projectUsers={projectUsers} className='project-overview-table' />
       </div>
     </div>
   );

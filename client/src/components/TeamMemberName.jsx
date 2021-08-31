@@ -1,11 +1,20 @@
 import React from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
       
+const useStyles = makeStyles((theme) => ({
+  size: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  }
+}));
+
 export default function TeamMemberName(props) {
-  
+  const classes = useStyles();
+
   return (
     <div className="team-member-name">
-      <AccountCircleIcon fontSize="large" />
+      <Avatar className={classes.size} />
       {props.name && <p>{props.name}</p>}
     </div>
   )

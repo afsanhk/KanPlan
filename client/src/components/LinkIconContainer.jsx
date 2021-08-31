@@ -5,10 +5,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
-import Icon from '@material-ui/core/Icon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrello } from '@fortawesome/free-brands-svg-icons'
-// import { faTrello } from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/LinkIconContainer.scss'
 

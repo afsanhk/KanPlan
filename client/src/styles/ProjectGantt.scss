@@ -1,0 +1,23 @@
+@use './base';
+
+.project-gantt {
+  height: 100vh;
+  overflow: auto;
+}
+
+.project-gantt-header {
+  height: auto;
+  background-color: base.$off-white;
+  padding: 3vh 40px;
+  border-bottom: 3px dashed base.$blue-secondary-dark
+}
+
+.project-gantt-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ganttContainer {
+  margin: 3vh 40px;
+}

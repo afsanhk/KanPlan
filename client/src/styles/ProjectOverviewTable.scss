@@ -1,2 +1,25 @@
 @use './base';
 
+.overview-table-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: auto;
+}
+
+.overview-table-avatar-name {
+  margin-left: 5px;
+}
+
+.overview-table-add-task {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+    margin-left: 5px;
+    padding-top: 1px;
+  }
+}
+
