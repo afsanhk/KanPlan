@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import "../styles/AddProjectForm.scss"
 
-export default function AddProjectForm () {
+export default function AddProjectForm ({userID}) {
 
   const [drawerShow, setDrawerShow] = useState({right: false});
 
