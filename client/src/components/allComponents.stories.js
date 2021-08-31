@@ -30,7 +30,6 @@ import ProjectOverviewTable from "./ProjectOverviewTable";
 import LinkIconContainer from "./LinkIconContainer";
 import ProjectListItem from "./ProjectListItem";
 import ProjectList from "./ProjectList";
-import { Link } from "@material-ui/core";
 import ProjectUsers from "./ProjectUsers";
 
 import AddProjectButton from "./AddProjectButton";
