@@ -5,7 +5,8 @@ import '../styles/ProjectListItem.scss'
 
 import LinkIconContainer from './LinkIconContainer';
 
-export default function ProjectListItem ({name, description, team_members, state}) {
+// id is project id
+export default function ProjectListItem ({id, name, description, team_members, state}) {
 
   const parsedUsers = team_members.map(user => {
     const userDetails = state.users[user]
@@ -25,7 +26,7 @@ export default function ProjectListItem ({name, description, team_members, state
       <p className="project-body">{description}</p>
       <footer className="project-footer">
         <div className="nav-icon-container">
-          <LinkIconContainer/>
+          <LinkIconContainer projectID={id}/>
         </div>
           {team_members && 
             <div class='project-grouped-users'>

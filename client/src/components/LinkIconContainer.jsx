@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
-import ListAltIcon from '@material-ui/icons/ListAlt'; // Project Kanban
 import PeopleIcon from '@material-ui/icons/People';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 import Icon from '@material-ui/core/Icon';
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function LinkIconContainer ({project}) {
+export default function LinkIconContainer ({projectID}) {
   
 
   const classes = useStyles();
