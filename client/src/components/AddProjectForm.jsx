@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
@@ -16,6 +16,9 @@ export default function AddProjectForm ({state, userID, close}) {
     event.preventDefault();
 
     console.log(userID, projectName, projectDesc);
+    setProjectName('')
+    setProjectDesc('')
+    
   }
 
   const userObj = state && state.users[userID];
@@ -24,10 +27,11 @@ export default function AddProjectForm ({state, userID, close}) {
     <div className="add-project-form-container">
       <h1 className='add-project-form-title'>Add a project</h1>
       <div className="add-project-form-body">
-        <form className="add-project-form" onSubmit={handleSubmit}>
+        <form className="add-project-form">
           <TextField 
             id="standard-full-width"
             label="Project Name"
+            value={projectName}
             style={{ margin: 8 }}
             placeholder="Write project name here..."
             multiline
@@ -38,6 +42,7 @@ export default function AddProjectForm ({state, userID, close}) {
           <TextField 
             id="standard-full-width"
             label="Project Description"
+            value={projectDesc}
             style={{ margin: 8 }}
             placeholder="Write project name here..."
             multiline
@@ -50,12 +55,8 @@ export default function AddProjectForm ({state, userID, close}) {
             <TeamMember name={userObj.user_name}/>
           </span>
         </form>
-        <Button type="submit">
-          <ConfirmButton saving consoleData={() => console.log("Something should happen!")}/>
-        </Button>
-        <Button>
+          <ConfirmButton saving consoleData={handleSubmit}/>
           <ConfirmButton cancelling close={close}/>
-        </Button>
       </div>
     </div>
   )
