@@ -33,7 +33,7 @@ function App() {
               <UserDashboard state={state} userID={userID} />
             </Route>
             <Route path="/projects">
-              <UserProjects />
+              <UserProjects state={state} userID={userID} />
             </Route>
             {/* This will need to change to become a dynamic link. */}
             <Route path="/project/overview">
