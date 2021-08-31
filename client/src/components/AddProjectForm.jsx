@@ -56,13 +56,16 @@ export default function AddProjectForm ({state, userID, close}) {
           </div>
 
           <div className="add-project-form-team-members">
-            <h3>Choose some additional team members! --> NEED TO REUSE USERS MODAL COMPONENTS HERE!</h3>
+            <h3>Choose some additional team members!</h3>
             <TeamMember add/>
+            <h3>NEED TO REUSE USERS MODAL COMPONENTS HERE!</h3>
           </div>
 
         </form>
-          <ConfirmButton saving consoleData={handleSubmit}/>
-          <ConfirmButton cancelling close={close}/>
+      </div>
+      <div class="add-project-form-buttons">
+        <ConfirmButton saving consoleData={handleSubmit}/>
+        <ConfirmButton cancelling close={close}/>
       </div>
     </div>
   )
