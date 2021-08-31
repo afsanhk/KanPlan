@@ -1,0 +1,62 @@
+.project-users {
+  .project-users-header {
+    padding: 20px 20px 0px 20px;
+    border-bottom: 2px solid black;
+    display: flex;
+    justify-content: center;
+
+    h1 {
+      width: 80%;
+    }
+  }
+  .project-users-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .project-users-body-div {
+      margin-top: 30px;
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .project-users-body-manager {
+        margin-right: 15px;
+        font-weight: bold;
+      }
+    }
+
+    .project-users-body-users {
+      width: 80%;
+      height: 500px;
+
+      .project-users-body-users-div {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
+
+      .project-users-body-add-user {
+        width: 80%;
+
+        .project-users-body-add-user-div {
+          margin-left: 20px;
+          display: flex;
+          align-items: center;
+
+          p {
+            font-size: 20px;
+            margin: 0;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .project-users-footer {
+    display: flex;
+    justify-content: center;
+  }
+}
