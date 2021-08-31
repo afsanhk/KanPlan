@@ -1,6 +1,8 @@
 import React from 'react';
 import {FrappeGantt, Task, ViewMode} from 'frappe-gantt-react';
 
+import '../styles/Gantt.scss'
+
 /* 
 Tasks need to be fed to FrappeGant as the default 'Task' class extracted at the top of this file.
 The tasks mapped to the new Task class have to be in an object formation with keys:
@@ -20,7 +22,8 @@ function Gantt({projectTasks}) {
       start: el.plan_start,
       end: el.plan_end,
       progress: 100,
-      dependencies: ''
+      dependencies: '',
+      custom_class: 'bar-color'
     }
   })
   .map(x => new Task(x));
@@ -37,6 +40,7 @@ function Gantt({projectTasks}) {
         onTasksChange={(tasks) => console.log(tasks)}
         // // https://github.com/mohammed-io/frappe-gantt-react/blob/master/src/App.tsx
         // // onViewChange={this._func} --> something to do with class state = {mode: ViewMode.___} 
+        className='frappe-gantt'
       />}
     </>
   )

@@ -1,0 +1,11 @@
+@use './base';
+
+.gantt-container {
+  height: 70vh;
+  // overflow: none;
+}
+
+.bar-color g rect {
+  fill: base.$blue-primary !important;
+}
+
