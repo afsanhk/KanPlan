@@ -34,6 +34,7 @@ import { Link } from "@material-ui/core";
 import ProjectUsers from "./ProjectUsers";
 
 import AddProjectButton from "./AddProjectButton";
+import AddProjectForm from "./AddProjectForm";
 
 // TEST DATA
 const projects = {
@@ -417,4 +418,6 @@ storiesOf("Project Page", module)
   ))
   .add("ProjectList", () => <ProjectList projects={userProjects} state={state} />);
 
-storiesOf("Add Project Form", module).add("Basic", () => <AddProjectButton />);
+storiesOf("Add Projects", module)
+  .add("Button & Drawer", () => <AddProjectButton />)
+  .add("Add Project Form", () => <AddProjectForm />);
