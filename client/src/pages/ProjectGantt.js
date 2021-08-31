@@ -1,8 +1,11 @@
+import { useParams } from "react-router";
+
 import Gantt from "../components/Gantt";
 
 import { getTasksForProject } from "../helpers/selectors";
 
-const ProjectGantt = ({ state, projectID }) => {
+const ProjectGantt = ({ state }) => {
+  const { projectID } = useParams();
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   return (
     <div>

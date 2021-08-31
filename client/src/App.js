@@ -81,7 +81,7 @@ function App() {
                   <ProjectKanban state={state} projectID={projectID} />
                 </Route>
                 {/* This will need to change to become a dynamic link. */}
-                <Route path="/project/gantt">
+                <Route path="/project/:projectID/gantt">
                   <ProjectGantt state={state} projectID={projectID} />
                 </Route>
                 {/* Do we want a 404 page? */}
