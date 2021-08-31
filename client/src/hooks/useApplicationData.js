@@ -7,6 +7,7 @@ export default function useApplicationData() {
     projects: {},
     users: {},
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -21,8 +22,9 @@ export default function useApplicationData() {
         projects: all[1].data,
         users: all[2].data,
       }));
+      setLoading(false);
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
-  return { state };
+  return { state, loading };
 }
