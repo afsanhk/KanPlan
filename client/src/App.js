@@ -20,9 +20,12 @@ function App() {
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-  const projectID = 2;
+  const projectID = 3;
   const userID = 1;
+<<<<<<< HEAD
   console.log(state);
+=======
+>>>>>>> 30fe295bbe40a76ceedab354d38a5ac55f9fbda0
 
   return (
     <div className="App">
@@ -38,7 +41,7 @@ function App() {
             </Route>
             {/* This will need to change to become a dynamic link. */}
             <Route path="/project/overview">
-              <ProjectOverview />
+              <ProjectOverview state={state} projectID={projectID} />
             </Route>
             {/* This will need to change to become a dynamic link. */}
             <Route path="/project/kanban">

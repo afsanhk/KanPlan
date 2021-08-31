@@ -26,6 +26,12 @@ import HomepageCharts from './HomepageCharts';
 import Gantt from './Gantt';
 
 import CustomizedTables from './ProjectOverviewTable';
+import ProjectOverviewTable from './ProjectOverviewTable';
+
+import LinkIconContainer from './LinkIconContainer';
+import ProjectListItem from './ProjectListItem';
+import ProjectList from './ProjectList';
+import { Link } from '@material-ui/core';
 
 // TEST DATA
 const projects = {
@@ -349,7 +355,7 @@ storiesOf('TeamMember', module)
 
 storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImportantUpdates />);
 
-storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
+sstoriesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
 storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} team_members={projects['1'].team_members} users={users} />);
 
 storiesOf('ProjectNameDescription', module)
@@ -368,4 +374,11 @@ storiesOf('Gantt', module)
   .add('Basic', () => <Gantt projectTasks={projectTasks} />)
   .add('No Data', () => <Gantt projectTasks={[null]} />);
 
-storiesOf('Project Overview Table', module).add('Basic', () => <CustomizedTables projectTasks={projectTasks} />);
+storiesOf('Project Overview Table', module)
+  .add('Basic', () => <ProjectOverviewTable projectTasks={projectTasks} />)
+  .add('No Data', () => <ProjectOverviewTable projectTasks={[null]} />);
+
+storiesOf('Project Page', module)
+  .add('Icon Container', () => <LinkIconContainer project={userProjects[0]} />)
+  .add('ProjectListItem', () => <ProjectListItem name="KanPlan" team_members={[1, 2, 3]} description="Project management(not boring!)" state={state} />)
+  .add('ProjectList', () => <ProjectList projects={userProjects} state={state} />);
