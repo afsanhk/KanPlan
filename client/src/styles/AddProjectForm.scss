@@ -1,6 +1,13 @@
-.add-form-body {
-  .add-form {
-    display: flex;
-    flex-direction: column;
+.add-form-container {
+  padding: 20px;
+  h1 {
+    margin: 8px;
+    margin-top: 40px;
+  }
+  .add-form-body {
+    .add-form {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

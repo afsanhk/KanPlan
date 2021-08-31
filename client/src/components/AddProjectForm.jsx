@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { TextField, Button } from '@material-ui/core';
 
 import ConfirmButton from './ConfirmButton';
+import TeamMember from './TeamMember';
 
 import "../styles/AddProjectForm.scss" 
 
@@ -14,11 +15,13 @@ export default function AddProjectForm ({state, userID, close}) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(userID, projectName, projectDesc)
+    console.log(userID, projectName, projectDesc);
   }
 
+  const userObj = state && state.users[userID];
+
   return (
-    <>
+    <div className="add-form-container">
       <h1 className='add-form-title'>Add a project</h1>
       <div className="add-form-body">
         <form className="add-form" onSubmit={handleSubmit}>
@@ -42,6 +45,8 @@ export default function AddProjectForm ({state, userID, close}) {
             onChange={(event) => setProjectDesc(event.target.value)}
           />
 
+          <TeamMember name={userObj.user_name}/>
+
         </form>
         <Button type="submit">
           <ConfirmButton saving consoleData={() => console.log("Something should happen!")}/>
@@ -50,6 +55,6 @@ export default function AddProjectForm ({state, userID, close}) {
           <ConfirmButton cancelling close={close}/>
         </Button>
       </div>
-    </>
+    </div>
   )
 }
