@@ -5,6 +5,7 @@ import { getTasksForProject } from '../helpers/selectors';
 
 // import component
 import KanbanBoard from '../components/KanbanBoard';
+import LinkIconContainer from '../components/LinkIconContainer';
 
 // import css
 import '../styles/ProjectKanban.scss';
@@ -224,7 +225,10 @@ const ProjectKanban = ({ projectID, state }) => {
 
   return (
     <div className="project-kanban">
-      <h1>This will show the project Kanban.</h1>
+      <div className="project-kanban-header">
+        <h1>This will show the project Kanban.</h1>
+        <LinkIconContainer />
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="project-kanban-board">
           {kanbanState.columnOrder.map((columnId) => {
