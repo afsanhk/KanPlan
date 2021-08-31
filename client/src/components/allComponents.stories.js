@@ -7,6 +7,7 @@ import TaskList from './TaskList';
 import HomepageMyWork from './HomepageMyWork';
 import HomepageImportantUpdates from './HomepageImportantUpdates';
 
+import DeleteTaskForm from './DeleteTaskForm';
 import EditTaskForm from './EditTaskForm';
 import AddTaskForm from './AddTaskForm';
 import TeamMemberName from './TeamMemberName';
@@ -358,6 +359,7 @@ storiesOf('HomepageImportantUpdates', module).add('Initial', () => <HomepageImpo
 
 storiesOf('EditTaskForm', module).add('Initial', () => <EditTaskForm tasks={tasks['1']} projects={projectsArray} users={users} />);
 storiesOf('AddTaskForm', module).add('Initial', () => <AddTaskForm proj_name={projects['1'].proj_name} team_members={projects['1'].team_members} users={users} />);
+storiesOf('DeleteTaskForm', module).add('Initial', () => <DeleteTaskForm />);
 storiesOf('ProjectUsers', module).add('Initial', () => <ProjectUsers users={users} project={projectsArray[0]} />);
 
 storiesOf('ProjectNameDescription', module)
