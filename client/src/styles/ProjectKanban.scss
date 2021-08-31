@@ -1,7 +1,35 @@
-.project-kanban-board {
-  width: 90%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  text-align: left;
+@use './base';
+
+.project-kanban {
+  height: 100vh;
+
+  .project-kanban-header {
+    height: auto;
+    background-color: base.$off-white;
+    padding: 3vh 40px;
+    border-bottom: 3px dashed base.$blue-secondary-dark;
+
+    .project-kanban-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .project-kanban-body {
+    display: flex;
+    justify-content: center;
+
+    .project-kanban-body-div {
+      width: 90%;
+    }
+
+    .project-kanban-board {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+  }
 }

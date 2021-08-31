@@ -54,7 +54,7 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users }) {
+function AddTaskForm({ proj_name, team_members, users, close }) {
   const classes = useStyles();
 
   const [currentUsers, setCurrentUsers] = useState([]);
@@ -97,7 +97,7 @@ function AddTaskForm({ proj_name, team_members, users }) {
   };
 
   return (
-    <div>
+    <div className="task-form">
       <header className="task-form-header">
         <h1>Add New Task</h1>
       </header>
@@ -238,7 +238,7 @@ function AddTaskForm({ proj_name, team_members, users }) {
       <footer className="task-form-footer">
         <div>
           <ConfirmButton saving consoleData={consoleData} />
-          <ConfirmButton cancelling />
+          <ConfirmButton cancelling close={close} />
         </div>
       </footer>
     </div>

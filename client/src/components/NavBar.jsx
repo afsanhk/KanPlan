@@ -86,21 +86,21 @@ function NavBar() {
                   />
                 </ListItem>
               </NavLink>
-              <NavLink to="/project/overview">
+              <NavLink to="/project/1/overview">
                 <ListItem>
                     <ListItemText className={classes.navBarButton}>
                     Project Overview
                     </ListItemText>
                   </ListItem>
               </NavLink>
-              <NavLink to="/project/gantt">
+              <NavLink to="/project/1/gantt">
                 <ListItem>
                   <ListItemText className={classes.navBarButton}>
                     Gantt Placeholder
                   </ListItemText>
                 </ListItem>
               </NavLink>
-              <NavLink to="/project/kanban">
+              <NavLink to="/project/1/kanban">
                 <ListItem>
                     <ListItemText className={classes.navBarButton}>
                     Kanban Placeholder

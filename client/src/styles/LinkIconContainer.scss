@@ -6,6 +6,10 @@
   align-items: flex-end;
   color: rgba(base.$blue-primary-dark, 0.4);
 
+  .iconNavLink {
+    text-decoration: none;
+  }
+
   p {
     margin-left: 4px;
   }

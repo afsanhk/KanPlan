@@ -19,9 +19,10 @@ const flagStyles = {
   }
 };
 
-function KanbanTask({ task, index }) {
+function KanbanTask({ task, index, state }) {
   const parsedUsers = task.task_users.map((user) => {
-    return <Avatar alt={user.toString()}>{user}</Avatar>;
+    const userDetails = state.users[user];
+    return <Avatar alt={userDetails.user_name}>{userDetails.user_name[0]}</Avatar>;
   });
 
   return (
