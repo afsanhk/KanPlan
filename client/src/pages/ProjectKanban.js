@@ -43,15 +43,17 @@ const ProjectKanban = ({ state }) => {
     columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
   };
   projectTasks.forEach((task) => {
-    initialData.tasks[task.title] = task;
-    if (task.status === 'Late') {
-      initialData.columns['column-1'].taskIds.push(task.title);
-    } else if (task.status === 'To-Do') {
-      initialData.columns['column-2'].taskIds.push(task.title);
-    } else if (task.status === 'In Progress') {
-      initialData.columns['column-3'].taskIds.push(task.title);
-    } else if (task.status === 'Done') {
-      initialData.columns['column-4'].taskIds.push(task.title);
+    if (task) {
+      initialData.tasks[task.title] = task;
+      if (task.status === 'Late') {
+        initialData.columns['column-1'].taskIds.push(task.title);
+      } else if (task.status === 'To-Do') {
+        initialData.columns['column-2'].taskIds.push(task.title);
+      } else if (task.status === 'In Progress') {
+        initialData.columns['column-3'].taskIds.push(task.title);
+      } else if (task.status === 'Done') {
+        initialData.columns['column-4'].taskIds.push(task.title);
+      }
     }
   });
 
