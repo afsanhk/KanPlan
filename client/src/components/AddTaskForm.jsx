@@ -18,6 +18,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import '../styles/AddTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
+import useApplicationData from '../hooks/useApplicationData';
+
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
@@ -54,7 +56,8 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users, close, projectID, status, tempState, setTempState }) {
+function AddTaskForm({ proj_name, team_members, users, close, projectID, status }) {
+  const { updateTasks } = useApplicationData();
   const classes = useStyles();
 
   const [currentUsers, setCurrentUsers] = useState([]);
@@ -89,8 +92,8 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   const updateData = () => {
-    const taskID = Object.keys(tempState.tasks).length + 1;
-    setTempState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: { ...state, id: taskID } } }));
+    const newState = updateTasks({ ...state, project_id: projectID });
+    console.log(newState);
     close();
   };
 
@@ -105,7 +108,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   useEffect(() => {
-    setError(!state.title || !state.task_description || !state.priority_name);
+    setError(!state.title || !state.task_description || !state.priority_name || !state.task_users.length);
   }, [state]);
 
   return (

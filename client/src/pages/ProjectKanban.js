@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -12,91 +12,10 @@ import LinkIconContainer from '../components/LinkIconContainer';
 import '../styles/ProjectKanban.scss';
 
 const ProjectKanban = ({ state }) => {
-  let projectTasks;
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
-  console.log(projectID);
 
-  const [tempState, setTempState] = useState(state);
-
-  if (state && getTasksForProject(state, projectID)[0]) {
-    projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-  } else {
-    // For Kanban Layout
-    projectTasks = [
-      {
-        id: 1,
-        title: 'API Routes',
-        task_description: 'Set up API Routes',
-        priority_id: 3,
-        status_id: 1,
-        project_id: 1,
-        plan_start: '2021-08-26T18:08:57.766Z',
-        plan_end: '2021-08-27T18:08:57.766Z',
-        proj_name: 'KanPlan',
-        priority_name: 'High',
-        status: 'To-Do',
-        task_users: [2]
-      },
-      {
-        id: 2,
-        title: 'React Components',
-        task_description: 'Build react components',
-        priority_id: 2,
-        status_id: 1,
-        project_id: 1,
-        plan_start: '2021-08-29T18:08:57.766Z',
-        plan_end: '2021-09-06T18:08:57.766Z',
-        proj_name: 'KanPlan',
-        priority_name: 'Low',
-        status: 'To-Do',
-        task_users: [1, 2, 3]
-      },
-      {
-        id: 3,
-        title: 'Kanban DnD',
-        task_description: 'Build Kanban containers and drag and drop',
-        priority_id: 2,
-        status_id: 1,
-        project_id: 1,
-        plan_start: '2021-08-29T18:08:57.766Z',
-        plan_end: '2021-09-03T18:08:57.766Z',
-        proj_name: 'KanPlan',
-        priority_name: 'Low',
-        status: 'To-Do',
-        task_users: [1]
-      },
-      {
-        id: 4,
-        title: 'Relax',
-        task_description: 'Relax a bit',
-        priority_id: 1,
-        status_id: 2,
-        project_id: 1,
-        plan_start: '2021-09-01T18:08:57.766Z',
-        plan_end: '2021-09-03T18:08:57.766Z',
-        proj_name: 'KanPlan',
-        priority_name: 'None',
-        status: 'Late',
-        task_users: [1, 2, 3]
-      },
-      {
-        id: 5,
-        title: 'Seeds',
-        task_description: 'Making api seeds',
-        priority_id: 3,
-        status_id: 3,
-        project_id: 1,
-        plan_start: '2021-09-01T18:08:57.766Z',
-        plan_end: '2021-09-02T18:08:57.766Z',
-        proj_name: 'KanPlan',
-        priority_name: 'High',
-        status: 'In Progress',
-        task_users: [1, 2]
-      }
-    ];
-  }
-
+  const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const initialData = {
     tasks: {},
     columns: {
@@ -123,7 +42,6 @@ const ProjectKanban = ({ state }) => {
     },
     columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
   };
-
   projectTasks.forEach((task) => {
     initialData.tasks[task.title] = task;
     if (task.status === 'Late') {
@@ -138,6 +56,88 @@ const ProjectKanban = ({ state }) => {
   });
 
   const [kanbanState, setKanbanState] = useState(initialData);
+
+  // if (state && getTasksForProject(state, projectID)[0]) {
+  // projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
+  // } else {
+  //   // For Kanban Layout
+  //   projectTasks = [
+  //     {
+  //       id: 1,
+  //       title: 'API Routes',
+  //       task_description: 'Set up API Routes',
+  //       priority_id: 3,
+  //       status_id: 1,
+  //       project_id: 1,
+  //       plan_start: '2021-08-26T18:08:57.766Z',
+  //       plan_end: '2021-08-27T18:08:57.766Z',
+  //       proj_name: 'KanPlan',
+  //       priority_name: 'High',
+  //       status: 'To-Do',
+  //       task_users: [2]
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'React Components',
+  //       task_description: 'Build react components',
+  //       priority_id: 2,
+  //       status_id: 1,
+  //       project_id: 1,
+  //       plan_start: '2021-08-29T18:08:57.766Z',
+  //       plan_end: '2021-09-06T18:08:57.766Z',
+  //       proj_name: 'KanPlan',
+  //       priority_name: 'Low',
+  //       status: 'To-Do',
+  //       task_users: [1, 2, 3]
+  //     },
+  //     {
+  //       id: 3,
+  //       title: 'Kanban DnD',
+  //       task_description: 'Build Kanban containers and drag and drop',
+  //       priority_id: 2,
+  //       status_id: 1,
+  //       project_id: 1,
+  //       plan_start: '2021-08-29T18:08:57.766Z',
+  //       plan_end: '2021-09-03T18:08:57.766Z',
+  //       proj_name: 'KanPlan',
+  //       priority_name: 'Low',
+  //       status: 'To-Do',
+  //       task_users: [1]
+  //     },
+  //     {
+  //       id: 4,
+  //       title: 'Relax',
+  //       task_description: 'Relax a bit',
+  //       priority_id: 1,
+  //       status_id: 2,
+  //       project_id: 1,
+  //       plan_start: '2021-09-01T18:08:57.766Z',
+  //       plan_end: '2021-09-03T18:08:57.766Z',
+  //       proj_name: 'KanPlan',
+  //       priority_name: 'None',
+  //       status: 'Late',
+  //       task_users: [1, 2, 3]
+  //     },
+  //     {
+  //       id: 5,
+  //       title: 'Seeds',
+  //       task_description: 'Making api seeds',
+  //       priority_id: 3,
+  //       status_id: 3,
+  //       project_id: 1,
+  //       plan_start: '2021-09-01T18:08:57.766Z',
+  //       plan_end: '2021-09-02T18:08:57.766Z',
+  //       proj_name: 'KanPlan',
+  //       priority_name: 'High',
+  //       status: 'In Progress',
+  //       task_users: [1, 2]
+  //     }
+  //   ];
+  // }
+
+  useEffect(() => {
+    console.log('hello');
+  }, [state]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -226,7 +226,7 @@ const ProjectKanban = ({ state }) => {
       }
     };
 
-    // console.log(newState);
+    console.log(newState);
     setKanbanState(newState);
   };
 
@@ -251,7 +251,7 @@ const ProjectKanban = ({ state }) => {
                 const column = kanbanState.columns[columnId];
                 const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
 
-                return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} tempState={tempState} setTempState={setTempState} projectID={projectID} />;
+                return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} />;
               })}
             </div>
           </DragDropContext>
