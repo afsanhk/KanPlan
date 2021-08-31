@@ -21,10 +21,10 @@ export default function AddProjectForm ({state, userID, close}) {
   const userObj = state && state.users[userID];
 
   return (
-    <div className="add-form-container">
-      <h1 className='add-form-title'>Add a project</h1>
-      <div className="add-form-body">
-        <form className="add-form" onSubmit={handleSubmit}>
+    <div className="add-project-form-container">
+      <h1 className='add-project-form-title'>Add a project</h1>
+      <div className="add-project-form-body">
+        <form className="add-project-form" onSubmit={handleSubmit}>
           <TextField 
             id="standard-full-width"
             label="Project Name"
@@ -45,8 +45,10 @@ export default function AddProjectForm ({state, userID, close}) {
             onChange={(event) => setProjectDesc(event.target.value)}
           />
 
-          <TeamMember name={userObj.user_name}/>
-
+          <span className="add-project-form-PM">
+            <h3>Project Manager</h3>
+            <TeamMember name={userObj.user_name}/>
+          </span>
         </form>
         <Button type="submit">
           <ConfirmButton saving consoleData={() => console.log("Something should happen!")}/>

@@ -1,13 +1,19 @@
-.add-form-container {
+.add-project-form-container {
   padding: 20px;
   h1 {
     margin: 8px;
     margin-top: 40px;
   }
-  .add-form-body {
-    .add-form {
+  .add-project-form-body {
+    .add-project-form {
       display: flex;
       flex-direction: column;
+      h3 {
+        margin-top: 20px;
+        margin-bottom: 0px;
+        padding-left: 8px;
+      }
+      margin-bottom: 20px;
     }
   }
 }
