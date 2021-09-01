@@ -6,11 +6,23 @@ import TeamMember from './TeamMember';
 
 import '../styles/AddProjectForm.scss';
 
+import convertTimestampStringToYMD from '../helpers'
+
+// Prep date data
+// get today's date yyyy-mm-dd
+const planStartInit = new Date();
+const planEndInit = new Date();
+planEndInit.setDate(planEndInit.getDate() + 7); 
+// convert to string and return in YYYY-MM-DD format
+const planStartString = convertTimestampStringToYMD(planStartInit.toString())
+const planEndString = convertTimestampStringToYMD(planStartInit.toString())
+
+
 export default function AddProjectForm({ state, userID, close }) {
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
-  const [planStart,setPlanStart] = useState();
-  const [planEnd,setPlanEnd] = useState();
+  const [planStart,setPlanStart] = useState(planStartString);
+  const [planEnd,setPlanEnd] = useState(planEndString);
 
   const [teamMembers, setTeamMembers] = useState([userID]);
 
@@ -22,8 +34,8 @@ export default function AddProjectForm({ state, userID, close }) {
     setProjectDesc('');
   };
 
-  // get today's date yyyy-mm-dd
-  const today = new Date();
+ 
+
 
   const userObj = state && state.users[userID];
 
