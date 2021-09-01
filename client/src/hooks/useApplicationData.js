@@ -22,47 +22,37 @@ export default function useApplicationData() {
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
-  // useEffect(() => {
-  // }, [state]);
-
-  const addTask = async (newTask) => {
-    const taskID = await axios
+  const addTask = async (newTask, projectID, taskUsersID) => {
+    let taskID;
+    return axios
       .post(`http://localhost:8001/api/tasks/`, newTask)
       .then((res) => {
-        return res.data.task_id;
+        taskID = res.data.task_id;
       })
-      .catch((error) => console.log(error));
+      .then(() => {
+        const stateCopy = JSON.parse(JSON.stringify(state));
 
-    const tasks = {
-      ...state.tasks,
-      [taskID]: { ...newTask, id: taskID }
-    };
+        stateCopy.tasks[taskID] = { ...newTask, id: taskID, kanban_order: -1 };
+        stateCopy.projects[projectID].project_tasks = [...state.projects[projectID].project_tasks, taskID];
 
-    setState((prev) => ({ ...prev, tasks: tasks }));
-    console.log(state.tasks);
-    // return { ...state, tasks: tasks };
+        taskUsersID.forEach((id) => {
+          stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
+          setState((prev) => ({ ...prev, ...stateCopy }));
+        });
+        console.log(state);
+      });
   };
 
-  const updateTask = (taskState) => {
-    console.log(taskState);
-    const task = {
-      ...state.tasks[taskState.id],
-      status: taskState.status,
-      status_id: taskState.status_id
-    };
+  const updateTaskStatus = (taskState) => {
+    const stateCopy = JSON.parse(JSON.stringify(state));
+    stateCopy.tasks[taskState.id].status = taskState.status;
+    stateCopy.tasks[taskState.id].status_id = taskState.status;
+    stateCopy.tasks[taskState.id].kanban_order = taskState.kanban_order;
 
-    const tasks = {
-      ...state.tasks,
-      [taskState.id]: task
-    };
-
-    setState((prev) => ({ ...prev, tasks }));
+    setState((prev) => ({ ...prev, ...stateCopy }));
     console.log(state.tasks[taskState.id]);
 
-    return axios
-      .put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState)
-      .then(() => {})
-      .catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
   };
 
   function deleteTask(id) {
@@ -79,5 +69,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTask, deleteTask };
+  return { state, loading, addTask, updateTaskStatus, deleteTask };
 }

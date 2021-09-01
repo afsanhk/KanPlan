@@ -11,6 +11,14 @@
     display: flex;
     justify-content: center;
     border: 2px solid grey;
+    position: relative;
+
+    .kanban-board-header-button {
+      color: white;
+      position: absolute;
+      top: 17px;
+      right: 15px;
+    }
   }
 
   .kanban-board-body {
@@ -19,28 +27,6 @@
 
     .kanban-board-body-div {
       width: 90%;
-    }
-  }
-
-  .kanban-board-footer {
-    color: white;
-    display: flex;
-    justify-content: center;
-
-    .kanban-board-footer-div {
-      font-weight: bold;
-      width: 90%;
-      margin: 10px;
-      display: flex;
-      align-items: center;
-
-      p {
-        margin: 0;
-      }
-
-      svg {
-        color: white;
-      }
     }
   }
 }
