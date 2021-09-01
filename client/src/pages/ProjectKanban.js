@@ -187,7 +187,7 @@ const ProjectKanban = ({ state }) => {
     setKanbanState(initialData);
   }, [state]);
 
-  const onDragEnd = async (result) => {
+  const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -215,7 +215,7 @@ const ProjectKanban = ({ state }) => {
       status_id: statusToID[finish.title]
     };
 
-    await updateTask(updatedTaskState);
+    updateTask(updatedTaskState);
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
