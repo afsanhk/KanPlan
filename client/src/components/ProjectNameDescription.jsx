@@ -10,7 +10,7 @@ export default function ProjectNameDescription({ proj_name, proj_description, te
   const parsedUsers = team_members.map(user => {
     const userDetails = state.users[user]
     return (
-      <Avatar alt={userDetails.user_name}>
+      <Avatar key={user.id} alt={userDetails.user_name}>
         {userDetails.user_name[0]}
       </Avatar>
     )

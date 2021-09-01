@@ -11,6 +11,7 @@ export default function HomepageMyProjects({ projects, state }) {
     return(
       <NavLink to={`/project/${proj.id}/overview`} className="navlink">
         <ProjectNameDescription
+          key={proj.id}
           proj_name={proj.proj_name}
           proj_description={proj.proj_description}
           team_members={proj.team_members}
