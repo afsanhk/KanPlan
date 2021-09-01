@@ -22,34 +22,62 @@ export default function useApplicationData() {
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
-  const updateTasks = (newTask) => {
-    axios
+  // useEffect(() => {
+  // }, [state]);
+
+  const addTask = async (newTask) => {
+    const taskID = await axios
       .post(`http://localhost:8001/api/tasks/`, newTask)
-      .then(() => axios.get('http://localhost:8001/api/tasks').then((res) => setState((prev) => ({ ...prev, tasks: res.data }))))
+      .then((res) => {
+        return res.data.task_id;
+      })
       .catch((error) => console.log(error));
 
-    return state;
+    const tasks = {
+      ...state.tasks,
+      [taskID]: { ...newTask, id: taskID }
+    };
+
+    setState((prev) => ({ ...prev, tasks: tasks }));
+    console.log(state.tasks);
+    // return { ...state, tasks: tasks };
   };
 
-  function deleteTask (id) {
-    return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
+  const updateTask = (taskState) => {
+    console.log(taskState);
+    const task = {
+      ...state.tasks[taskState.id],
+      status: taskState.status,
+      status_id: taskState.status_id
+    };
 
+    const tasks = {
+      ...state.tasks,
+      [taskState.id]: task
+    };
+
+    setState((prev) => ({ ...prev, tasks }));
+    console.log(state.tasks[taskState.id]);
+
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState)
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
+  function deleteTask(id) {
+    return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
       // const tasks = {
       //   ...state.tasks,
       // }
-
       // //not manipulating state directly
       // delete tasks[id]
-
       // setState({
       //   ...state,
       //   tasks,
       // });
-
-    })
-
-
+    });
   }
 
-  return { state, loading, updateTasks, deleteTask };
+  return { state, loading, addTask, updateTask, deleteTask };
 }

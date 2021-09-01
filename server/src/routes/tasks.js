@@ -44,13 +44,31 @@ module.exports = (db) => {
           db.query(
             `
             INSERT INTO user_tasks(task_id, user_id)
-            VALUES ${query};
+            VALUES ${query}
+            RETURNING task_id;
             `
-          ).catch((error) => console.log(error));
+          )
+            .then((res) => {
+              // console.log(res.rows[0]);
+              response.send(res.rows[0]);
+            })
+            .catch((error) => console.log(error));
         }
       })
-      .then(() => {
-        response.status(204).json({});
+      .catch((error) => console.log(error));
+  });
+
+  router.put('/tasks/:id/status', (request, response) => {
+    const { id, status_id } = request.body;
+    db.query(
+      `UPDATE tasks 
+       SET status_id = $1
+       WHERE id = $2
+      `,
+      [status_id, id]
+    )
+      .then((res) => {
+        response.send(res);
       })
       .catch((error) => console.log(error));
   });
