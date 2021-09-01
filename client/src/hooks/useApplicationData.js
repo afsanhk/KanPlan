@@ -1,22 +1,26 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tasks: {},
     projects: {},
-    users: {}
+    users: {},
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([axios.get('http://localhost:8001/api/tasks'), axios.get('http://localhost:8001/api/projects'), axios.get('http://localhost:8001/api/users')]).then((all) => {
+    Promise.all([
+      axios.get("http://localhost:8001/api/tasks"),
+      axios.get("http://localhost:8001/api/projects"),
+      axios.get("http://localhost:8001/api/users"),
+    ]).then((all) => {
       //updates the state with all the information received from the axios get requests
       setState((prev) => ({
         ...prev,
         tasks: all[0].data,
         projects: all[1].data,
-        users: all[2].data
+        users: all[2].data,
       }));
       setLoading(false);
     });
@@ -35,7 +39,7 @@ export default function useApplicationData() {
 
     const tasks = {
       ...state.tasks,
-      [taskID]: { ...newTask, id: taskID }
+      [taskID]: { ...newTask, id: taskID },
     };
 
     setState((prev) => ({ ...prev, tasks: tasks }));
@@ -48,12 +52,12 @@ export default function useApplicationData() {
     const task = {
       ...state.tasks[taskState.id],
       status: taskState.status,
-      status_id: taskState.status_id
+      status_id: taskState.status_id,
     };
 
     const tasks = {
       ...state.tasks,
-      [taskState.id]: task
+      [taskState.id]: task,
     };
 
     setState((prev) => ({ ...prev, tasks }));
@@ -65,7 +69,7 @@ export default function useApplicationData() {
       .catch((error) => console.log(error));
   };
 
-  function deleteTask(id) {
+  function deleteTask(id, projectID, userID) {
     return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
       // const tasks = {
       //   ...state.tasks,
