@@ -50,12 +50,14 @@ const theme = createTheme({
 });
 
 function App() {
-  const { state, loading, deleteTask } = useApplicationData();
+  const { state, setState, loading, deleteTask } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   const projectID = 1;
   const userID = 2;
+
+  console.log("Inside App.js:", state);
 
   return (
     <ThemeProvider theme={theme}>

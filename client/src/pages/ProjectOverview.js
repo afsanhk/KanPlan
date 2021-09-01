@@ -13,9 +13,11 @@ const ProjectOverview = ({ state, deleteTask }) => {
   let { projectID } = useParams();
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-  const projectUsers = getUsersForProject(state, projectID)
+  const projectUsers = getUsersForProject(state, projectID);
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
+
+  console.log("Inside ProjectOverview Page", state);
 
   return (
     <div className="project-overview">
@@ -26,8 +28,14 @@ const ProjectOverview = ({ state, deleteTask }) => {
         </div>
         <p>{projectDescription}</p>
       </div>
-      <div className='project-overview-body'>
-        <ProjectOverviewTable state={state} projectTasks={projectTasks} projectUsers={projectUsers} deleteTask={deleteTask} className='project-overview-table' />
+      <div className="project-overview-body">
+        <ProjectOverviewTable
+          state={state}
+          projectTasks={projectTasks}
+          projectUsers={projectUsers}
+          deleteTask={deleteTask}
+          className="project-overview-table"
+        />
       </div>
     </div>
   );

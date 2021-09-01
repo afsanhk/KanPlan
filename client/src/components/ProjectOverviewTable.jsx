@@ -120,6 +120,8 @@ const backgroundColor = {
 };
 
 export default function ProjectOverviewTable({ state, projectTasks, projectUsers, deleteTask }) {
+  console.log("Inside ProjectOverviewTable", state)
+  
   const classes = useStyles();
 
   // modal state
