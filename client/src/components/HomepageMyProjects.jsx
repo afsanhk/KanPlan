@@ -9,9 +9,8 @@ export default function HomepageMyProjects({ projects, state }) {
 
   const parsedProjects = projects.map(proj => {
     return(
-      <NavLink to={`/project/${proj.id}/overview`} className="navlink">
+      <NavLink key={proj.id} to={`/project/${proj.id}/overview`} className="navlink">
         <ProjectNameDescription
-          key={proj.id}
           proj_name={proj.proj_name}
           proj_description={proj.proj_description}
           team_members={proj.team_members}

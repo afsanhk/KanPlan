@@ -24,7 +24,7 @@ export default function AddProjectForm({ state, userID, close }) {
   // This is for demonstration purposes to TJ and Veronica only. Ends at next //
   const potentialTeamMembers = [2,3,4,5,6]
   const parsedTeamMembers = potentialTeamMembers.map(id => {
-    return (<TeamMember name={state.users[id].user_name} border add/>)
+    return (<TeamMember key={id} name={state.users[id].user_name} border add/>)
   });
 
   return (

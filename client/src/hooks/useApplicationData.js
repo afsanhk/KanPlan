@@ -75,15 +75,23 @@ export default function useApplicationData() {
         ...state.tasks,
       };
 
+      // Hard coded to mimic deletion of first task from KanPlan
+      const projects = {
+        ...state.projects,
+      };
+      const project_tasks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+      projects[1].project_tasks = project_tasks;
+
       console.log("Task copy inside deleteTask for id", id, tasks);
       //not manipulating state directly
       delete tasks[id];
       console.log("new tasks copy without id", id, tasks);
       console.log("Setting state below this line:");
-      setState({
-        ...state,
+      setState((prev) => ({
+        ...prev,
         tasks,
-      });
+        projects,
+      }));
     });
   }
 
