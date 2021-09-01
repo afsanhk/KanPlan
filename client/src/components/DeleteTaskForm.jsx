@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -21,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '30vw'
+    width: '30vw',
+    top: '40vh',
+    left: '35vw',
+    position: 'fixed',
+
   },
   cross: {
     alignSelf: 'flex-end',
@@ -31,29 +36,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function DeleteTaskForm({ id, title }) {
+//prop received from Delete button from ProjectOverviewTable =>
+//  task prop = object containing all details about task
+export default function DeleteTaskForm(props) {
+
+  const { close, task } = props
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div className={[classes.paper]}>
-      <Close onClick={handleClose} className={classes.cross} />
+      {console.log('props:', props)}
+      <Close onClick={close} className={classes.cross} />
       <h3 className={'delete-modal-text-a'}>
-        Are you sure you want to delete <strong>'{id}'</strong>?
+        Are you sure you want to delete '{task['title']}'?
       </h3>
       <h3 className={'delete-modal-text-b'}>
         This action cannot be undone !
       </h3>
       <div className={'delete-modal-footer'}>
-        <ConfirmButton cancelling close={handleClose} />
+        <ConfirmButton cancelling close={close} />
         <ConfirmButton deleting />
       </div>
     </div>

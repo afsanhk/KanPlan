@@ -156,6 +156,7 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
   const rows = projectTasks[0] && projectTasks.map(el => createData(el));
 
   return (
+    <>
     <TableContainer component={Paper} elevation={0} >
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
@@ -171,8 +172,6 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
         </TableHead>
         <TableBody>
           {projectTasks[0] && rows.map((row) => (
-            <>
-            {console.log('projectTasks:', projectTasks)}
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
                 {row.title}
@@ -240,28 +239,6 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
                 </IconButton>
               </StyledTableCell>
             </StyledTableRow>
-
-            <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-            >
-              <Fade in={open}>
-                <DeleteTaskForm 
-                  close={handleClose}
-                  id={rowID}
-                  title={projectTasks.rowID}
-                />
-              </Fade>
-            </Modal>
-          </>
           ))}
           <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={() => {console.log('go to add task modal')}}>
             <StyledTableCell className={classes.rowAddTask} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
@@ -280,7 +257,26 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
         </TableBody>
       </Table>
     </TableContainer>
-
+    <Modal
+    aria-labelledby="transition-modal-title"
+    aria-describedby="transition-modal-description"
+    className={classes.modal}
+    open={open}
+    onClose={handleClose}
+    closeAfterTransition
+    BackdropComponent={Backdrop}
+    BackdropProps={{
+      timeout: 500,
+    }}
+    >
+      <Fade in={open}>
+        <DeleteTaskForm 
+          close={handleClose}
+          task={projectTasks[rowID - 1]}
+        />
+      </Fade>
+    </Modal>
+  </>
     
   );
 }
