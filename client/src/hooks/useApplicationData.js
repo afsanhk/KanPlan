@@ -31,5 +31,25 @@ export default function useApplicationData() {
     return state;
   };
 
-  return { state, loading, updateTasks };
+  function deleteTask (id) {
+    return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
+
+      // const tasks = {
+      //   ...state.tasks,
+      // }
+
+      // //not manipulating state directly
+      // delete tasks[id]
+
+      // setState({
+      //   ...state,
+      //   tasks,
+      // });
+
+    })
+
+
+  }
+
+  return { state, loading, updateTasks, deleteTask };
 }

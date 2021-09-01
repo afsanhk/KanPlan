@@ -55,5 +55,13 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
+  router.delete('/tasks/:id', (request, response) => {
+    db.query('DELETE FROM tasks WHERE id = $1::integer', [request.params.id])
+      .then(() => {
+        response.status(204).json({});
+      })
+      .catch((error) => console.log(error));
+  })
+
   return router;
 };

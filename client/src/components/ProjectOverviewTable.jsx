@@ -119,7 +119,7 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
+export default function ProjectOverviewTable({ state, projectTasks, projectUsers, deleteTask }) {
   const classes = useStyles();
 
   // modal state
@@ -231,10 +231,8 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
                 </IconButton>
                 <IconButton size="small">
                   <DeleteIcon className={classes.icon} onClick={() => {
-                    console.log('go to delete task modal')
-                    setRowID(row.id)
+                    changeRowID(row.id)
                     handleOpen()
-                    console.log(row.id)
                   }}/>
                 </IconButton>
               </StyledTableCell>
@@ -272,7 +270,9 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
       <Fade in={open}>
         <DeleteTaskForm 
           close={handleClose}
-          task={projectTasks[rowID - 1]}
+          task={state.tasks[rowID]}
+          taskID={rowID - 1}
+          deleteTask={deleteTask}
         />
       </Fade>
     </Modal>

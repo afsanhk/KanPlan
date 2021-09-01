@@ -9,7 +9,7 @@ import { getTasksForProject, getUsersForProject } from "../helpers/selectors";
 
 import "../styles/ProjectOverview.scss";
 
-const ProjectOverview = ({ state }) => {
+const ProjectOverview = ({ state, deleteTask }) => {
   let { projectID } = useParams();
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
@@ -27,7 +27,7 @@ const ProjectOverview = ({ state }) => {
         <p>{projectDescription}</p>
       </div>
       <div className='project-overview-body'>
-        <ProjectOverviewTable projectTasks={projectTasks} projectUsers={projectUsers} className='project-overview-table' />
+        <ProjectOverviewTable state={state} projectTasks={projectTasks} projectUsers={projectUsers} deleteTask={deleteTask} className='project-overview-table' />
       </div>
     </div>
   );

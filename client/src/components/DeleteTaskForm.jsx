@@ -40,25 +40,28 @@ const useStyles = makeStyles((theme) => ({
 //  task prop = object containing all details about task
 export default function DeleteTaskForm(props) {
 
-  const { close, task } = props
+  const { close, task, deleteTask } = props
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+
+  function deleteSingleTask() {
+    deleteTask(task.id)
+    close()
+  }
 
 
   return (
     <div className={[classes.paper]}>
-      {console.log('props:', props)}
       <Close onClick={close} className={classes.cross} />
       <h3 className={'delete-modal-text-a'}>
-        Are you sure you want to delete '{task['title']}'?
+        Are you sure you want to delete '{task.title}'?
       </h3>
       <h3 className={'delete-modal-text-b'}>
         This action cannot be undone !
       </h3>
       <div className={'delete-modal-footer'}>
         <ConfirmButton cancelling close={close} />
-        <ConfirmButton deleting />
+        <ConfirmButton deleting deleteSingleTask={deleteSingleTask} />
       </div>
     </div>
   );
