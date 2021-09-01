@@ -7,7 +7,7 @@ import TeamMember from './TeamMember';
 
 import '../styles/AddProjectForm.scss';
 
-import convertTimestampStringToYMD from '../helpers/dateConvert.js';
+import convertTimestampStringToYMD from '../helpers/dateConvert';
 
 // Prep date data
 // get today's date yyyy-mm-dd
