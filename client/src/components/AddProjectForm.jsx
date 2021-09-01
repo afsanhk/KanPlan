@@ -82,19 +82,19 @@ export default function AddProjectForm({ state, userID, close }) {
             InputLabelProps={{
               shrink: true
             }}
-            onChange={() => console.log('Changed something in the start date table!')}
+            onChange={(event) => setPlanStart(event.target.value)}
           />
 
           <TextField
             id="date"
-            label="Start Date"
+            label="End Date"
             type="date"
             defaultValue={planEndString}
             className={classes.textField}
             InputLabelProps={{
               shrink: true
             }}
-            onChange={() => console.log('Changed something in the start date table!')}
+            onChange={(event) => setPlanEnd(event.target.value)}
           />
 
           <div className="add-project-form-PM">
