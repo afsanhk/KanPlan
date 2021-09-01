@@ -30,12 +30,12 @@ export default function AddProjectForm({ state, userID, close }) {
   const classes = useStyles();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
     console.log(userID, projectName, projectDesc);
     setProjectName('');
     setProjectDesc('');
-    setPlanStart(planStartString)
-    setPlanEnd(planEndString)
+    setPlanStart(planStartString);
+    setPlanEnd(planEndString);
+    close(event);
   };
 
   const userObj = state && state.users[userID];
