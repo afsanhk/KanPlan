@@ -26,7 +26,7 @@ export default function ProjectListItem ({id, name, description, team_members, s
       <p className="project-body">{description}</p>
       <footer className="project-footer">
         <div className="nav-icon-container">
-          <LinkIconContainer projectID={id}/>
+          <LinkIconContainer projectID={id} text/>
         </div>
           {team_members && 
             <div class='project-grouped-users'>

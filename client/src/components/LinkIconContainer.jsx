@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
   },
   buttonNoText: {
     'min-width': '30px',
+    color: '#093170',
   }
 }));
 
