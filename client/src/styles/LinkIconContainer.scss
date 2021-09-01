@@ -3,15 +3,15 @@
 .nav-icons {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   color: rgba(base.$blue-primary-dark, 0.4);
 
-  .iconNavLink {
+  .iconNavLink{
     text-decoration: none;
   }
 
   p {
-    margin-left: 4px;
+    margin-left: 9px;
   }
 
   .Gantt-icon {
@@ -20,5 +20,7 @@
 
   .Kanban-icon {
     font-size: 25px;
+    padding: 1px;
+    padding-left: 3px
   }
 }

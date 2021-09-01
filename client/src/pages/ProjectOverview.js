@@ -22,7 +22,7 @@ const ProjectOverview = ({ state, deleteTask }) => {
       <div className="project-overview-header">
         <div className="project-overview-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} />
+          <LinkIconContainer projectID={projectID} text/>
         </div>
         <p>{projectDescription}</p>
       </div>

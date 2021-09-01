@@ -18,7 +18,6 @@ import TextField from '@material-ui/core/TextField';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 // Project Components
-import TeamMemberName from './TeamMemberName';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import DeleteTaskForm from './DeleteTaskForm';
 
@@ -122,9 +121,15 @@ const backgroundColor = {
 export default function ProjectOverviewTable({ state, projectTasks, projectUsers, deleteTask }) {
   const classes = useStyles();
 
+  //how modal knows which task to pass in
+  const [rowID, setRowID] = React.useState('')
+
+  const changeRowID = (id) => {
+    setRowID(id)
+  }
+  
   // modal state
   const [open, setOpen] = React.useState(false);
-  const [rowID, setRowID] = React.useState('')
 
   // modal open function
   const handleOpen = () => {
@@ -136,9 +141,6 @@ export default function ProjectOverviewTable({ state, projectTasks, projectUsers
     setOpen(false);
   };
 
-  const changeRowID = (id) => {
-    setRowID(id)
-  }
 
   // Array of task objects in projectTasks
   function createData(projectTasks) {
@@ -271,7 +273,6 @@ export default function ProjectOverviewTable({ state, projectTasks, projectUsers
         <DeleteTaskForm 
           close={handleClose}
           task={state.tasks[rowID]}
-          taskID={rowID - 1}
           deleteTask={deleteTask}
         />
       </Fade>

@@ -11,6 +11,14 @@ import IconButton from '@material-ui/core/IconButton';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
+//For the edit and delete modals
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+
+import DeleteTaskForm from './DeleteTaskForm';
+
+
 const useStyles = makeStyles({
   listItem: {
     '&:hover': {
@@ -22,29 +30,64 @@ const useStyles = makeStyles({
   }
 }) 
 
-export default function TaskListItem({ task }) {
-
+export default function TaskListItem({ task, deleteTask }) {
   const classes = useStyles();
 
+   // modal state
+   const [open, setOpen] = React.useState(false);
+
+   // modal open function
+   const handleOpen = () => {
+     setOpen(true);
+   };
+ 
+   // modal close function
+   const handleClose = () => {
+     setOpen(false);
+   };
+
   return (
-    <ListItem className={classes.listItem}>
-        <ListItemText primary={task.title} />
+    <>
+      <ListItem className={classes.listItem}>
+          <ListItemText primary={task.title} />
 
-        <ListItemIcon>
+          <ListItemIcon>
 
-          {/* onClick will trigger the edit modal */}
-          <IconButton size='small' className={classes.icon}>
-            <EditOutlinedIcon/>
-          </IconButton>
+            {/* onClick will trigger the edit modal */}
+            <IconButton size='small' className={classes.icon}>
+              <EditOutlinedIcon/>
+            </IconButton>
 
-          {/* onClick will trigger the delete modal */}
-          <IconButton size='small' className={classes.icon}>
-            <DeleteOutlinedIcon/>
-          </IconButton>
+            {/* onClick will trigger the delete modal */}
+            <IconButton size='small' className={classes.icon} onClick={handleOpen}>
+              <DeleteOutlinedIcon/>
+            </IconButton>
 
-        </ListItemIcon>
+          </ListItemIcon>
 
-    </ListItem>
+      </ListItem>
+
+      <Modal
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      // className={classes.modal}
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+      >
+        <Fade in={open}>
+          <DeleteTaskForm 
+            close={handleClose}
+            deleteTask={deleteTask}
+            task={task}
+          />
+        </Fade>
+      </Modal>
+    </>
   )
 }
 

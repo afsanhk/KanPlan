@@ -12,8 +12,8 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
 
   return (
       <div className='homepage-charts'>
-        <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing:' chartColor='#3d6bb3'  className='canvas-container-chartA'/>
-        <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On:' chartColor='#3d6bb3' />
+        <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing' chartColor='#3d6bb3'  className='canvas-container-chartA'/>
+        <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On' chartColor='#3d6bb3' />
         {tasks[0] && 
         <div className='homepage-chart-B-legend'>
           <HomepageChartB chartInformation={ taskStatuses } />

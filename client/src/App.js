@@ -68,7 +68,7 @@ function App() {
             <div className="body">
               <Switch>
                 <Route exact path="/">
-                  <UserDashboard state={state} userID={userID} />
+                  <UserDashboard state={state} userID={userID} deleteTask={deleteTask}/>
                 </Route>
                 <Route path="/projects">
                   <UserProjects state={state} userID={userID} />

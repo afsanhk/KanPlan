@@ -17,7 +17,7 @@ const ProjectGantt = ({ state }) => {
       <div className="project-gantt-header">
         <div className="project-gantt-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} />
+          <LinkIconContainer projectID={projectID} text/>
         </div>
         <p>{projectDescription}</p>
       </div>

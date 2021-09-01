@@ -11,7 +11,7 @@ import {  getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTa
 
 import '../styles/UserDashboard.scss'
 
-const UserDashboard = ({ state, userID }) => {
+const UserDashboard = ({ state, userID, deleteTask }) => {
 
   const name = state.users[userID].user_name;
   const tasks = getTasksForUser(state, userID)
@@ -26,11 +26,11 @@ const UserDashboard = ({ state, userID }) => {
         <h1>Hello, {name}!</h1>
         <div className='inspirational-quote'>
           <p><em>"Burn that excel spread sheet"</em></p>
-          <p>Kanye West</p>
+          <p>- Kanye West</p>
         </div>
       </div>
       <div className='userDashboard-body'>
-        <HomepageMyWork tasks={tasks}/>
+        <HomepageMyWork tasks={tasks} deleteTask={deleteTask} />
         <HomepageImportantUpdates/>
         <HomepageMyProjects projects={projects} state={state} />
       </div>

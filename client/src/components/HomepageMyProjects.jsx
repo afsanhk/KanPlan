@@ -9,14 +9,13 @@ export default function HomepageMyProjects({ projects, state }) {
 
   const parsedProjects = projects.map(proj => {
     return(
-      <NavLink to={`/project/${proj.id}/overview`} className="navlink">
         <ProjectNameDescription
           proj_name={proj.proj_name}
           proj_description={proj.proj_description}
           team_members={proj.team_members}
           state={state}
+          projectID={proj.id}
         />
-      </NavLink>
       )
     })
     

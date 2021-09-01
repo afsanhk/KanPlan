@@ -8,18 +8,24 @@
 
   h3 {
     margin-top: 0;
+    margin-bottom: 0px;
   }
 
   &:hover {
     border: 3px rgba(base.$medium-grey, 0.5) solid;
     box-shadow: 0 2px 6px 0 rgba(base.$medium-grey, 0.6);
-    cursor: pointer; 
+    // cursor: pointer; 
   }
+}
+
+.project-name-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .project-grouped-users {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-top: 30px;
 }
-

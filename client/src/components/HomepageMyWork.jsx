@@ -8,8 +8,8 @@ import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import "../styles/HomepageMyWork.scss"
 import TaskList from "./TaskList"
 
+export default function HomepageMyWork({ tasks, deleteTask }) {
 
-export default function HomepageMyWork({ tasks }) {
   return (
     <div className="homepage-my-work">
       <h2><strong>My Work</strong></h2>
@@ -26,9 +26,8 @@ export default function HomepageMyWork({ tasks }) {
         </div> */}
       </div>
 
-      {tasks[0] && <TaskList tasks={tasks} />}
+      {tasks[0] && <TaskList tasks={tasks} deleteTask={deleteTask} />}
       {!tasks[0] && <div>No tasks</div>}
-
     </div>
   );
 }

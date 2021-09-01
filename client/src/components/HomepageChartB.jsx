@@ -44,7 +44,7 @@ function HomepageChartB({ chartInformation }) {
           plugins: {
             title:{
               display:true,
-              text:'Task Tracker:',
+              text:'Task Tracker',
               font: {
                 size: 22
               },

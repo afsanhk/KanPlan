@@ -3,9 +3,11 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
+import LinkIconContainer from "../components/LinkIconContainer";
+
 import '../styles/ProjectNameDescription.scss'
 
-export default function ProjectNameDescription({ proj_name, proj_description, team_members, state }) {
+export default function ProjectNameDescription({ proj_name, proj_description, team_members, state, projectID }) {
 
   const parsedUsers = team_members.map(user => {
     const userDetails = state.users[user]
@@ -18,7 +20,10 @@ export default function ProjectNameDescription({ proj_name, proj_description, te
 
   return (
       <article className='project-name-description'>
-        <h3>{proj_name}</h3>
+        <div className='project-name-header'>
+          <h3>{proj_name}</h3>
+          <LinkIconContainer projectID={projectID}/>
+        </div>
         <p>{proj_description}</p>
         {team_members && 
           <div className='project-grouped-users'>

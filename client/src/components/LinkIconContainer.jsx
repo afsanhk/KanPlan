@@ -11,44 +11,48 @@ import { faTrello } from '@fortawesome/free-brands-svg-icons'
 import '../styles/LinkIconContainer.scss'
 
 const useStyles = makeStyles(() => ({
-  button: {
-    'margin-right': '5px',
+  buttonText: {
     color: '#093170',
     height: '40px',
     padding: '10px 8px',
     'text-transform': 'none',
     'font-size': '16px',
   },
+  buttonNoText: {
+    'min-width': '30px',
+  }
 }));
 
-export default function LinkIconContainer ({projectID}) {
+export default function LinkIconContainer ({projectID, text}) {
 
   const classes = useStyles();
   
   return (
     <div className='nav-icons'>
-      <NavLink to={`/project/${projectID}/overview`} className="iconNavLink">
-        <Button size="small" className={classes.button}>
+      <NavLink to={`/project/${projectID}/overview`} className={"iconNavLink"}>
+        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
           <DashboardIcon></DashboardIcon>
-          <p>Overview</p>
+          {text && <p>Overview</p>}
         </Button>
       </NavLink>
-      <NavLink to={`/project/${projectID}/gantt`} className="iconNavLink">
-        <Button size="small" className={classes.button}>
+      <NavLink to={`/project/${projectID}/gantt`} className={"iconNavLink"}>
+        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
           <AssessmentIcon className='Gantt-icon'/>
-          <p>Gantt</p>
+          {text && <p>Gantt</p>}
         </Button>
       </NavLink>
-      <NavLink to={`/project/${projectID}/kanban`} className="iconNavLink">
-        <Button size="small" className={classes.button}>
+      <NavLink to={`/project/${projectID}/kanban`} className={"iconNavLink"}>
+        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
         <FontAwesomeIcon icon={faTrello} className='Kanban-icon' />
-          <p>Kanban</p>
+          {text && <p>Kanban</p>}
         </Button>
       </NavLink>
-      <Button size="small" className={classes.button}>
-        <PeopleIcon />
+      {text && 
+        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
+          <PeopleIcon />
         <p>Users</p>
-      </Button>
+        </Button>
+      }
     </div>
   )
 }
