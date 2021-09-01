@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 }) 
 
-export default function TaskListItem({ task, deleteTask, id, userID, projectID }) {
+export default function TaskListItem({ task, deleteTask, userID, projectID }) {
   const classes = useStyles();
 
    // modal state
@@ -84,6 +84,8 @@ export default function TaskListItem({ task, deleteTask, id, userID, projectID }
             close={handleClose}
             deleteTask={deleteTask}
             task={task}
+            userID={userID}
+            projectID={projectID}
           />
         </Fade>
       </Modal>
