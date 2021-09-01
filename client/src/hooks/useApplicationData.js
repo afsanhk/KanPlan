@@ -55,7 +55,7 @@ export default function useApplicationData() {
   };
 
   const getKanbanStatus = (projectID) => {
-    return axios.get(`httpL//localhost:8001/api/kanban/project/${projectID}`).then((res) => {
+    return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
       setKanbanStatus(res.data);
       console.log(res);
     });
