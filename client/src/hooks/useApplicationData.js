@@ -22,6 +22,9 @@ export default function useApplicationData() {
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
+  // useEffect(() => {
+  // }, [state]);
+
   const addTask = async (newTask) => {
     const taskID = await axios
       .post(`http://localhost:8001/api/tasks/`, newTask)
@@ -36,16 +39,29 @@ export default function useApplicationData() {
     };
 
     setState((prev) => ({ ...prev, tasks: tasks }));
-    return { ...state, tasks: tasks };
+    console.log(state.tasks);
+    // return { ...state, tasks: tasks };
   };
 
-  const updateTask = async (taskState) => {
+  const updateTask = (taskState) => {
     console.log(taskState);
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskState.id]: { ...prev.tasks[taskState.id], status: taskState.status, status_id: taskState.status_id } } }));
-    console.log(state);
-    axios
+    const task = {
+      ...state.tasks[taskState.id],
+      status: taskState.status,
+      status_id: taskState.status_id
+    };
+
+    const tasks = {
+      ...state.tasks,
+      [taskState.id]: task
+    };
+
+    setState((prev) => ({ ...prev, tasks }));
+    console.log(state.tasks[taskState.id]);
+
+    return axios
       .put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState)
-      .then((res) => console.log('Status update success!'))
+      .then(() => {})
       .catch((error) => console.log(error));
   };
 

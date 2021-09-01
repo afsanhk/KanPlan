@@ -20,8 +20,6 @@ const ProjectKanban = ({ state }) => {
 
   const { updateTask } = useApplicationData();
 
-  const [updatedState, setUpdatedState] = useState(state);
-
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const initialData = {
     tasks: {},
@@ -145,7 +143,7 @@ const ProjectKanban = ({ state }) => {
   // }
 
   useEffect(() => {
-    const projectTasks = Object.values(updatedState.tasks).filter((value) => value.project_id === projectID);
+    const projectTasks = Object.values(state.tasks).filter((value) => value.project_id === projectID);
     const initialData = {
       tasks: {},
       columns: {
@@ -187,9 +185,9 @@ const ProjectKanban = ({ state }) => {
       }
     });
     setKanbanState(initialData);
-  }, [updatedState]);
+  }, [state]);
 
-  const onDragEnd = (result) => {
+  const onDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -217,7 +215,7 @@ const ProjectKanban = ({ state }) => {
       status_id: statusToID[finish.title]
     };
 
-    updateTask(updatedTaskState);
+    await updateTask(updatedTaskState);
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
@@ -316,7 +314,7 @@ const ProjectKanban = ({ state }) => {
                 const column = kanbanState.columns[columnId];
                 const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
 
-                return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} setUpdatedState={setUpdatedState} />;
+                return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} />;
               })}
             </div>
           </DragDropContext>

@@ -37,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
 
 // get today's date yyyy-mm-dd
 const today = new Date();
-const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
+const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${
+  today.getDate().toString().length > 1 ? today.getDate() : '0' + today.getDate()
+}`;
 
 // task status and prioirty list
 const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
@@ -56,7 +58,7 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users, close, projectID, status, setUpdatedState }) {
+function AddTaskForm({ proj_name, team_members, users, close, projectID, status }) {
   const { addTask } = useApplicationData();
   const classes = useStyles();
 
@@ -92,8 +94,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   const updateData = async () => {
-    const newState = await addTask({ ...state, project_id: projectID });
-    setUpdatedState(newState);
+    await addTask({ ...state, project_id: projectID });
     close();
   };
 

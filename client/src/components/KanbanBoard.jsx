@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function KanbanBoard({ tasks, column, state, projectID, setUpdatedState }) {
+function KanbanBoard({ tasks, column, state, projectID }) {
   const classes = useStyles();
 
   // modal state
@@ -88,7 +88,6 @@ function KanbanBoard({ tasks, column, state, projectID, setUpdatedState }) {
                 close={handleClose}
                 projectID={projectID}
                 status={column.title}
-                setUpdatedState={setUpdatedState}
               />
             </Fade>
           </Modal>
