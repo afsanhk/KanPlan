@@ -96,7 +96,9 @@ export default function useApplicationData() {
       console.log("State User Tasks List", state.users[userID].user_tasks);
       console.log("State Copy User Tasks List", stateCopy.users[userID].user_tasks);
       // Finally, set state.
-      setState((prev) => ({ ...prev, stateCopy }));
+      console.log("State", state);
+      console.log("State Copy", stateCopy);
+      setState((prev) => ({ ...prev, ...stateCopy }));
     });
   }
 
