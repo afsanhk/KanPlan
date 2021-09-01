@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -33,33 +33,40 @@ const useStyles = makeStyles({
 export default function TaskListItem({ task, deleteTask }) {
   const classes = useStyles();
 
-   // modal state
-   const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false); // modal state
+    const [visibility, setVisibility] = useState({display: 'none'})
 
-   // modal open function
-   const handleOpen = () => {
-     setOpen(true);
-   };
- 
-   // modal close function
-   const handleClose = () => {
-     setOpen(false);
-   };
+    // modal open function
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    // modal close function
+    const handleClose = () => {
+      setOpen(false);
+    };
 
   return (
     <>
-      <ListItem className={classes.listItem}>
+      <ListItem className={classes.listItem}
+        onMouseEnter = {() => {
+          setVisibility({display: 'block'})
+        }}
+        onMouseLeave = {() => {
+          setVisibility({display: 'none'})
+        }}
+      >
           <ListItemText primary={task.title} />
 
           <ListItemIcon>
 
             {/* onClick will trigger the edit modal */}
-            <IconButton size='small' className={classes.icon}>
+            <IconButton size='small' className={classes.icon} style={visibility}>
               <EditOutlinedIcon/>
             </IconButton>
 
             {/* onClick will trigger the delete modal */}
-            <IconButton size='small' className={classes.icon} onClick={handleOpen}>
+            <IconButton size='small' className={classes.icon} onClick={handleOpen} style={visibility}>
               <DeleteOutlinedIcon/>
             </IconButton>
 
