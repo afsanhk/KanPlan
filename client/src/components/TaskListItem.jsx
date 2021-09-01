@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 }) 
 
-export default function TaskListItem({ task, deleteTask }) {
+export default function TaskListItem({ task, deleteTask, id, userID, projectID }) {
   const classes = useStyles();
 
    // modal state
