@@ -18,8 +18,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import '../styles/AddTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
-import useApplicationData from '../hooks/useApplicationData';
-
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
@@ -58,8 +56,7 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users, close, projectID, status }) {
-  const { addTask } = useApplicationData();
+function AddTaskForm({ proj_name, team_members, users, close, projectID, status, addTask }) {
   const classes = useStyles();
 
   const [currentUsers, setCurrentUsers] = useState([]);
@@ -93,8 +90,10 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status 
     console.log(state);
   };
 
-  const updateData = async () => {
-    await addTask({ ...state, project_id: projectID });
+  const updateData = () => {
+    // state.plan_start = state.plan_start + 'T04:00:00.000Z';
+    // state.plan_end = state.plan_end + 'T04:00:00.000Z';
+    addTask({ ...state, project_id: projectID }, projectID, currentUsers);
     close();
   };
 

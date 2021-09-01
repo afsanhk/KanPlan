@@ -59,11 +59,12 @@ module.exports = (db) => {
   });
 
   router.put('/tasks/:id/status', (request, response) => {
-    const { id, status_id } = request.body;
+    const { id, status_id, order } = request.body;
     db.query(
-      `UPDATE tasks 
-       SET status_id = $1
-       WHERE id = $2
+      `
+      UPDATE tasks 
+      SET status_id = $1
+      WHERE id = $2;
       `,
       [status_id, id]
     )
@@ -79,7 +80,7 @@ module.exports = (db) => {
         response.status(204).json({});
       })
       .catch((error) => console.log(error));
-  })
+  });
 
   return router;
 };
