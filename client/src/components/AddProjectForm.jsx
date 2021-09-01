@@ -9,6 +9,9 @@ import '../styles/AddProjectForm.scss';
 export default function AddProjectForm({ state, userID, close }) {
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
+  const [planStart,setPlanStart] = useState();
+  const [planEnd,setPlanEnd] = useState();
+
   const [teamMembers, setTeamMembers] = useState([userID]);
 
   const handleSubmit = (event) => {
@@ -18,6 +21,9 @@ export default function AddProjectForm({ state, userID, close }) {
     setProjectName('');
     setProjectDesc('');
   };
+
+  // get today's date yyyy-mm-dd
+  const today = new Date();
 
   const userObj = state && state.users[userID];
 
