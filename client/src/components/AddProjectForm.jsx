@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
 
 import '../styles/AddProjectForm.scss';
 
-import convertTimestampStringToYMD from '../helpers'
+import convertTimestampStringToYMD from '../helpers/dateConvert.js';
 
 // Prep date data
 // get today's date yyyy-mm-dd
@@ -23,19 +24,19 @@ export default function AddProjectForm({ state, userID, close }) {
   const [projectDesc, setProjectDesc] = useState('');
   const [planStart,setPlanStart] = useState(planStartString);
   const [planEnd,setPlanEnd] = useState(planEndString);
-
   const [teamMembers, setTeamMembers] = useState([userID]);
+
+  const useStyles = makeStyles();
+  const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log(userID, projectName, projectDesc);
     setProjectName('');
     setProjectDesc('');
+    setPlanStart(planStartString)
+    setPlanEnd(planEndString)
   };
-
- 
-
 
   const userObj = state && state.users[userID];
 
@@ -70,6 +71,30 @@ export default function AddProjectForm({ state, userID, close }) {
             multiline
             margin="normal"
             onChange={(event) => setProjectDesc(event.target.value)}
+          />
+
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={planStartString}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={() => console.log('Changed something in the start date table!')}
+          />
+
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={planEndString}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={() => console.log('Changed something in the start date table!')}
           />
 
           <div className="add-project-form-PM">
