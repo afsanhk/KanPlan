@@ -81,18 +81,22 @@ export default function useApplicationData() {
       // Remove task object from stateCopy.tasks
       delete stateCopy.tasks[id];
       // Remove task from project_tasks array --> Looks for the task ID inside project_tasks, removes it.
-      const index = stateCopy.projects[projectID].project_tasks.indexOf(id);
-      if (index > -1) {
-        stateCopy.projects[projectID].project_tasks.splice(index, 1);
+      const deletedProjectTaskIndex = stateCopy.projects[projectID].project_tasks.indexOf(id);
+      if (deletedProjectTaskIndex > -1) {
+        stateCopy.projects[projectID].project_tasks.splice(deletedProjectTaskIndex, 1);
       }
-      // Remove
-
       console.log("State Project Tasks List", state.projects[projectID].project_tasks);
       console.log("State Copy Project Tasks List", stateCopy.projects[projectID].project_tasks);
-      // setState({
-      //   ...state,
-      //   tasks,
-      // });
+      // Remove task from user_projects array --> Looks for the task ID inside user_projects, removes it.
+      // If the task is not assigned to the user, doesn't do anything.
+      const deletedUserTaskIndex = stateCopy.users[userID].user_tasks.indexOf(id);
+      if (deletedUserTaskIndex > -1) {
+        stateCopy.users[userID].user_tasks.splice(deletedUserTaskIndex, 1);
+      }
+      console.log("State User Tasks List", state.users[userID].user_tasks);
+      console.log("State Copy User Tasks List", stateCopy.users[userID].user_tasks);
+      // Finally, set state.
+      setState((prev) => ({ ...prev, stateCopy }));
     });
   }
 
