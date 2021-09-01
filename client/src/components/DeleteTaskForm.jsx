@@ -1,11 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import CloseIcon from '@material-ui/icons/Close';
 import Close from '@material-ui/icons/Close';
-import { Task } from 'frappe-gantt-react';
 
 import ConfirmButton from './ConfirmButton'
 
@@ -36,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TransitionsModal() {
+export default function DeleteTaskForm({ id, title }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,33 +44,18 @@ export default function TransitionsModal() {
   };
 
   return (
-    <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      className={classes.modal}
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
-    >
-      <Fade in={open}>
-        <div className={[classes.paper]}>
-          <Close onClick={handleClose} className={classes.cross} />
-          <h3 className={'delete-modal-text-a'}>
-            Are you sure you want to delete 'this task'?
-          </h3>
-          <h3 className={'delete-modal-text-b'}>
-            This action cannot be undone !
-          </h3>
-          <div className={'delete-modal-footer'}>
-            <ConfirmButton cancelling close={handleClose} />
-            <ConfirmButton deleting />
-          </div>
-        </div>
-      </Fade>
-    </Modal>
+    <div className={[classes.paper]}>
+      <Close onClick={handleClose} className={classes.cross} />
+      <h3 className={'delete-modal-text-a'}>
+        Are you sure you want to delete <strong>'{id}'</strong>?
+      </h3>
+      <h3 className={'delete-modal-text-b'}>
+        This action cannot be undone !
+      </h3>
+      <div className={'delete-modal-footer'}>
+        <ConfirmButton cancelling close={handleClose} />
+        <ConfirmButton deleting />
+      </div>
+    </div>
   );
 }

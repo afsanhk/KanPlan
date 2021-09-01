@@ -20,6 +20,12 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 // Project Components
 import TeamMemberName from './TeamMemberName';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import DeleteTaskForm from './DeleteTaskForm';
+
+//For the edit and delete modals
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 import '../styles/ProjectOverviewTable.scss'
 
@@ -116,6 +122,24 @@ const backgroundColor = {
 export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
   const classes = useStyles();
 
+  // modal state
+  const [open, setOpen] = React.useState(false);
+  const [rowID, setRowID] = React.useState('')
+
+  // modal open function
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  // modal close function
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const changeRowID = (id) => {
+    setRowID(id)
+  }
+
   // Array of task objects in projectTasks
   function createData(projectTasks) {
     return { 
@@ -147,6 +171,8 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
         </TableHead>
         <TableBody>
           {projectTasks[0] && rows.map((row) => (
+            <>
+            {console.log('projectTasks:', projectTasks)}
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
                 {row.title}
@@ -205,10 +231,37 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
                   <EditOutlinedIcon className={classes.icon} onClick={() => {console.log('go to edit task modal')}}/>
                 </IconButton>
                 <IconButton size="small">
-                  <DeleteIcon className={classes.icon} onClick={() => {console.log('go to delete task modal')}}/>
+                  <DeleteIcon className={classes.icon} onClick={() => {
+                    console.log('go to delete task modal')
+                    setRowID(row.id)
+                    handleOpen()
+                    console.log(row.id)
+                  }}/>
                 </IconButton>
               </StyledTableCell>
             </StyledTableRow>
+
+            <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+            >
+              <Fade in={open}>
+                <DeleteTaskForm 
+                  close={handleClose}
+                  id={rowID}
+                  title={projectTasks.rowID}
+                />
+              </Fade>
+            </Modal>
+          </>
           ))}
           <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={() => {console.log('go to add task modal')}}>
             <StyledTableCell className={classes.rowAddTask} style={{borderTopLeftRadius: '25px', borderBottomLeftRadius: '25px'}}>
@@ -227,5 +280,7 @@ export default function ProjectOverviewTable({ projectTasks, projectUsers }) {
         </TableBody>
       </Table>
     </TableContainer>
+
+    
   );
 }
