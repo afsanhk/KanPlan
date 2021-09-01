@@ -56,7 +56,7 @@ const status_id = {
   Done: 4
 };
 
-function AddTaskForm({ proj_name, team_members, users, close, projectID, status }) {
+function AddTaskForm({ proj_name, team_members, users, close, projectID, status, setUpdatedState }) {
   const { updateTasks } = useApplicationData();
   const classes = useStyles();
 
@@ -91,9 +91,9 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status 
     console.log(state);
   };
 
-  const updateData = () => {
-    const newState = updateTasks({ ...state, project_id: projectID });
-    console.log(newState);
+  const updateData = async () => {
+    const newState = await updateTasks({ ...state, project_id: projectID });
+    setUpdatedState(newState);
     close();
   };
 

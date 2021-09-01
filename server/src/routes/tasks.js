@@ -44,14 +44,18 @@ module.exports = (db) => {
           db.query(
             `
             INSERT INTO user_tasks(task_id, user_id)
-            VALUES ${query};
+            VALUES ${query}
+            RETURNING task_id;
             `
-          ).catch((error) => console.log(error));
+          )
+            .then((res) => {
+              console.log(res.rows[0]);
+              response.send(res.rows[0]);
+            })
+            .catch((error) => console.log(error));
         }
       })
-      .then(() => {
-        response.status(204).json({});
-      })
+
       .catch((error) => console.log(error));
   });
 
