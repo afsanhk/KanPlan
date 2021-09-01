@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function KanbanBoard({ tasks, column, state, projectID }) {
+function KanbanBoard({ tasks, column, state, projectID, addTask }) {
   const classes = useStyles();
 
   // modal state
@@ -48,25 +48,10 @@ function KanbanBoard({ tasks, column, state, projectID }) {
         <h2>
           {column.title.toUpperCase()} ({tasks.length})
         </h2>
-      </header>
-
-      <Droppable droppableId={column.id}>
-        {(provided) => (
-          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps}>
-            <div className="kanban-board-body-div">
-              {tasks && tasks.map((task, index) => <KanbanTask key={task.id} task={task} index={index} state={state} />)}
-              {provided.placeholder}
-            </div>
-          </div>
-        )}
-      </Droppable>
-
-      <footer className="kanban-board-footer">
-        <div className="kanban-board-footer-div">
+        <div className="kanban-board-header-button">
           <IconButton size="small" onClick={handleOpen}>
             <AddCircleIcon />
           </IconButton>
-          <p>Add new task</p>
 
           <Modal
             aria-labelledby="transition-modal-title"
@@ -88,11 +73,28 @@ function KanbanBoard({ tasks, column, state, projectID }) {
                 close={handleClose}
                 projectID={projectID}
                 status={column.title}
+                addTask={addTask}
               />
             </Fade>
           </Modal>
         </div>
-      </footer>
+      </header>
+
+      <Droppable droppableId={column.id}>
+        {(provided) => (
+          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps}>
+            <div className="kanban-board-body-div">
+              {tasks &&
+                tasks.map((task, index) => (
+                  <>
+                    <KanbanTask key={task.id} task={task} index={index} state={state} />
+                  </>
+                ))}
+              {provided.placeholder}
+            </div>
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }
