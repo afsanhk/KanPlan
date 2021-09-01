@@ -11,10 +11,14 @@ import LinkIconContainer from '../components/LinkIconContainer';
 // import css
 import '../styles/ProjectKanban.scss';
 
+import useApplicationData from '../hooks/useApplicationData';
+
 const ProjectKanban = ({ state }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
+
+  const { updateTask } = useApplicationData();
 
   const [updatedState, setUpdatedState] = useState(state);
 
@@ -199,6 +203,22 @@ const ProjectKanban = ({ state }) => {
     const start = kanbanState.columns[source.droppableId];
     const finish = kanbanState.columns[destination.droppableId];
 
+    const statusToID = {
+      'To-Do': 1,
+      Late: 2,
+      'In Progress': 3,
+      Done: 4
+    };
+
+    const updatedTaskState = {
+      id: kanbanState.tasks[draggableId].id,
+      title: draggableId,
+      status: finish.title,
+      status_id: statusToID[finish.title]
+    };
+
+    updateTask(updatedTaskState);
+
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
@@ -272,7 +292,6 @@ const ProjectKanban = ({ state }) => {
       }
     };
 
-    console.log(newState);
     setKanbanState(newState);
   };
 

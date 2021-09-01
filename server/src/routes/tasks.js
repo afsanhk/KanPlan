@@ -49,13 +49,27 @@ module.exports = (db) => {
             `
           )
             .then((res) => {
-              console.log(res.rows[0]);
+              // console.log(res.rows[0]);
               response.send(res.rows[0]);
             })
             .catch((error) => console.log(error));
         }
       })
+      .catch((error) => console.log(error));
+  });
 
+  router.put('/tasks/:id/status', (request, response) => {
+    const { id, status_id } = request.body;
+    db.query(
+      `UPDATE tasks 
+       SET status_id = $1
+       WHERE id = $2
+      `,
+      [status_id, id]
+    )
+      .then((res) => {
+        response.send(res);
+      })
       .catch((error) => console.log(error));
   });
 
