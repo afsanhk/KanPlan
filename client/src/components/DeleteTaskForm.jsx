@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 
 import ConfirmButton from './ConfirmButton'
+import LoadingCircle from './LoadingCircle';
 
 import '../styles/DeleteTaskForm.scss'
 
@@ -49,18 +50,21 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
 
 
   return (
-    <div className={[classes.paper]}>
-      <Close onClick={close} className={classes.cross} />
-      <h3 className={'delete-modal-text-a'}>
-        Are you sure you want to delete '{task.title}'?
-      </h3>
-      <h3 className={'delete-modal-text-b'}>
-        This action cannot be undone !
-      </h3>
-      <div className={'delete-modal-footer'}>
-        <ConfirmButton cancelling close={close} />
-        <ConfirmButton deleting deleteSingleTask={deleteSingleTask} />
-      </div>
-    </div>
+    <>
+    {!task ? (<LoadingCircle>Deleting...</LoadingCircle>): 
+      <div className={[classes.paper]}> 
+        <Close onClick={close} className={classes.cross} />
+        <h3 className={'delete-modal-text-a'}>
+          Are you sure you want to delete '{task.title}'?
+        </h3>
+        <h3 className={'delete-modal-text-b'}>
+          This action cannot be undone !
+        </h3>
+        <div className={'delete-modal-footer'}>
+          <ConfirmButton cancelling close={close} />
+          <ConfirmButton deleting deleteSingleTask={deleteSingleTask} />
+        </div>
+      </div>}
+  </>
   );
 }
