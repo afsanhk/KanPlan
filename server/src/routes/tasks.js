@@ -63,10 +63,10 @@ module.exports = (db) => {
     db.query(
       `
       UPDATE tasks 
-      SET status_id = $1, kanban_order = $2
-      WHERE id = $3;
+      SET status_id = $1
+      WHERE id = $2;
       `,
-      [status_id, order, id]
+      [status_id, id]
     )
       .then((res) => {
         response.send(res);

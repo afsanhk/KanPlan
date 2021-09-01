@@ -87,7 +87,6 @@ function KanbanBoard({ tasks, column, state, projectID, addTask }) {
               {tasks &&
                 tasks.map((task, index) => (
                   <>
-                    {task.kanban_order}
                     <KanbanTask key={task.id} task={task} index={index} state={state} />
                   </>
                 ))}

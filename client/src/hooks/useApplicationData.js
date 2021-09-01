@@ -7,6 +7,7 @@ export default function useApplicationData() {
     projects: {},
     users: {}
   });
+  const [kanbanStatus, setKanbanStatus] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -47,12 +48,17 @@ export default function useApplicationData() {
     const stateCopy = JSON.parse(JSON.stringify(state));
     stateCopy.tasks[taskState.id].status = taskState.status;
     stateCopy.tasks[taskState.id].status_id = taskState.status;
-    stateCopy.tasks[taskState.id].kanban_order = taskState.kanban_order;
 
     setState((prev) => ({ ...prev, ...stateCopy }));
-    console.log(state.tasks[taskState.id]);
 
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
+  };
+
+  const getKanbanStatus = (projectID) => {
+    return axios.get(`httpL//localhost:8001/api/kanban/project/${projectID}`).then((res) => {
+      setKanbanStatus(res.data);
+      console.log(res);
+    });
   };
 
   function deleteTask(id) {
@@ -69,5 +75,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask };
+  return { state, loading, addTask, updateTaskStatus, deleteTask, getKanbanStatus, kanbanStatus };
 }

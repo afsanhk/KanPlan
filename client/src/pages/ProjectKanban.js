@@ -11,12 +11,12 @@ import LinkIconContainer from '../components/LinkIconContainer';
 // import css
 import '../styles/ProjectKanban.scss';
 
-const ProjectKanban = ({ state, addTask, updateTaskStatus }) => {
+const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
-
-  const taskOrders = {};
+  // get kanban status from api
+  // getKanbanStatus(projectID);
 
   const moveInArray = function (arr, from, to) {
     if (Object.prototype.toString.call(arr) !== '[object Array]') {
@@ -59,33 +59,19 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus }) => {
     },
     columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
   };
-  new Promise(() => {
-    projectTasks.forEach((task) => {
-      if (task.kanban_order !== -1) {
-        taskOrders[task.title] = task.kanban_order;
+  projectTasks.forEach((task) => {
+    if (task) {
+      initialData.tasks[task.title] = task;
+      if (task.status === 'Late') {
+        initialData.columns['column-1'].taskIds.push(task.title);
+      } else if (task.status === 'To-Do') {
+        initialData.columns['column-2'].taskIds.push(task.title);
+      } else if (task.status === 'In Progress') {
+        initialData.columns['column-3'].taskIds.push(task.title);
+      } else if (task.status === 'Done') {
+        initialData.columns['column-4'].taskIds.push(task.title);
       }
-      if (task) {
-        initialData.tasks[task.title] = task;
-        if (task.status === 'Late') {
-          initialData.columns['column-1'].taskIds.push(task.title);
-        } else if (task.status === 'To-Do') {
-          initialData.columns['column-2'].taskIds.push(task.title);
-        } else if (task.status === 'In Progress') {
-          initialData.columns['column-3'].taskIds.push(task.title);
-        } else if (task.status === 'Done') {
-          initialData.columns['column-4'].taskIds.push(task.title);
-        }
-      }
-    });
-  });
-
-  Object.values(initialData.columns).forEach((column) => {
-    column.taskIds.forEach((title) => {
-      if (taskOrders[title] === 0 || taskOrders[title]) {
-        moveInArray(column.taskIds, column.taskIds.indexOf(title), taskOrders[title]);
-        initialData.columns[column.id].taskIds = column.taskIds;
-      }
-    });
+    }
   });
 
   const [kanbanState, setKanbanState] = useState(initialData);
@@ -118,33 +104,19 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus }) => {
       },
       columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
     };
-    new Promise(() => {
-      projectTasks.forEach((task) => {
-        if (task.kanban_order !== -1) {
-          taskOrders[task.title] = task.kanban_order;
+    projectTasks.forEach((task) => {
+      if (task) {
+        initialData.tasks[task.title] = task;
+        if (task.status === 'Late') {
+          initialData.columns['column-1'].taskIds.push(task.title);
+        } else if (task.status === 'To-Do') {
+          initialData.columns['column-2'].taskIds.push(task.title);
+        } else if (task.status === 'In Progress') {
+          initialData.columns['column-3'].taskIds.push(task.title);
+        } else if (task.status === 'Done') {
+          initialData.columns['column-4'].taskIds.push(task.title);
         }
-        if (task) {
-          initialData.tasks[task.title] = task;
-          if (task.status === 'Late') {
-            initialData.columns['column-1'].taskIds.push(task.title);
-          } else if (task.status === 'To-Do') {
-            initialData.columns['column-2'].taskIds.push(task.title);
-          } else if (task.status === 'In Progress') {
-            initialData.columns['column-3'].taskIds.push(task.title);
-          } else if (task.status === 'Done') {
-            initialData.columns['column-4'].taskIds.push(task.title);
-          }
-        }
-      });
-    }).then(() => {
-      Object.values(initialData.columns).forEach((column) => {
-        column.taskIds.forEach((title) => {
-          if (taskOrders[title] === 0 || taskOrders[title]) {
-            moveInArray(column.taskIds, column.taskIds.indexOf(title), taskOrders[title]);
-            initialData.columns[column.id].taskIds = column.taskIds;
-          }
-        });
-      });
+      }
     });
     setKanbanState(initialData);
   }, [state]);
@@ -196,12 +168,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus }) => {
         }
       };
 
-      newColumn.taskIds.forEach((taskName, index) => {
-        if (taskName === draggableId) {
-          order = index;
-        }
-      });
-      updatedTaskState.order = order;
       updateTaskStatus(updatedTaskState);
 
       setKanbanState(newState);
@@ -223,13 +189,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus }) => {
       ...finish,
       taskIds: finishTaskIds
     };
-
-    finishTaskIds.forEach((taskName, index) => {
-      if (taskName === draggableId) {
-        order = index;
-      }
-    });
-    updatedTaskState.order = order;
 
     updateTaskStatus(updatedTaskState);
 
