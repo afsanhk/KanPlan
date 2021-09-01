@@ -38,14 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 //prop received from Delete button from ProjectOverviewTable =>
 //  task prop = object containing all details about task
-export default function DeleteTaskForm(props) {
-
-  const { close, task, deleteTask } = props
+export default function DeleteTaskForm({ close, task, deleteTask, projectID, userID }) {
 
   const classes = useStyles();
 
   function deleteSingleTask() {
-    deleteTask(task.id)
+    deleteTask(task.id, projectID, userID)
     close()
   }
 

@@ -71,6 +71,7 @@ export default function useApplicationData() {
 
   function deleteTask(id, projectID, userID) {
     return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
+      console.log(`Inside deleteTask task-id:${id}, projectID: ${projectID}, userID: ${userID}`);
       // const tasks = {
       //   ...state.tasks,
       // }
