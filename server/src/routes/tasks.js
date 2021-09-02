@@ -7,14 +7,19 @@ module.exports = (db) => {
               proj_name, 
               priority_name, 
               status,
-              array_agg(DISTINCT user_tasks.user_id) AS task_users 
+              CASE 
+                WHEN user_tasks.task_id IS NULL
+                THEN ARRAY[]::integer[]
+                ELSE array_agg(DISTINCT user_tasks.user_id)
+              END
+                AS task_users 
       FROM tasks 
       JOIN priorities ON tasks.priority_id = priorities.id
       JOIN projects ON tasks.project_id = projects.id
       JOIN kanban_status ON tasks.status_id = kanban_status.id
-      JOIN user_tasks ON tasks.id = user_tasks.task_id
-      GROUP BY tasks.id, proj_name, priority_name, status
-      ORDER BY tasks.id`
+      FULL JOIN user_tasks ON tasks.id = user_tasks.task_id
+      GROUP BY tasks.id, proj_name, priority_name, status, user_tasks.task_id
+      `
     ).then(({ rows: tasks }) => {
       response.json(tasks.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
     });
@@ -22,7 +27,7 @@ module.exports = (db) => {
 
   router.post('/tasks', (request, response) => {
     const { title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users, project_id } = request.body;
-    console.log(title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users);
+    // console.log(title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users);
 
     db.query(
       `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)

@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import IconButton from '@material-ui/core/IconButton'; 
+import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
-
-import '../styles/ProjectListItem.scss'
+import '../styles/ProjectListItem.scss';
 
 import LinkIconContainer from './LinkIconContainer';
 import LinearWithValueLabel from './ProjectStatusBar';
@@ -17,19 +16,18 @@ import Fade from '@material-ui/core/Fade';
 
 import DeleteTaskForm from './DeleteTaskForm';
 
-
 const useStyles = makeStyles({
   icon: {
     margin: '0 2px',
     color: '#d53c3c',
     '&:hover': {
-      backgroundColor: 'rgba(189, 189, 189, 0.4)',
+      backgroundColor: 'rgba(189, 189, 189, 0.4)'
     }
   }
-}) 
+});
 
 // id is project id
-export default function ProjectListItem ({project, state, deleteProject}) {
+export default function ProjectListItem({ project, state, deleteProject, updateProjectUsers }) {
   const id = project.id;
   const name = project.proj_name;
   const description = project.proj_description;
@@ -37,7 +35,7 @@ export default function ProjectListItem ({project, state, deleteProject}) {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false); // modal state
-  const [visibility, setVisibility] = useState({display: 'none'})
+  const [visibility, setVisibility] = useState({ display: 'none' });
 
   // modal open function
   const handleOpen = () => {
@@ -51,51 +49,47 @@ export default function ProjectListItem ({project, state, deleteProject}) {
 
   return (
     <>
-      <article 
+      <article
         className="project"
-        onMouseEnter = {() => {
-          setVisibility({display: 'block'})
+        onMouseEnter={() => {
+          setVisibility({ display: 'block' });
         }}
-        onMouseLeave = {() => {
-          setVisibility({display: 'none'})
+        onMouseLeave={() => {
+          setVisibility({ display: 'none' });
         }}
       >
         <header className="project-header">
           <h2>{name}</h2>
-          <LinearWithValueLabel  state={state} projectID={id}/>
+          <LinearWithValueLabel state={state} projectID={id} />
         </header>
         <p className="project-body">{description}</p>
         <footer className="project-footer">
           <div className="nav-icon-container">
-            <LinkIconContainer projectID={id} text/>
+            <LinkIconContainer projectID={id} text state={state} updateProjectUsers={updateProjectUsers} />
           </div>
           <div style={visibility}>
-              <IconButton className={classes.icon} onClick={handleOpen} style={visibility}>
-                <DeleteOutlinedIcon/>
-              </IconButton>
+            <IconButton className={classes.icon} onClick={handleOpen} style={visibility}>
+              <DeleteOutlinedIcon />
+            </IconButton>
           </div>
         </footer>
       </article>
       <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      // className={classes.modal}
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        // className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
       >
         <Fade in={open}>
-          <DeleteTaskForm 
-            close={handleClose}
-            deleteProject={deleteProject}
-            project={project}
-          />
+          <DeleteTaskForm close={handleClose} deleteProject={deleteProject} project={project} />
         </Fade>
       </Modal>
     </>
-  )
+  );
 }

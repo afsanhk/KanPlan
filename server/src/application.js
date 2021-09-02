@@ -1,26 +1,27 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const express = require("express");
-const bodyparser = require("body-parser");
-const helmet = require("helmet");
-const cors = require("cors");
+const express = require('express');
+const bodyparser = require('body-parser');
+const helmet = require('helmet');
+const cors = require('cors');
 
 const app = express();
 
-const db = require("./db");
+const db = require('./db');
 
-const users = require("./routes/users");
-const projects = require("./routes/projects");
-const tasks = require("./routes/tasks");
-const kanbanTasks = require("./routes/kanban_tasks");
+const users = require('./routes/users');
+const projects = require('./routes/projects');
+const tasks = require('./routes/tasks');
+const kanbanTasks = require('./routes/kanban_tasks');
+const projectMembers = require('./routes/project_members');
 
 function read(file) {
   return new Promise((resolve, reject) => {
     fs.readFile(
       file,
       {
-        encoding: "utf-8",
+        encoding: 'utf-8'
       },
       (error, data) => {
         if (error) return reject(error);
@@ -35,25 +36,23 @@ module.exports = function application(ENV) {
   app.use(helmet());
   app.use(bodyparser.json());
 
-  app.use("/api", users(db));
-  app.use("/api", projects(db));
-  app.use("/api", tasks(db));
-  app.use("/api", kanbanTasks(db));
+  app.use('/api', users(db));
+  app.use('/api', projects(db));
+  app.use('/api', tasks(db));
+  app.use('/api', kanbanTasks(db));
+  app.use('/api', projectMembers(db));
 
-  if (ENV === "development" || ENV === "test") {
-    Promise.all([
-      read(path.resolve(__dirname, `db/schema/create.sql`)),
-      read(path.resolve(__dirname, `db/schema/${ENV}.sql`)),
-    ])
+  if (ENV === 'development' || ENV === 'test') {
+    Promise.all([read(path.resolve(__dirname, `db/schema/create.sql`)), read(path.resolve(__dirname, `db/schema/${ENV}.sql`))])
       .then(([create, seed]) => {
-        app.get("/api/debug/reset", (request, response) => {
+        app.get('/api/debug/reset', (request, response) => {
           db.query(create)
             .then((result) => {
               db.query(seed);
             })
             .then(() => {
-              console.log("Database Reset");
-              response.status(200).send("Database Reset");
+              console.log('Database Reset');
+              response.status(200).send('Database Reset');
             });
         });
       })
