@@ -105,6 +105,11 @@ export default function useApplicationData() {
     });
   }
 
+  //
+  function addProject(projectID) {
+    console.log(`Form data projectID ${projectID}`);
+  }
+
   //id is the project id
   function deleteProject(id) {
     return axios.delete(`http://localhost:8001/api/projects/${id}`).then(() => {
@@ -143,5 +148,15 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, deleteProject, getKanbanStatus, kanbanStatus };
+  return {
+    state,
+    loading,
+    addTask,
+    updateTaskStatus,
+    deleteTask,
+    addProject,
+    deleteProject,
+    getKanbanStatus,
+    kanbanStatus,
+  };
 }
