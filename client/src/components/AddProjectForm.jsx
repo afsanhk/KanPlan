@@ -8,6 +8,7 @@ import TeamMember from './TeamMember';
 import '../styles/AddProjectForm.scss';
 
 import convertTimestampStringToYMD from '../helpers/dateConvert';
+import CheckboxDropdown from './CheckboxDropdown';
 
 // Prep date data
 // get today's date yyyy-mm-dd
@@ -23,7 +24,6 @@ export default function AddProjectForm({ state, userID, close }) {
   const [projectDesc, setProjectDesc] = useState('');
   const [planStart,setPlanStart] = useState(planStartString);
   const [planEnd,setPlanEnd] = useState(planEndString);
-  const [teamMembers, setTeamMembers] = useState([userID]);
 
   const useStyles = makeStyles();
   const classes = useStyles();
@@ -38,12 +38,6 @@ export default function AddProjectForm({ state, userID, close }) {
   };
 
   const userObj = state && state.users[userID];
-
-  // This is for demonstration purposes to TJ and Veronica only. Ends at next //
-  const potentialTeamMembers = [2,3,4,5,6]
-  const parsedTeamMembers = potentialTeamMembers.map(id => {
-    return (<TeamMember name={state.users[id].user_name} border add/>)
-  });
 
   return (
     <div className="add-project-form-container">
@@ -104,7 +98,7 @@ export default function AddProjectForm({ state, userID, close }) {
           <div className="add-project-form-team-members">
             <h3>Choose some additional team members!</h3>
             <div className="team-member-container">
-              {parsedTeamMembers}
+              <CheckboxDropdown users={state.users} />
             </div>
           </div>
         </form>

@@ -34,8 +34,6 @@ const MenuProps = {
   }
 };
 
-
-
 export default function CheckboxDropdown({users}) {
   const classes = useStyles();
   const [personName, setPersonName] = React.useState([]);
@@ -48,10 +46,9 @@ export default function CheckboxDropdown({users}) {
 
   return (
     <div>
-        <InputLabel id="demo-mutiple-checkbox-label">Select Users</InputLabel>
         <Select
           labelId="demo-mutiple-checkbox-label"
-          id="demo-mutiple-checkbox"
+          id="mutiple-checkbox"
           multiple
           value={personName}
           onChange={handleChange}
