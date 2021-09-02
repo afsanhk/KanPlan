@@ -136,11 +136,4 @@ const config = {
   title: 'Simple Gantt', // Title for the Gantt to be displayed in the toolbar
 };
 
-export default function IBMGantt ({projectTasks}) {
-  return (
-    <>
-      <div id="gantt"></div>
-      {ReactDOM.render(<GanttChart config={config} />, document.getElementById('gantt'))}
-    </>
-  )
-}
+ReactDOM.render(<GanttChart config={config} />, document.getElementById('gantt'))

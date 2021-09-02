@@ -404,7 +404,11 @@ storiesOf("HomepageCharts", module).add("Charts", () => (
 storiesOf("Gantt", module)
   .add("Libersky timeline", () => <Gantt projectTasks={projectTasks} />)
   .add("Google Gantt", () => <GoogleGantt projectTasks={projectTasks} />)
-  .add("IBM Gantt", () => <IBMGantt projectTasks={projectTasks} />)
+  // .add("IBM Gantt", () => (
+  //   <>
+  //     <div id="gantt"></div> <IBMGantt projectTasks={projectTasks} />{" "}
+  //   </>
+  // ))
   .add("No Data", () => <Gantt projectTasks={[null]} />);
 
 storiesOf("Project Overview Table", module)
