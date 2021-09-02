@@ -22,7 +22,7 @@ module.exports = (db) => {
     const { team_members, deleted_members, deleted_tasks } = request.body;
     const project_id = request.params.id;
 
-    console.log(deleted_members, deleted_tasks);
+    // console.log(deleted_members, deleted_tasks);
 
     if (deleted_members) {
       deleted_members.forEach((member_id, index) => {

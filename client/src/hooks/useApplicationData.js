@@ -40,7 +40,7 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log(stateCopy);
+        // console.log(stateCopy);
       });
   };
 
@@ -76,13 +76,12 @@ export default function useApplicationData() {
       deletedMembers.forEach((memberID) => {
         stateCopy.users[memberID].user_projects.splice(stateCopy.users[memberID].user_projects.indexOf(projectID), 1);
         stateCopy.users[memberID].user_tasks.forEach((taskID) => {
-          if (stateCopy.tasks[taskID].project_id === projectID) {
+          if (stateCopy.tasks[taskID] && stateCopy.tasks[taskID].project_id === projectID) {
             stateCopy.tasks[taskID].task_users.splice(stateCopy.tasks[taskID].task_users.indexOf(memberID), 1);
           }
         });
       });
     }
-    console.log(stateCopy);
 
     setState((prev) => ({ ...prev, ...stateCopy }));
   };

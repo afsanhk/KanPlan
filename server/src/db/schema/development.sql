@@ -251,6 +251,9 @@ VALUES
   -- Done (ID4)
   ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
 
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 3);
+
 -- user_tasks
 INSERT INTO user_tasks(task_id, user_id)
 VALUES

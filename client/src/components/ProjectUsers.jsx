@@ -77,7 +77,7 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
   };
 
   const updateData = () => {
-    console.log(userState);
+    // console.log(userState);
     if (currentUsers.length < project.team_members.length) {
       const deletedMembers = project.team_members.filter(function (el) {
         return currentUsers.indexOf(el) < 0;
@@ -96,7 +96,7 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
       const updatedUserProjects = [...users[userID].user_projects, project.id].filter((value, index, self) => {
         return self.indexOf(value) === index;
       });
-      console.log('project_id: ', project.id, 'user_id: ', userID, 'team_members: ', currentUsers, 'user_projects: ', updatedUserProjects);
+      // console.log('project_id: ', project.id, 'user_id: ', userID, 'team_members: ', currentUsers, 'user_projects: ', updatedUserProjects);
       updateProjectUsers(project.id, userID, project.team_members, currentUsers, updatedUserProjects);
     });
     closeModal();
