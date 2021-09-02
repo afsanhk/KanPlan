@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     }
   },
   icon: {
-    margin: '2px',
+    margin: '0 2px',
   }
 }) 
 

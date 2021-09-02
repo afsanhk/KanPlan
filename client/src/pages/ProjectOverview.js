@@ -1,4 +1,4 @@
-//
+import { useEffect } from 'react'
 import { useParams } from "react-router-dom";
 // Components
 import ProjectOverviewTable from "../components/ProjectOverviewTable";
@@ -23,7 +23,6 @@ const ProjectOverview = ({ state, deleteTask, userID }) => {
 
   return (
     <div className="project-overview">
-      {console.log('projectStatus:', projectStatus)}
       <div className="project-overview-header">
         <div className="project-overview-title">
           <h1>{projectTitle}</h1>
@@ -48,7 +47,8 @@ const ProjectOverview = ({ state, deleteTask, userID }) => {
               chartInformation={projectStatusPercentage} 
               chartTitle={'Project Task Completion'} 
               chartColor={['#7bbf5e', 'rgba(189, 189, 189, 0.3)']} 
-              data={[projectStatus.completedTasks, projectStatus.incompleteTasks]}/>
+              data={[projectStatus.completedTasks, projectStatus.incompleteTasks]}
+              />
           </div>
           <div className='project-overview-inspiration'>
           </div>
