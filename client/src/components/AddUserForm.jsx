@@ -11,24 +11,27 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   paper: {
+    borderRadius: '3px',
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    width: '500px',
-    height: '300px',
+    width: '530px',
+    height: '350px',
     display: 'flex',
     flexDirection: 'column'
   },
   header: {
-    paddingLeft: '20px',
+    paddingTop: '5px',
     borderBottom: '3px solid black',
-    marginBottom: '30px'
+    display: 'flex',
+    justifyContent: 'center'
   },
   container: {
+    padding: '10px',
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    maxHeight: '160px',
+    maxHeight: '200px',
     overflow: 'auto'
   }
 }));

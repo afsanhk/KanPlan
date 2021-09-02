@@ -1,6 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
 
 import "../styles/HomepageMyProjects.scss"
 import ProjectNameDescription from "./ProjectNameDescription"

@@ -12,40 +12,16 @@ import LinkIconContainer from '../components/LinkIconContainer';
 import '../styles/ProjectKanban.scss';
 import axios from 'axios';
 
-const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder }) => {
+const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, updateProjectUsers }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
+  // get kanban status from api
 
   useEffect(() => {
-    // get kanban status data
-    axios
-      .get(`http://localhost:8001/api/kanban/project/${projectID}`)
-      .then((res) => {
-        updateKanbanStatus(res.data);
-      })
-      .then(() => {
-        kanbanStatus[0].task_id.map((id) => id.toString());
-        kanbanStatus[1].task_id.map((id) => id.toString());
-        kanbanStatus[2].task_id.map((id) => id.toString());
-        kanbanStatus[3].task_id.map((id) => id.toString());
-      });
-    console.log(kanbanStatus);
-  }, [projectID]);
-
-  const moveInArray = function (arr, from, to) {
-    if (Object.prototype.toString.call(arr) !== '[object Array]') {
-      throw new Error('Please provide a valid array');
-    }
-
-    const item = arr.splice(from, 1);
-
-    if (!item.length) {
-      throw new Error('There is no item in the array at index' + from);
-    }
-
-    arr.splice(to, 0, item[0]);
-  };
+    getKanbanStatus(projectID);
+    console.log(state.users[1]);
+  }, [projectID, state.projects[projectID].project_tasks]);
 
   const initialData = {
     tasks: {},
@@ -78,39 +54,34 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
 
   useEffect(() => {
     const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-    const initialData = {
-      tasks: {},
-      columns: {
-        'column-1': {
-          id: 'column-1',
-          title: 'Late',
-          taskIds: kanbanStatus[1].task_id
-        },
-        'column-2': {
-          id: 'column-2',
-          title: 'To-Do',
-          taskIds: kanbanStatus[0].task_id
-        },
-        'column-3': {
-          id: 'column-3',
-          title: 'In Progress',
-          taskIds: kanbanStatus[2].task_id
-        },
-        'column-4': {
-          id: 'column-4',
-          title: 'Done',
-          taskIds: kanbanStatus[3].task_id
+
+    kanbanStatus.forEach((obj) => {
+      if (obj.status === 'Late') {
+        if (obj) {
+          initialData.columns['column-1'].taskIds = obj.task_id;
         }
-      },
-      columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
-    };
+      } else if (obj.status === 'To-Do') {
+        if (obj) {
+          initialData.columns['column-2'].taskIds = obj.task_id;
+        }
+      } else if (obj.status === 'In Progress') {
+        if (obj) {
+          initialData.columns['column-3'].taskIds = obj.task_id;
+        }
+      } else if (obj.status === 'Done') {
+        if (obj) {
+          initialData.columns['column-4'].taskIds = obj.task_id;
+        }
+      }
+    });
+
     projectTasks.forEach((task) => {
       if (task) {
         initialData.tasks[task.id] = task;
       }
     });
-    setKanbanState(initialData);
-  }, [state, kanbanStatus]);
+    setKanbanState((prev) => ({ ...prev, ...initialData }));
+  }, [kanbanStatus]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -133,13 +104,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
       Done: 4
     };
 
-    const updatedTaskState = {
-      id: kanbanState.tasks[draggableId].id,
-      title: draggableId,
-      status: finish.title,
-      status_id: statusToID[finish.title]
-    };
-
     if (start === finish) {
       const newTaskIds = Array.from(start.taskIds);
       newTaskIds.splice(source.index, 1);
@@ -158,13 +122,9 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
         }
       };
 
-      const stateCopy = JSON.parse(JSON.stringify(state));
       newTaskIds.forEach((id, index) => {
-        stateCopy.tasks[id].kanban_order = index;
+        updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, id);
       });
-      stateCopy.tasks[draggableId] = { ...stateCopy.tasks[draggableId], ...updatedTaskState };
-
-      updateTaskStatus(updatedTaskState);
 
       setKanbanState(newState);
       return;
@@ -185,16 +145,13 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
       ...finish,
       taskIds: finishTaskIds
     };
-    updateTaskStatus(updatedTaskState);
 
-    const stateCopy = JSON.parse(JSON.stringify(state));
     startTaskIds.forEach((id, index) => {
-      stateCopy.tasks[id].kanban_order = index;
+      updateTaskStatus({ status: start.title, status_id: statusToID[start.title], kanban_order: index }, Number(id));
     });
     finishTaskIds.forEach((id, index) => {
-      stateCopy.tasks[id].kanban_order = index;
+      updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, Number(id));
     });
-    stateCopy.tasks[draggableId] = { ...stateCopy.tasks[draggableId], ...updatedTaskState };
 
     const columnToStatus = {
       'column-1': {
@@ -231,7 +188,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
       }
     };
 
-    setKanbanState(newState);
+    setKanbanState((prev) => ({ ...prev, ...newState }));
   };
 
   const projectTitle = state.projects[projectID].proj_name;
@@ -242,7 +199,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
       <div className="project-kanban-header">
         <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text />
+          <LinkIconContainer projectID={projectID} text state={state} updateProjectUsers={updateProjectUsers} />
         </div>
         <p>{projectDescription}</p>
       </div>

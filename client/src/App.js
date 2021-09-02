@@ -45,16 +45,25 @@ const theme = createTheme({
       colorDefault: {
         'background-color': '#1e88e5'
       }
+    },
+    MuiLinearProgress: {
+      barColorPrimary: {
+        'background-color': '#3d6bb3'
+      }
     }
   }
 });
 
 function App() {
+<<<<<<< HEAD
   const { state, loading, deleteTask, addTask, updateTaskStatus, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder } = useApplicationData();
+=======
+  const { state, loading, deleteTask, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, addProject, deleteProject, updateProjectUsers } = useApplicationData();
+>>>>>>> master
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
-  const projectID = 1;
+  const projectID = 2;
   const userID = 1;
 
   return (
@@ -71,23 +80,29 @@ function App() {
                   <UserDashboard state={state} userID={userID} deleteTask={deleteTask} />
                 </Route>
                 <Route path="/projects">
-                  <UserProjects state={state} userID={userID} />
+                  <UserProjects state={state} userID={userID} addProject={addProject} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} />
                 </Route>
                 <Route path="/project/:projectID/overview">
-                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} />
+                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} addTask={addTask} />
                 </Route>
                 <Route path="/project/:projectID/kanban">
                   <ProjectKanban
                     state={state}
                     addTask={addTask}
                     updateTaskStatus={updateTaskStatus}
+<<<<<<< HEAD
                     updateKanbanStatus={updateKanbanStatus}
                     kanbanStatus={kanbanStatus}
                     updateTaskKanbanOrder={updateTaskKanbanOrder}
+=======
+                    getKanbanStatus={getKanbanStatus}
+                    kanbanStatus={kanbanStatus}
+                    updateProjectUsers={updateProjectUsers}
+>>>>>>> master
                   />
                 </Route>
                 <Route path="/project/:projectID/gantt">
-                  <ProjectGantt state={state} />
+                  <ProjectGantt state={state} updateProjectUsers={updateProjectUsers} />
                 </Route>
                 <Route path="*">
                   <h1>404 - Not Found</h1>

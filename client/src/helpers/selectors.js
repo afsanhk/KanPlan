@@ -57,6 +57,25 @@ function getUsersForProject(state, projectID) {
   return projectUsers;
 }
 
+//Returns obj containing total, completed and incomplete tasks of a project
+function getProjectStatus(state, projectID) {
+  const taskIDs = state.projects[projectID].project_tasks;
+
+  if (taskIDs[0]) {
+    const completed = taskIDs.filter(task => state.tasks[task]['status'] === 'Done').length
+
+    const projectStatus = { 
+      totalTasks: taskIDs.length, 
+      completedTasks: completed,
+      incompleteTasks: taskIDs.length - completed
+    }
+
+    return projectStatus
+  }
+
+  return null //not sure what to return back here for cases where there are no tasks for a project
+}
+
 
 // TEST DATA
 // const projects = {
@@ -627,11 +646,15 @@ function getUsersForProject(state, projectID) {
 // console.log("-----------getUsersForProject-----------");
 // console.log(getUsersForProject(state, 1))
 
+// console.log("-----------getProjectStatus-----------");
+// console.log(getProjectStatus(state, 1))
+
 export {  
   getTasksForProject, 
   getProjectsForUser, 
   getTasksForUser, 
   getProjectsManagingForUser, 
   getTaskStatuses,
-  getUsersForProject
+  getUsersForProject,
+  getProjectStatus
 };

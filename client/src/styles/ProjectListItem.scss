@@ -1,11 +1,16 @@
 @use './base';
 
 article {
-  border: base.$border-grey;
+  border: 3px base.$medium-grey solid;
   margin: 20px 0;
   border-radius: base.$border-radius;
   padding: 20px 30px;
   background-color: base.$off-white;
+
+  &:hover {
+    border: 3px rgba(base.$medium-grey, 0.5) solid;
+    box-shadow: 0 2px 6px 0 rgba(base.$medium-grey, 0.6);
+  }
 
   .project-header {
     display: flex;
@@ -22,10 +27,11 @@ article {
 
   .project-footer {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-
-    
+    height: 30px;
+    // margin: 30px 0;
   }
+
 }

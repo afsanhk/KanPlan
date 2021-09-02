@@ -5,7 +5,7 @@ module.exports = (db) => {
     const values = [request.params.id];
     db.query(
       `SELECT kanban_status.*,
-              array_agg(DISTINCT tasks.id) AS task_id 
+              array_agg(tasks.id ORDER BY tasks.kanban_order ASC) AS task_id
       FROM kanban_status 
       JOIN tasks ON kanban_status.id = tasks.status_id
       WHERE tasks.project_id = $1
