@@ -1,32 +1,23 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tasks: {},
     projects: {},
-    users: {},
+    users: {}
   });
-  const [kanbanStatus, setKanbanStatus] = useState([
-    { task_id: [] },
-    { task_id: [] },
-    { task_id: [] },
-    { task_id: [] },
-  ]);
+  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      axios.get("http://localhost:8001/api/tasks"),
-      axios.get("http://localhost:8001/api/projects"),
-      axios.get("http://localhost:8001/api/users"),
-    ]).then((all) => {
+    Promise.all([axios.get('http://localhost:8001/api/tasks'), axios.get('http://localhost:8001/api/projects'), axios.get('http://localhost:8001/api/users')]).then((all) => {
       //updates the state with all the information received from the axios get requests
       setState((prev) => ({
         ...prev,
         tasks: all[0].data,
         projects: all[1].data,
-        users: all[2].data,
+        users: all[2].data
       }));
       setLoading(false);
     });
@@ -49,10 +40,11 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log(stateCopy);
+        // console.log(stateCopy);
       });
   };
 
+  // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
     stateCopy.tasks[taskID].status = taskState.status;
@@ -60,15 +52,38 @@ export default function useApplicationData() {
     stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios
-      .put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID })
-      .catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
   };
 
+  // get kanban status from api
   const getKanbanStatus = (projectID) => {
     return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
       setKanbanStatus(res.data);
     });
+  };
+
+  //
+  const updateProjectUsers = (projectID, userID, originalMembers, teamMembers, userProjects) => {
+    const stateCopy = JSON.parse(JSON.stringify(state));
+    stateCopy.users[userID].user_projects = userProjects;
+
+    stateCopy.projects[projectID].team_members = teamMembers;
+    // in case user is removed
+    if (originalMembers.length > teamMembers.length) {
+      const deletedMembers = originalMembers.filter(function (el) {
+        return teamMembers.indexOf(el) < 0;
+      });
+      deletedMembers.forEach((memberID) => {
+        stateCopy.users[memberID].user_projects.splice(stateCopy.users[memberID].user_projects.indexOf(projectID), 1);
+        stateCopy.users[memberID].user_tasks.forEach((taskID) => {
+          if (stateCopy.tasks[taskID] && stateCopy.tasks[taskID].project_id === projectID) {
+            stateCopy.tasks[taskID].task_users.splice(stateCopy.tasks[taskID].task_users.indexOf(memberID), 1);
+          }
+        });
+      });
+    }
+
+    setState((prev) => ({ ...prev, ...stateCopy }));
   };
 
   function deleteTask(id, projectID, userID) {
@@ -112,9 +127,9 @@ export default function useApplicationData() {
           ...newProject,
           id: projectID,
           manager_name: newProject.manager_name,
-          project_tasks: [null],
+          project_tasks: [null]
         };
-        console.log("Inside addProject: ", stateCopy.projects);
+        console.log('Inside addProject: ', stateCopy.projects);
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.push(projectID));
         // Set state.
@@ -167,8 +182,9 @@ export default function useApplicationData() {
     updateTaskStatus,
     deleteTask,
     addProject,
+    updateProjectUsers,
     deleteProject,
     getKanbanStatus,
-    kanbanStatus,
+    kanbanStatus
   };
 }
