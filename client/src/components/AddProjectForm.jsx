@@ -19,8 +19,8 @@ import convertTimestampStringToYMD from '../helpers/dateConvert';
 // Styling for the 'chips'
 const useStyles = makeStyles((theme) => ({
   chips: {
-    display: "flex",
-    flexDirection: "row"
+    display: "grid",
+    gridTemplateColumns: "150px 150px 150px",
   },
   chip: {
     margin: 2
@@ -38,7 +38,7 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
-      marginTop: 25
+      marginTop: 52
     }
   }
 };
@@ -68,7 +68,7 @@ export default function AddProjectForm({ state, userID, close }) {
   const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
-    console.log(userID, projectName, projectDesc, planStart, planEnd);
+    console.log(userID, projectName, projectDesc, planStart, planEnd, personName);
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
@@ -145,6 +145,7 @@ export default function AddProjectForm({ state, userID, close }) {
                 value={personName}
                 onChange={handleChange}
                 input={<Input />}
+                style={{width: "490px"}}
                 renderValue={(selected) => (
                   <div className={classes.chips}>
                     {selected.map((value) => (
