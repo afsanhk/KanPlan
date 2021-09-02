@@ -1,23 +1,32 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tasks: {},
     projects: {},
-    users: {}
+    users: {},
   });
-  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
+  const [kanbanStatus, setKanbanStatus] = useState([
+    { task_id: [] },
+    { task_id: [] },
+    { task_id: [] },
+    { task_id: [] },
+  ]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([axios.get('http://localhost:8001/api/tasks'), axios.get('http://localhost:8001/api/projects'), axios.get('http://localhost:8001/api/users')]).then((all) => {
+    Promise.all([
+      axios.get("http://localhost:8001/api/tasks"),
+      axios.get("http://localhost:8001/api/projects"),
+      axios.get("http://localhost:8001/api/users"),
+    ]).then((all) => {
       //updates the state with all the information received from the axios get requests
       setState((prev) => ({
         ...prev,
         tasks: all[0].data,
         projects: all[1].data,
-        users: all[2].data
+        users: all[2].data,
       }));
       setLoading(false);
     });
@@ -40,7 +49,8 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log(state);
+        console.log("Inside addTask state:", state);
+        console.log("Inside addTask state copy:", stateCopy);
       });
   };
 
@@ -51,7 +61,9 @@ export default function useApplicationData() {
     stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID })
+      .catch((error) => console.log(error));
   };
 
   const getKanbanStatus = (projectID) => {
@@ -96,37 +108,36 @@ export default function useApplicationData() {
   //id is the project id
   function deleteProject(id) {
     return axios.delete(`http://localhost:8001/api/projects/${id}`).then(() => {
-
-      const stateCopy = JSON.parse(JSON.stringify(state))
+      const stateCopy = JSON.parse(JSON.stringify(state));
 
       //remove project from user[user_projects]
-      const projectMembers = stateCopy.projects[id].team_members
+      const projectMembers = stateCopy.projects[id].team_members;
 
       projectMembers.forEach((userID) => {
-        const projectIndex = stateCopy.users[userID].user_projects.indexOf(id)
-        stateCopy.users[userID].user_projects.splice(projectIndex, 1)
-      })
+        const projectIndex = stateCopy.users[userID].user_projects.indexOf(id);
+        stateCopy.users[userID].user_projects.splice(projectIndex, 1);
+      });
 
       //remove tasks from project
-      const projectTasks = stateCopy.projects[id].project_tasks
+      const projectTasks = stateCopy.projects[id].project_tasks;
 
       projectTasks.forEach((taskID) => {
-        delete stateCopy.tasks[taskID]
-      })
+        delete stateCopy.tasks[taskID];
+      });
 
       //remove tasks from users
       projectMembers.forEach((userID) => {
         projectTasks.forEach((taskID) => {
-          const projectTaskUnderUserIndex = stateCopy.users[userID].user_tasks.indexOf(taskID)
+          const projectTaskUnderUserIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
 
           if (projectTaskUnderUserIndex > -1) {
-            stateCopy.users[userID].user_tasks.splice(projectTaskUnderUserIndex, 1)
+            stateCopy.users[userID].user_tasks.splice(projectTaskUnderUserIndex, 1);
           }
-        })
-      })
+        });
+      });
 
       //remove project from stateCopy.projects
-      delete stateCopy.projects[id]
+      delete stateCopy.projects[id];
 
       setState((prev) => ({ ...prev, ...stateCopy }));
     });
