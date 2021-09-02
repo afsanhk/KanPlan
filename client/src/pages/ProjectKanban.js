@@ -19,8 +19,10 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
 
   useEffect(() => {
     getKanbanStatus(projectID);
+    console.log(state.users[1]);
   }, [projectID, state.projects[projectID].project_tasks]);
 
+<<<<<<< HEAD
   const moveInArray = function (arr, from, to) {
     if (Object.prototype.toString.call(arr) !== "[object Array]") {
       throw new Error("Please provide a valid array");
@@ -35,6 +37,8 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
     arr.splice(to, 0, item[0]);
   };
 
+=======
+>>>>>>> master
   const initialData = {
     tasks: {},
     columns: {
@@ -220,7 +224,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
         <div className="project-kanban-body-div">
           <DragDropContext onDragEnd={onDragEnd}>
             <div className="project-kanban-board">
-              {console.log(kanbanState.columns, kanbanStatus)}
               {kanbanState.columnOrder.map((columnId) => {
                 const column = kanbanState.columns[columnId];
                 const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
