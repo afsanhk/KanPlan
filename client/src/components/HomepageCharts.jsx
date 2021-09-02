@@ -12,8 +12,8 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
 
   return (
       <div className='homepage-charts'>
-        <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing' chartColor='#3d6bb3'  className='canvas-container-chartA'/>
-        <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On' chartColor='#3d6bb3' />
+        <HomepageChartA chartInformation={ projectsManaging } chartTitle='Projects Managing' chartColor={['#3d6bb3']}  className='canvas-container-chartA'data={[1]}/>
+        <HomepageChartA chartInformation={ projectsWorkingOn } chartTitle='Projects Working On' chartColor={['#3d6bb3']} data={[1]}/>
         {tasks[0] && 
         <div className='homepage-chart-B-legend'>
           <HomepageChartB chartInformation={ taskStatuses } />
@@ -45,7 +45,7 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
           </ul>
         </div>}
         {!tasks[0] && 
-        <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor='#4d9900' />
+        <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor={['#6aa84f', '#bdbdbd']} data={[40,60]}/>
         }
       </div>
   )

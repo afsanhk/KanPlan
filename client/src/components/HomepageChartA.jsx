@@ -8,7 +8,7 @@ import '../styles/HomepageCharts.scss'
 
 
 
-function HomepageChartA({ chartInformation, chartTitle, chartColor }) {
+function HomepageChartA({ chartInformation, chartTitle, chartColor, data }) {
   
   const plugins = [{
     beforeDraw: function(chart) {
@@ -18,7 +18,7 @@ function HomepageChartA({ chartInformation, chartTitle, chartColor }) {
       ctx.restore();
       const fontSize = (height / 70).toFixed(2);
       ctx.font = fontSize + "em sans-serif";
-      ctx.fillStyle = chartColor; //changes the colour of the middle text
+      ctx.fillStyle = chartColor[0]; //changes the colour of the middle text
       ctx.textBaseline = "top";
       const text = chartInformation, //pass in props here too
       textX = Math.round((width - ctx.measureText(text).width) / 2),
@@ -31,13 +31,9 @@ function HomepageChartA({ chartInformation, chartTitle, chartColor }) {
   const chartData = {
     datasets: [
       {
-        backgroundColor: [
-          chartColor, //change color of the ring (donut) 
-        ],
-        hoverBackgroundColor: [
-          chartColor //same value as backgroundColor
-        ],
-        data: [1], //always keep this >0, so the donut will show
+        backgroundColor: chartColor, //change color of the ring (donut) - data needs to come in an array
+        hoverBackgroundColor: chartColor, //same value as backgroundColor - data needs to come in an array
+        data: data, //always keep this >0, so the donut will show - data needs to come in an array
         borderWidth: 0,
         cutout: '90%'
       }

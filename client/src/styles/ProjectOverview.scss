@@ -1,8 +1,8 @@
 @use './base';
 
 .project-overview {
-  height: auto;
-  // overflow: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .project-overview-header {
@@ -19,10 +19,23 @@
 }
 
 .project-overview-body {
-  padding: 5vh 60px;
+  padding: 5vh 40px;
+  display: flex;
+  width: 100%;
 }
 
 .project-overview-table {
-  width: 85vh
+  // margin: 14px;
+  border: base.$border-grey;
+  border-radius: base.$border-radius;
 }
 
+.project-overview-charts {
+  margin: 0 40px;
+  border: base.$border-grey;
+  border-radius: base.$border-radius;
+  background-color: base.$off-white;
+  width: 550px;
+  display: flex;
+  justify-content: center;
+}
