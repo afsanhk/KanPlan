@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function KanbanBoard({ tasks, column, state, projectID }) {
+function KanbanBoard({ tasks, column, state, projectID, addTask }) {
   const classes = useStyles();
 
   // modal state
@@ -43,57 +43,59 @@ function KanbanBoard({ tasks, column, state, projectID }) {
   };
 
   return (
-    <div className="kanban-board" style={{ backgroundColor: backgroundColor[column.title] }}>
-      <header className="kanban-board-header">
-        <h2>
-          {column.title.toUpperCase()} ({tasks.length})
-        </h2>
-      </header>
+    <Droppable droppableId={column.id}>
+      {(provided) => (
+        <div className="kanban-board" style={{ backgroundColor: backgroundColor[column.title] }} ref={provided.innerRef} {...provided.droppableProps}>
+          <header className="kanban-board-header">
+            <h2>
+              {column.title.toUpperCase()} ({tasks.length})
+            </h2>
+            <div className="kanban-board-header-button">
+              <IconButton size="small" onClick={handleOpen}>
+                <AddCircleIcon />
+              </IconButton>
 
-      <Droppable droppableId={column.id}>
-        {(provided) => (
-          <div className="kanban-board-body" ref={provided.innerRef} {...provided.droppableProps}>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500
+                }}
+              >
+                <Fade in={open}>
+                  <AddTaskForm
+                    proj_name={state.projects[projectID].proj_name}
+                    team_members={state.projects[projectID].team_members}
+                    users={state.users}
+                    close={handleClose}
+                    projectID={projectID}
+                    status={column.title}
+                    addTask={addTask}
+                  />
+                </Fade>
+              </Modal>
+            </div>
+          </header>
+
+          <div className="kanban-board-body">
             <div className="kanban-board-body-div">
-              {tasks && tasks.map((task, index) => <KanbanTask key={task.id} task={task} index={index} state={state} />)}
+              {tasks &&
+                tasks.map((task, index) => (
+                  <>
+                    <KanbanTask key={task.id} task={task} index={index} state={state} />
+                  </>
+                ))}
               {provided.placeholder}
             </div>
           </div>
-        )}
-      </Droppable>
-
-      <footer className="kanban-board-footer">
-        <div className="kanban-board-footer-div">
-          <IconButton size="small" onClick={handleOpen}>
-            <AddCircleIcon />
-          </IconButton>
-          <p>Add new task</p>
-
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500
-            }}
-          >
-            <Fade in={open}>
-              <AddTaskForm
-                proj_name={state.projects[projectID].proj_name}
-                team_members={state.projects[projectID].team_members}
-                users={state.users}
-                close={handleClose}
-                projectID={projectID}
-                status={column.title}
-              />
-            </Fade>
-          </Modal>
         </div>
-      </footer>
-    </div>
+      )}
+    </Droppable>
   );
 }
 

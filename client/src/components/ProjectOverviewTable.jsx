@@ -108,7 +108,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const flagStyles = {
   High: {
     color: 'rgb(213, 60, 60)'
@@ -128,7 +127,7 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({ state, projectTasks, projectUsers, deleteTask }) {
+export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID }) {
   const classes = useStyles();
 
   //how modal knows which task to pass in
@@ -299,6 +298,8 @@ export default function ProjectOverviewTable({ state, projectTasks, projectUsers
       <Fade in={open}>
         <DeleteTaskForm 
           close={handleClose}
+          userID={userID}
+          projectID={projectID}
           task={state.tasks[rowID]}
           deleteTask={deleteTask}
         />

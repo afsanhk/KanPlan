@@ -11,11 +11,11 @@ import { getTasksForProject, getUsersForProject, getProjectStatus } from "../hel
 
 import "../styles/ProjectOverview.scss";
 
-const ProjectOverview = ({ state, deleteTask }) => {
+const ProjectOverview = ({ state, deleteTask, userID }) => {
   let { projectID } = useParams();
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-  const projectUsers = getUsersForProject(state, projectID)
+  const projectUsers = getUsersForProject(state, projectID);
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
   const projectStatus = getProjectStatus(state, projectID)
@@ -27,13 +27,20 @@ const ProjectOverview = ({ state, deleteTask }) => {
       <div className="project-overview-header">
         <div className="project-overview-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text/>
+          <LinkIconContainer projectID={projectID} text />
         </div>
         <p>{projectDescription}</p>
       </div>
       <div className='project-overview-body'>
         <div className='project-overview-table'>
-          <ProjectOverviewTable state={state} projectTasks={projectTasks} projectUsers={projectUsers} deleteTask={deleteTask}/>
+          <ProjectOverviewTable
+            state={state}
+            userID={userID}
+            projectID={projectID}
+            projectTasks={projectTasks}
+            projectUsers={projectUsers}
+            deleteTask={deleteTask}
+          />
         </div>
         <div>
           <div className='project-overview-charts'>
@@ -44,7 +51,6 @@ const ProjectOverview = ({ state, deleteTask }) => {
               data={[projectStatus.completedTasks, projectStatus.incompleteTasks]}/>
           </div>
           <div className='project-overview-inspiration'>
-
           </div>
         </div>
       </div>
