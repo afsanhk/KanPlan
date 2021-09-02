@@ -62,7 +62,6 @@ function HomepageChartA({ chartInformation, chartTitle, chartColor, data }) {
     <div className='canvas-container-chartA'>
       {isRebuildingCanvas ? undefined : (
         <Doughnut
-        id={1}
           data={chartData}
           spacing={30}
           options={{

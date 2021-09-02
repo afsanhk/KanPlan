@@ -4,6 +4,7 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import '../styles/ProjectListItem.scss'
 
 import LinkIconContainer from './LinkIconContainer';
+import LinearWithValueLabel from './ProjectStatusBar';
 
 // id is project id
 export default function ProjectListItem ({id, name, description, team_members, state}) {
@@ -21,7 +22,7 @@ export default function ProjectListItem ({id, name, description, team_members, s
     <article className="project">
       <header className="project-header">
         <h2>{name}</h2>
-        <div>Project Progress: Goes brrrrrrrrr......</div>
+        <LinearWithValueLabel  state={state} projectID={id}/>
       </header>
       <p className="project-body">{description}</p>
       <footer className="project-footer">

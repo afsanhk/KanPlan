@@ -45,6 +45,11 @@ const theme = createTheme({
       colorDefault: {
         'background-color': '#1e88e5'
       }
+    },
+    MuiLinearProgress: {
+      barColorPrimary: {
+        'background-color': '#3d6bb3'
+      }
     }
   }
 });
