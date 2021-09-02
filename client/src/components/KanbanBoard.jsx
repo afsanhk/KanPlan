@@ -84,12 +84,11 @@ function KanbanBoard({ tasks, column, state, projectID, addTask }) {
 
           <div className="kanban-board-body">
             <div className="kanban-board-body-div">
-              {tasks &&
-                tasks.map((task, index) => (
-                  <>
-                    <KanbanTask key={task.id} task={task} index={index} state={state} />
-                  </>
-                ))}
+              {tasks.map((task, index) => (
+                <>
+                  <KanbanTask key={task.id} task={task} index={index} state={state} />
+                </>
+              ))}
               {provided.placeholder}
             </div>
           </div>
