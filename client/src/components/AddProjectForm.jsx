@@ -29,7 +29,7 @@ export default function AddProjectForm({ state, userID, close }) {
   const useStyles = makeStyles();
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
+  const clickSave = (event) => {
     console.log(userID, projectName, projectDesc);
     setProjectName('');
     setProjectDesc('');
@@ -111,7 +111,7 @@ export default function AddProjectForm({ state, userID, close }) {
         </form>
       </div>
       <div class="add-project-form-buttons">
-        <ConfirmButton saving handleSubmit={handleSubmit} addProject />
+        <ConfirmButton saving updateData={clickSave} />
         <ConfirmButton cancelling close={close} />
       </div>
       <img style= {{width: '200px', marginTop: '20px', marginLeft:'140px'}}
