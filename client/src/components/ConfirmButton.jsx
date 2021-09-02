@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-function ConfirmButton({ saving, deleting, cancelling, close, error, updateData,  deleteSingleTask }) {
+function ConfirmButton({ saving, deleting, cancelling, close, error, updateData,  deleteTaskOrProj }) {
   return (
     <>
       {saving && !error && (
@@ -15,7 +15,7 @@ function ConfirmButton({ saving, deleting, cancelling, close, error, updateData,
         </Button>
       )}
       {deleting && (
-        <Button variant="contained" color="secondary" onClick={deleteSingleTask}>
+        <Button variant="contained" color="secondary" onClick={deleteTaskOrProj}>
           Delete
         </Button>
       )}

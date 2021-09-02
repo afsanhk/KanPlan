@@ -19,7 +19,12 @@ const ProjectOverview = ({ state, deleteTask, userID }) => {
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
   const projectStatus = getProjectStatus(state, projectID)
-  const projectStatusPercentage = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks)) + '%'
+  let projectStatusPercentage; 
+  
+  if (projectStatus) {
+    projectStatusPercentage = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks)) + '%'
+  }
+
 
   return (
     <div className="project-overview">
@@ -47,7 +52,7 @@ const ProjectOverview = ({ state, deleteTask, userID }) => {
               chartInformation={projectStatusPercentage} 
               chartTitle={'Project Task Completion'} 
               chartColor={['#7bbf5e', 'rgba(189, 189, 189, 0.3)']} 
-              data={[projectStatus.completedTasks, projectStatus.incompleteTasks]}
+              data={[projectStatus ? projectStatus.completedTasks : 0, projectStatus ? projectStatus.incompleteTasks : 0]}
               />
           </div>
           <div className='project-overview-inspiration'>

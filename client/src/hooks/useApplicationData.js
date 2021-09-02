@@ -93,5 +93,44 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, getKanbanStatus, kanbanStatus };
+  //id is the project id
+  function deleteProject(id) {
+    return axios.delete(`http://localhost:8001/api/projects/${id}`).then(() => {
+
+      const stateCopy = JSON.parse(JSON.stringify(state))
+
+      //remove project from user[user_projects]
+      const projectMembers = stateCopy.projects[id].team_members
+
+      projectMembers.forEach((userID) => {
+        const projectIndex = stateCopy.users[userID].user_projects.indexOf(id)
+        stateCopy.users[userID].user_projects.splice(projectIndex, 1)
+      })
+
+      //remove tasks from project
+      const projectTasks = stateCopy.projects[id].project_tasks
+
+      projectTasks.forEach((taskID) => {
+        delete stateCopy.tasks[taskID]
+      })
+
+      //remove tasks from users
+      projectMembers.forEach((userID) => {
+        projectTasks.forEach((taskID) => {
+          const projectTaskUnderUserIndex = stateCopy.users[userID].user_tasks.indexOf(taskID)
+
+          if (projectTaskUnderUserIndex > -1) {
+            stateCopy.users[userID].user_tasks.splice(projectTaskUnderUserIndex, 1)
+          }
+        })
+      })
+
+      //remove project from stateCopy.projects
+      delete stateCopy.projects[id]
+
+      setState((prev) => ({ ...prev, ...stateCopy }));
+    });
+  }
+
+  return { state, loading, addTask, updateTaskStatus, deleteTask, deleteProject, getKanbanStatus, kanbanStatus };
 }

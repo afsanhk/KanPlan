@@ -45,7 +45,7 @@ function HomepageCharts({ projectsManaging, projectsWorkingOn, taskStatuses, tas
           </ul>
         </div>}
         {!tasks[0] && 
-        <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor={['#6aa84f', '#bdbdbd']} data={[40,60]}/>
+        <HomepageChartA chartInformation={0} chartTitle='Task Tracker' chartColor={['#3d6bb3']} data={[1]}/>
         }
       </div>
   )

@@ -3,7 +3,7 @@ import { getProjectsForUser } from "../helpers/selectors";
 import AddProjectButton from "../components/AddProjectButton";
 import "../styles/UserProjects.scss";
 
-const UserProjects = ({ state, userID }) => {
+const UserProjects = ({ state, userID, deleteProject }) => {
   const userProjects =
     !(Object.keys(state.users).length === 0) && getProjectsForUser(state, userID).map((el) => state.projects[el]);
 
@@ -13,7 +13,7 @@ const UserProjects = ({ state, userID }) => {
         <h1>All Projects</h1>
         <AddProjectButton state={state} userID={userID} />
       </div>
-      {userProjects && <ProjectList state={state} projects={userProjects} />}
+      {userProjects && <ProjectList state={state} projects={userProjects} deleteProject={deleteProject} />}
     </div>
   );
 };
