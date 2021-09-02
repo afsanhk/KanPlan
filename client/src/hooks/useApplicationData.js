@@ -7,7 +7,7 @@ export default function useApplicationData() {
     projects: {},
     users: {}
   });
-  const [kanbanStatus, setKanbanStatus] = useState({});
+  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,19 +46,19 @@ export default function useApplicationData() {
 
   const updateTaskStatus = (taskState) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    stateCopy.tasks[taskState.id].status = taskState.status;
-    stateCopy.tasks[taskState.id].status_id = taskState.status;
+    stateCopy.tasks[taskState.id].status_id = taskState.status_id;
 
-    setState((prev) => ({ ...prev, ...stateCopy }));
+    new Promise(() => {
+      setState((prev) => ({ ...stateCopy }));
+    }).then(() => {
+      axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
+    });
 
-    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
+    console.log(state);
   };
 
-  const getKanbanStatus = (projectID) => {
-    return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
-      setKanbanStatus(res.data);
-      console.log(res);
-    });
+  const updateKanbanStatus = (taskState) => {
+    return setKanbanStatus(() => taskState);
   };
 
   function deleteTask(id, projectID, userID) {
@@ -94,5 +94,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, getKanbanStatus, kanbanStatus };
+  return { state, loading, addTask, updateTaskStatus, deleteTask, updateKanbanStatus, kanbanStatus };
 }
