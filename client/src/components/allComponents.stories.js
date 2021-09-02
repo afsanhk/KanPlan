@@ -411,4 +411,4 @@ storiesOf("Project Overview Table", module)
 storiesOf("Add Projects", module)
   .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />)
   .add("Button & Drawer", () => <AddProjectButton state={state} userID={1} />)
-  .add("Checkbox Dropdown", () => <CheckboxDropdown />);
+  .add("Checkbox Dropdown", () => <CheckboxDropdown users={state.users} />);

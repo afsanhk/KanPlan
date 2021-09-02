@@ -8,10 +8,11 @@ import Select from "@material-ui/core/Select";
 import Checkbox from "@material-ui/core/Checkbox";
 import Chip from "@material-ui/core/Chip";
 
+// Styling for the 'chips'
 const useStyles = makeStyles((theme) => ({
   chips: {
     display: "flex",
-    flexWrap: "wrap"
+    flexDirection: "row"
   },
   chip: {
     margin: 2
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Styling for the drop-down
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -32,29 +34,9 @@ const MenuProps = {
   }
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder"
-];
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium
-  };
-}
 
-export default function CheckboxDropdown() {
+export default function CheckboxDropdown({users}) {
   const classes = useStyles();
   const [personName, setPersonName] = React.useState([]);
 
@@ -62,16 +44,7 @@ export default function CheckboxDropdown() {
     setPersonName(event.target.value);
   };
 
-  const handleChangeMultiple = (event) => {
-    const { options } = event.target;
-    const value = [];
-    for (let i = 0, l = options.length; i < l; i += 1) {
-      if (options[i].selected) {
-        value.push(options[i].value);
-      }
-    }
-    setPersonName(value);
-  };
+  const names = Object.keys(users).map(userID => users[userID].user_name);
 
   return (
     <div>
