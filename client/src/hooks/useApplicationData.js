@@ -74,12 +74,8 @@ export default function useApplicationData() {
 
   function deleteTask(id, projectID, userID) {
     return axios.delete(`http://localhost:8001/api/tasks/${id}`).then(() => {
-      // console.log(`Inside deleteTask task-id:${id}, projectID: ${projectID}, userID: ${userID}`);
       // Create state copy
       const stateCopy = JSON.parse(JSON.stringify(state));
-
-      // console.log('State before manipulation', state);
-      // console.log('Copy of state before manipulation', stateCopy);
       // Only manipulate stateCopy
       // Remove task object from stateCopy.tasks
       delete stateCopy.tasks[id];
@@ -88,26 +84,21 @@ export default function useApplicationData() {
       if (deletedProjectTaskIndex > -1) {
         stateCopy.projects[projectID].project_tasks.splice(deletedProjectTaskIndex, 1);
       }
-      // console.log('State Project Tasks List', state.projects[projectID].project_tasks);
-      // console.log('State Copy Project Tasks List', stateCopy.projects[projectID].project_tasks);
       // Remove task from user_tasks array --> Looks for the task ID inside user_tasks, removes it.
       // If the task is not assigned to the user, doesn't do anything.
       const deletedUserTaskIndex = stateCopy.users[userID].user_tasks.indexOf(id);
       if (deletedUserTaskIndex > -1) {
         stateCopy.users[userID].user_tasks.splice(deletedUserTaskIndex, 1);
       }
-      // console.log('State User Tasks List', state.users[userID].user_tasks);
-      // console.log('State Copy User Tasks List', stateCopy.users[userID].user_tasks);
       // Finally, set state.
-      // console.log('State', state);
-      // console.log('State Copy', stateCopy);
       setState((prev) => ({ ...prev, ...stateCopy }));
     });
   }
 
   //
   function addProject(projectID) {
-    console.log(`Form data projectID ${projectID}`);
+    console.log(`Inside addProject:
+    Form data projectID ${projectID}`);
   }
 
   //id is the project id
