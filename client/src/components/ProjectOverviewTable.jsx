@@ -98,7 +98,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const flagStyles = {
   High: {
     color: 'rgb(213, 60, 60)'

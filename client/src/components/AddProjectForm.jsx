@@ -1,22 +1,41 @@
 import { useState } from 'react';
 import { TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
 
 import '../styles/AddProjectForm.scss';
 
+import convertTimestampStringToYMD from '../helpers/dateConvert';
+
+// Prep date data
+// get today's date yyyy-mm-dd
+const planStartInit = new Date();
+const planEndInit = new Date();
+planEndInit.setDate(planEndInit.getDate() + 7); 
+// convert to string and return in YYYY-MM-DD format
+const planStartString = convertTimestampStringToYMD(planStartInit.toString())
+const planEndString = convertTimestampStringToYMD(planStartInit.toString())
+
+
 export default function AddProjectForm({ state, userID, close }) {
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
+  const [planStart,setPlanStart] = useState(planStartString);
+  const [planEnd,setPlanEnd] = useState(planEndString);
   const [teamMembers, setTeamMembers] = useState([userID]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const useStyles = makeStyles();
+  const classes = useStyles();
 
+  const clickSave = (event) => {
     console.log(userID, projectName, projectDesc);
     setProjectName('');
     setProjectDesc('');
+    setPlanStart(planStartString);
+    setPlanEnd(planEndString);
+    close(event);
   };
 
   const userObj = state && state.users[userID];
@@ -54,6 +73,30 @@ export default function AddProjectForm({ state, userID, close }) {
             onChange={(event) => setProjectDesc(event.target.value)}
           />
 
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={planStartString}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={(event) => setPlanStart(event.target.value)}
+          />
+
+          <TextField
+            id="date"
+            label="End Date"
+            type="date"
+            defaultValue={planEndString}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={(event) => setPlanEnd(event.target.value)}
+          />
+
           <div className="add-project-form-PM">
             <h3>Project Manager</h3>
             <TeamMember name={userObj.user_name} />
@@ -68,7 +111,7 @@ export default function AddProjectForm({ state, userID, close }) {
         </form>
       </div>
       <div class="add-project-form-buttons">
-        <ConfirmButton saving handleSubmit={handleSubmit} addProject />
+        <ConfirmButton saving updateData={clickSave} />
         <ConfirmButton cancelling close={close} />
       </div>
       <img style= {{width: '200px', marginTop: '20px', marginLeft:'140px'}}
