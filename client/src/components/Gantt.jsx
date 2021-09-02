@@ -28,6 +28,8 @@ const styleConfig = {
             backgroundColor:  '#fbf9f9',
             textAlign: "left",
             padding: "5px",
+            fontSize: "20px",
+            height: "20px"
           }
       },
       verticalSeparator:{//the vertical seperator use to resize he width of the task list
@@ -79,6 +81,7 @@ function Gantt({projectTasks}) {
       <TimeLine 
       data={tasks} 
       config={styleConfig} 
+      // mode={"year"} //Takes day, month, week, year as inputs to update view mode
       // onUpdateTask={onUpdateTask}
       />}
     </>
