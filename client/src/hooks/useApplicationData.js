@@ -96,15 +96,10 @@ export default function useApplicationData() {
   }
 
   //
-  function addProject(newProject, teamMembers) {
-    console.log(
-      `Inside addProject:
-        newProject  ${JSON.stringify(newProject)}
-        teamMembers ${teamMembers}
-        `
-    );
+  function addProject(newProject) {
+    console.log(`Inside addProject: newProject  ${JSON.stringify(newProject)}`);
     let projectID;
-    return axios.post(`http://localhost:8001/api/projects/`, { newProject, teamMembers });
+    return axios.post(`http://localhost:8001/api/projects/`, newProject);
     //   .then((res) => {
     //     // capture new project ID
     //     taskID = res.data.task_id;
