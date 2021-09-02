@@ -59,14 +59,14 @@ module.exports = (db) => {
   });
 
   router.put('/tasks/:id/status', (request, response) => {
-    const { id, status_id, order } = request.body;
+    const { id, status_id, kanban_order } = request.body;
     db.query(
       `
       UPDATE tasks 
-      SET status_id = $1
-      WHERE id = $2;
+      SET status_id = $1, kanban_order = $2
+      WHERE id = $3;
       `,
-      [status_id, id]
+      [status_id, kanban_order, id]
     )
       .then((res) => {
         response.send(res);
