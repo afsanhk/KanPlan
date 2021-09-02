@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProjectOverview = ({ state, deleteTask, userID, deleteProject, updateProjectUsers }) => {
+const ProjectOverview = ({ state, deleteTask, userID, deleteProject, updateProjectUsers, addTask }) => {
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
@@ -70,7 +70,7 @@ const ProjectOverview = ({ state, deleteTask, userID, deleteProject, updateProje
         </div>
         <div className="project-overview-body">
           <div className="project-overview-table">
-            <ProjectOverviewTable state={state} userID={userID} projectID={projectID} projectTasks={projectTasks} projectUsers={projectUsers} deleteTask={deleteTask} />
+            <ProjectOverviewTable state={state} userID={userID} projectID={projectID} projectTasks={projectTasks} projectUsers={projectUsers} deleteTask={deleteTask} addTask={addTask} />
           </div>
           <div>
             <div className="project-overview-charts">
