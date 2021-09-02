@@ -54,6 +54,8 @@ planEndInit.setDate(planEndInit.getDate() + 7);
 const planStartString = convertTimestampStringToYMD(planStartInit.toString())
 const planEndString = convertTimestampStringToYMD(planEndInit.toString())
 
+// Note that the usage duplicate names is troublesome due to the implementation of the checkbox dropdown, as we have to retrieve the ID later. 
+// Avoid duplicate names for users.
 export default function AddProjectForm({ state, userID, close, addProject }) {
   const classes = useStyles();
   const [projectName, setProjectName] = useState('');
@@ -67,10 +69,13 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
   };
   
   let managerID = Number(userID);
-  const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
+  const ids = Object.keys(state.users).filter(userids => userids !== managerID.toString());
+  const names = ids.map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
-    console.log(userID, projectName, projectDesc, planStart, planEnd, personName);
+    // Looks for the index of each team member in 'names' array, then returns corresponding 'id'.
+    const teamIDs = personName.map(selectedName => names.findIndex(name => name === selectedName)).map(index => ids[index]); 
+    console.log(userID, projectName, projectDesc, planStart, planEnd, personName, teamIDs);
     addProject("test")
     setProjectName('');
     setProjectDesc('');
