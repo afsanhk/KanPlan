@@ -65,8 +65,7 @@ function Gantt({projectTasks}) {
       end: endDate + 100000000, // Hard coded --> Remove when seeds are improved
       color: 'lightblue'
     }
-  })
-  ;
+  });
   
   // const onUpdateTask = (item, props) => {
   //   item.start = props.start;

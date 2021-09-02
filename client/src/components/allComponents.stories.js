@@ -25,6 +25,7 @@ import HomepageChartB from "./HomepageChartB";
 import HomepageCharts from "./HomepageCharts";
 
 import Gantt from "./Gantt";
+import GoogleGantt from "./GoogleGantt";
 
 import ProjectOverviewTable from "./ProjectOverviewTable";
 
@@ -392,7 +393,7 @@ storiesOf("HomepageMyProjects", module).add("Intial", () => (
 // storiesOf('Kanban', module).add('Project Kanban', () => <ProjectKanban />);
 
 storiesOf("HomepageCharts", module).add("Chart A", () => (
-  <HomepageChartA chartInformation={"8"} chartTitle="Projects Managing" chartColor="#0099ff" data={[1]}/>
+  <HomepageChartA chartInformation={"8"} chartTitle="Projects Managing" chartColor="#0099ff" data={[1]} />
 ));
 storiesOf("HomepageCharts", module).add("Chart B", () => <HomepageChartB chartInformation={chartData} />);
 storiesOf("HomepageCharts", module).add("Charts", () => (
@@ -400,7 +401,8 @@ storiesOf("HomepageCharts", module).add("Charts", () => (
 ));
 
 storiesOf("Gantt", module)
-  .add("Basic", () => <Gantt projectTasks={projectTasks} />)
+  .add("Libersky timeline", () => <Gantt projectTasks={projectTasks} />)
+  .add("Google Gantt", () => <GoogleGantt projectTasks={projectTasks} />)
   .add("No Data", () => <Gantt projectTasks={[null]} />);
 
 storiesOf("Project Overview Table", module)
