@@ -18,7 +18,6 @@ planEndInit.setDate(planEndInit.getDate() + 7);
 const planStartString = convertTimestampStringToYMD(planStartInit.toString())
 const planEndString = convertTimestampStringToYMD(planEndInit.toString())
 
-
 export default function AddProjectForm({ state, userID, close }) {
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
