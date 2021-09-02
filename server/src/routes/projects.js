@@ -18,6 +18,14 @@ module.exports = (db) => {
     });
   });
 
+  router.delete('/projects/:id', (request, response) => {
+    db.query('DELETE FROM projects WHERE id = $1::integer', [request.params.id])
+      .then(() => {
+        response.status(204).json({});
+      })
+      .catch((error) => console.log(error));
+  });
+
   return router;
 };
 //

@@ -74,7 +74,7 @@ function NavBar() {
                 <ListItem button className={[activePage() === 'homepage' ? classes.selected : '', classes.navBarButton] } alignItems="center">
                   <ListItemText 
                     primary={<HomeIcon className={classes.navBarIcon} />} 
-                    secondary={<Typography variant='h7'>Home</Typography>}  
+                    secondary={<Typography>Home</Typography>}  
                   />
                 </ListItem>
               </NavLink>
@@ -82,7 +82,7 @@ function NavBar() {
                 <ListItem button className={[activePage() === 'projects' ? classes.selected : '', classes.navBarButton] }>
                   <ListItemText 
                     primary={<AppsIcon className={classes.navBarIcon} />} 
-                    secondary={<Typography variant='h7'>Projects</Typography>}
+                    secondary={<Typography>Projects</Typography>}
                   />
                 </ListItem>
               </NavLink>
@@ -115,7 +115,7 @@ function NavBar() {
             <ListItem button className={ classes.navBarButton  }>
               <ListItemText 
                 primary={<AlarmIcon fontSize="large" className={ classes.navBarIcon } />} 
-                secondary={<Typography variant='h7'>Pomodoro</Typography>}
+                secondary={<Typography>Pomodoro</Typography>}
               />
             </ListItem>
           </List>
