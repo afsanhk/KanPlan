@@ -7,7 +7,7 @@ import '../styles/ProjectGantt.scss';
 
 import { getTasksForProject } from '../helpers/selectors';
 
-const ProjectGantt = ({ state }) => {
+const ProjectGantt = ({ state, updateProjectUsers }) => {
   const { projectID } = useParams();
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
@@ -17,7 +17,7 @@ const ProjectGantt = ({ state }) => {
       <div className="project-gantt-header">
         <div className="project-gantt-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text state={state} />
+          <LinkIconContainer projectID={projectID} text state={state} updateProjectUsers={updateProjectUsers} />
         </div>
         <p>{projectDescription}</p>
       </div>

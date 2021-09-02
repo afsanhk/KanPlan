@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProjectOverview = ({ state, deleteTask, userID, deleteProject }) => {
+const ProjectOverview = ({ state, deleteTask, userID, deleteProject, updateProjectUsers }) => {
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
@@ -60,7 +60,7 @@ const ProjectOverview = ({ state, deleteTask, userID, deleteProject }) => {
           <div className="project-overview-title">
             <h1>{projectTitle}</h1>
             <div className="project-overview-links">
-              <LinkIconContainer projectID={projectID} text state={state} />
+              <LinkIconContainer projectID={projectID} text state={state} updateProjectUsers={updateProjectUsers} />
               <Button variant="outlined" color="secondary" className={classes.button} onClick={handleOpen}>
                 Delete project
               </Button>

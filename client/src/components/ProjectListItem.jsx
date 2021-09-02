@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 // id is project id
-export default function ProjectListItem({ project, state, deleteProject }) {
+export default function ProjectListItem({ project, state, deleteProject, updateProjectUsers }) {
   const id = project.id;
   const name = project.proj_name;
   const description = project.proj_description;
@@ -65,7 +65,7 @@ export default function ProjectListItem({ project, state, deleteProject }) {
         <p className="project-body">{description}</p>
         <footer className="project-footer">
           <div className="nav-icon-container">
-            <LinkIconContainer projectID={id} text state={state} />
+            <LinkIconContainer projectID={id} text state={state} updateProjectUsers={updateProjectUsers} />
           </div>
           <div style={visibility}>
             <IconButton className={classes.icon} onClick={handleOpen} style={visibility}>

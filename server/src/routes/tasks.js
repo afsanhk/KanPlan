@@ -14,7 +14,7 @@ module.exports = (db) => {
       JOIN kanban_status ON tasks.status_id = kanban_status.id
       JOIN user_tasks ON tasks.id = user_tasks.task_id
       GROUP BY tasks.id, proj_name, priority_name, status
-      ORDER BY tasks.id`
+      `
     ).then(({ rows: tasks }) => {
       response.json(tasks.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
     });

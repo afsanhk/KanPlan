@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function LinkIconContainer({ projectID, text, state }) {
+export default function LinkIconContainer({ projectID, text, state, updateProjectUsers }) {
   const classes = useStyles();
 
   // modal state
@@ -86,7 +86,7 @@ export default function LinkIconContainer({ projectID, text, state }) {
             }}
           >
             <Fade in={open}>
-              <ProjectUsers users={state.users} project={state.projects[projectID]} closeModal={handleClose} />
+              <ProjectUsers users={state.users} project={state.projects[projectID]} closeModal={handleClose} updateProjectUsers={updateProjectUsers} />
             </Fade>
           </Modal>
         </>

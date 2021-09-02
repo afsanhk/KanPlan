@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 // scss
 import '../styles/ProjectUsers.scss';
+import axios from 'axios';
 
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
@@ -35,12 +36,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ProjectUsers({ users, project, closeModal }) {
+function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
   const classes = useStyles();
 
   const [teamMembers, setTeamMembers] = useState(project.team_members);
   const [currentUsers, setCurrentUsers] = useState(project.team_members);
-  const [state, setState] = useState({});
+  const [userState, setUserState] = useState({});
 
   const managerId = teamMembers.filter((id) => id === project.manager_id)[0];
 
@@ -61,7 +62,7 @@ function ProjectUsers({ users, project, closeModal }) {
   const removeUser = (user_id) => {
     setCurrentUsers((prev) => {
       const newUsers = [...prev].filter((id) => id !== user_id);
-      setState((prev) => ({ ...prev, team_members: newUsers }));
+      setUserState((prev) => ({ ...prev, team_members: newUsers }));
       return newUsers;
     });
   };
@@ -70,24 +71,39 @@ function ProjectUsers({ users, project, closeModal }) {
   const addUser = (user_id) => {
     setCurrentUsers((prev) => {
       const newUsers = [...prev, user_id];
-      setState((prev) => ({ ...prev, team_members: newUsers }));
+      setUserState((prev) => ({ ...prev, team_members: newUsers }));
       return newUsers;
     });
   };
 
   const updateData = () => {
-    console.log(currentUsers);
+    console.log(userState);
+    if (currentUsers.length < project.team_members.length) {
+      const deletedMembers = project.team_members.filter(function (el) {
+        return currentUsers.indexOf(el) < 0;
+      });
+      const deletedTasks = deletedMembers.map((memberID) => {
+        return users[memberID].user_tasks.filter((taskID) => project.project_tasks.includes(taskID));
+      });
+      axios
+        .put(`http://localhost:8001/api/member/project/${project.id}`, { team_members: currentUsers, deleted_members: deletedMembers, deleted_tasks: deletedTasks })
+        .catch((error) => console.log(error));
+    } else {
+      axios.put(`http://localhost:8001/api/member/project/${project.id}`, { team_members: currentUsers }).catch((error) => console.log(error));
+    }
+    currentUsers.forEach((userID) => {
+      // filter the unique project id
+      const updatedUserProjects = [...users[userID].user_projects, project.id].filter((value, index, self) => {
+        return self.indexOf(value) === index;
+      });
+      console.log('project_id: ', project.id, 'user_id: ', userID, 'team_members: ', currentUsers, 'user_projects: ', updatedUserProjects);
+      updateProjectUsers(project.id, userID, project.team_members, currentUsers, updatedUserProjects);
+    });
     closeModal();
   };
 
-  // console log function
-  const consoleData = () => {
-    setState((prev) => ({ ...prev, team_members: currentUsers }));
-    console.log(state);
-  };
-
   useEffect(() => {
-    setState((prev) => ({ ...prev, team_members: currentUsers }));
+    setUserState((prev) => ({ ...prev, team_members: currentUsers }));
   }, []);
 
   return (
