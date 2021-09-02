@@ -2,12 +2,48 @@ import { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
+import Chip from "@material-ui/core/Chip";
+
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
 
 import '../styles/AddProjectForm.scss';
 
 import convertTimestampStringToYMD from '../helpers/dateConvert';
+
+// Styling for the 'chips'
+const useStyles = makeStyles((theme) => ({
+  // This defines the styling for the 'field' that contains the name 'chips'
+  chips: {
+    display: "grid",
+    gridTemplateColumns: "150px 150px 150px",
+    backgroundColor: "white"
+  },
+  // This defines the styling for the actual name 'chips'
+  chip: {
+    margin: 2,
+    backgroundColor: "white",
+    border: "solid 1px #4b9fea"
+  }
+}));
+
+// Styling for the drop-down
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+      marginTop: 52
+    }
+  }
+};
 
 // Prep date data
 // get today's date yyyy-mm-dd
@@ -16,21 +52,25 @@ const planEndInit = new Date();
 planEndInit.setDate(planEndInit.getDate() + 7); 
 // convert to string and return in YYYY-MM-DD format
 const planStartString = convertTimestampStringToYMD(planStartInit.toString())
-const planEndString = convertTimestampStringToYMD(planStartInit.toString())
-
+const planEndString = convertTimestampStringToYMD(planEndInit.toString())
 
 export default function AddProjectForm({ state, userID, close }) {
+  const classes = useStyles();
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
   const [planStart,setPlanStart] = useState(planStartString);
   const [planEnd,setPlanEnd] = useState(planEndString);
-  const [teamMembers, setTeamMembers] = useState([userID]);
+  const [personName, setPersonName] = useState([]);
 
-  const useStyles = makeStyles();
-  const classes = useStyles();
+  const handleChange = (event) => {
+    setPersonName(event.target.value);
+  };
+  
+  let managerID = userID;
+  const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
-    console.log(userID, projectName, projectDesc);
+    console.log(userID, projectName, projectDesc, planStart, planEnd, personName);
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
@@ -38,13 +78,7 @@ export default function AddProjectForm({ state, userID, close }) {
     close(event);
   };
 
-  const userObj = state && state.users[userID];
-
-  // This is for demonstration purposes to TJ and Veronica only. Ends at next //
-  const potentialTeamMembers = [2,3,4,5,6]
-  const parsedTeamMembers = potentialTeamMembers.map(id => {
-    return (<TeamMember name={state.users[id].user_name} border add/>)
-  });
+  const managerObj = state && state.users[managerID];
 
   return (
     <div className="add-project-form-container">
@@ -99,13 +133,37 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-PM">
             <h3>Project Manager</h3>
-            <TeamMember name={userObj.user_name} />
+            <TeamMember name={managerObj.user_name} />
           </div>
 
           <div className="add-project-form-team-members">
             <h3>Choose some additional team members!</h3>
+            {/* Checkbox Dropdown Code */}
             <div className="team-member-container">
-              {parsedTeamMembers}
+              <Select
+                labelId="demo-mutiple-checkbox-label"
+                id="mutiple-checkbox"
+                multiple
+                value={personName}
+                onChange={handleChange}
+                input={<Input />}
+                style={{width: "490px"}}
+                renderValue={(selected) => (
+                  <div className={classes.chips}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} className={classes.chip} />
+                    ))}
+                  </div>
+                )}
+                MenuProps={MenuProps}
+              >
+                {names.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    <Checkbox checked={personName.indexOf(name) > -1} />
+                    <ListItemText primary={name} />
+                  </MenuItem>
+                ))}
+              </Select>
             </div>
           </div>
         </form>
@@ -114,10 +172,6 @@ export default function AddProjectForm({ state, userID, close }) {
         <ConfirmButton saving updateData={clickSave} />
         <ConfirmButton cancelling close={close} />
       </div>
-      <img style= {{width: '200px', marginTop: '20px', marginLeft:'140px'}}
-          src="https://static.boredpanda.com/blog/wp-content/uploads/2018/12/5c24c2292938a_wegda68zn5021__700.jpg"
-          alt="hehe cat"
-        />
     </div>
   );
 }

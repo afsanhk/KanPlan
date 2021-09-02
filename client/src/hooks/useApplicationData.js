@@ -7,7 +7,7 @@ export default function useApplicationData() {
     projects: {},
     users: {}
   });
-  const [kanbanStatus, setKanbanStatus] = useState({});
+  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -44,20 +44,19 @@ export default function useApplicationData() {
       });
   };
 
-  const updateTaskStatus = (taskState) => {
+  const updateTaskStatus = (taskState, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    stateCopy.tasks[taskState.id].status = taskState.status;
-    stateCopy.tasks[taskState.id].status_id = taskState.status;
+    stateCopy.tasks[taskID].status = taskState.status;
+    stateCopy.tasks[taskID].status_id = taskState.status_id;
+    stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
 
-    setState((prev) => ({ ...prev, ...stateCopy }));
-
-    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
+    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
   };
 
   const getKanbanStatus = (projectID) => {
     return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
       setKanbanStatus(res.data);
-      console.log(res);
     });
   };
 
