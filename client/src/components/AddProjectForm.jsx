@@ -18,16 +18,18 @@ import convertTimestampStringToYMD from '../helpers/dateConvert';
 
 // Styling for the 'chips'
 const useStyles = makeStyles((theme) => ({
+  // This defines the styling for the 'field' that contains the name 'chips'
   chips: {
     display: "grid",
     gridTemplateColumns: "150px 150px 150px",
+    backgroundColor: "white"
   },
+  // This defines the styling for the actual name 'chips'
   chip: {
-    margin: 2
-  },
-  noLabel: {
-    marginTop: theme.spacing(3)
-  },
+    margin: 2,
+    backgroundColor: "white",
+    border: "solid 1px #4b9fea"
+  }
 }));
 
 // Styling for the drop-down
