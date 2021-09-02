@@ -83,7 +83,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
       proj_description: projectDesc
     }
     console.log(newProject, teamIDs);
-    addProject(newProject, managerID, teamIDs);
+    addProject(newProject, teamIDs);
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
