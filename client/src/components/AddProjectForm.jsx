@@ -74,8 +74,15 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
 
   const clickSave = (event) => {
     // Looks for the index of each team member in 'names' array, then returns corresponding 'id'.
-    const teamIDs = personName.map(selectedName => names.findIndex(name => name === selectedName)).map(index => ids[index]); 
-    console.log(userID, projectName, projectDesc, planStart, planEnd, personName, teamIDs);
+    const teamIDs = personName.map(selectedName => names.findIndex(name => name === selectedName)).map(index => Number(ids[index])); 
+    const newProject = {
+      proj_name: projectName, 
+      manager_id: managerID, 
+      planned_start: planStart, 
+      planned_end: planEnd, 
+      proj_description: projectDesc
+    }
+    console.log(newProject, teamIDs);
     addProject("test")
     setProjectName('');
     setProjectDesc('');
