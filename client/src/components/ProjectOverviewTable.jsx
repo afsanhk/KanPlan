@@ -207,8 +207,12 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                         if (row.users.length === 1) {
                           return (
                             <>
-                              <Avatar name={projectUsers[userID]['user_name']} key={index} />
-                              <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                              {projectUsers[userID] && (
+                                <>
+                                  <Avatar name={projectUsers[userID]['user_name']} key={index} />
+                                  <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                                </>
+                              )}
                             </>
                           );
                         }
