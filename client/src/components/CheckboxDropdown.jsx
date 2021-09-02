@@ -48,7 +48,7 @@ export default function CheckboxDropdown({users}) {
 
   return (
     <div>
-        <InputLabel id="demo-mutiple-checkbox-label">Tag</InputLabel>
+        <InputLabel id="demo-mutiple-checkbox-label">Select Users</InputLabel>
         <Select
           labelId="demo-mutiple-checkbox-label"
           id="demo-mutiple-checkbox"
