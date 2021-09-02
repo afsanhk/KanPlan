@@ -49,8 +49,7 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log("Inside addTask state:", state);
-        console.log("Inside addTask state copy:", stateCopy);
+        console.log(stateCopy);
       });
   };
 
