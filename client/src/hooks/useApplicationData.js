@@ -102,13 +102,19 @@ export default function useApplicationData() {
       .post(`http://localhost:8001/api/projects/`, newProject)
       .then((res) => {
         // Capture new project ID
-        projectID = res.data.task_id;
+        projectID = res.data.project_id;
       })
       .then(() => {
         // Create stateCopy
         const stateCopy = JSON.parse(JSON.stringify(state));
         // Add new project to state copy, set project_tasks to null
-        stateCopy.projects[projectID] = { ...newProject, project_tasks: [null] };
+        stateCopy.projects[projectID] = {
+          ...newProject,
+          id: projectID,
+          manager_name: newProject.manager_name,
+          project_tasks: [null],
+        };
+        console.log("Inside addProject: ", stateCopy.projects);
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.push(projectID));
         // Set state.

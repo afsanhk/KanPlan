@@ -69,6 +69,8 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
   };
   
   let managerID = Number(userID);
+  const managerObj = state && state.users[managerID];
+  const managerName = managerObj.user_name;
   const ids = Object.keys(state.users).filter(userids => userids !== managerID.toString());
   const names = ids.map(userids => state.users[userids].user_name);
 
@@ -78,6 +80,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
     const newProject = {
       proj_name: projectName, 
       manager_id: managerID, 
+      manager_name: managerName,
       planned_start: planStart, 
       planned_end: planEnd, 
       proj_description: projectDesc,
@@ -92,7 +95,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
     close(event);
   };
 
-  const managerObj = state && state.users[managerID];
+ 
 
   return (
     <div className="add-project-form-container">
@@ -147,7 +150,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
 
           <div className="add-project-form-PM">
             <h3>Project Manager</h3>
-            <TeamMember name={managerObj.user_name} />
+            <TeamMember name={managerName} />
           </div>
 
           <div className="add-project-form-team-members">
