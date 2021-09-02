@@ -33,6 +33,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '3px #757575 solid',
+    'border-radius': '8px',
+    boxShadow: theme.shadows[5],
+    // padding: theme.spacing(2, 2, 2),
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    width: '50vw',
+    top: '5vh',
+    left: '28vw',
+    position: 'fixed',
   }
 }));
 
@@ -127,7 +141,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }, []);
 
   return (
-    <div className="task-form">
+    <div className={classes.paper}>
       <header className="task-form-header">
         <h1>{tasks.title}</h1>
       </header>
