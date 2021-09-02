@@ -109,9 +109,6 @@ export default function useApplicationData() {
     });
   }
 
-<<<<<<< HEAD
-  return { state, loading, addTask, updateTaskStatus, deleteTask, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder };
-=======
   //
   function addProject(newProject) {
     console.log(`Inside addProject: newProject  ${JSON.stringify(newProject)}`);
@@ -190,5 +187,4 @@ export default function useApplicationData() {
     getKanbanStatus,
     kanbanStatus
   };
->>>>>>> master
 }

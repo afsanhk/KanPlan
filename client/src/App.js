@@ -55,11 +55,7 @@ const theme = createTheme({
 });
 
 function App() {
-<<<<<<< HEAD
-  const { state, loading, deleteTask, addTask, updateTaskStatus, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder } = useApplicationData();
-=======
   const { state, loading, deleteTask, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, addProject, deleteProject, updateProjectUsers } = useApplicationData();
->>>>>>> master
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
@@ -90,15 +86,9 @@ function App() {
                     state={state}
                     addTask={addTask}
                     updateTaskStatus={updateTaskStatus}
-<<<<<<< HEAD
-                    updateKanbanStatus={updateKanbanStatus}
-                    kanbanStatus={kanbanStatus}
-                    updateTaskKanbanOrder={updateTaskKanbanOrder}
-=======
                     getKanbanStatus={getKanbanStatus}
                     kanbanStatus={kanbanStatus}
                     updateProjectUsers={updateProjectUsers}
->>>>>>> master
                   />
                 </Route>
                 <Route path="/project/:projectID/gantt">
