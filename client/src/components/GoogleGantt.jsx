@@ -20,6 +20,21 @@ export default function GoogleGantt ({projectTasks}) {
   
   });
 
+  // https://developers.google.com/chart/interactive/docs/gallery/ganttchart#data-format
+  const ganttStyle = {
+    height: 400,
+    gantt: {
+      criticalPathEnabled: false,
+      innerGridHorizLine: {
+        stroke: 'lightblue',
+        strokeWidth: 2,
+      },
+      innerGridTrack: { fill: 'white' },
+      innerGridDarkTrack: { fill: 'white' },
+      // trackHeight: 70
+    },
+  }
+
   return (
     <Chart
     width={'100%'}
@@ -38,6 +53,7 @@ export default function GoogleGantt ({projectTasks}) {
       ], 
       ...tasks
     ]}
+    options={ganttStyle}
   />
   )
 };
