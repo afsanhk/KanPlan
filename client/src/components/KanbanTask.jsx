@@ -26,7 +26,7 @@ function KanbanTask({ task, index, state }) {
   });
 
   return (
-    <Draggable key={task.id} draggableId={task.title} index={index}>
+    <Draggable key={task.id} draggableId={task.id.toString()} index={index}>
       {(provided) => (
         <div className="kanban-task" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
           <header className="kanban-task-header">

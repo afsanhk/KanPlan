@@ -54,11 +54,9 @@ export default function useApplicationData() {
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
   };
 
-  const getKanbanStatus = (projectID) => {
-    return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
-      setKanbanStatus(res.data);
-      console.log(res);
-    });
+  const updateKanbanStatus = (state) => {
+    setKanbanStatus((prev) => ({ ...prev, ...state }));
+    return;
   };
 
   function deleteTask(id, projectID, userID) {
@@ -94,5 +92,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, getKanbanStatus, kanbanStatus };
+  return { state, loading, addTask, updateTaskStatus, deleteTask, updateKanbanStatus, kanbanStatus };
 }

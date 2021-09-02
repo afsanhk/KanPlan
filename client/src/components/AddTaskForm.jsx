@@ -91,8 +91,6 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   const updateData = () => {
-    // state.plan_start = state.plan_start + 'T04:00:00.000Z';
-    // state.plan_end = state.plan_end + 'T04:00:00.000Z';
     addTask({ ...state, project_id: projectID }, projectID, currentUsers);
     close();
   };
