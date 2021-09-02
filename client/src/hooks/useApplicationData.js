@@ -96,9 +96,21 @@ export default function useApplicationData() {
   }
 
   //
-  function addProject(projectID) {
+  function addProject() {
     console.log(`Inside addProject:
-    Form data projectID ${projectID}`);
+    Form data projectID ${"random code inside addProject test"}`);
+    let projectID;
+    // return axios
+    //   .post(`http://localhost:8001/api/tasks/`, newTask)
+    //   .then((res) => {
+    //     // capture new project ID
+    //     taskID = res.data.task_id;
+    //   })
+    //   .then(() => {
+    //     // Make state copy and set new state
+    //     console.log("Inside addTask state:", state);
+    //     console.log("Inside addTask state copy:", stateCopy);
+    //   });
   }
 
   //id is the project id

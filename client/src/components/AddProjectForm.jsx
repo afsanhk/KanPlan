@@ -66,11 +66,12 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
     setPersonName(event.target.value);
   };
   
-  let managerID = userID;
+  let managerID = Number(userID);
   const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
     console.log(userID, projectName, projectDesc, planStart, planEnd, personName);
+    addProject("test")
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
