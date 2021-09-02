@@ -56,7 +56,7 @@ const status_id = {
   Done: 4
 };
 
-function EditTaskForm({ tasks, projects, users }) {
+function EditTaskForm({ tasks, projects, users, close, editTask }) {
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
@@ -72,9 +72,15 @@ function EditTaskForm({ tasks, projects, users }) {
   const [teamMembers, setTeamMembers] = useState(null);
   // const [currentProject, setCurrentProject] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ task_description: tasks.task_description, plan_start: currentDate, plan_end: currentDate });
+  const [state, setState] = useState({ 
+    task_description: tasks.task_description, 
+    plan_start: tasks.plan_start, 
+    plan_end: tasks.plan_end 
+  });
 
   const [open, setOpen] = React.useState(false);
+
+  const taskID = tasks.id
 
   const handleClick = () => {
     setClickDesc(!clickDesc);
@@ -107,6 +113,12 @@ function EditTaskForm({ tasks, projects, users }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // modal save function
+  function updateData() {
+    editTask(state, taskID)
+    close()
+  }
 
   useEffect(() => {
     // setCurrentUsers(getTeamMembers(currentProject));
@@ -174,7 +186,7 @@ function EditTaskForm({ tasks, projects, users }) {
                 id="date"
                 label="Start Date"
                 type="date"
-                defaultValue={currentDate}
+                defaultValue={tasks.plan_start}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -185,7 +197,7 @@ function EditTaskForm({ tasks, projects, users }) {
                 id="date"
                 label="End Date"
                 type="date"
-                defaultValue={currentDate}
+                defaultValue={tasks.plan_end}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -257,13 +269,11 @@ function EditTaskForm({ tasks, projects, users }) {
 
       <footer className="task-form-footer">
         <div>
+          <ConfirmButton cancelling close={close} />
           <ConfirmButton
             saving
-            consoleData={() => {
-              console.log(state);
-            }}
+            updateData={updateData}
           />
-          <ConfirmButton deleting />
         </div>
       </footer>
     </div>

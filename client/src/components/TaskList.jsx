@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 
 import TaskListItem from "./TaskListItem";
 
-export default function TaskList({ tasks, deleteTask, userID }) {
+export default function TaskList({ tasks, deleteTask, editTask, userID, state }) {
 
   const parsedTaskList = tasks.map(task => {
     return (
@@ -14,6 +14,8 @@ export default function TaskList({ tasks, deleteTask, userID }) {
         projectID={task.project_id}
         task={task} 
         deleteTask={deleteTask}
+        editTask={editTask}
+        state={state}
       /> 
     )
   })

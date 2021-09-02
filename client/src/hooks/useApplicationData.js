@@ -54,6 +54,32 @@ export default function useApplicationData() {
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
   };
 
+  const editTask = (newTaskData, taskID) => {
+    const stateCopy = JSON.parse(JSON.stringify(state));
+    
+    stateCopy.tasks[taskID].task_description = newTaskData.task_description;
+    stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
+    stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
+    stateCopy.tasks[taskID].task_users = newTaskData.task_users
+    
+    if (newTaskData.priority_id) {
+      stateCopy.tasks[taskID].priority_id = newTaskData.priority_id;
+      stateCopy.tasks[taskID].priority_name = newTaskData.priority_name;
+    }
+
+    if (newTaskData.status_id) {
+      stateCopy.tasks[taskID].status_id = newTaskData.status_id;
+      stateCopy.tasks[taskID].status = newTaskData.status_name;
+    }
+
+    const newTaskFullData = stateCopy.tasks[taskID]
+    console.log('newTaskFullData:', newTaskFullData)
+    console.log('taskID:', taskID)
+
+    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID]}}));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}`, {newTaskFullData}).catch((error) => console.log(error));
+  }
+
   const getKanbanStatus = (projectID) => {
     return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
       setKanbanStatus(res.data);
@@ -132,5 +158,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, deleteProject, getKanbanStatus, kanbanStatus };
+  return { state, loading, addTask, updateTaskStatus, deleteTask, editTask, deleteProject, getKanbanStatus, kanbanStatus };
 }

@@ -11,7 +11,7 @@ import { getProjectsForUser, getTasksForUser, getProjectsManagingForUser, getTas
 
 import "../styles/UserDashboard.scss";
 
-const UserDashboard = ({ state, userID, deleteTask }) => {
+const UserDashboard = ({ state, userID, deleteTask, editTask }) => {
   const name = state.users[userID].user_name;
   const tasks = getTasksForUser(state, userID);
   const projects = getProjectsForUser(state, userID).map((index) => state.projects[index]); //array (of objs) with all project details
@@ -31,7 +31,7 @@ const UserDashboard = ({ state, userID, deleteTask }) => {
         </div>
       </div>
       <div className="userDashboard-body">
-        <HomepageMyWork tasks={tasks} deleteTask={deleteTask} userID={userID} />
+        <HomepageMyWork tasks={tasks} deleteTask={deleteTask} editTask={editTask} userID={userID} state={state} />
         <HomepageImportantUpdates />
         <HomepageMyProjects projects={projects} state={state} />
       </div>
