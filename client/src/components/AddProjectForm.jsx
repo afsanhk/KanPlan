@@ -16,7 +16,7 @@ const planEndInit = new Date();
 planEndInit.setDate(planEndInit.getDate() + 7); 
 // convert to string and return in YYYY-MM-DD format
 const planStartString = convertTimestampStringToYMD(planStartInit.toString())
-const planEndString = convertTimestampStringToYMD(planStartInit.toString())
+const planEndString = convertTimestampStringToYMD(planEndInit.toString())
 
 
 export default function AddProjectForm({ state, userID, close }) {
@@ -30,7 +30,7 @@ export default function AddProjectForm({ state, userID, close }) {
   const classes = useStyles();
 
   const clickSave = (event) => {
-    console.log(userID, projectName, projectDesc);
+    console.log(userID, projectName, projectDesc, planStart, planEnd);
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
