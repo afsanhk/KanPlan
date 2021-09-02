@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
+import { useLocation, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 
@@ -45,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 export default function DeleteTaskForm({ close, task, deleteTask, projectID, userID, project, deleteProject }) {
 
   const classes = useStyles();
+  const history = useHistory();
+
+  const { pathname } = useLocation(); //extracts pathname from current url location
 
   function deleteSingleTask() {
     deleteTask(task.id, projectID, userID)
@@ -53,7 +58,12 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
 
   function deleteSingleProject() {
     deleteProject(project.id)
-    close()
+      
+    if (pathname.includes('overview')) {
+      history.push('/')
+    } else {
+      close()
+    }
   }
 
 

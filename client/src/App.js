@@ -79,7 +79,7 @@ function App() {
                   <UserProjects state={state} userID={userID} deleteProject={deleteProject}/>
                 </Route>
                 <Route path="/project/:projectID/overview">
-                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} />
+                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} deleteProject={deleteProject}/>
                 </Route>
                 <Route path="/project/:projectID/kanban">
                   <ProjectKanban state={state} addTask={addTask} updateTaskStatus={updateTaskStatus} getKanbanStatus={getKanbanStatus} kanbanStatus={kanbanStatus} />
