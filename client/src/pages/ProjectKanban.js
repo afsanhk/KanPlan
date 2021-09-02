@@ -35,7 +35,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
     arr.splice(to, 0, item[0]);
   };
 
-  const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const initialData = {
     tasks: {},
     columns: {
@@ -62,67 +61,31 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
     },
     columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
   };
-  projectTasks.forEach((task) => {
-    if (task) {
-      initialData.tasks[task.id] = task;
-      if (task.status === 'Late') {
-        initialData.columns['column-1'].taskIds.push(task.id);
-      } else if (task.status === 'To-Do') {
-        initialData.columns['column-2'].taskIds.push(task.id);
-      } else if (task.status === 'In Progress') {
-        initialData.columns['column-3'].taskIds.push(task.id);
-      } else if (task.status === 'Done') {
-        initialData.columns['column-4'].taskIds.push(task.id);
-      }
-    }
-  });
 
   const [kanbanState, setKanbanState] = useState(initialData);
 
   useEffect(() => {
     const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
-    const initialData = {
-      tasks: {},
-      columns: {
-        'column-1': {
-          id: 'column-1',
-          title: 'Late',
-          taskIds: []
-        },
-        'column-2': {
-          id: 'column-2',
-          title: 'To-Do',
-          taskIds: []
-        },
-        'column-3': {
-          id: 'column-3',
-          title: 'In Progress',
-          taskIds: []
-        },
-        'column-4': {
-          id: 'column-4',
-          title: 'Done',
-          taskIds: []
-        }
-      },
-      columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
-    };
+
     projectTasks.forEach((task) => {
       if (task) {
         initialData.tasks[task.id] = task;
-        if (task.status === 'Late') {
-          initialData.columns['column-1'].taskIds.push(task.id);
-        } else if (task.status === 'To-Do') {
-          initialData.columns['column-2'].taskIds.push(task.id);
-        } else if (task.status === 'In Progress') {
-          initialData.columns['column-3'].taskIds.push(task.id);
-        } else if (task.status === 'Done') {
-          initialData.columns['column-4'].taskIds.push(task.id);
-        }
       }
     });
-    setKanbanState(initialData);
-  }, [state]);
+    if (kanbanStatus[1]) {
+      initialData.columns['column-1'].taskIds = kanbanStatus[1].task_id;
+    }
+    if (kanbanStatus[0]) {
+      initialData.columns['column-2'].taskIds = kanbanStatus[0].task_id;
+    }
+    if (kanbanStatus[2]) {
+      initialData.columns['column-3'].taskIds = kanbanStatus[2].task_id;
+    }
+    if (kanbanStatus[3]) {
+      initialData.columns['column-4'].taskIds = kanbanStatus[3].task_id;
+    }
+    setKanbanState((prev) => ({ ...prev, ...initialData }));
+  }, [kanbanStatus]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -230,7 +193,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
       }
     };
 
-    setKanbanState(newState);
+    setKanbanState((prev) => ({ ...prev, ...newState }));
   };
 
   const projectTitle = state.projects[projectID].proj_name;
@@ -253,6 +216,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
               {kanbanState.columnOrder.map((columnId) => {
                 const column = kanbanState.columns[columnId];
                 const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
+                console.log(tasks);
                 return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} addTask={addTask} />;
               })}
             </div>
