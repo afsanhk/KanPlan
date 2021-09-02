@@ -24,39 +24,39 @@ module.exports = (db) => {
     console.log(
       `Server side proj_name ${proj_name}, manager_id ${manager_id}, planned_start ${planned_start}, planned_end ${planned_end}, proj_description ${proj_description} & team_members ${team_members}`
     );
-    // First query inserts inro projects
+    // First query inserts into projects
     db.query(
       `INSERT INTO projects (proj_name, manager_id, planned_start, planned_end, proj_description) 
        VALUES ($1::text, $2::integer, $3, $4, $5::text)
        RETURNING id;
       `,
       [proj_name, manager_id, planned_start, planned_end, proj_description]
-    ).then((res) => console.log(res.rows[0]));
-    //   .then((res) => {
-    //     if (task_users.length) {
-    //       let query = '';
-    //       const task_id = res.rows[0].id;
-    //       for (const user_id of task_users) {
-    //         query += '(' + task_id + ',' + user_id + ')';
-    //         if (!(task_users.indexOf(user_id) === task_users.length - 1)) {
-    //           query += ',\n';
-    //         }
-    //       }
-    //       db.query(
-    //         `
-    //         INSERT INTO user_tasks(task_id, user_id)
-    //         VALUES ${query}
-    //         RETURNING task_id;
-    //         `
-    //       )
-    //         .then((res) => {
-    //           // console.log(res.rows[0]);
-    //           response.send(res.rows[0]);
-    //         })
-    //         .catch((error) => console.log(error));
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
+    )
+      // Second query creates relations for team members and project in project_members table
+      .then((res) => {
+        if (team_members.length) {
+          let query = "";
+          const project_id = res.rows[0].id;
+          for (const user_id of team_members) {
+            query += "(" + project_id + "," + user_id + ")";
+            if (!(team_members.indexOf(user_id) === team_members.length - 1)) {
+              query += ",\n";
+            }
+          }
+          db.query(
+            `
+            INSERT INTO project_members(project_id, user_id)
+            VALUES ${query}
+            RETURNING project_id;
+            `
+          ) // Sends the new projectID back so we can create a state copy
+            .then((res) => {
+              response.send(res.rows[0]);
+            })
+            .catch((error) => console.log(error));
+        }
+      })
+      .catch((error) => console.log(error));
   });
 
   router.delete("/projects/:id", (request, response) => {
