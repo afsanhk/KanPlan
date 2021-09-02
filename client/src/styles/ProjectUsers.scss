@@ -1,9 +1,16 @@
 .project-users {
+  background-color: white;
+  width: 600px;
+  padding-bottom: 50px;
+  border-radius: 5px;
+  border: 2px solid black;
+
   .project-users-header {
     padding: 20px 20px 0px 20px;
     border-bottom: 2px solid black;
     display: flex;
     justify-content: center;
+    position: relative;
 
     h1 {
       width: 80%;
@@ -34,15 +41,18 @@
 
       .project-users-body-users-div {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         flex-wrap: wrap;
+        max-height: 350px;
+        overflow: auto;
+        margin-bottom: 25px;
       }
 
       .project-users-body-add-user {
         width: 80%;
 
         .project-users-body-add-user-div {
-          margin-left: 20px;
+          margin-left: 10px;
           display: flex;
           align-items: center;
 

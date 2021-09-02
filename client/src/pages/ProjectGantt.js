@@ -1,11 +1,11 @@
-import { useParams } from "react-router";
+import { useParams } from 'react-router';
 
-import Gantt from "../components/Gantt";
-import LinkIconContainer from "../components/LinkIconContainer";
+import Gantt from '../components/Gantt';
+import LinkIconContainer from '../components/LinkIconContainer';
 
-import '../styles/ProjectGantt.scss'
+import '../styles/ProjectGantt.scss';
 
-import { getTasksForProject } from "../helpers/selectors";
+import { getTasksForProject } from '../helpers/selectors';
 
 const ProjectGantt = ({ state }) => {
   const { projectID } = useParams();
@@ -13,11 +13,11 @@ const ProjectGantt = ({ state }) => {
   const projectDescription = state.projects[projectID].proj_description;
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   return (
-    <div className='project-gantt'>
+    <div className="project-gantt">
       <div className="project-gantt-header">
         <div className="project-gantt-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text/>
+          <LinkIconContainer projectID={projectID} text state={state} />
         </div>
         <p>{projectDescription}</p>
       </div>

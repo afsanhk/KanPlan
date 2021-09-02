@@ -199,7 +199,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
       <div className="project-kanban-header">
         <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text />
+          <LinkIconContainer projectID={projectID} text state={state} />
         </div>
         <p>{projectDescription}</p>
       </div>

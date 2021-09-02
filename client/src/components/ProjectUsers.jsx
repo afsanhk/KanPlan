@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 // components
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
+import AddUserForm from './AddUserForm';
 
 // material-ui cores
 import { Backdrop, Fade, IconButton, makeStyles, Modal } from '@material-ui/core';
 
 // material-ui icons
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import AddUserForm from './AddUserForm';
+import CloseIcon from '@material-ui/icons/Close';
 
 // scss
 import '../styles/ProjectUsers.scss';
@@ -26,10 +27,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '35px',
+    right: '35px'
   }
 }));
 
-function ProjectUsers({ users, project }) {
+function ProjectUsers({ users, project, closeModal }) {
   const classes = useStyles();
 
   const [teamMembers, setTeamMembers] = useState(project.team_members);
@@ -69,6 +75,11 @@ function ProjectUsers({ users, project }) {
     });
   };
 
+  const updateData = () => {
+    console.log(currentUsers);
+    closeModal();
+  };
+
   // console log function
   const consoleData = () => {
     setState((prev) => ({ ...prev, team_members: currentUsers }));
@@ -83,6 +94,9 @@ function ProjectUsers({ users, project }) {
     <div className="project-users">
       <header className="project-users-header">
         <h1>Users</h1>
+        <IconButton size="small" onClick={closeModal} className={classes.closeButton}>
+          <CloseIcon />
+        </IconButton>
       </header>
 
       <div className="project-users-body">
@@ -95,6 +109,7 @@ function ProjectUsers({ users, project }) {
           )}
         </div>
         <div className="project-users-body-users">
+          <h2>Team Members</h2>
           <div className="project-users-body-users-div">
             {currentUsers.map((id, index) => (
               <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
@@ -128,7 +143,7 @@ function ProjectUsers({ users, project }) {
       </div>
 
       <footer className="project-users-footer">
-        <ConfirmButton saving consoleData={consoleData} />
+        <ConfirmButton saving updateData={updateData} />
       </footer>
     </div>
   );
