@@ -172,10 +172,6 @@ export default function AddProjectForm({ state, userID, close }) {
         <ConfirmButton saving updateData={clickSave} />
         <ConfirmButton cancelling close={close} />
       </div>
-      <img style= {{width: '200px', marginTop: '20px', marginLeft:'140px'}}
-          src="https://static.boredpanda.com/blog/wp-content/uploads/2018/12/5c24c2292938a_wegda68zn5021__700.jpg"
-          alt="hehe cat"
-        />
     </div>
   );
 }
