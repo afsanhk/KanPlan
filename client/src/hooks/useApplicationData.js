@@ -100,8 +100,7 @@ export default function useApplicationData() {
     console.log(`Inside addProject:
     Form data projectID ${"random code inside addProject test"}`);
     let projectID;
-    // return axios
-    //   .post(`http://localhost:8001/api/tasks/`, newTask)
+    return axios.post(`http://localhost:8001/api/projects/`, { test: "test" });
     //   .then((res) => {
     //     // capture new project ID
     //     taskID = res.data.task_id;
