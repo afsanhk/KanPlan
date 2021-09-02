@@ -7,7 +7,7 @@ export default function useApplicationData() {
     projects: {},
     users: {}
   });
-  const [kanbanStatus, setKanbanStatus] = useState({});
+  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -54,9 +54,13 @@ export default function useApplicationData() {
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, taskState).catch((error) => console.log(error));
   };
 
-  const updateKanbanStatus = (state) => {
-    setKanbanStatus((prev) => ({ ...prev, ...state }));
+  const updateKanbanStatus = (newState) => {
+    setKanbanStatus(newState);
     return;
+  };
+
+  const updateTaskKanbanOrder = (newState) => {
+    console.log(newState);
   };
 
   function deleteTask(id, projectID, userID) {
@@ -92,5 +96,5 @@ export default function useApplicationData() {
     });
   }
 
-  return { state, loading, addTask, updateTaskStatus, deleteTask, updateKanbanStatus, kanbanStatus };
+  return { state, loading, addTask, updateTaskStatus, deleteTask, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder };
 }

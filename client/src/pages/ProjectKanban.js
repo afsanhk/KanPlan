@@ -12,19 +12,26 @@ import LinkIconContainer from '../components/LinkIconContainer';
 import '../styles/ProjectKanban.scss';
 import axios from 'axios';
 
-const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, kanbanStatus }) => {
+const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, kanbanStatus, updateTaskKanbanOrder }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
 
   useEffect(() => {
     // get kanban status data
-    axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
-      updateKanbanStatus(res.data);
-    });
-  }, [projectID, []]);
-
-  console.log(kanbanStatus);
+    axios
+      .get(`http://localhost:8001/api/kanban/project/${projectID}`)
+      .then((res) => {
+        updateKanbanStatus(res.data);
+      })
+      .then(() => {
+        kanbanStatus[0].task_id.map((id) => id.toString());
+        kanbanStatus[1].task_id.map((id) => id.toString());
+        kanbanStatus[2].task_id.map((id) => id.toString());
+        kanbanStatus[3].task_id.map((id) => id.toString());
+      });
+    console.log(kanbanStatus);
+  }, [projectID]);
 
   const moveInArray = function (arr, from, to) {
     if (Object.prototype.toString.call(arr) !== '[object Array]') {
@@ -40,7 +47,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
     arr.splice(to, 0, item[0]);
   };
 
-  const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const initialData = {
     tasks: {},
     columns: {
@@ -67,20 +73,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
     },
     columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
   };
-  projectTasks.forEach((task) => {
-    if (task) {
-      initialData.tasks[task.id] = task;
-      if (task.status === 'Late') {
-        initialData.columns['column-1'].taskIds.push(task.id);
-      } else if (task.status === 'To-Do') {
-        initialData.columns['column-2'].taskIds.push(task.id);
-      } else if (task.status === 'In Progress') {
-        initialData.columns['column-3'].taskIds.push(task.id);
-      } else if (task.status === 'Done') {
-        initialData.columns['column-4'].taskIds.push(task.id);
-      }
-    }
-  });
 
   const [kanbanState, setKanbanState] = useState(initialData);
 
@@ -92,46 +84,36 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
         'column-1': {
           id: 'column-1',
           title: 'Late',
-          taskIds: []
+          taskIds: kanbanStatus[1].task_id
         },
         'column-2': {
           id: 'column-2',
           title: 'To-Do',
-          taskIds: []
+          taskIds: kanbanStatus[0].task_id
         },
         'column-3': {
           id: 'column-3',
           title: 'In Progress',
-          taskIds: []
+          taskIds: kanbanStatus[2].task_id
         },
         'column-4': {
           id: 'column-4',
           title: 'Done',
-          taskIds: []
+          taskIds: kanbanStatus[3].task_id
         }
       },
       columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
     };
     projectTasks.forEach((task) => {
       if (task) {
-        initialData.tasks[task.id.toString()] = task;
-        if (task.status === 'Late') {
-          initialData.columns['column-1'].taskIds.push(task.id.toString());
-        } else if (task.status === 'To-Do') {
-          initialData.columns['column-2'].taskIds.push(task.id.toString());
-        } else if (task.status === 'In Progress') {
-          initialData.columns['column-3'].taskIds.push(task.id.toString());
-        } else if (task.status === 'Done') {
-          initialData.columns['column-4'].taskIds.push(task.id.toString());
-        }
+        initialData.tasks[task.id] = task;
       }
     });
     setKanbanState(initialData);
-  }, [state]);
+  }, [state, kanbanStatus]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
-    let order;
 
     if (!destination) {
       return;
@@ -176,6 +158,12 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
         }
       };
 
+      const stateCopy = JSON.parse(JSON.stringify(state));
+      newTaskIds.forEach((id, index) => {
+        stateCopy.tasks[id].kanban_order = index;
+      });
+      stateCopy.tasks[draggableId] = { ...stateCopy.tasks[draggableId], ...updatedTaskState };
+
       updateTaskStatus(updatedTaskState);
 
       setKanbanState(newState);
@@ -197,8 +185,16 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, updateKanbanStatus, k
       ...finish,
       taskIds: finishTaskIds
     };
-
     updateTaskStatus(updatedTaskState);
+
+    const stateCopy = JSON.parse(JSON.stringify(state));
+    startTaskIds.forEach((id, index) => {
+      stateCopy.tasks[id].kanban_order = index;
+    });
+    finishTaskIds.forEach((id, index) => {
+      stateCopy.tasks[id].kanban_order = index;
+    });
+    stateCopy.tasks[draggableId] = { ...stateCopy.tasks[draggableId], ...updatedTaskState };
 
     const columnToStatus = {
       'column-1': {

@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 module.exports = (db) => {
-  router.get("/kanban/project/:id", (request, response) => {
+  router.get('/kanban/project/:id', (request, response) => {
     const values = [request.params.id];
     db.query(
       `SELECT kanban_status.*,
