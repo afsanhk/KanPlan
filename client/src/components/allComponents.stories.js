@@ -35,7 +35,6 @@ import ProjectUsers from "./ProjectUsers";
 
 import AddProjectButton from "./AddProjectButton";
 import AddProjectForm from "./AddProjectForm";
-import CheckboxDropdown from "./CheckboxDropdown";
 
 // TEST DATA
 const projects = {
@@ -410,5 +409,4 @@ storiesOf("Project Overview Table", module)
 
 storiesOf("Add Projects", module)
   .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />)
-  .add("Button & Drawer", () => <AddProjectButton state={state} userID={1} />)
-  .add("Checkbox Dropdown", () => <CheckboxDropdown users={state.users} />);
+  .add("Button & Drawer", () => <AddProjectButton state={state} userID={1} />);

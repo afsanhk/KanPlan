@@ -15,7 +15,6 @@ import TeamMember from './TeamMember';
 import '../styles/AddProjectForm.scss';
 
 import convertTimestampStringToYMD from '../helpers/dateConvert';
-import CheckboxDropdown from './CheckboxDropdown';
 
 // Styling for the 'chips'
 const useStyles = makeStyles((theme) => ({
