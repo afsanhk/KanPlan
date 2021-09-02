@@ -24,15 +24,14 @@ module.exports = (db) => {
     console.log(
       `Server side proj_name ${proj_name}, manager_id ${manager_id}, planned_start ${planned_start}, planned_end ${planned_end}, proj_description ${proj_description} & team_members ${team_members}`
     );
-    // const { title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users, project_id } = request.body;
-    // console.log(title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users);
-    // db.query(
-    //   `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
-    //    VALUES ($1::text, $2::text, $3::integer, $4::integer, $5::integer, $6, $7)
-    //    RETURNING id;
-    //   `,
-    //   [title, task_description, priority_id, status_id, project_id, plan_start, plan_end]
-    // )
+    // First query inserts inro projects
+    db.query(
+      `INSERT INTO projects (proj_name, manager_id, planned_start, planned_end, proj_description) 
+       VALUES ($1::text, $2::integer, $3, $4, $5::text)
+       RETURNING id;
+      `,
+      [proj_name, manager_id, planned_start, planned_end, proj_description]
+    ).then((res) => console.log(res.rows[0]));
     //   .then((res) => {
     //     if (task_users.length) {
     //       let query = '';
