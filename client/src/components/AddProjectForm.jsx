@@ -54,7 +54,9 @@ planEndInit.setDate(planEndInit.getDate() + 7);
 const planStartString = convertTimestampStringToYMD(planStartInit.toString())
 const planEndString = convertTimestampStringToYMD(planEndInit.toString())
 
-export default function AddProjectForm({ state, userID, close }) {
+// Note that the usage duplicate names is troublesome due to the implementation of the checkbox dropdown, as we have to retrieve the ID later. 
+// Avoid duplicate names for users.
+export default function AddProjectForm({ state, userID, close, addProject }) {
   const classes = useStyles();
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
@@ -66,11 +68,26 @@ export default function AddProjectForm({ state, userID, close }) {
     setPersonName(event.target.value);
   };
   
-  let managerID = userID;
-  const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
+  let managerID = Number(userID);
+  const managerObj = state && state.users[managerID];
+  const managerName = managerObj.user_name;
+  const ids = Object.keys(state.users).filter(userids => userids !== managerID.toString());
+  const names = ids.map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
-    console.log(userID, projectName, projectDesc, planStart, planEnd, personName);
+    // Looks for the index of each team member in 'names' array, then returns corresponding 'id'.
+    const teamIDs = [managerID, ...personName.map(selectedName => names.findIndex(name => name === selectedName)).map(index => Number(ids[index]))]; 
+    const newProject = {
+      proj_name: projectName, 
+      manager_id: managerID, 
+      manager_name: managerName,
+      planned_start: planStart, 
+      planned_end: planEnd, 
+      proj_description: projectDesc,
+      team_members: teamIDs
+    }
+    console.log(newProject);
+    addProject(newProject, teamIDs);
     setProjectName('');
     setProjectDesc('');
     setPlanStart(planStartString);
@@ -78,7 +95,7 @@ export default function AddProjectForm({ state, userID, close }) {
     close(event);
   };
 
-  const managerObj = state && state.users[managerID];
+ 
 
   return (
     <div className="add-project-form-container">
@@ -133,7 +150,7 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-PM">
             <h3>Project Manager</h3>
-            <TeamMember name={managerObj.user_name} />
+            <TeamMember name={managerName} />
           </div>
 
           <div className="add-project-form-team-members">
