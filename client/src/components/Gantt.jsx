@@ -27,9 +27,8 @@ const styleConfig = {
           style:{ // the style to be applied
             backgroundColor:  '#fbf9f9',
             textAlign: "left",
-            padding: "5px",
-            fontSize: "20px",
-            height: "20px"
+            padding: "1px",
+            fontSize: "15px",
           }
       },
       verticalSeparator:{//the vertical seperator use to resize he width of the task list
