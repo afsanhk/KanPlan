@@ -10,7 +10,6 @@ import LinkIconContainer from '../components/LinkIconContainer';
 
 // import css
 import '../styles/ProjectKanban.scss';
-import axios from 'axios';
 
 const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, updateProjectUsers }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
