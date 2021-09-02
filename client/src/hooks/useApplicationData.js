@@ -96,9 +96,14 @@ export default function useApplicationData() {
   }
 
   //
-  function addProject() {
-    console.log(`Inside addProject:
-    Form data projectID ${"random code inside addProject test"}`);
+  function addProject(newProject, managerID, teamMembers) {
+    console.log(
+      `Inside addProject:
+        newProject  ${JSON.stringify(newProject)}
+        managerID   ${managerID}
+        teamMembers ${teamMembers}
+        `
+    );
     let projectID;
     return axios.post(`http://localhost:8001/api/projects/`, { test: "test" });
     //   .then((res) => {
