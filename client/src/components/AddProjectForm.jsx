@@ -62,8 +62,9 @@ export default function AddProjectForm({ state, userID, close }) {
   const handleChange = (event) => {
     setPersonName(event.target.value);
   };
-
-  const names = Object.keys(state.users).map(userID => state.users[userID].user_name);
+  
+  let managerID = userID;
+  const names = Object.keys(state.users).filter(userids => userids !== managerID.toString()).map(userids => state.users[userids].user_name);
 
   const clickSave = (event) => {
     console.log(userID, projectName, projectDesc, planStart, planEnd);
@@ -134,6 +135,7 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-team-members">
             <h3>Choose some additional team members!</h3>
+            {/* Checkbox Dropdown Code */}
             <div className="team-member-container">
               <Select
                 labelId="demo-mutiple-checkbox-label"
