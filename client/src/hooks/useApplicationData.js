@@ -76,7 +76,27 @@ export default function useApplicationData() {
     console.log('newTaskFullData:', newTaskFullData)
     console.log('taskID:', taskID)
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID]}}));
+    //got through old task users, compare to new task users, go to that users/user_tasks, delete task id
+    const oldArrayOfUsers = state.tasks[taskID].task_users;
+    const newArrayOfUsers = newTaskFullData.task_users;
+
+    const deletedUsers = oldArrayOfUsers.filter(task_user => !newArrayOfUsers.includes(task_user))
+    
+    deletedUsers.forEach(userID => {
+      const taskIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
+      stateCopy.users[userID].user_tasks.splice(taskIndex, 1);
+
+      setState((prev) => ({
+        ...prev,
+        users: { ...prev.users, [userID]: stateCopy.users[userID]}
+      }))
+    })
+
+
+    setState((prev) => ({ 
+      ...prev, 
+      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID]},
+    }));
     return axios.put(`http://localhost:8001/api/tasks/${taskID}`, {newTaskFullData}).catch((error) => console.log(error));
   }
 
