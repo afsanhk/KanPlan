@@ -75,7 +75,7 @@ export default function AddProjectForm({ state, userID, close }) {
     close(event);
   };
 
-  const userObj = state && state.users[userID];
+  const managerObj = state && state.users[managerID];
 
   return (
     <div className="add-project-form-container">
@@ -130,7 +130,7 @@ export default function AddProjectForm({ state, userID, close }) {
 
           <div className="add-project-form-PM">
             <h3>Project Manager</h3>
-            <TeamMember name={userObj.user_name} />
+            <TeamMember name={managerObj.user_name} />
           </div>
 
           <div className="add-project-form-team-members">
