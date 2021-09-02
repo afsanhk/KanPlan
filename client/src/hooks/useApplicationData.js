@@ -73,10 +73,9 @@ export default function useApplicationData() {
     }
 
     const newTaskFullData = stateCopy.tasks[taskID]
-    console.log('newTaskFullData:', newTaskFullData)
-    console.log('taskID:', taskID)
+    console.lg('taskID:', taskID)
 
-    //got through old task users, compare to new task users, go to that users/user_tasks, delete task id
+    //go through old task users, compare to new task users, go to that users/user_tasks, delete task_id
     const oldArrayOfUsers = state.tasks[taskID].task_users;
     const newArrayOfUsers = newTaskFullData.task_users;
 
@@ -85,6 +84,19 @@ export default function useApplicationData() {
     deletedUsers.forEach(userID => {
       const taskIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
       stateCopy.users[userID].user_tasks.splice(taskIndex, 1);
+
+      setState((prev) => ({
+        ...prev,
+        users: { ...prev.users, [userID]: stateCopy.users[userID]}
+      }))
+    })
+
+    //find out who are the new users, go to that users/user_tasks and add task_id
+
+    const newUsers = newArrayOfUsers.filter(task_user => !oldArrayOfUsers.includes(task_user))
+
+    newUsers.forEach(userID => {
+      stateCopy.users[userID].user_tasks.push(taskID)
 
       setState((prev) => ({
         ...prev,

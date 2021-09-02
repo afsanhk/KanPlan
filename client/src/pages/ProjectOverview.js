@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ProjectOverview = ({ state, deleteTask, userID, deleteProject }) => {
+const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject }) => {
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
@@ -80,6 +80,7 @@ const ProjectOverview = ({ state, deleteTask, userID, deleteProject }) => {
               projectTasks={projectTasks}
               projectUsers={projectUsers}
               deleteTask={deleteTask}
+              editTask={editTask}
             />
           </div>
           <div>
