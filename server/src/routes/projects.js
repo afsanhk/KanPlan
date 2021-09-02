@@ -49,7 +49,7 @@ module.exports = (db) => {
             VALUES ${query}
             RETURNING project_id;
             `
-          ) // Sends the new projectID back so we can create a state copy
+          ) // Sends the new projectID back so we can create a state copy on the client side
             .then((res) => {
               response.send(res.rows[0]);
             })
