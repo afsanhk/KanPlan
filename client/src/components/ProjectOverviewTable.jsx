@@ -131,12 +131,13 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID, addTask, updateTaskStatus }) {
+export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID, addTask, updateTaskStatus, updateTaskPriority }) {
   const classes = useStyles();
 
   //how modal knows which task to pass in
   const [rowID, setRowID] = React.useState('');
 
+  // status to status_id
   const statusToID = {
     'To-Do': 1,
     Late: 2,
@@ -144,11 +145,19 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     Done: 4
   };
 
+  // status_id to status
   const IDToStatus = {
     1: 'To-Do',
     2: 'Late',
     3: 'In Progress',
     4: 'Done'
+  };
+
+  // priority to priority_id
+  const priorityToID = {
+    None: 1,
+    Low: 2,
+    High: 3
   };
 
   const changeRowID = (id) => {
@@ -200,8 +209,16 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     } else {
       nextStatus = IDToStatus[statusToID[row.status] + 1];
     }
-    console.log('task_id: ', row.id, 'task_status: ', nextStatus, 'task_status_id', statusToID[nextStatus]);
+    // console.log('task_id: ', row.id, 'task_status: ', nextStatus, 'task_status_id', statusToID[nextStatus]);
     updateTaskStatus({ status: nextStatus, status_id: statusToID[nextStatus] }, row.id);
+  };
+
+  const priorityClickHandler = (row) => {
+    let nextPriority;
+    if (row.status === 'High') {
+      nextPriority = 'None';
+    }
+    console.log(row);
   };
 
   return (
@@ -255,7 +272,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     {row.status && row.status.toUpperCase()}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
+                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" onClick={() => priorityClickHandler(row)} />
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     <TextField

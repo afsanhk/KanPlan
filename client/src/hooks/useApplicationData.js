@@ -61,6 +61,11 @@ export default function useApplicationData() {
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
   };
 
+  // update task's priority, priority_id
+  const updateTaskPriority = (priorityState, taskID) => {
+    console.log('This is priority update function.');
+  };
+
   // get kanban status from api
   const getKanbanStatus = (projectID) => {
     return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
@@ -186,6 +191,7 @@ export default function useApplicationData() {
     loading,
     addTask,
     updateTaskStatus,
+    updateTaskPriority,
     deleteTask,
     addProject,
     updateProjectUsers,

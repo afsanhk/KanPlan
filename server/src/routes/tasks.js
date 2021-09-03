@@ -65,18 +65,33 @@ module.exports = (db) => {
 
   router.put('/tasks/:id/status', (request, response) => {
     const { id, status_id, kanban_order } = request.body;
-    db.query(
-      `
-      UPDATE tasks 
-      SET status_id = $1, kanban_order = $2
-      WHERE id = $3;
-      `,
-      [status_id, kanban_order, id]
-    )
-      .then((res) => {
-        response.send(res);
-      })
-      .catch((error) => console.log(error));
+    if (kanban_order) {
+      db.query(
+        `
+        UPDATE tasks 
+        SET status_id = $1, kanban_order = $2
+        WHERE id = $3;
+        `,
+        [status_id, kanban_order, id]
+      )
+        .then((res) => {
+          response.send(res);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      db.query(
+        `
+        UPDATE tasks 
+        SET status_id = $1
+        WHERE id = $2;
+        `,
+        [status_id, id]
+      )
+        .then((res) => {
+          response.send(res);
+        })
+        .catch((error) => console.log(error));
+    }
   });
 
   router.delete('/tasks/:id', (request, response) => {
