@@ -3,7 +3,7 @@
 .project-name-description {
   border: 3px base.$medium-grey dashed;
   border-radius: base.$border-radius;
-  padding: 25px;
+  padding: 20px;
   margin: 5% 0;
 
   h3 {
@@ -20,11 +20,12 @@
 .project-name-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .project-grouped-users {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 30px;
+  margin-top: 10px;
 }
