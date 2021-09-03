@@ -36,7 +36,7 @@ const randomBadgeNumber = function () { //limit to max 10
   return Math.floor(Math.random() * 10);
 }
 
-export default function HomepageImportantUpdates() {
+export default function HomepageImportantUpdates({taskStatuses}) {
 
   const classes = useStyles();
 
@@ -60,7 +60,7 @@ export default function HomepageImportantUpdates() {
         <ListItem button className={classes.listItem}>
           <EventBusyIcon className={classes.listItemIcon}/>
           <ListItemText primary="Late Tasks" />
-          <Badge badgeContent={randomBadgeNumber()} color="primary" />
+          <Badge badgeContent={taskStatuses.late} color="primary" />
         </ListItem>
         <Divider />
         <ListItem button className={classes.listItem}>

@@ -25,14 +25,14 @@ const UserDashboard = ({ state, userID, deleteTask, editTask }) => {
         <h1>Hello, {name}!</h1>
         <div className="inspirational-quote">
           <p>
-            <em>"Burn that excel spread sheet"</em>
+            <em>"Well begun is half done."</em>
           </p>
-          <p>- Kanye West</p>
+          <p>- Aristotle</p>
         </div>
       </div>
       <div className="userDashboard-body">
         <HomepageMyWork tasks={tasks} deleteTask={deleteTask} editTask={editTask} userID={userID} state={state} />
-        <HomepageImportantUpdates />
+        <HomepageImportantUpdates taskStatuses={taskStatuses}/>
         <HomepageMyProjects projects={projects} state={state} />
       </div>
       <div className="userDashboard-footer">

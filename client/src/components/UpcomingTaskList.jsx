@@ -22,9 +22,9 @@ function UpcomingTaskList({projectTasks, userID}) {
 
     const todayFullDate = new Date();
     const todayMonth = Number(todayFullDate.getMonth()) + 1
-    const todayDay = Number(todayFullDate.getDate()) 
+    let todayDay = Number(todayFullDate.getDate()) 
 
-    let twoDaysFromToday = todayDay + 2
+    let sevenDaysFromToday = todayDay + 7
 
     const possibleDays = {[todayMonth]: [todayDay]}
 
@@ -33,40 +33,44 @@ function UpcomingTaskList({projectTasks, userID}) {
     const newDateCalc = function () {
       possibleDays[nextMonth] = [];
 
-      for (let i = twoDaysFromToday; i >= 1; i--) {
+      for (let i = sevenDaysFromToday; i >= 1; i--) {
         possibleDays[nextMonth].push(i)
       }
     }
 
-    if (twoDaysFromToday > 28 && todayMonth === 2) {
-      twoDaysFromToday = twoDaysFromToday - 28;
+    if (sevenDaysFromToday > 28 && todayMonth === 2) {
+      sevenDaysFromToday = sevenDaysFromToday - 28;
       nextMonth ++;
       newDateCalc()
 
-    } else if (twoDaysFromToday > 30) {
+    } else if (sevenDaysFromToday > 30) {
       if (todayMonth === 4 || todayMonth === 6 || todayMonth === 9 || todayMonth === 11) {
-        twoDaysFromToday = twoDaysFromToday - 30;
+        sevenDaysFromToday = sevenDaysFromToday - 30;
         nextMonth ++;
         newDateCalc()
       }
 
-    } else if (twoDaysFromToday > 31) {
+    } else if (sevenDaysFromToday > 31) {
       if (todayMonth === 1 || todayMonth === 3 || todayMonth === 5 || todayMonth === 7 || todayMonth === 8 || todayMonth === 10) {
-      twoDaysFromToday = twoDaysFromToday - 31;
+      sevenDaysFromToday = sevenDaysFromToday - 31;
       nextMonth ++;
       newDateCalc()
       }
 
-    } else if (twoDaysFromToday > 31 && todayMonth === 12) {
-      twoDaysFromToday = twoDaysFromToday - 31;
+    } else if (sevenDaysFromToday > 31 && todayMonth === 12) {
+      sevenDaysFromToday = sevenDaysFromToday - 31;
       nextMonth = 1
       newDateCalc()
       
     } else {
-      possibleDays[todayMonth].push(todayDay + 1);
-      possibleDays[todayMonth].push(todayDay + 2);
+
+      for (let i = 0; i < 6; i++) {
+        todayDay++
+        possibleDays[todayMonth].push(todayDay)
+      }
     }
 
+    console.log('pd:',possibleDays)
 
     if (possibleDays[taskDueMonth] && possibleDays[taskDueMonth].includes(taskDueDay) && task.status !== 'Done') {
       return true;
