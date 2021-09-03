@@ -64,7 +64,6 @@ export default function useApplicationData() {
 
   // update task's priority, priority_id
   const updateTaskPriority = (priorityState, taskID) => {
-    console.log(priorityState, taskID);
     const stateCopy = JSON.parse(JSON.stringify(state));
     if (stateCopy.tasks[taskID].priority_name) {
       stateCopy.tasks[taskID].priority_name = priorityState.priority_name;
@@ -74,7 +73,7 @@ export default function useApplicationData() {
     }
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
   };
 
   const editTask = (newTaskData, taskID) => {

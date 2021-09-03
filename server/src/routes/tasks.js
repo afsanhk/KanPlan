@@ -64,8 +64,7 @@ module.exports = (db) => {
   });
 
   router.put('/tasks/:id/status', (request, response) => {
-    const { status_id, kanban_order } = request.body;
-    const id = request.params.id;
+    const { status_id, kanban_order, id } = request.body;
 
     // console.log('id: ', id, 'status_id: ', status_id, 'kanban_order: ', kanban_order);
     if (kanban_order) {
@@ -95,6 +94,23 @@ module.exports = (db) => {
         })
         .catch((error) => console.log(error));
     }
+  });
+
+  router.put('/tasks/:id/priority', (request, response) => {
+    const { priority_id, id } = request.body;
+
+    db.query(
+      `
+        UPDATE tasks 
+        SET priority_id = $1
+        WHERE id = $2
+        `,
+      [priority_id, id]
+    )
+      .then((res) => {
+        response.send(res);
+      })
+      .catch((error) => console.log(error));
   });
 
   router.put('/tasks/:id', (request, response) => {
