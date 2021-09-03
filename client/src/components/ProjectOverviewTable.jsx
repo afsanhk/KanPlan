@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   tableWrapper: {
     overflow: 'auto',
     height: '71vh',
-    width: '58vw'
+    width: '100%'
   },
   columnTasks: {
     padding: '0 10px 0 30px'
