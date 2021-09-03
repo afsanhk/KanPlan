@@ -25,9 +25,9 @@ const UserDashboard = ({ state, userID, deleteTask, editTask }) => {
         <h1>Hello, {name}!</h1>
         <div className="inspirational-quote">
           <p>
-            <em>"Burn that excel spread sheet"</em>
+            <em>"Well begun is half done."</em>
           </p>
-          <p>- Kanye West</p>
+          <p>- Aristotle</p>
         </div>
       </div>
       <div className="userDashboard-body">
