@@ -47,9 +47,15 @@ export default function useApplicationData() {
   // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    stateCopy.tasks[taskID].status = taskState.status;
-    stateCopy.tasks[taskID].status_id = taskState.status_id;
-    stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    if (stateCopy.tasks[taskID].status) {
+      stateCopy.tasks[taskID].status = taskState.status;
+    }
+    if (stateCopy.tasks[taskID].status_id) {
+      stateCopy.tasks[taskID].status_id = taskState.status_id;
+    }
+    if (stateCopy.tasks[taskID].kanban_order) {
+      stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    }
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
     return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));

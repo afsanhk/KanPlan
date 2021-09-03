@@ -131,11 +131,25 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID, addTask }) {
+export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID, addTask, updateTaskStatus }) {
   const classes = useStyles();
 
   //how modal knows which task to pass in
   const [rowID, setRowID] = React.useState('');
+
+  const statusToID = {
+    'To-Do': 1,
+    Late: 2,
+    'In Progress': 3,
+    Done: 4
+  };
+
+  const IDToStatus = {
+    1: 'To-Do',
+    2: 'Late',
+    3: 'In Progress',
+    4: 'Done'
+  };
 
   const changeRowID = (id) => {
     setRowID(id);
@@ -178,6 +192,17 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   }
 
   const rows = projectTasks[0] && projectTasks.map((el) => createData(el));
+
+  const statusClickHandler = (row) => {
+    let nextStatus;
+    if (row.status === 'Done') {
+      nextStatus = 'To-Do';
+    } else {
+      nextStatus = IDToStatus[statusToID[row.status] + 1];
+    }
+    console.log('task_id: ', row.id, 'task_status: ', nextStatus, 'task_status_id', statusToID[nextStatus]);
+    updateTaskStatus({ status: nextStatus, status_id: statusToID[nextStatus] }, row.id);
+  };
 
   return (
     <>
@@ -226,7 +251,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     </AvatarGroup>
                   </StyledTableCell>
                   {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-                  <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px' }}>
+                  <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px' }} onClick={() => statusClickHandler(row)}>
                     {row.status && row.status.toUpperCase()}
                   </StyledTableCell>
                   <StyledTableCell align="center">
