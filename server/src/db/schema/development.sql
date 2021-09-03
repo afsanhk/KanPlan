@@ -127,23 +127,23 @@ VALUES
 -- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES 
-  ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
-  ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area'), -- ID 2
+  ('KanPlan', 1, 'KanPlan is a project management web app to make organizing your ideas easier!'), -- ID 1
+  ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area.'), -- ID 2
   ('Dev Community', 7, 'A social media platform for developers to interact with each other across the globe.'), -- ID 3
-  ('Fete', 9, 'TBD'), -- ID 4
+  ('Fete', 9, 'An app for planning weddings.'), -- ID 4
   ('Roshanak and Mohammads Project', 11, 'TBD'), -- ID 5
-  ('David, Jamie and Mohameds Project', 13, 'TBD'), -- ID 6
-  ('NoshFeast', 16, 'An app focused on takeout orders; Users can order from and pick up at the restaurants.'), -- ID 7
-  ('Kathy and Emekas Project', 19, 'TBD'), -- ID 8
-  ('Mona and Saraths Project', 21, 'TBD'), -- ID 9
-  ('Farid and Camerons Project', 23, 'TBD'), -- ID 10
-  ('SNIFFLES', 25, 'An app to discover other dog owners within your area sharing similar features to dating apps.'), -- ID 11
-  ('RegexViz', 28, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
+  ('smartHome', 13, 'An app that allows a user to take a better decision to buy a smart device'), -- ID 6
+  ('NoshFeast', 16, 'An app focused on takeout orders. Users can order from and pick up at the restaurants.'), -- ID 7
+  ('DateNite', 19, 'An app to help couples pick a date spot.'), -- ID 8
+  ('healthbook', 21, 'healthbook is a patient-healthcare provider app that allows users and providers immediate access to online appointment scheduling, electronic health records, prescriptions, and patient-doctor communications from the ease and safety of their home.'), -- ID 9
+  ('biblion', 23, 'An app where users can create posts about books they read'), -- ID 10
+  ('SNIFFLES', 25, 'An app for dogs to find new friends within their area. Sharing similar features to dating apps.'), -- ID 11
+  ('RegexViz', 28, 'A regular expression visualizer with syntax higlighting, step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
   ('Lotify', 30, 'A location-based to-do list - app pops up a reminder when you are near the location.'), -- ID 13
   ('findShelter', 33, 'A shelter management software - serve the homeless '), -- ID 14
-  ('hotelCalifornia', 36, 'Allows conveners post last minute requests or chat real time with the hotel crue'), -- ID 15
+  ('hotelCalifornia', 36, 'Allows conveners post last minute requests or chat real time with the hotel crew.'), -- ID 15
   ('Super Secret awesome amazing project', 39, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
-  ('gg', 42, 'social platform for reviewing and recommending video games'); -- ID 17
+  ('gg', 42, 'Social platform for reviewing and recommending video games.'); -- ID 17
 
 INSERT INTO kanban_status (status)
 VALUES 
@@ -212,47 +212,44 @@ VALUES
   (2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1);
 
 -- Tasks
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
 VALUES
 -- Kanplan
   -- To-Do (ID1)
-  ('API Routes', 'Set up API Routes', 3, 1, 1),
-  ('React Components', 'Build react components', 2, 1, 1),
-  ('Kanban DnD', 'Build Kanban containers and drag and drop', 2, 1, 1),
+  ('API Routes', 'Set up API Routes', 2, 4, 1,'2021-08-27','2021-08-28'),
+  ('React Components', 'Build react components', 3, 4, 1,'2021-08-27','2021-09-01'),
+  ('Kanban DnD', 'Build Kanban containers and drag and drop', 3, 4, 1,'2021-08-27','2021-09-01'),
   -- Late (ID2)
-  ('Relax', 'Relax a bit', 1, 2, 1),
+  ('Relax', 'Relax a bit', 1, 2, 1,'2021-08-13','2021-09-11'),
   -- In-progress (ID3)
-  ('Seeds', 'Making api seeds', 3, 3, 1),
-  ('Gantt Research', 'Find a good library to use for the gantt chart', 2, 3, 1),
-  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1),
-  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1),
   -- Done (ID4)
-  ('ERD', 'Plan data relations with team', 2, 4, 1),
-  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
-  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1),
+  ('Seeds', 'Making api seeds', 3, 3, 1,'2021-08-28','2021-08-28'),
+  ('Gantt Research & Build', 'Find a good library to use for the gantt chart', 2, 3, 1,'2021-08-27','2021-09-02'),
+  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1,'2021-08-27','2021-09-03'),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1,'2021-08-31','2021-08-31'),
+  ('ERD', 'Plan data relations with team', 2, 4, 1,'2021-08-25','2021-08-25'),
+  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1,'2021-08-25','2021-08-26'),
+  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1,'2021-08-25','2021-08-25'),
 
 -- OnlyFriends
   -- To-Do (ID1)
-  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2),
+  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2,'2021-08-31','2021-12-12'),
   -- Late (ID2)
-  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2),
+  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2,'2021-08-31','2021-12-12'),
   -- In-progress (ID3)
-  ('Figure out the back-end', 'Server no bueno', 2, 3, 2),
+  ('Figure out the back-end', 'Server no bueno', 2, 3, 2,'2021-08-31','2021-12-12'),
   -- Done (ID4)
-  ('Figure out a name!', 'onlyFrands', 1, 4, 2),
+  ('Figure out a name!', 'onlyFrands', 1, 4, 2,'2021-08-31','2021-12-12'),
 
 -- DevCommunity 
   -- To-Do (ID1)
-  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3),
+  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3,'2021-08-31','2021-12-12'),
   -- Late (ID2)
-  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3),
+  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3,'2021-08-31','2021-12-12'),
   -- In-progress (ID3)
-  ('Planning!', 'So many documents so little time.', 2, 3, 3),
+  ('Planning!', 'So many documents so little time.', 2, 3, 3,'2021-08-31','2021-12-12'),
   -- Done (ID4)
-  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
-
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
-VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 3);
+  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3,'2021-08-31','2021-12-12');
 
 -- user_tasks
 INSERT INTO user_tasks(task_id, user_id)
@@ -298,6 +295,22 @@ VALUES
   (18,7),
   (19,8);
 
+-- Further seeds 
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
+VALUES
+-- Kanplan(ID1)
+  -- To-Do (ID1)
+  ('Practice demos', 'Prepare pitch and flow', 2, 1, 1, '2021-09-07','2021-09-07'),
+  ('Dry run demo!', 'Show the mentors our work...', 1, 1, 1, '2021-09-08','2021-09-08'),
+  ('Demo the project!', 'Time to show everyone what we''ve been working on!', 3, 1, 1, '2021-09-09','2021-09-09'),
+  ('Enjoy some well-deserved time off.', 'Bootcamp is over!', 1, 1, 1, '2021-09-09','2021-09-30'),
+  -- Late (ID2)
 
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id,plan_start,plan_end)
-VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 1,'2021-08-31','2021-12-12');
+  -- In-progress (ID3)
+  ('Small bug and styling fixes', 'Polishing up the app.', 3,3,1,'2021-09-03','2021-09-06'),
+
+  -- Done (ID4)
+  ('Find teammates!', 'TJ, Veronica and Afsan', 1, 4, 1, '2021-08-10','2021-08-13'),
+  ('What features to work on?', 'Drag n Drop, Gantt Chart', 2, 4, 1, '2021-08-13','2021-08-25'),
+  ('Agree on project', 'Project Management', 3, 4, 1, '2021-08-13','2021-08-25'),
+  ('Decide stack', 'PostgreSQL,Express, React, Node', 3, 4, 1, '2021-08-23','2021-08-25');
