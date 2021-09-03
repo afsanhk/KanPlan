@@ -5,22 +5,22 @@ function ConfirmButton({ saving, deleting, cancelling, close, error, updateData,
   return (
     <>
       {saving && !error && (
-        <Button variant="contained" color="primary" onClick={updateData}>
+        <Button variant="contained" color="primary" onClick={updateData} size='large'>
           Save
         </Button>
       )}
       {saving && error && (
-        <Button variant="contained" color="primary" disabled>
+        <Button variant="contained" color="primary" disabled size='large'>
           Save
         </Button>
       )}
       {deleting && (
-        <Button variant="contained" color="secondary" onClick={deleteTaskOrProj}>
+        <Button variant="contained" color="secondary" onClick={deleteTaskOrProj} size='large'>
           Delete
         </Button>
       )}
       {cancelling && (
-        <Button variant="contained" onClick={close}>
+        <Button variant="contained" onClick={close} size='large'>
           Cancel
         </Button>
       )}

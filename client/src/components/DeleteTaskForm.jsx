@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 
 import ConfirmButton from './ConfirmButton'
-import LoadingCircle from './LoadingCircle';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 import '../styles/DeleteTaskForm.scss'
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#fcfcfc',
     border: '3px #757575 solid',
     'border-radius': '8px',
     boxShadow: theme.shadows[5],
@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '30vw',
-    top: '40vh',
-    left: '35vw',
+    width: '24vw',
+    top: '22vh',
+    left: '40.2vw',
     position: 'fixed',
   },
   cross: {
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       cursor: 'pointer'
     }
+  },
+  error: {
+    fontSize: '150px',
   }
 }));
 
@@ -70,12 +73,16 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
       {task &&
         <div className={[classes.paper]}> 
           <Close onClick={close} className={classes.cross} />
-          <h3 className={'delete-modal-text-a'}>
-            Are you sure you want to delete the task: '<u>{task.title}</u>'?
-          </h3>
-          <h3 className={'delete-modal-text-b'}>
-            This action cannot be undone !
-          </h3>
+          <ErrorOutlineIcon className={classes.error} color='secondary'/>
+          <p className={'delete-modal-text-a'}>
+            Are you sure you want to delete the task:
+          </p>
+          <p className={'delete-modal-prop-data'}>
+          '<em>{task.title}</em>'?
+          </p>
+          <p className={'delete-modal-text-b'}>
+            This action cannot be undone!
+          </p>
           <div className={'delete-modal-footer'}>
             <ConfirmButton cancelling close={close} />
             <ConfirmButton deleting deleteTaskOrProj={deleteSingleTask} />
@@ -84,18 +91,22 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
       }
       {project &&
         <div className={[classes.paper]}> 
-        <Close onClick={close} className={classes.cross} />
-        <h3 className={'delete-modal-text-a'}>
-          Are you sure you want to delete the project: '<u>{project.proj_name}</u>'?
-        </h3>
-        <h3 className={'delete-modal-text-b'}>
-          This action cannot be undone !
-        </h3>
-        <div className={'delete-modal-footer'}>
-          <ConfirmButton cancelling close={close} />
-          <ConfirmButton deleting deleteTaskOrProj={deleteSingleProject}/>
+          <Close onClick={close} className={classes.cross} />
+          <ErrorOutlineIcon className={classes.error} color='secondary'/>
+          <p className={'delete-modal-text-a'}>
+            Are you sure you want to delete the project:
+          </p>
+          <p className={'delete-modal-prop-data'}>
+          '<em>{project.proj_name}</em>'?
+          </p>
+          <p className={'delete-modal-text-b'}>
+            This action cannot be undone !
+          </p>
+          <div className={'delete-modal-footer'}>
+            <ConfirmButton cancelling close={close}/>
+            <ConfirmButton deleting deleteTaskOrProj={deleteSingleProject}/>
+          </div>
         </div>
-      </div>
       }
   </>
   );

@@ -55,6 +55,11 @@ const theme = createTheme({
       stickyHeader: {
         'z-index': 10
       }
+    },
+    MuiBackdrop: {
+      root: {
+        'background-color': 'rgba(0, 0, 0, 0.3)'
+      }
     }
   }
 });
