@@ -33,6 +33,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '3px #757575 solid',
+    'border-radius': '8px',
+    boxShadow: theme.shadows[5],
+    // padding: theme.spacing(2, 2, 2),
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    width: '50vw',
+    top: '5vh',
+    left: '28vw',
+    position: 'fixed',
   }
 }));
 
@@ -56,7 +70,7 @@ const status_id = {
   Done: 4
 };
 
-function EditTaskForm({ tasks, projects, users }) {
+function EditTaskForm({ tasks, projects, users, close, editTask }) {
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
@@ -72,9 +86,15 @@ function EditTaskForm({ tasks, projects, users }) {
   const [teamMembers, setTeamMembers] = useState(null);
   // const [currentProject, setCurrentProject] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ task_description: tasks.task_description, plan_start: currentDate, plan_end: currentDate });
+  const [state, setState] = useState({ 
+    task_description: tasks.task_description, 
+    plan_start: tasks.plan_start, 
+    plan_end: tasks.plan_end 
+  });
 
   const [open, setOpen] = React.useState(false);
+
+  const taskID = tasks.id
 
   const handleClick = () => {
     setClickDesc(!clickDesc);
@@ -108,6 +128,12 @@ function EditTaskForm({ tasks, projects, users }) {
     setOpen(false);
   };
 
+  // modal save function
+  function updateData() {
+    editTask(state, taskID)
+    close()
+  }
+
   useEffect(() => {
     // setCurrentUsers(getTeamMembers(currentProject));
     setTeamMembers(getTeamMembers(tasks.proj_name));
@@ -115,7 +141,7 @@ function EditTaskForm({ tasks, projects, users }) {
   }, []);
 
   return (
-    <div className="task-form">
+    <div className={classes.paper}>
       <header className="task-form-header">
         <h1>{tasks.title}</h1>
       </header>
@@ -174,7 +200,7 @@ function EditTaskForm({ tasks, projects, users }) {
                 id="date"
                 label="Start Date"
                 type="date"
-                defaultValue={currentDate}
+                defaultValue={tasks.plan_start}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -185,7 +211,7 @@ function EditTaskForm({ tasks, projects, users }) {
                 id="date"
                 label="End Date"
                 type="date"
-                defaultValue={currentDate}
+                defaultValue={tasks.plan_end}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -257,13 +283,11 @@ function EditTaskForm({ tasks, projects, users }) {
 
       <footer className="task-form-footer">
         <div>
+          <ConfirmButton cancelling close={close} />
           <ConfirmButton
             saving
-            consoleData={() => {
-              console.log(state);
-            }}
+            updateData={updateData}
           />
-          <ConfirmButton deleting />
         </div>
       </footer>
     </div>

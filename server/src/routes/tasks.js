@@ -94,6 +94,53 @@ module.exports = (db) => {
     }
   });
 
+  router.put('/tasks/:id', (request, response) => {
+    const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } = request.body.newTaskFullData;
+
+    db.query(
+      `
+      UPDATE tasks 
+      SET task_description = $1,
+        plan_start = $2,
+        plan_end = $3,
+        priority_id = $4,
+        status_id = $5
+        WHERE id = $6;
+      `, [task_description, plan_start, plan_end, priority_id, status_id, id]
+    )
+
+    //get current task users
+
+    db.query(
+      `SELECT user_id FROM user_tasks WHERE task_id = $1;`, [id]
+    )
+      .then((res) => {
+        const query_users = res.rows.map(row => row.user_id)
+        const new_users = task_users.filter(task_user => !query_users.includes(task_user))
+        const deleted_users = query_users.filter(task_user => !task_users.includes(task_user))
+        
+        //adds new users
+        new_users.forEach(new_user => {
+          db.query (
+            `
+            INSERT INTO user_tasks (user_id, task_id)
+            VALUES ($1, $2)
+            `, [new_user, id]
+          )
+        })
+
+        //deletes new users
+        deleted_users.forEach(old_user => {
+          db.query (
+            `
+            DELETE FROM user_tasks WHERE user_id = $1 AND task_id = $2;
+            `, [old_user, id]
+          )
+        })
+      })
+      .catch((error) => console.log(error));
+  })
+
   router.delete('/tasks/:id', (request, response) => {
     db.query('DELETE FROM tasks WHERE id = $1::integer', [request.params.id])
       .then(() => {

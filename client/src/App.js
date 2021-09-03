@@ -55,7 +55,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const { state, loading, deleteTask, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, addProject, deleteProject, updateProjectUsers, updateTaskPriority } = useApplicationData();
+  const { state, loading, deleteTask, editTask, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, addProject, deleteProject, updateProjectUsers, updateTaskPriority } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
@@ -73,7 +73,7 @@ function App() {
             <div className="body">
               <Switch>
                 <Route exact path="/">
-                  <UserDashboard state={state} userID={userID} deleteTask={deleteTask} />
+                  <UserDashboard state={state} userID={userID} deleteTask={deleteTask} editTask={editTask} />
                 </Route>
                 <Route path="/projects">
                   <UserProjects state={state} userID={userID} addProject={addProject} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} />
@@ -86,6 +86,7 @@ function App() {
                     deleteProject={deleteProject}
                     updateProjectUsers={updateProjectUsers}
                     addTask={addTask}
+                    editTask={editTask}
                     updateTaskStatus={updateTaskStatus}
                     updateTaskPriority={updateTaskPriority}
                   />

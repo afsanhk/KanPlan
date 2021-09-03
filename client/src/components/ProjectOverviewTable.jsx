@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,6 +21,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 // Project Components
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import EditTaskForm from './EditTaskForm';
 import DeleteTaskForm from './DeleteTaskForm';
 
 //For the edit and delete modals
@@ -30,6 +31,9 @@ import Fade from '@material-ui/core/Fade';
 
 import '../styles/ProjectOverviewTable.scss';
 import AddTaskForm from './AddTaskForm';
+
+//helper functions
+import { getProjectsForUser } from '../helpers/selectors';
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -131,7 +135,7 @@ const backgroundColor = {
   Done: 'rgb(106, 168, 79)'
 };
 
-export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, userID, addTask, updateTaskStatus, updateTaskPriority }) {
+export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, editTask, userID, addTask, updateTaskStatus, updateTaskPriority }) {
   const classes = useStyles();
 
   //how modal knows which task to pass in
@@ -165,26 +169,37 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   };
 
   // modal state
-  const [open, setOpen] = React.useState(false);
-  // add task modal state
-  const [openAddTask, setOpenAddTask] = React.useState(false);
+  const [openEdit, setOpenEdit] = useState(false); // modal state -- edit modal
+  const [openDelete, setOpenDelete] = useState(false); // modal state -- delete modal
+  const [openAddTask, setOpenAddTask] = React.useState(false); // add task modal state
 
-  // modal open function
-  const handleOpen = () => {
-    setOpen(true);
+  const projectsArray = getProjectsForUser(state, userID).map((key) => state.projects[key]);
+
+  // modal open function - edit modal
+  const handleOpenEdit = () => {
+    setOpenEdit(true);
   };
   // add task modal open function
   const handleOpenAddTask = () => {
     setOpenAddTask(true);
   };
 
-  // modal close function
-  const handleClose = () => {
-    setOpen(false);
+  // modal close function - edit modal
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  // modal open function - delete modal
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
   };
   // add task modal close function
   const handleCloseAddTask = () => {
     setOpenAddTask(false);
+  };
+  // modal close function - delete modal
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
   };
 
   // Array of task objects in projectTasks
@@ -314,7 +329,8 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                         className={classes.icon}
                         fontSize="small"
                         onClick={() => {
-                          console.log('go to edit task modal');
+                          changeRowID(row.id);
+                          handleOpenEdit();
                         }}
                       />
                     </IconButton>
@@ -324,13 +340,14 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                         fontSize="small"
                         onClick={() => {
                           changeRowID(row.id);
-                          handleOpen();
+                          handleOpenDelete();
                         }}
                       />
                     </IconButton>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
+
             <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={handleOpenAddTask}>
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomLeftRadius: '5px' }}>
                 <div className="overview-table-add-task">
@@ -347,48 +364,74 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
               <StyledTableCell className={classes.rowAddTask} />
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomRightRadius: '5px' }} />
             </StyledTableRow>
-
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              className={classes.modal}
-              open={openAddTask}
-              onClose={handleCloseAddTask}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 500
-              }}
-            >
-              <Fade in={open}>
-                <AddTaskForm
-                  proj_name={state.projects[projectID].proj_name}
-                  team_members={state.projects[projectID].team_members}
-                  users={state.users}
-                  close={handleCloseAddTask}
-                  projectID={projectID}
-                  addTask={addTask}
-                />
-              </Fade>
-            </Modal>
           </TableBody>
         </Table>
       </TableContainer>
 
+      {/* add task modal */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={open}
-        onClose={handleClose}
+        open={openAddTask}
+        onClose={handleCloseAddTask}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500
         }}
       >
-        <Fade in={open}>
-          <DeleteTaskForm close={handleClose} userID={userID} projectID={projectID} task={state.tasks[rowID]} deleteTask={deleteTask} />
+        <Fade in={openAddTask}>
+          <AddTaskForm
+            proj_name={state.projects[projectID].proj_name}
+            team_members={state.projects[projectID].team_members}
+            users={state.users}
+            close={handleCloseAddTask}
+            projectID={projectID}
+            addTask={addTask}
+          />
+        </Fade>
+      </Modal>
+
+      {/* edit modal */}
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        // className={classes.modal}
+        open={openEdit}
+        onClose={handleCloseEdit}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={openEdit}>
+          <EditTaskForm
+            close={handleCloseEdit}
+            editTask={editTask}
+            tasks={state.tasks[rowID]} //data about only this task
+            users={state.users}
+            projects={projectsArray}
+          />
+        </Fade>
+      </Modal>
+
+      {/* delete modal */}
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        // className={classes.modal}
+        open={openDelete}
+        onClose={handleCloseDelete}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
+      >
+        <Fade in={openDelete}>
+          <DeleteTaskForm close={handleCloseDelete} userID={userID} projectID={projectID} task={state.tasks[rowID]} deleteTask={deleteTask} />
         </Fade>
       </Modal>
     </>
