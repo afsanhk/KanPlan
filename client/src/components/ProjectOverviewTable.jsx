@@ -82,7 +82,8 @@ const useStyles = makeStyles((theme) => ({
   },
   tableWrapper: {
     overflow: 'auto',
-    height: '100%',
+    maxHeight: '700px',
+    // height: '100%',
     width: '100%'
   },
   columnTasks: {
@@ -260,7 +261,14 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell className={classes.columnTasks}>Tasks</StyledTableCell>
+              <StyledTableCell className={classes.columnTasks}>
+                <div className="overview-table-task-name-column">
+                  Tasks
+                  <IconButton size="small" onClick={handleOpenAddTask}>
+                    <AddCircleIcon className="overview-table-task-name-column-button" />
+                  </IconButton>
+                </div>
+              </StyledTableCell>
               <StyledTableCell align="center">Users</StyledTableCell>
               <StyledTableCell align="center">Status</StyledTableCell>
               <StyledTableCell align="center">Priority</StyledTableCell>
@@ -277,7 +285,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     <div className="overview-table-task-name">{row.title}</div>
                   </StyledTableCell>
                   <StyledTableCell>
-                    <AvatarGroup className="overview-table-avatar">
+                    <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
                       {row.users.map((userID, index) => {
                         if (row.users.length === 1) {
                           return (
@@ -370,7 +378,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                 </StyledTableRow>
               ))}
 
-            <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={handleOpenAddTask}>
+            {/* <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={handleOpenAddTask}>
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomLeftRadius: '5px' }}>
                 <div className="overview-table-add-task">
                   <AddCircleIcon />
@@ -385,7 +393,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
               <StyledTableCell className={classes.rowAddTask} />
               <StyledTableCell className={classes.rowAddTask} />
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomRightRadius: '5px' }} />
-            </StyledTableRow>
+            </StyledTableRow> */}
           </TableBody>
         </Table>
       </TableContainer>
