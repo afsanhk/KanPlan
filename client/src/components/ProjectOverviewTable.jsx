@@ -320,6 +320,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
                   </StyledTableCell>
                   <StyledTableCell align="center">
+                    {console.log(row)}
                     <TextField
                       id="date"
                       // label="Start Date"

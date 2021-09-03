@@ -21,6 +21,8 @@ import Fade from '@material-ui/core/Fade';
 import '../styles/EditTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
+import convertTimestampStringToYMD from '../helpers/dateConvert';
+
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
@@ -71,7 +73,6 @@ const status_id = {
 };
 
 function EditTaskForm({ tasks, projects, users, close, editTask }) {
-  console.log(tasks.plan_start);
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
@@ -163,6 +164,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 label="Task Description"
                 style={{ margin: 8 }}
                 placeholder="Write description"
+                defaultValue={state.task_description}
                 fullWidth
                 multiline
                 margin="normal"
@@ -201,7 +203,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="date"
                 label="Start Date"
                 type="date"
-                defaultValue={tasks.plan_start}
+                defaultValue={convertTimestampStringToYMD(tasks.plan_start)}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -212,7 +214,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="date"
                 label="End Date"
                 type="date"
-                defaultValue={tasks.plan_end}
+                defaultValue={convertTimestampStringToYMD(tasks.plan_end)}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
@@ -228,6 +230,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="combo-box-demo"
                 options={taskStatus}
                 getOptionLabel={(option) => option.name}
+                defaultValue={{ name: tasks.status }}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
                 onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
@@ -236,6 +239,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="combo-box-demo"
                 options={taskPriority}
                 getOptionLabel={(option) => option.name}
+                defaultValue={{ name: tasks.priority_name }}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
                 onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
