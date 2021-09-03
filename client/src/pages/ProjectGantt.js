@@ -1,8 +1,6 @@
 import { useParams } from "react-router";
 
-import Gantt from "../components/Gantt";
 import SFGantt from "../components/SFGantt";
-import GoogleGantt from "../components/GoogleGantt";
 import LinkIconContainer from "../components/LinkIconContainer";
 
 import "../styles/ProjectGantt.scss";
@@ -25,7 +23,6 @@ const ProjectGantt = ({ state, updateProjectUsers }) => {
       </div>
       <section className="ganttContainer">
         <SFGantt projectTasks={projectTasks} />
-        <GoogleGantt projectTasks={projectTasks} />
       </section>
     </div>
   );

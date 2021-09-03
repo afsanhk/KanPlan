@@ -22,8 +22,8 @@ export default function GoogleGantt ({projectTasks}) {
 
   // https://developers.google.com/chart/interactive/docs/gallery/ganttchart#data-format
   const ganttStyle = {
-    width: "95vw",
-    height: "auto",
+    width: "90vw",
+    height: "200px",
     gantt: {
       criticalPathEnabled: false,
       innerGridHorizLine: {
@@ -39,9 +39,8 @@ export default function GoogleGantt ({projectTasks}) {
 
   return (
     <Chart
-    width={'100%'}
-    height={'400px'}
     chartType="Gantt"
+
     loader={<div>Loading Chart</div>}
     data={[
       [
