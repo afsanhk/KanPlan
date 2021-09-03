@@ -313,4 +313,18 @@ VALUES
   ('Find teammates!', 'TJ, Veronica and Afsan', 1, 4, 1, '2021-08-10','2021-08-13'),
   ('What features to work on?', 'Drag n Drop, Gantt Chart', 2, 4, 1, '2021-08-13','2021-08-25'),
   ('Agree on project', 'Project Management', 3, 4, 1, '2021-08-13','2021-08-25'),
-  ('Decide stack', 'PostgreSQL,Express, React, Node', 3, 4, 1, '2021-08-23','2021-08-25');
+  ('Decide stack', 'PostgreSQL,Express, React, Node', 3, 4, 1, '2021-08-23','2021-08-25'),
+  ('Build user dashboard', 'Storybook testing and react renderimg', 3, 4, 1, '2021-08-27','2021-09-02');
+
+INSERT INTO user_tasks(task_id, user_id)
+VALUES
+  (20,1), (20,2), (20,3),
+  (21,1), (21,2), (21,3),
+  (22,1), (22,2), (22,3),
+  (23,1), (23,2), (23,3),
+  (24,1), (24,2), (24,3),
+  (25,1), (25,2), (25,3),
+  (26,1), (26,2), (26,3),
+  (27,1), (27,2), (27,3),
+  (28,1), (28,2), (28,3),
+                  (29,3);
