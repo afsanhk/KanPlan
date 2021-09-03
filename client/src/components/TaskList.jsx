@@ -21,7 +21,7 @@ export default function TaskList({ tasks, deleteTask, editTask, userID, state })
   })
 
   return (
-    <List>
+    <List disablePadding>
       {parsedTaskList}
     </List>
   )

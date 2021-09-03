@@ -69,7 +69,8 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
 
   return (
     <>
-      <ListItem
+      <ListItem 
+        divider
         className={classes.listItem}
         onMouseEnter={() => {
           setVisibility({ display: 'block' });

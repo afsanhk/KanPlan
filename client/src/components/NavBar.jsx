@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import KanPlanLogo from '../images/KanPlanLogo.jpg';
+import KanPlanLogo from '../images/KanPlanLogo.png';
 import '../styles/NavBar.scss';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import AppsIcon from '@material-ui/icons/Apps';
 import AlarmIcon from '@material-ui/icons/Alarm';
+import ForumIcon from '@material-ui/icons/Forum';
 import Avatar from '@material-ui/core/Avatar';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -86,27 +87,12 @@ function NavBar() {
                   />
                 </ListItem>
               </NavLink>
-              <NavLink to="/project/1/overview">
-                <ListItem>
-                    <ListItemText className={classes.navBarButton}>
-                    Project Overview
-                    </ListItemText>
-                  </ListItem>
-              </NavLink>
-              <NavLink to="/project/1/gantt">
-                <ListItem>
-                  <ListItemText className={classes.navBarButton}>
-                    Gantt Placeholder
-                  </ListItemText>
+              <ListItem button className={classes.navBarButton}>
+                  <ListItemText 
+                    primary={<ForumIcon className={classes.navBarIcon} />} 
+                    secondary={<Typography>Chat</Typography>}
+                  />
                 </ListItem>
-              </NavLink>
-              <NavLink to="/project/1/kanban">
-                <ListItem>
-                    <ListItemText className={classes.navBarButton}>
-                    Kanban Placeholder
-                    </ListItemText>
-                  </ListItem>
-              </NavLink>
             </List>
           </div>
         </div>
