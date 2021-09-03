@@ -216,17 +216,17 @@ INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, 
 VALUES
 -- Kanplan
   -- To-Do (ID1)
-  ('API Routes', 'Set up API Routes', 2, 4, 1,'2021-08-27','2021-08-28'),
+  ('API Routes', 'Set up API Routes', 2, 4, 1,'2021-08-27','2021-08-28'), -- These 3 are actually done now, but not moved due to ID requirements in task_users seeding.
   ('React Components', 'Build react components', 3, 4, 1,'2021-08-27','2021-09-01'),
   ('Kanban DnD', 'Build Kanban containers and drag and drop', 3, 4, 1,'2021-08-27','2021-09-01'),
   -- Late (ID2)
   ('Relax', 'Relax a bit', 1, 2, 1,'2021-08-13','2021-09-11'),
   -- In-progress (ID3)
   -- Done (ID4)
-  ('Seeds', 'Making api seeds', 3, 3, 1,'2021-08-28','2021-08-28'),
-  ('Gantt Research & Build', 'Find a good library to use for the gantt chart', 2, 3, 1,'2021-08-27','2021-09-02'),
-  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1,'2021-08-27','2021-09-03'),
-  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1,'2021-08-31','2021-08-31'),
+  ('Seeds', 'Making api seeds', 3, 4, 1,'2021-08-28','2021-08-28'),
+  ('Gantt Research & Build', 'Find a good library to use for the gantt chart', 2, 4, 1,'2021-08-27','2021-09-02'),
+  ('React Component - Storybook Testing', 'Test components in storybook', 1, 4, 1,'2021-08-27','2021-09-03'),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 4, 1,'2021-08-31','2021-08-31'),
   ('ERD', 'Plan data relations with team', 2, 4, 1,'2021-08-25','2021-08-25'),
   ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1,'2021-08-25','2021-08-26'),
   ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1,'2021-08-25','2021-08-25'),
