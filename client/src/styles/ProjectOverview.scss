@@ -30,9 +30,10 @@
 }
 
 .project-overview-table {
-  // margin: 14px;
   border: base.$border-grey;
   border-radius: base.$border-radius;
+  height: 71vh; //this matches the tableWrapper style in ProjectOverviewTable.jsx
+
 }
 
 .project-overview-charts {
@@ -40,7 +41,17 @@
   border: base.$border-grey;
   border-radius: base.$border-radius;
   background-color: base.$off-white;
-  width: 550px;
   display: flex;
   justify-content: center;
+  width: 550px;
+}
+
+.project-overview-upcoming-tasks {
+  margin: 40px 0 0 40px;
+  border: base.$border-grey;
+  border-radius: base.$border-radius;
+  background-color: base.$off-white;
+  height: 345px;
+  overflow: auto;
+  width: 550px;
 }

@@ -18,6 +18,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
 import DeleteTaskForm from '../components/DeleteTaskForm';
+import ProjectOverviewUpcomingTasks from '../components/ProjectOverviewUpcomingTasks';
 
 import '../styles/ProjectOverview.scss';
 
@@ -27,7 +28,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, updateProjectUsers, addTask, updateTaskStatus, updateTaskPriority }) => {
+const ProjectOverview = ({ 
+  state, 
+  deleteTask, 
+  editTask, 
+  userID, 
+  deleteProject, 
+  updateProjectUsers, 
+  addTask, 
+  updateTaskStatus, 
+  updateTaskPriority 
+}) => {
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
@@ -92,7 +103,9 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
                 data={[projectStatus ? projectStatus.completedTasks : 0, projectStatus ? projectStatus.incompleteTasks : 0]}
               />
             </div>
-            <div className="project-overview-inspiration"></div>
+            <div className="project-overview-upcoming-tasks">
+              <ProjectOverviewUpcomingTasks projectTasks={projectTasks} userID={userID}/>
+            </div>
           </div>
         </div>
       </div>

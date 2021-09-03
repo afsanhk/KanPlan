@@ -1,0 +1,11 @@
+@use './base';
+
+.upcoming-tasks {
+  padding: 20px 30px;
+
+  h2 {
+    padding: 10px 0 15px 0;
+    border-bottom: 2px solid base.$dark-grey;
+    margin: 0;
+  }
+}

@@ -1,0 +1,9 @@
+@use './base';
+
+.listItem {
+  padding: 10px; 
+  
+  &:hover {
+    background-color: base.$light-grey
+  }
+}

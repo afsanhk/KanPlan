@@ -73,11 +73,11 @@ const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    minWidth: 650,
   },
   tableWrapper: {
     overflow: 'auto',
-    height: '67vh',
+    height: '71vh',
     width: '58vw'
   },
   columnTasks: {

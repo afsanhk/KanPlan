@@ -38,6 +38,9 @@ import AddProjectButton from "./AddProjectButton";
 import AddProjectForm from "./AddProjectForm";
 import SFGantt from "./SFGantt";
 
+import UpcomingTaskListItem from "./UpcomingTaskListItem";
+import UpcomingTaskList from "./UpcomingTaskList";
+
 // TEST DATA
 const projects = {
   1: {
@@ -414,3 +417,15 @@ storiesOf("Project Overview Table", module)
 storiesOf("Add Projects", module)
   .add("Add Project Form", () => <AddProjectForm state={state} userID={1} />)
   .add("Button & Drawer", () => <AddProjectButton state={state} userID={1} />);
+
+storiesOf("UpcomingTaskListItem", module).add("Intial", () => (
+  <UpcomingTaskListItem  myTask taskTitle={tasks[1].title} taskDesc={tasks[1].task_description} />
+));
+
+storiesOf("UpcomingTaskList", module)
+  .add("Intial", () => (
+    <UpcomingTaskList  projectTasks={projectTasks} userID={'1'}/>
+  ))
+  .add("No tasks", () => (
+    <UpcomingTaskList  userID={'1'}/>
+  ));
