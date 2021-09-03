@@ -32,7 +32,7 @@ const UserDashboard = ({ state, userID, deleteTask, editTask }) => {
       </div>
       <div className="userDashboard-body">
         <HomepageMyWork tasks={tasks} deleteTask={deleteTask} editTask={editTask} userID={userID} state={state} />
-        <HomepageImportantUpdates />
+        <HomepageImportantUpdates taskStatuses={taskStatuses}/>
         <HomepageMyProjects projects={projects} state={state} />
       </div>
       <div className="userDashboard-footer">
