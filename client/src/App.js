@@ -55,7 +55,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const { state, loading, deleteTask, addTask, editTask, updateTaskStatus, getKanbanStatus, kanbanStatus, deleteProject } = useApplicationData();
+  const { state, loading, deleteTask, editTask, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, addProject, deleteProject, updateProjectUsers } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
@@ -76,16 +76,23 @@ function App() {
                   <UserDashboard state={state} userID={userID} deleteTask={deleteTask} editTask={editTask}/>
                 </Route>
                 <Route path="/projects">
-                  <UserProjects state={state} userID={userID} deleteProject={deleteProject}/>
+                  <UserProjects state={state} userID={userID} addProject={addProject} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} />
                 </Route>
                 <Route path="/project/:projectID/overview">
-                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} deleteProject={deleteProject} editTask={editTask}/>
+                  <ProjectOverview state={state} userID={userID} deleteTask={deleteTask} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} addTask={addTask} editTask={editTask}/>
                 </Route>
                 <Route path="/project/:projectID/kanban">
-                  <ProjectKanban state={state} addTask={addTask} updateTaskStatus={updateTaskStatus} getKanbanStatus={getKanbanStatus} kanbanStatus={kanbanStatus} />
+                  <ProjectKanban
+                    state={state}
+                    addTask={addTask}
+                    updateTaskStatus={updateTaskStatus}
+                    getKanbanStatus={getKanbanStatus}
+                    kanbanStatus={kanbanStatus}
+                    updateProjectUsers={updateProjectUsers}
+                  />
                 </Route>
                 <Route path="/project/:projectID/gantt">
-                  <ProjectGantt state={state} />
+                  <ProjectGantt state={state} updateProjectUsers={updateProjectUsers} />
                 </Route>
                 <Route path="*">
                   <h1>404 - Not Found</h1>

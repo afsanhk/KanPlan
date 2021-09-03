@@ -1,46 +1,85 @@
 import React from 'react';
-import {FrappeGantt, Task, ViewMode} from 'frappe-gantt-react';
-
+import TimeLine from "libresky-gantt";
 import '../styles/Gantt.scss'
 
-/* 
-Tasks need to be fed to FrappeGant as the default 'Task' class extracted at the top of this file.
-The tasks mapped to the new Task class have to be in an object formation with keys:
-  { id, name, start, end, progress, dependencies }
-Since our task data is much more robust:
-  { id, title, task_description, priority_id, status_id, project_id, plan_start, plan_end, proj_name, priority_name, status, task_users}
-We do 2 maps, first one is to convert our structure into the required structure. Second is to convert that into an array of 'Task' classes as required by the library.
-*/
+
+const styleConfig = {
+  header:{ //Target the time header containing the information month/day of the week, day and time.
+      top:{//Target the month elements
+          style:{backgroundColor:"#333333"} //The style applied to the month elements
+      },
+      middle:{//Target elements displaying the day of week info
+          style:{backgroundColor:"chocolate"}, //The style applied to the day of week elements
+          selectedStyle:{backgroundColor:"#b13525"}//The style applied to the day of week elements when is selected
+      },
+      bottom:{//Target elements displaying the day number or time 
+          style:{background:"grey",fontSize:9},//the style tp be applied 
+          selectedStyle:{backgroundColor:"#b13525",fontWeight:  'bold'}//the style tp be applied  when selected
+      }
+  },
+  taskList:{//the right side task list
+      title:{//The title od the task list
+          label:"Tasks",//The caption to display as title
+          style:{backgroundColor:  '#333333',borderBottom:  'solid 1px silver',
+                 color:  'white',textAlign:  'center'}//The style to be applied to the title
+      },
+      task:{// The items inside the list diplaying the task
+          style:{ // the style to be applied
+            backgroundColor:  '#fbf9f9',
+            textAlign: "left",
+            padding: "5px",
+          }
+      },
+      verticalSeparator:{//the vertical seperator use to resize he width of the task list
+          style:{backgroundColor:  '#333333',},//the style
+          grip:{//the four square grip inside the vertical separator
+              style:{backgroundColor:  '#cfcfcd'}//the style to be applied
+          }
+      }
+  },
+  dataViewPort:{//The are where we display the task
+    rows:{//the row constainting a task
+          style:{backgroundColor:"#fbf9f9",borderBottom:'solid 0.5px #cfcfcd'}
+          },
+      task:{//the task itself
+          showLabel:false,//If the task display the a lable
+          style:{position:  'absolute',borderRadius:14,color:  'white',
+                 textAlign:'center',backgroundColor:'grey'},
+           selectedStyle:{}//the style tp be applied  when selected
+      }
+  }
+}
 
 function Gantt({projectTasks}) {
 
   const tasks = projectTasks[0] && 
   projectTasks.map(el => {
+    
+    const endDate = Date.parse(el.plan_end) // Hard coded --> Remove when seeds are improved
+
     return {
       id: el.id,
       name: el.title,
       start: el.plan_start,
-      end: el.plan_end,
-      progress: 100,
-      dependencies: '',
-      custom_class: 'bar-color'
+      end: endDate + 100000000, // Hard coded --> Remove when seeds are improved
+      color: 'lightblue'
     }
   })
-  .map(x => new Task(x));
+  ;
+  
+  // const onUpdateTask = (item, props) => {
+  //   item.start = props.start;
+  //   item.end = props.end;
+  //   this.setState({ data: [...this.state.data] });
+  // };
 
   return (
     <>
       {!projectTasks[0] ? <h1>Ha-ha no data for a Gantt!</h1> :
-      <FrappeGantt
-        tasks={tasks}
-        viewMode={ViewMode.Week}
-        onClick={(task) => console.log(task)}
-        onDateChange={(task, start, end) => console.log(task, start, end)}
-        onProgressChange={(task, progress) => console.log(task, progress)}
-        onTasksChange={(tasks) => console.log(tasks)}
-        // // https://github.com/mohammed-io/frappe-gantt-react/blob/master/src/App.tsx
-        // // onViewChange={this._func} --> something to do with class state = {mode: ViewMode.___} 
-        className='frappe-gantt'
+      <TimeLine 
+      data={tasks} 
+      config={styleConfig} 
+      // onUpdateTask={onUpdateTask}
       />}
     </>
   )

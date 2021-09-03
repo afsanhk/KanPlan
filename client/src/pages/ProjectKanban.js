@@ -11,7 +11,7 @@ import LinkIconContainer from '../components/LinkIconContainer';
 // import css
 import '../styles/ProjectKanban.scss';
 
-const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus }) => {
+const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanbanStatus, updateProjectUsers }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
@@ -19,21 +19,8 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
 
   useEffect(() => {
     getKanbanStatus(projectID);
-  }, [projectID]);
-
-  const moveInArray = function (arr, from, to) {
-    if (Object.prototype.toString.call(arr) !== '[object Array]') {
-      throw new Error('Please provide a valid array');
-    }
-
-    const item = arr.splice(from, 1);
-
-    if (!item.length) {
-      throw new Error('There is no item in the array at index' + from);
-    }
-
-    arr.splice(to, 0, item[0]);
-  };
+    console.log(state.users[1]);
+  }, [projectID, state.projects[projectID].project_tasks]);
 
   const initialData = {
     tasks: {},
@@ -67,23 +54,31 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
   useEffect(() => {
     const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
 
+    kanbanStatus.forEach((obj) => {
+      if (obj.status === 'Late') {
+        if (obj) {
+          initialData.columns['column-1'].taskIds = obj.task_id;
+        }
+      } else if (obj.status === 'To-Do') {
+        if (obj) {
+          initialData.columns['column-2'].taskIds = obj.task_id;
+        }
+      } else if (obj.status === 'In Progress') {
+        if (obj) {
+          initialData.columns['column-3'].taskIds = obj.task_id;
+        }
+      } else if (obj.status === 'Done') {
+        if (obj) {
+          initialData.columns['column-4'].taskIds = obj.task_id;
+        }
+      }
+    });
+
     projectTasks.forEach((task) => {
       if (task) {
         initialData.tasks[task.id] = task;
       }
     });
-    if (kanbanStatus[1]) {
-      initialData.columns['column-1'].taskIds = kanbanStatus[1].task_id;
-    }
-    if (kanbanStatus[0]) {
-      initialData.columns['column-2'].taskIds = kanbanStatus[0].task_id;
-    }
-    if (kanbanStatus[2]) {
-      initialData.columns['column-3'].taskIds = kanbanStatus[2].task_id;
-    }
-    if (kanbanStatus[3]) {
-      initialData.columns['column-4'].taskIds = kanbanStatus[3].task_id;
-    }
     setKanbanState((prev) => ({ ...prev, ...initialData }));
   }, [kanbanStatus]);
 
@@ -150,7 +145,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
       taskIds: finishTaskIds
     };
 
-    console.log(startTaskIds, statusToID[start.title], finishTaskIds, statusToID[finish.title]);
     startTaskIds.forEach((id, index) => {
       updateTaskStatus({ status: start.title, status_id: statusToID[start.title], kanban_order: index }, Number(id));
     });
@@ -204,7 +198,7 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
       <div className="project-kanban-header">
         <div className="project-kanban-title">
           <h1>{projectTitle}</h1>
-          <LinkIconContainer projectID={projectID} text />
+          <LinkIconContainer projectID={projectID} text state={state} updateProjectUsers={updateProjectUsers} />
         </div>
         <p>{projectDescription}</p>
       </div>
@@ -216,7 +210,6 @@ const ProjectKanban = ({ state, addTask, updateTaskStatus, getKanbanStatus, kanb
               {kanbanState.columnOrder.map((columnId) => {
                 const column = kanbanState.columns[columnId];
                 const tasks = column.taskIds.map((taskId) => kanbanState.tasks[taskId]);
-                console.log(tasks);
                 return <KanbanBoard key={column.id} column={column} tasks={tasks} state={state} projectID={projectID} addTask={addTask} />;
               })}
             </div>
