@@ -11,8 +11,11 @@ import convertTimestampStringToYMD from '../helpers/dateConvert'
 //projectTasks is a list of task objects cross-referenced by projectID with end_date within 2 days
 //pass in 'myTask' as a prop to UpcomingTaskListItem to trigger the star (assigned to me)
 function UpcomingTaskList({projectTasks, userID}) {
+  let parsedTaskList;
+
   //from all projectTasks, narrow it down to which tasks are due in the next 2 days
-  const upcomingTasks = projectTasks.filter(task => {
+  if (projectTasks[0]) {
+    const upcomingTasks = projectTasks.filter(task => {
     const taskDue = convertTimestampStringToYMD(task.plan_end)
     const taskDueMonth = taskDue[5] !== '0' ? parseInt(taskDue[5] + taskDue[6]) : parseInt(taskDue[6]);
     const taskDueDay = taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9]);
@@ -70,28 +73,29 @@ function UpcomingTaskList({projectTasks, userID}) {
     }
 
     return false;
-  })
-
-  let parsedTaskList;
-
-  if (upcomingTasks[0]){
-    parsedTaskList = upcomingTasks.map((task, index) => {
-      const assignedToUser = task.task_users.includes(parseInt(userID))
-  
-      return (
-        <UpcomingTaskListItem
-          myTask={assignedToUser}
-          taskTitle={task.title}
-          taskDesc={task.task_description}
-        />
-
-      )
     })
+
+    if (upcomingTasks[0]){
+      parsedTaskList = upcomingTasks.map((task, index) => {
+        const assignedToUser = task.task_users.includes(parseInt(userID))
+    
+        return (
+          <UpcomingTaskListItem
+            myTask={assignedToUser}
+            taskTitle={task.title}
+            taskDesc={task.task_description}
+          />
+  
+        )
+      })
+    }
   }
+
+
 
   return (
     <List disablePadding>
-      {projectTasks && parsedTaskList}
+      {parsedTaskList}
     </List>
   )
 }

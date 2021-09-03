@@ -28,17 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProjectOverview = ({ 
-  state, 
-  deleteTask, 
-  editTask, 
-  userID, 
-  deleteProject, 
-  updateProjectUsers, 
-  addTask, 
-  updateTaskStatus, 
-  updateTaskPriority 
-}) => {
+const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, updateProjectUsers, addTask, updateTaskStatus, updateTaskPriority }) => {
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
@@ -94,7 +84,7 @@ const ProjectOverview = ({
               updateTaskPriority={updateTaskPriority}
             />
           </div>
-          <div>
+          <div className="project-overview-body-right">
             <div className="project-overview-charts">
               <HomepageChartA
                 chartInformation={projectStatusPercentage}
@@ -104,7 +94,7 @@ const ProjectOverview = ({
               />
             </div>
             <div className="project-overview-upcoming-tasks">
-              <ProjectOverviewUpcomingTasks projectTasks={projectTasks} userID={userID}/>
+              <ProjectOverviewUpcomingTasks projectTasks={projectTasks} userID={userID} />
             </div>
           </div>
         </div>

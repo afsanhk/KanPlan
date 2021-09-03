@@ -42,6 +42,12 @@
   }
 }
 
+.homepage-chart-B-legend-all{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
 .homepage-chart-legend-late {
   color: base.$red-dark;
 }
