@@ -22,16 +22,18 @@ export default function GoogleGantt ({projectTasks}) {
 
   // https://developers.google.com/chart/interactive/docs/gallery/ganttchart#data-format
   const ganttStyle = {
-    height: 400,
+    width: "95vw",
+    height: "auto",
     gantt: {
       criticalPathEnabled: false,
       innerGridHorizLine: {
-        stroke: 'lightblue',
-        strokeWidth: 2,
+        stroke: 'grey',
+        strokeWidth: 0.5,
       },
+      barCornerRadius: 20,
       innerGridTrack: { fill: 'white' },
       innerGridDarkTrack: { fill: 'white' },
-      // trackHeight: 70
+      trackHeight: 70
     },
   }
 
