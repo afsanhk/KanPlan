@@ -1,8 +1,11 @@
-import { ColumnDirective, ColumnsDirective, GanttComponent } from '@syncfusion/ej2-react-gantt';
+import {useState, useCallback} from 'react';
 
+import { ColumnDirective, ColumnsDirective, GanttComponent } from '@syncfusion/ej2-react-gantt';
 import "../styles/Gantt.scss"
 
 function SFGantt({ projectTasks }) {
+  const [showDates, setShowDates] = useState(true);
+  const toggle = useCallback(() => setShowDates(!showDates))
   const taskValues = {
     id: 'id',
     name: 'name',
@@ -24,11 +27,12 @@ function SFGantt({ projectTasks }) {
 
   return (
     <div>
+      <button onClick={toggle}>{showDates?'Hide Dates':'Show Dates'}</button>
       <GanttComponent dataSource={tasks} taskFields={taskValues}>
         <ColumnsDirective>
           <ColumnDirective field="name" headerText="Task Names" headerTextAlign="Center"></ColumnDirective>
-          {/* <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>
-          <ColumnDirective field="end_date" format="dd-MMM-yy"></ColumnDirective> */}
+          {showDates && <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>}
+          {showDates && <ColumnDirective field="end_date" format="dd-MMM-yy"></ColumnDirective>}
         </ColumnsDirective>
       </GanttComponent>
     </div>
