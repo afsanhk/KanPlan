@@ -1,11 +1,13 @@
-import { useParams } from 'react-router';
+import { useParams } from "react-router";
 
-import Gantt from '../components/Gantt';
-import LinkIconContainer from '../components/LinkIconContainer';
+import Gantt from "../components/Gantt";
+import SFGantt from "../components/SFGantt";
+import GoogleGantt from "../components/GoogleGantt";
+import LinkIconContainer from "../components/LinkIconContainer";
 
-import '../styles/ProjectGantt.scss';
+import "../styles/ProjectGantt.scss";
 
-import { getTasksForProject } from '../helpers/selectors';
+import { getTasksForProject } from "../helpers/selectors";
 
 const ProjectGantt = ({ state, updateProjectUsers }) => {
   const { projectID } = useParams();
@@ -22,7 +24,8 @@ const ProjectGantt = ({ state, updateProjectUsers }) => {
         <p>{projectDescription}</p>
       </div>
       <section className="ganttContainer">
-        <Gantt projectTasks={projectTasks} />
+        <SFGantt projectTasks={projectTasks} />
+        <GoogleGantt projectTasks={projectTasks} />
       </section>
     </div>
   );
