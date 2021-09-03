@@ -78,7 +78,7 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
             Are you sure you want to delete the task:
           </p>
           <p className={'delete-modal-prop-data'}>
-          '<em>{task.title}</em>'?
+          '<u><em>{task.title}</em></u>'?
           </p>
           <p className={'delete-modal-text-b'}>
             This action cannot be undone!
@@ -97,7 +97,7 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
             Are you sure you want to delete the project:
           </p>
           <p className={'delete-modal-prop-data'}>
-          '<em>{project.proj_name}</em>'?
+          '<u><em>{project.proj_name}</em></u>'?
           </p>
           <p className={'delete-modal-text-b'}>
             This action cannot be undone !
