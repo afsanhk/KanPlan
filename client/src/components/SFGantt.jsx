@@ -26,9 +26,9 @@ function SFGantt({ projectTasks }) {
     <div>
       <GanttComponent dataSource={tasks} taskFields={taskValues}>
         <ColumnsDirective>
-          <ColumnDirective field="name" headerText="Task Name" headerTextAlign="Left"></ColumnDirective>
-          <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>
-          <ColumnDirective field="end_date" format="dd-MMM-yy"></ColumnDirective>
+          <ColumnDirective field="name" headerText="Task Names" headerTextAlign="Center"></ColumnDirective>
+          {/* <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>
+          <ColumnDirective field="end_date" format="dd-MMM-yy"></ColumnDirective> */}
         </ColumnsDirective>
       </GanttComponent>
     </div>
