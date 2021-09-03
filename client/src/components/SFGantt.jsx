@@ -12,17 +12,14 @@ function SFGantt({ projectTasks }) {
 
   const tasks = projectTasks[0] && 
   projectTasks.map(el => {
-
     const startDate = new Date(Date.parse(el.plan_start))
     const endDate = new Date(Date.parse(el.plan_end)) // Hard coded --> Remove when seeds are improved
-
     return {
       id: el.id,
       name: el.title,
       start_date: startDate,
       end_date: endDate
     }
-  
   });
 
   return (
