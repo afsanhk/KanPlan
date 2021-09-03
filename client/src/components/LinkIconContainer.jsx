@@ -37,7 +37,6 @@ const useStyles = makeStyles(() => ({
 export default function LinkIconContainer({ projectID, text, state, updateProjectUsers }) {
   const { pathname } = useLocation(); //extracts pathname from current url location
 
-  console.log(pathname)
   const classes = useStyles();
 
   const activePage = function () {
