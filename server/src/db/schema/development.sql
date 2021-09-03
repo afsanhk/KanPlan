@@ -127,23 +127,23 @@ VALUES
 -- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
 VALUES 
-  ('KanPlan', 1, 'Project management(not boring!)'), -- ID 1
-  ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area'), -- ID 2
+  ('KanPlan', 1, 'KanPlan is a project management web app to make organizing your ideas easier!'), -- ID 1
+  ('onlyFriends', 4, 'A tinder-style app to meet new friends with similar interests in your area.'), -- ID 2
   ('Dev Community', 7, 'A social media platform for developers to interact with each other across the globe.'), -- ID 3
-  ('Fete', 9, 'TBD'), -- ID 4
+  ('Fete', 9, 'An app for planning weddings.'), -- ID 4
   ('Roshanak and Mohammads Project', 11, 'TBD'), -- ID 5
-  ('David, Jamie and Mohameds Project', 13, 'TBD'), -- ID 6
-  ('NoshFeast', 16, 'An app focused on takeout orders; Users can order from and pick up at the restaurants.'), -- ID 7
-  ('Kathy and Emekas Project', 19, 'TBD'), -- ID 8
-  ('Mona and Saraths Project', 21, 'TBD'), -- ID 9
-  ('Farid and Camerons Project', 23, 'TBD'), -- ID 10
-  ('SNIFFLES', 25, 'An app to discover other dog owners within your area sharing similar features to dating apps.'), -- ID 11
-  ('RegexViz', 28, 'A regular expression visualizer with syntax higlighting,step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
+  ('smartHome', 13, 'An app that allows a user to take a better decision to buy a smart device'), -- ID 6
+  ('NoshFeast', 16, 'An app focused on takeout orders. Users can order from and pick up at the restaurants.'), -- ID 7
+  ('DateNite', 19, 'An app to help couples pick a date spot.'), -- ID 8
+  ('healthbook', 21, 'healthbook is a patient-healthcare provider app that allows users and providers immediate access to online appointment scheduling, electronic health records, prescriptions, and patient-doctor communications from the ease and safety of their home.'), -- ID 9
+  ('biblion', 23, 'An app where users can create posts about books they read'), -- ID 10
+  ('SNIFFLES', 25, 'An app for dogs to find new friends within their area. Sharing similar features to dating apps.'), -- ID 11
+  ('RegexViz', 28, 'A regular expression visualizer with syntax higlighting, step by step graph mode, and contextual information on the rules and syntax.'), -- ID 12
   ('Lotify', 30, 'A location-based to-do list - app pops up a reminder when you are near the location.'), -- ID 13
   ('findShelter', 33, 'A shelter management software - serve the homeless '), -- ID 14
-  ('hotelCalifornia', 36, 'Allows conveners post last minute requests or chat real time with the hotel crue'), -- ID 15
+  ('hotelCalifornia', 36, 'Allows conveners post last minute requests or chat real time with the hotel crew.'), -- ID 15
   ('Super Secret awesome amazing project', 39, 'Address independant delivery amazingness (Skip but way better)'), -- ID 16
-  ('gg', 42, 'social platform for reviewing and recommending video games'); -- ID 17
+  ('gg', 42, 'Social platform for reviewing and recommending video games.'); -- ID 17
 
 INSERT INTO kanban_status (status)
 VALUES 
