@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 
 //icons
-import IconButton from '@material-ui/core/IconButton'; 
+import IconButton from '@material-ui/core/IconButton';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
@@ -16,34 +16,36 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-import EditTaskForm from "./EditTaskForm";
+import EditTaskForm from './EditTaskForm';
 import DeleteTaskForm from './DeleteTaskForm';
 
 //helpers
-import { getProjectsForUser } from '../helpers/selectors'
-
+import { getProjectsForUser } from '../helpers/selectors';
 
 const useStyles = makeStyles({
   listItem: {
     '&:hover': {
-      backgroundColor: '#f5f5f5',
+      backgroundColor: '#f5f5f5'
     }
   },
   icon: {
-    margin: '0 2px',
+    margin: '0 2px'
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
-}) 
-
+});
 
 export default function TaskListItem({ task, deleteTask, editTask, userID, projectID, state }) {
   const classes = useStyles();
 
   const [openEdit, setOpenEdit] = useState(false); // modal state -- edit modal
   const [openDelete, setOpenDelete] = useState(false); // modal state -- delete modal
-  const [visibility, setVisibility] = useState({display: 'none'})
+  const [visibility, setVisibility] = useState({ display: 'none' });
 
   const projectsArray = getProjectsForUser(state, userID).map((key) => state.projects[key]);
-
 
   // modal open function - edit modal
   const handleOpenEdit = () => {
@@ -65,50 +67,47 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
     setOpenDelete(false);
   };
 
-    
   return (
     <>
-      <ListItem className={classes.listItem}
-        onMouseEnter = {() => {
-          setVisibility({display: 'block'})
+      <ListItem
+        className={classes.listItem}
+        onMouseEnter={() => {
+          setVisibility({ display: 'block' });
         }}
-        onMouseLeave = {() => {
-          setVisibility({display: 'none'})
+        onMouseLeave={() => {
+          setVisibility({ display: 'none' });
         }}
       >
-          <ListItemText primary={task.title} />
+        <ListItemText primary={task.title} />
 
-          <ListItemIcon>
+        <ListItemIcon>
+          {/* onClick will trigger the edit modal */}
+          <IconButton size="small" className={classes.icon} onClick={handleOpenEdit} style={visibility}>
+            <EditOutlinedIcon />
+          </IconButton>
 
-            {/* onClick will trigger the edit modal */}
-            <IconButton size='small' className={classes.icon} onClick={handleOpenEdit} style={visibility}>
-              <EditOutlinedIcon/>
-            </IconButton>
-
-            {/* onClick will trigger the delete modal */}
-            <IconButton size='small' className={classes.icon} onClick={handleOpenDelete} style={visibility}>
-              <DeleteOutlinedIcon/>
-            </IconButton>
-
-          </ListItemIcon>
-
+          {/* onClick will trigger the delete modal */}
+          <IconButton size="small" className={classes.icon} onClick={handleOpenDelete} style={visibility}>
+            <DeleteOutlinedIcon />
+          </IconButton>
+        </ListItemIcon>
       </ListItem>
 
       {/* edit modal */}
       <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      // className={classes.modal}
-      open={openEdit}
-      onClose={handleCloseEdit}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={openEdit}
+        onClose={handleCloseEdit}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
       >
         <Fade in={openEdit}>
-          <EditTaskForm 
+          <EditTaskForm
             close={handleCloseEdit}
             editTask={editTask}
             tasks={task} //data about only this task
@@ -120,30 +119,21 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
 
       {/* delete modal */}
       <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      // className={classes.modal}
-      open={openDelete}
-      onClose={handleCloseDelete}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        // className={classes.modal}
+        open={openDelete}
+        onClose={handleCloseDelete}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500
+        }}
       >
         <Fade in={openDelete}>
-          <DeleteTaskForm 
-            close={handleCloseDelete}
-            deleteTask={deleteTask}
-            task={task}
-            userID={userID}
-            projectID={projectID}
-          />
+          <DeleteTaskForm close={handleCloseDelete} deleteTask={deleteTask} task={task} userID={userID} projectID={projectID} />
         </Fade>
       </Modal>
-
     </>
-  )
+  );
 }
-
-

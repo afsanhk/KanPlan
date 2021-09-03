@@ -66,6 +66,11 @@ const StyledTableCell = withStyles((theme) => ({
     padding: '5px 15px',
     align: 'center',
     border: '3px solid rgba(189, 189, 189, 0.5)'
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }))(TableCell);
 
@@ -73,7 +78,7 @@ const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650,
+    minWidth: 650
   },
   tableWrapper: {
     overflow: 'auto',
@@ -406,7 +411,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        // className={classes.modal}
+        className={classes.modal}
         open={openEdit}
         onClose={handleCloseEdit}
         closeAfterTransition

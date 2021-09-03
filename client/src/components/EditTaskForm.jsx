@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: '50vw',
     top: '5vh',
     left: '28vw',
-    position: 'fixed',
+    position: 'fixed'
   }
 }));
 
@@ -86,15 +86,15 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   const [teamMembers, setTeamMembers] = useState(null);
   // const [currentProject, setCurrentProject] = useState(null);
   const [clickDesc, setClickDesc] = useState(false);
-  const [state, setState] = useState({ 
-    task_description: tasks.task_description, 
-    plan_start: tasks.plan_start, 
-    plan_end: tasks.plan_end 
+  const [state, setState] = useState({
+    task_description: tasks.task_description,
+    plan_start: tasks.plan_start,
+    plan_end: tasks.plan_end
   });
 
   const [open, setOpen] = React.useState(false);
 
-  const taskID = tasks.id
+  const taskID = tasks.id;
 
   const handleClick = () => {
     setClickDesc(!clickDesc);
@@ -130,8 +130,8 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
 
   // modal save function
   function updateData() {
-    editTask(state, taskID)
-    close()
+    editTask(state, taskID);
+    close();
   }
 
   useEffect(() => {
@@ -141,7 +141,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }, []);
 
   return (
-    <div className={classes.paper}>
+    <div className="task-form">
       <header className="task-form-header">
         <h1>{tasks.title}</h1>
       </header>
@@ -284,10 +284,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
       <footer className="task-form-footer">
         <div>
           <ConfirmButton cancelling close={close} />
-          <ConfirmButton
-            saving
-            updateData={updateData}
-          />
+          <ConfirmButton saving updateData={updateData} />
         </div>
       </footer>
     </div>
