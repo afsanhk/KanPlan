@@ -26,7 +26,7 @@
 }
 
 .project-overview-body {
-  padding: 5vh 40px 0 40px;
+  padding: 5vh 0 0 40px;
   display: flex;
   // width: 100%;
   overflow: auto;
@@ -35,7 +35,7 @@
 .project-overview-table {
   border: base.$border-grey;
   border-radius: base.$border-radius;
-  height: 71vh; //this matches the tableWrapper style in ProjectOverviewTable.jsx
+  // height: 71vh; //this matches the tableWrapper style in ProjectOverviewTable.jsx
   flex-basis: 70%;
 }
 

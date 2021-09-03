@@ -1,9 +1,19 @@
 @use './base';
 
 .listItem {
-  padding: 10px; 
-  
+  padding: 10px;
+
+  span {
+    max-height: 50px;
+    overflow: auto;
+    overflow-wrap: break-word;
+  }
+
+  span::-webkit-scrollbar {
+    display: none;
+  }
+
   &:hover {
-    background-color: base.$light-grey
+    background-color: base.$light-grey;
   }
 }

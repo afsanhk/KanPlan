@@ -1,5 +1,14 @@
 @use './base';
 
+.overview-table-task-name {
+  max-height: 50px;
+  overflow: auto;
+}
+
+.overview-table-task-name::-webkit-scrollbar {
+  display: none;
+}
+
 .overview-table-avatar {
   display: flex;
   justify-content: center;
@@ -9,7 +18,7 @@
 }
 
 .overview-table-avatar-name {
-  margin-left: 5px;
+  margin: 0 0 0 5px;
   font-size: 15px;
 }
 
@@ -24,4 +33,3 @@
     padding-top: 1px;
   }
 }
-

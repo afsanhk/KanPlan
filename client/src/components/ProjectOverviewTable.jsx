@@ -78,23 +78,27 @@ const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    // minWidth: '650px'
   },
   tableWrapper: {
     overflow: 'auto',
-    height: '71vh',
+    height: '100%',
     width: '100%'
   },
   columnTasks: {
-    padding: '0 10px 0 30px'
+    padding: '0 10px 0 30px',
+    minWidth: '300px',
+    maxWidth: '300px'
   },
   columnTaskTitle: {
     color: '#545454',
-    borderLeft: 0
+    borderLeft: 0,
+    overflowWrap: 'break-word'
   },
   columnActions: {
     padding: '10px',
-    borderRight: 0
+    borderRight: 0,
+    minWidth: '80px'
   },
   icon: {
     margin: '2px'
@@ -270,7 +274,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
               rows.map((row) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
-                    {row.title}
+                    <div className="overview-table-task-name">{row.title}</div>
                   </StyledTableCell>
                   <StyledTableCell>
                     <AvatarGroup className="overview-table-avatar">
@@ -297,7 +301,11 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     </AvatarGroup>
                   </StyledTableCell>
                   {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-                  <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px' }} onClick={() => statusClickHandler(row)}>
+                  <StyledTableCell
+                    align="center"
+                    style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }}
+                    onClick={() => statusClickHandler(row)}
+                  >
                     {row.status && row.status.toUpperCase()}
                   </StyledTableCell>
                   <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
