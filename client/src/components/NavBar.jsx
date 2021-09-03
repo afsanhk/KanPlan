@@ -31,7 +31,7 @@ const theme = createTheme({
 
 const useStyles = makeStyles({
   selected: {
-    backgroundColor: '#f5f5f5'
+    backgroundColor: 'rgba(189, 189, 189, 0.3)'
   },
   navBarButton: {
     'text-align': 'center',

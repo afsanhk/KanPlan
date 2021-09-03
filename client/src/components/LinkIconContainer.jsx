@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
 import AssessmentIcon from '@material-ui/icons/Assessment'; // Project Gantt
@@ -13,6 +13,9 @@ import { Backdrop, Fade, Modal } from '@material-ui/core';
 import ProjectUsers from './ProjectUsers';
 
 const useStyles = makeStyles(() => ({
+  selected:{
+    backgroundColor: 'rgba(189, 189, 189, 0.3)'
+  },
   buttonText: {
     color: '#093170',
     height: '40px',
@@ -32,7 +35,24 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function LinkIconContainer({ projectID, text, state, updateProjectUsers }) {
+  const { pathname } = useLocation(); //extracts pathname from current url location
+
+  console.log(pathname)
   const classes = useStyles();
+
+  const activePage = function () {
+    if (pathname.includes('/overview')) {
+      return 'overview';
+    }
+
+    if (pathname.includes('/gantt')) {
+      return 'gantt';
+    }
+
+    if (pathname.includes('/kanban')) {
+      return 'kanban';
+    }
+  };
 
   // modal state
   const [open, setOpen] = React.useState(false);
@@ -50,19 +70,19 @@ export default function LinkIconContainer({ projectID, text, state, updateProjec
   return (
     <div className="nav-icons">
       <NavLink to={`/project/${projectID}/overview`} className={'iconNavLink'}>
-        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
+        <Button size="small" className={[text ? classes.buttonText : classes.buttonNoText, activePage() === 'overview' ? classes.selected : '']}>
           <DashboardIcon></DashboardIcon>
           {text && <p>Overview</p>}
         </Button>
       </NavLink>
       <NavLink to={`/project/${projectID}/gantt`} className={'iconNavLink'}>
-        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
+        <Button size="small" className={[text ? classes.buttonText : classes.buttonNoText, activePage() === 'gantt' ? classes.selected : '']}>
           <AssessmentIcon className="Gantt-icon" />
           {text && <p>Gantt</p>}
         </Button>
       </NavLink>
       <NavLink to={`/project/${projectID}/kanban`} className={'iconNavLink'}>
-        <Button size="small" className={text ? classes.buttonText : classes.buttonNoText}>
+        <Button size="small" className={[text ? classes.buttonText : classes.buttonNoText, activePage() === 'kanban' ? classes.selected : '']}>
           <FontAwesomeIcon icon={faTrello} className="Kanban-icon" />
           {text && <p>Kanban</p>}
         </Button>
