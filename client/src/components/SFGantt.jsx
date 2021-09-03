@@ -13,14 +13,14 @@ function SFGantt({ projectTasks }) {
   const tasks = projectTasks[0] && 
   projectTasks.map(el => {
     const startDate = new Date(Date.parse(el.plan_start))
-    const endDate = new Date(Date.parse(el.plan_end)) // Hard coded --> Remove when seeds are improved
+    const endDate = new Date(Date.parse(el.plan_end))
     return {
       id: el.id,
       name: el.title,
       start_date: startDate,
       end_date: endDate
     }
-  });
+  }).sort((a,b) => a.start_date - b.start_date);
 
   return (
     <div>
