@@ -1,4 +1,13 @@
 @use './base';
+.overview-table-task-name-column {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .overview-table-task-name-column-button {
+    color: white;
+  }
+}
 
 .overview-table-task-name {
   max-height: 50px;
