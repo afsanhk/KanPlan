@@ -212,47 +212,44 @@ VALUES
   (2,1),(3,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1),(14,1),(15,1),(16,1),(17,1);
 
 -- Tasks
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
 VALUES
 -- Kanplan
   -- To-Do (ID1)
-  ('API Routes', 'Set up API Routes', 3, 1, 1),
-  ('React Components', 'Build react components', 2, 1, 1),
-  ('Kanban DnD', 'Build Kanban containers and drag and drop', 2, 1, 1),
+  ('API Routes', 'Set up API Routes', 2, 4, 1,'2021-08-27','2021-08-28'),
+  ('React Components', 'Build react components', 3, 4, 1,'2021-08-27','2021-09-01'),
+  ('Kanban DnD', 'Build Kanban containers and drag and drop', 3, 4, 1,'2021-08-27','2021-09-01'),
   -- Late (ID2)
-  ('Relax', 'Relax a bit', 1, 2, 1),
+  ('Relax', 'Relax a bit', 1, 2, 1,'2021-08-13','2021-09-11'),
   -- In-progress (ID3)
-  ('Seeds', 'Making api seeds', 3, 3, 1),
-  ('Gantt Research', 'Find a good library to use for the gantt chart', 2, 3, 1),
-  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1),
-  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1),
   -- Done (ID4)
-  ('ERD', 'Plan data relations with team', 2, 4, 1),
-  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1),
-  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1),
+  ('Seeds', 'Making api seeds', 3, 3, 1,'2021-08-28','2021-08-28'),
+  ('Gantt Research & Build', 'Find a good library to use for the gantt chart', 2, 3, 1,'2021-08-27','2021-09-02'),
+  ('React Component - Storybook Testing', 'Test components in storybook', 1, 3, 1,'2021-08-27','2021-09-03'),
+  ('Build out back-end', 'Make sure api, DB and server are all working okay', 3, 3, 1,'2021-08-31','2021-08-31'),
+  ('ERD', 'Plan data relations with team', 2, 4, 1,'2021-08-25','2021-08-25'),
+  ('Wireframes', 'Create wireframes for visual reference', 3, 4, 1,'2021-08-25','2021-08-26'),
+  ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1,'2021-08-25','2021-08-25'),
 
 -- OnlyFriends
   -- To-Do (ID1)
-  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2),
+  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2,'2021-08-31','2021-12-12'),
   -- Late (ID2)
-  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2),
+  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2,'2021-08-31','2021-12-12'),
   -- In-progress (ID3)
-  ('Figure out the back-end', 'Server no bueno', 2, 3, 2),
+  ('Figure out the back-end', 'Server no bueno', 2, 3, 2,'2021-08-31','2021-12-12'),
   -- Done (ID4)
-  ('Figure out a name!', 'onlyFrands', 1, 4, 2),
+  ('Figure out a name!', 'onlyFrands', 1, 4, 2,'2021-08-31','2021-12-12'),
 
 -- DevCommunity 
   -- To-Do (ID1)
-  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3),
+  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3,'2021-08-31','2021-12-12'),
   -- Late (ID2)
-  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3),
+  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3,'2021-08-31','2021-12-12'),
   -- In-progress (ID3)
-  ('Planning!', 'So many documents so little time.', 2, 3, 3),
+  ('Planning!', 'So many documents so little time.', 2, 3, 3,'2021-08-31','2021-12-12'),
   -- Done (ID4)
-  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3);
-
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id)
-VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 3);
+  ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3,'2021-08-31','2021-12-12');
 
 -- user_tasks
 INSERT INTO user_tasks(task_id, user_id)
@@ -298,6 +295,22 @@ VALUES
   (18,7),
   (19,8);
 
+-- Further seeds 
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
+VALUES
+-- Kanplan(ID1)
+  -- To-Do (ID1)
+  ('Practice demos', 'Prepare pitch and flow', 2, 1, 1, '2021-09-07','2021-09-07'),
+  ('Dry run demo!', 'Show the mentors our work...', 1, 1, 1, '2021-09-08','2021-09-08'),
+  ('Demo the project!', 'Time to show everyone what we''ve been working on!', 3, 1, 1, '2021-09-09','2021-09-09'),
+  ('Enjoy some well-deserved time off.', 'Bootcamp is over!', 1, 1, 1, '2021-09-09','2021-09-30'),
+  -- Late (ID2)
 
-INSERT INTO tasks (title, task_description, priority_id, status_id, project_id,plan_start,plan_end)
-VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 1,'2021-08-31','2021-12-12');
+  -- In-progress (ID3)
+  ('Small bug and styling fixes', 'Polishing up the app.', 3,3,1,'2021-09-03','2021-09-06'),
+
+  -- Done (ID4)
+  ('Find teammates!', 'TJ, Veronica and Afsan', 1, 4, 1, '2021-08-10','2021-08-13'),
+  ('What features to work on?', 'Drag n Drop, Gantt Chart', 2, 4, 1, '2021-08-13','2021-08-25'),
+  ('Agree on project', 'Project Management', 3, 4, 1, '2021-08-13','2021-08-25'),
+  ('Decide stack', 'PostgreSQL,Express, React, Node', 3, 4, 1, '2021-08-23','2021-08-25');
