@@ -297,3 +297,7 @@ VALUES
   (17,8),
   (18,7),
   (19,8);
+
+
+INSERT INTO tasks (title, task_description, priority_id, status_id, project_id,plan_start,plan_end)
+VALUES (' teammates!', 'Maggie gonna kill it!', 1, 4, 1,'2021-08-31','2021-12-12');
