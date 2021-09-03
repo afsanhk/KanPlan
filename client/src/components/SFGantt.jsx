@@ -14,7 +14,7 @@ function SFGantt({ projectTasks }) {
   projectTasks.map(el => {
 
     const startDate = new Date(Date.parse(el.plan_start))
-    const endDate = new Date(Date.parse(el.plan_end )) // Hard coded --> Remove when seeds are improved
+    const endDate = new Date(Date.parse(el.plan_end)) // Hard coded --> Remove when seeds are improved
 
     return {
       id: el.id,
