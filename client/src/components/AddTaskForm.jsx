@@ -91,6 +91,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   const updateData = () => {
+    console.log({ ...state, project_id: projectID }, projectID, currentUsers);
     addTask({ ...state, project_id: projectID }, projectID, currentUsers);
     close();
   };
@@ -190,15 +191,26 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
 
           <div className="task-form-body-dropdowns-status">
             <div className="task-form-body-dropdowns-status-div">
-              <Autocomplete
-                id="combo-box-demo"
-                options={taskStatus}
-                inputValue={status}
-                getOptionLabel={(option) => option.name}
-                style={{ width: '200px' }}
-                renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
-              />
+              {status ? (
+                <Autocomplete
+                  id="combo-box-demo"
+                  options={taskStatus}
+                  inputValue={status}
+                  getOptionLabel={(option) => option.name}
+                  style={{ width: '200px' }}
+                  renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                  onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                />
+              ) : (
+                <Autocomplete
+                  id="combo-box-demo"
+                  options={taskStatus}
+                  getOptionLabel={(option) => option.name}
+                  style={{ width: '200px' }}
+                  renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                  onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                />
+              )}
               <Autocomplete
                 id="combo-box-demo"
                 options={taskPriority}

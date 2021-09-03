@@ -164,6 +164,12 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     High: 3
   };
 
+  const IDToPriority = {
+    1: 'None',
+    2: 'Low',
+    3: 'High'
+  };
+
   const changeRowID = (id) => {
     setRowID(id);
   };
@@ -230,10 +236,13 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
 
   const priorityClickHandler = (row) => {
     let nextPriority;
-    if (row.status === 'High') {
+    if (row.priority_name === 'High') {
       nextPriority = 'None';
+    } else {
+      nextPriority = IDToPriority[priorityToID[row.priority_name] + 1];
     }
-    console.log(row);
+    // console.log(row);
+    updateTaskPriority({ priority_name: nextPriority, priority_id: priorityToID[nextPriority] }, row.id);
   };
 
   return (
@@ -286,8 +295,8 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                   <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px' }} onClick={() => statusClickHandler(row)}>
                     {row.status && row.status.toUpperCase()}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" onClick={() => priorityClickHandler(row)} />
+                  <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
+                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     <TextField
