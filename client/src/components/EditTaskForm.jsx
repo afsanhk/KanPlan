@@ -71,6 +71,7 @@ const status_id = {
 };
 
 function EditTaskForm({ tasks, projects, users, close, editTask }) {
+  console.log(tasks.plan_start);
   const classes = useStyles();
 
   // getTeamMembers function = helper function to return a array of team members of specific project
