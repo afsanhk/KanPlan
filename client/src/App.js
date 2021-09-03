@@ -50,6 +50,11 @@ const theme = createTheme({
       barColorPrimary: {
         'background-color': '#3d6bb3'
       }
+    },
+    MuiTableCell: {
+      stickyHeader: {
+        'z-index': 10
+      }
     }
   }
 });

@@ -65,7 +65,7 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: 16,
     padding: '5px 15px',
     align: 'center',
-    border: '3px solid rgba(189, 189, 189, 0.5)'
+    border: '1px solid rgba(189, 189, 189, 0.5)'
   },
   modal: {
     display: 'flex',
@@ -77,14 +77,10 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
-  table: {
-    // minWidth: '650px'
-  },
-  tableWrapper: {
+    tableWrapper: {
     overflow: 'auto',
     maxHeight: '700px',
-    // height: '100%',
-    width: '100%'
+    width: '100%',
   },
   columnTasks: {
     padding: '0 10px 0 30px',
@@ -258,7 +254,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   return (
     <>
       <TableContainer component={Paper} elevation={0} className={classes.tableWrapper}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table stickyHeader className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell className={classes.columnTasks}>
