@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     top: '40vh',
     left: '35vw',
     position: 'fixed',
-
   },
   cross: {
     alignSelf: 'flex-end',

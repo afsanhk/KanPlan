@@ -40,19 +40,97 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        // console.log(stateCopy);
+        // console.log('STATECOPY:', stateCopy.tasks[taskID].status); //no status?
       });
   };
 
   // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
+    console.log(taskState);
     const stateCopy = JSON.parse(JSON.stringify(state));
-    stateCopy.tasks[taskID].status = taskState.status;
-    stateCopy.tasks[taskID].status_id = taskState.status_id;
-    stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    if (stateCopy.tasks[taskID].status) {
+      stateCopy.tasks[taskID].status = taskState.status;
+    }
+    if (stateCopy.tasks[taskID].status_id) {
+      stateCopy.tasks[taskID].status_id = taskState.status_id;
+    }
+    if (stateCopy.tasks[taskID].kanban_order) {
+      stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    }
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskState.id}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+  };
+
+  // update task's priority, priority_id
+  const updateTaskPriority = (priorityState, taskID) => {
+    console.log(priorityState, taskID);
+    const stateCopy = JSON.parse(JSON.stringify(state));
+    if (stateCopy.tasks[taskID].priority_name) {
+      stateCopy.tasks[taskID].priority_name = priorityState.priority_name;
+    }
+    if (stateCopy.tasks[taskID].priority_id) {
+      stateCopy.tasks[taskID].priority_id = priorityState.priority_id;
+    }
+
+    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
+  };
+
+  const editTask = (newTaskData, taskID) => {
+    const stateCopy = JSON.parse(JSON.stringify(state));
+
+    stateCopy.tasks[taskID].task_description = newTaskData.task_description;
+    stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
+    stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
+    stateCopy.tasks[taskID].task_users = newTaskData.task_users;
+
+    if (newTaskData.priority_id) {
+      stateCopy.tasks[taskID].priority_id = newTaskData.priority_id;
+      stateCopy.tasks[taskID].priority_name = newTaskData.priority_name;
+    }
+
+    if (newTaskData.status_id) {
+      stateCopy.tasks[taskID].status_id = newTaskData.status_id;
+      stateCopy.tasks[taskID].status = newTaskData.status_name;
+    }
+
+    const newTaskFullData = stateCopy.tasks[taskID];
+
+    //go through old task users, compare to new task users, go to that users/user_tasks, delete task_id
+    const oldArrayOfUsers = state.tasks[taskID].task_users;
+    const newArrayOfUsers = newTaskFullData.task_users;
+
+    const deletedUsers = oldArrayOfUsers.filter((task_user) => !newArrayOfUsers.includes(task_user));
+
+    deletedUsers.forEach((userID) => {
+      const taskIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
+      stateCopy.users[userID].user_tasks.splice(taskIndex, 1);
+
+      setState((prev) => ({
+        ...prev,
+        users: { ...prev.users, [userID]: stateCopy.users[userID] }
+      }));
+    });
+
+    //find out who are the new users, go to that users/user_tasks and add task_id
+
+    const newUsers = newArrayOfUsers.filter((task_user) => !oldArrayOfUsers.includes(task_user));
+
+    newUsers.forEach((userID) => {
+      stateCopy.users[userID].user_tasks.push(taskID);
+
+      setState((prev) => ({
+        ...prev,
+        users: { ...prev.users, [userID]: stateCopy.users[userID] }
+      }));
+    });
+
+    setState((prev) => ({
+      ...prev,
+      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] }
+    }));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData }).catch((error) => console.log(error));
   };
 
   // get kanban status from api
@@ -180,7 +258,10 @@ export default function useApplicationData() {
     loading,
     addTask,
     updateTaskStatus,
+    updateTaskPriority,
     deleteTask,
+    editTask,
+    deleteProject,
     addProject,
     updateProjectUsers,
     deleteProject,
