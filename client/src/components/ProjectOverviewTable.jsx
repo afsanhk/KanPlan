@@ -155,6 +155,10 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   const handleOpenEdit = () => {
     setOpenEdit(true);
   };
+  // add task modal open function
+  const handleOpenAddTask = () => {
+    setOpenAddTask(true);
+  };
 
   // modal close function - edit modal
   const handleCloseEdit = () => {

@@ -40,7 +40,7 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log('STATECOPY:', stateCopy.tasks[taskID].status);
+        // console.log('STATECOPY:', stateCopy.tasks[taskID].status); //no status?
       });
   };
 
