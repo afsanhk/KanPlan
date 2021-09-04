@@ -4,6 +4,10 @@ import { Draggable } from 'react-beautiful-dnd';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Avatar } from '@material-ui/core';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import Tooltip from '@material-ui/core/Tooltip';
+
+//helpers
+import avatarBGColor from '../helpers/avatarBG'
 
 import '../styles/KanbanTask.scss';
 
@@ -22,7 +26,13 @@ const flagStyles = {
 function KanbanTask({ task, index, state }) {
   const parsedUsers = task.task_users.map((user) => {
     const userDetails = state.users[user];
-    return <Avatar alt={userDetails.user_name}>{userDetails.user_name[0]}</Avatar>;
+    let avatarBG = avatarBGColor(userDetails.id)
+
+    return (
+      <Tooltip title={userDetails.user_name}>
+        <Avatar alt={userDetails.user_name} src={`https://robohash.org/${userDetails.id}`} style={{'background-color': avatarBG}} />
+      </Tooltip>
+    )
   });
 
   return (

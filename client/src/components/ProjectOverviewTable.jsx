@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FlagIcon from '@material-ui/icons/Flag';
 import Avatar from '@material-ui/core/Avatar';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Refer to EditTaskForm
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -32,6 +33,8 @@ import AddTaskForm from './AddTaskForm';
 
 //helper functions
 import { getProjectsForUser } from '../helpers/selectors';
+import avatarBGColor from '../helpers/avatarBG'
+
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -282,12 +285,13 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                   <StyledTableCell>
                     <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
                       {row.task_users.map((userID, index) => {
+                        let avatarBG = avatarBGColor(userID)
                         if (row.task_users.length === 1) {
                           return (
                             <>
                               {projectUsers[userID] && (
                                 <>
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} />
+                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}}/>
                                   <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
                                 </>
                               )}
@@ -296,9 +300,9 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                         }
 
                         return (
-                          <Avatar alt={projectUsers[userID]['user_name']} key={index}>
-                            {projectUsers[userID]['user_name'][0]}
-                          </Avatar>
+                          <Tooltip title={projectUsers[userID]['user_name']}>
+                            <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}} />
+                          </Tooltip>
                         );
                       })}
                     </AvatarGroup>

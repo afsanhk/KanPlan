@@ -40,10 +40,10 @@ const theme = createTheme({
       root: {
         width: '30px',
         height: '30px',
-        'font-size': '15px'
+        'font-size': '15px',
       },
       colorDefault: {
-        'background-color': '#1e88e5'
+        'background-color': '#54aeff',
       }
     },
     MuiLinearProgress: {
@@ -90,7 +90,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router>
-          <NavBar />
+          <NavBar userID={userID}/>
           {loading ? (
             <LoadingCircle />
           ) : (

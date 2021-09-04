@@ -18,6 +18,9 @@ import Avatar from '@material-ui/core/Avatar';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
+//helpers
+import avatarBGColor from '../helpers/avatarBG'
+
 const theme = createTheme({
   overrides: {
     MuiDrawer: {
@@ -43,14 +46,14 @@ const useStyles = makeStyles({
   },
   navBarAvatar: 
   {
-    border: 'solid #545454 4px',
+    border: 'solid #757575 3px',
     width: '80px',
     height: '80px',
-    margin :'10px 0 20px 0',
+    marginBottom :'20px',
   }
 });
 
-function NavBar() {
+function NavBar({userID}) {
   const { pathname } = useLocation(); //extracts pathname from current url location
   const classes = useStyles();
 
@@ -63,6 +66,8 @@ function NavBar() {
       return 'projects';
     }
   };
+
+  let avatarBG = avatarBGColor(userID)
 
   return (
     <ThemeProvider theme={theme}>
@@ -105,7 +110,7 @@ function NavBar() {
               />
             </ListItem>
           </List>
-          <Avatar alt="" src="" className={classes.navBarAvatar} />
+          <Avatar alt="" src="" className={classes.navBarAvatar} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}}/>
         </div>
       </Drawer>
     </ThemeProvider>

@@ -107,68 +107,70 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
 
   return (
     <div className="project-users">
-      <header className="project-users-header">
-        <h1>Users</h1>
-        {/* <IconButton size="small" onClick={closeModal} className={classes.closeButton}>
-          <CloseIcon />
-        </IconButton> */}
-      </header>
+      <div className='project-users-header-body'>
+        <header className="project-users-header">
+          <h1>Users</h1>
+          {/* <IconButton size="small" onClick={closeModal} className={classes.closeButton}>
+            <CloseIcon />
+          </IconButton> */}
+        </header>
 
-      <div className="project-users-body">
-        <div className="project-users-body-div">
-          {currentUsers.includes(managerId) && (
-            <>
-              <div className="project-users-body-manager">Project Manager:</div>
-              <TeamMember id={managerId} name={users[managerId].user_name} border />
-            </>
-          )}
-        </div>
-        <div className="project-users-body-users">
-          <div className='project-users-title-add'>
-            <h2>Team Members</h2>
-            <IconButton size="small" onClick={handleOpen}>
-                <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />
-              </IconButton>
+        <div className="project-users-body">
+          <div className="project-users-body-div">
+            {currentUsers.includes(managerId) && (
+              <>
+                <div className="project-users-body-manager">Project Manager:</div>
+                <TeamMember id={managerId} name={users[managerId].user_name} border />
+              </>
+            )}
           </div>
-          <div className="project-users-body-users-div">
-            {currentUsers.map((id, index) => (
-              <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
-            ))}
-          </div>
-          <div className="project-users-body-add-user">
-            <div className="project-users-body-add-user-div">
-              {/* <Button
-                onClick={handleOpen}  
-                disableRipple 
-                variant='contained'
-                
-                style={{ 
-                //   backgroundColor: 'transparent', 
-                  textTransform: 'none', 
-                  padding: '5px'
-                //   '&:hover': {
-                //     border: '2px solid black'
-                //   } 
-                }}
-              >
-                <p>Add new user</p>
-              </Button> */}
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500
-                }}
-              >
-                <Fade in={open}>
-                  <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} all />
-                </Fade>
-              </Modal>
+          <div className="project-users-body-users">
+            <div className='project-users-title-add'>
+              <h2>Team Members</h2>
+              <IconButton size="small" onClick={handleOpen}>
+                  <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />
+                </IconButton>
+            </div>
+            <div className="project-users-body-users-div">
+              {currentUsers.map((id, index) => (
+                <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
+              ))}
+            </div>
+            <div className="project-users-body-add-user">
+              <div className="project-users-body-add-user-div">
+                {/* <Button
+                  onClick={handleOpen}  
+                  disableRipple 
+                  variant='contained'
+                  
+                  style={{ 
+                  //   backgroundColor: 'transparent', 
+                    textTransform: 'none', 
+                    padding: '5px'
+                  //   '&:hover': {
+                  //     border: '2px solid black'
+                  //   } 
+                  }}
+                >
+                  <p>Add new user</p>
+                </Button> */}
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500
+                  }}
+                >
+                  <Fade in={open}>
+                    <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} all />
+                  </Fade>
+                </Modal>
+              </div>
             </div>
           </div>
         </div>
