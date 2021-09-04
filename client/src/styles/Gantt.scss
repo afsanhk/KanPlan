@@ -63,9 +63,15 @@
     .e-taskbar-main-container {
       background-color: black; //Make sure this matches background
       .e-gantt-child-taskbar-inner-div {
-        background-color: salmon;
+        background-color: salmon; // This should match .e-milestone top and bottom border-bottom-color for the rhombus shaped milestone
         border: 1px solid green;
         border-radius: 4px;
+      }
+      .e-milestone-top {
+        border-bottom-color: salmon;
+      }
+      .e-milestone-bottom {
+        border-bottom-color: salmon;
       }
     }
   }
