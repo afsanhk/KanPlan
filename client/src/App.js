@@ -92,6 +92,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        {!auth && <Login users={state.users} />}
+        {auth && <h1>Logged In!</h1>}
         <Router>
           <NavBar />
           {loading ? (
