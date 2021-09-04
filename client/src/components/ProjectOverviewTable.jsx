@@ -226,6 +226,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     };
   }
 
+  // Because projectTasks come in as [null] for new projects in state. With new tasks it's [null, task, task]... filter out the null.
   const rows = projectTasks.filter((el)=>el).map((el) => createData(el));
 
   const statusClickHandler = (row) => {
