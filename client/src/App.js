@@ -93,59 +93,60 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         {!auth && <Login users={state.users} />}
-        {auth && <h1>Logged In!</h1>}
-        <Router>
-          <NavBar userID={userID} />
-          {loading ? (
-            <LoadingCircle />
-          ) : (
-            <div className="body">
-              <Switch>
-                <Route exact path="/">
-                  <UserDashboard state={state} userID={userID} deleteTask={deleteTask} editTask={editTask} />
-                </Route>
-                <Route path="/projects">
-                  <UserProjects
-                    state={state}
-                    userID={userID}
-                    addProject={addProject}
-                    deleteProject={deleteProject}
-                    updateProjectUsers={updateProjectUsers}
-                  />
-                </Route>
-                <Route path="/project/:projectID/overview">
-                  <ProjectOverview
-                    state={state}
-                    userID={userID}
-                    deleteTask={deleteTask}
-                    deleteProject={deleteProject}
-                    updateProjectUsers={updateProjectUsers}
-                    addTask={addTask}
-                    editTask={editTask}
-                    updateTaskStatus={updateTaskStatus}
-                    updateTaskPriority={updateTaskPriority}
-                  />
-                </Route>
-                <Route path="/project/:projectID/kanban">
-                  <ProjectKanban
-                    state={state}
-                    addTask={addTask}
-                    updateKanbanOrder={updateKanbanOrder}
-                    getKanbanStatus={getKanbanStatus}
-                    kanbanStatus={kanbanStatus}
-                    updateProjectUsers={updateProjectUsers}
-                  />
-                </Route>
-                <Route path="/project/:projectID/gantt">
-                  <ProjectGantt state={state} updateProjectUsers={updateProjectUsers} />
-                </Route>
-                <Route path="*">
-                  <h1>404 - Not Found</h1>
-                </Route>
-              </Switch>
-            </div>
-          )}
-        </Router>
+        {auth && (
+          <Router>
+            <NavBar userID={userID} />
+            {loading ? (
+              <LoadingCircle />
+            ) : (
+              <div className="body">
+                <Switch>
+                  <Route exact path="/">
+                    <UserDashboard state={state} userID={userID} deleteTask={deleteTask} editTask={editTask} />
+                  </Route>
+                  <Route path="/projects">
+                    <UserProjects
+                      state={state}
+                      userID={userID}
+                      addProject={addProject}
+                      deleteProject={deleteProject}
+                      updateProjectUsers={updateProjectUsers}
+                    />
+                  </Route>
+                  <Route path="/project/:projectID/overview">
+                    <ProjectOverview
+                      state={state}
+                      userID={userID}
+                      deleteTask={deleteTask}
+                      deleteProject={deleteProject}
+                      updateProjectUsers={updateProjectUsers}
+                      addTask={addTask}
+                      editTask={editTask}
+                      updateTaskStatus={updateTaskStatus}
+                      updateTaskPriority={updateTaskPriority}
+                    />
+                  </Route>
+                  <Route path="/project/:projectID/kanban">
+                    <ProjectKanban
+                      state={state}
+                      addTask={addTask}
+                      updateKanbanOrder={updateKanbanOrder}
+                      getKanbanStatus={getKanbanStatus}
+                      kanbanStatus={kanbanStatus}
+                      updateProjectUsers={updateProjectUsers}
+                    />
+                  </Route>
+                  <Route path="/project/:projectID/gantt">
+                    <ProjectGantt state={state} updateProjectUsers={updateProjectUsers} />
+                  </Route>
+                  <Route path="*">
+                    <h1>404 - Not Found</h1>
+                  </Route>
+                </Switch>
+              </div>
+            )}
+          </Router>
+        )}
       </div>
     </ThemeProvider>
   );
