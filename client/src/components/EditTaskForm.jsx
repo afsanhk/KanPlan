@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     top: '5vh',
     left: '28vw',
     position: 'fixed'
-  }
+  },
 }));
 
 // task status and priority list
@@ -148,7 +148,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
         <div className="task-form-body-description">
           {!clickDesc ? (
             <div className="task-form-body-description-div">
-              <ListItemText primary="Task Description" secondary={state.task_description} />
+              <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{style: {marginTop: '2px'}}}/>
               <IconButton size="small" className={classes.icon} onClick={handleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -158,14 +158,18 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
               <TextField
                 id="standard-full-width"
                 label="Task Description"
-                style={{ margin: 8 }}
+                style={{ fontSize: '1.5em' }}
                 placeholder="Write description"
                 defaultValue={state.task_description}
                 fullWidth
                 multiline
                 margin="normal"
                 InputLabelProps={{
-                  shrink: true
+                  shrink: true,
+                  style: {fontSize: '0.7em', marginTop: 0}
+                }}
+                InputProps={{
+                  style: {fontSize: '1em', color: '#757575'}
                 }}
                 onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
               />

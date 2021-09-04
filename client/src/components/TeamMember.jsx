@@ -22,12 +22,12 @@ function TeamMember({ id, name, add, remove, border, removeUser, addUser }) {
       <TeamMemberName name={name} />
       {add && (
         <IconButton size="small" onClick={() => addUser(id)}>
-          <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
+          <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />
         </IconButton>
       )}
       {remove && (
         <IconButton size="small" onClick={() => removeUser(id)}>
-          <RemoveCircleIcon className={classes.teamMemberButton} fontSize="large" />
+          <RemoveCircleIcon className={classes.teamMemberButton} fontSize="medium" style={{paddingLeft: '2px'}}/>
         </IconButton>
       )}
     </div>

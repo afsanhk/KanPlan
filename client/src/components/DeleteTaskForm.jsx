@@ -2,7 +2,6 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useLocation, Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Close from '@material-ui/icons/Close';
 
 import ConfirmButton from './ConfirmButton'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     border: '3px #757575 solid',
     'border-radius': '8px',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 2, 2),
+    padding: theme.spacing(4, 2, 2, 2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -72,7 +71,6 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
     <>
       {task &&
         <div className={[classes.paper]}> 
-          <Close onClick={close} className={classes.cross} />
           <ErrorOutlineIcon className={classes.error} color='secondary'/>
           <p className={'delete-modal-text-a'}>
             Are you sure you want to delete the task:
@@ -91,7 +89,6 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
       }
       {project &&
         <div className={[classes.paper]}> 
-          <Close onClick={close} className={classes.cross} />
           <ErrorOutlineIcon className={classes.error} color='secondary'/>
           <p className={'delete-modal-text-a'}>
             Are you sure you want to delete the project:

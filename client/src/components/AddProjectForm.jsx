@@ -179,7 +179,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                   value={personName}
                   onChange={handleChange}
                   input={<Input />}
-                  style={{width: "490px"}}
+                  style={{width: "440px"}}
                   renderValue={(selected) => (
                     <div className={classes.chips}>
                       {selected.map((value) => (

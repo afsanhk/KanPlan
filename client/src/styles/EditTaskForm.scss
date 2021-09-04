@@ -1,3 +1,5 @@
+@use './base';
+
 // .task-form {
 //   // background-color: white;
 //   // width: 600px;
@@ -7,62 +9,67 @@
 // }
 .edit-task-form {
   background-color: white;
-  width: 750px;
-  padding-bottom: 50px;
-  border-radius: 5px;
-  border: 2px solid black;
-  height: 90vh;
+  width: 550px;
+  padding: 40px 60px 30px 60px;
+  background-color: #fcfcfc;
+  border: 3px #757575 solid;
+  border-radius: 8px;
+  height: 80vh;
   overflow: auto;
 
   .task-form-header {
-    padding: 20px 20px 0px 20px;
-    border-bottom: 2px solid black;
-    display: flex;
-    justify-content: center;
+    border-bottom: 2px solid base.$dark-grey;
+    // padding: 20px 20px 0px 20px;
+    // display: flex;
+    // justify-content: center;
 
     h1 {
-      width: 80%;
+      margin-top: 10px;
+      width: 100%;
     }
+  }
+
+  .test {
+    margin-top: 5px
   }
 
   .task-form-body {
     div.task-form-body-description {
-      margin-top: 20px;
-      font-size: 1.3em;
+      margin-top: 5px;
       display: flex;
-      justify-content: center;
       position: relative;
-      padding: 0;
 
       .task-form-body-description-div {
-        width: 80%;
+        width: 100%;
 
         .MuiListItemText-primary {
-          padding-left: 3px;
+          margin-top: 15px;
           font-size: 0.8em;
           color: grey;
         }
         .MuiListItemText-secondary {
+          padding-bottom: 3px;
           font-size: 1.5em;
-          font-weight: bold;
-          color: black;
+          color: base.$dark-dark-grey;
+          font-weight: 500;
         }
       }
 
       button {
         position: absolute;
         top: 25px;
-        right: 20px;
+        right: -5px;
+        margin-right: 20px;
       }
     }
+
     .task-form-body-dropdowns {
-      margin-top: 40px;
+      margin-top: 15px;
       display: flex;
       flex-direction: column;
 
       .task-form-body-dropdowns-project {
         display: flex;
-        justify-content: center;
 
         .task-form-body-dropdowns-project-div {
           width: 80%;
@@ -74,22 +81,22 @@
           }
           .MuiListItemText-secondary {
             font-size: 1.5em;
-            font-weight: bold;
-            color: black;
+            color: base.$dark-dark-grey;
+            font-weight: 500;
           }
         }
       }
     }
 
     .task-form-body-dropdowns-date {
-      margin-top: 40px;
+      margin-top: 20px;
       display: flex;
       justify-content: center;
 
       div.task-form-body-dropdowns-date-helper {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
 
@@ -101,20 +108,25 @@
       div.task-form-body-dropdowns-status-div {
         display: flex;
         width: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
 
     .task-form-body-members-title {
       display: flex;
-      justify-content: center;
+      width: 100%;
 
       div {
         border-bottom: 2px solid black;
-        width: 80%;
+        width: 100%;
         justify-content: space-between;
         display: flex;
         align-items: center;
+        margin-top: 20px;
+
+        h2 {
+          font-weight: 600;
+        }
 
         .add-button {
           width: 30px;
@@ -130,13 +142,12 @@
     }
 
     .task-form-body-members {
-      margin-top: 40px;
+      margin-top: 10px;
       display: flex;
       justify-content: center;
       div.task-form-body-members-div {
         display: flex;
-        width: 80%;
-        // height: 160px;
+        width: 100%;
         max-height: 160px;
         justify-content: space-around;
         flex-wrap: wrap;
@@ -152,12 +163,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 40px 0;
+    margin-top: 50px;
 
     div {
       display: flex;
-      width: 40%;
-      justify-content: space-around;
+      width: 50%;
+      justify-content: space-between;
     }
   }
 }
