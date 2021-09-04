@@ -6,6 +6,8 @@ article {
   border-radius: base.$border-radius;
   padding: 20px 30px;
   background-color: base.$off-white;
+  min-width: 450px;
+  width: 45%;
 
   &:hover {
     border: 3px rgba(base.$medium-grey, 0.5) solid;
@@ -18,7 +20,6 @@ article {
     justify-content: space-between;
     align-items: center;
     border-bottom: base.$border-grey;
-
   }
 
   .project-body {
@@ -33,5 +34,10 @@ article {
     height: 30px;
     // margin: 30px 0;
   }
+}
 
+@media only screen and (max-width: 1534px) {
+  article {
+    width: 100%;
+  }
 }
