@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, uesRef, useRef } from 'react';
 
 // internal components
 import TeamMember from './TeamMember';
@@ -11,7 +11,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 
 // material-ui cores/lab
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { IconButton, ListItemText } from '@material-ui/core';
+import { IconButton, ListItemText, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'; //use this to customize the style
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     top: '5vh',
     left: '28vw',
     position: 'fixed'
-  },
+  }
 }));
 
 // task status and priority list
@@ -132,24 +132,32 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
     close();
   }
 
+  const titleRef = useRef(null);
+  const [disableHover, setDisableHover] = useState(true);
+
   useEffect(() => {
     // setCurrentUsers(getTeamMembers(currentProject));
     setTeamMembers(getTeamMembers(tasks.proj_name));
     setState((prev) => ({ ...prev, proj_name: tasks.proj_name, task_users: currentUsers }));
+    if (titleRef.current.clientWidth < titleRef.current.scrollWidth) {
+      setDisableHover(false);
+    }
   }, []);
 
   return (
     <div className="edit-task-form">
-      <div className='task-form-header-body'>
+      <div className="task-form-header-body">
         <header className="task-form-header">
-          <h1>{tasks.title}</h1>
+          <Tooltip title={tasks.title} placement="top-start" disableHoverListener={disableHover}>
+            <h1 ref={titleRef}>{tasks.title}</h1>
+          </Tooltip>
         </header>
 
         <div className="task-form-body">
           <div className="task-form-body-description">
             {!clickDesc ? (
               <div className="task-form-body-description-div">
-                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{style: {marginTop: '2px'}}}/>
+                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{ style: { marginTop: '2px' } }} />
                 <IconButton size="small" className={classes.icon} onClick={handleClick}>
                   <EditOutlinedIcon />
                 </IconButton>
@@ -166,10 +174,10 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   margin="normal"
                   InputLabelProps={{
                     shrink: true,
-                    style: {fontSize: '0.8em', marginTop: 0}
+                    style: { fontSize: '0.8em', marginTop: 0 }
                   }}
                   InputProps={{
-                    style: {fontSize: '1.5em', color: '#757575', width: '100%'}
+                    style: { fontSize: '1.5em', color: '#757575', width: '100%' }
                   }}
                   onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
                 />
