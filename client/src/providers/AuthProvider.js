@@ -11,7 +11,7 @@ export default function AuthProvider(props) {
     setAuth(true);
   };
 
-  const logout = function (email, password) {
+  const logout = function () {
     setUserID(0);
     setAuth(false);
   };
