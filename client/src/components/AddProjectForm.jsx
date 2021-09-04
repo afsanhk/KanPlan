@@ -54,9 +54,11 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
-      marginTop: 52
     }
-  }
+  },
+  // Needed to ensure the checkbox position is fixed
+  variant:"menu",
+  getContentAnchorEl: null
 };
 
 // Prep date data
