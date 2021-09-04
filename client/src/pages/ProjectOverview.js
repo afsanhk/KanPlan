@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import ProjectOverviewTable from '../components/ProjectOverviewTable';
 import LinkIconContainer from '../components/LinkIconContainer';
 import HomepageChartA from '../components/HomepageChartA';
-import HomepageChartB from '../components/HomepageChartB';
 
 // Helpers
 import { getTasksForProject, getUsersForProject, getProjectStatus } from '../helpers/selectors';

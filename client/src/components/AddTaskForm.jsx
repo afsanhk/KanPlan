@@ -91,7 +91,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   const updateData = () => {
-    console.log({ ...state, project_id: projectID }, projectID, currentUsers);
+    // console.log({ ...state, project_id: projectID }, projectID, currentUsers);
     addTask({ ...state, project_id: projectID }, projectID, currentUsers);
     close();
   };

@@ -1,17 +1,25 @@
 .kanban-board {
   border: none;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  // border-bottom-left-radius: 15px;
+  // border-bottom-right-radius: 15px;
+  border-radius: 10px;
   min-width: 350px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   width: 22%;
+  max-height: 720px;
+  overflow: auto;
+  position: relative;
 
   .kanban-board-header {
     background: white;
     display: flex;
     justify-content: center;
     border: 2px solid grey;
-    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
 
     .kanban-board-header-button {
       color: white;
@@ -29,4 +37,8 @@
       width: 90%;
     }
   }
+}
+
+.kanban-board::-webkit-scrollbar {
+  display: none;
 }

@@ -67,7 +67,7 @@ module.exports = (db) => {
     const { status_id, kanban_order, id } = request.body;
 
     // console.log('id: ', id, 'status_id: ', status_id, 'kanban_order: ', kanban_order);
-    if (kanban_order) {
+    if (kanban_order > -1) {
       db.query(
         `
         UPDATE tasks 

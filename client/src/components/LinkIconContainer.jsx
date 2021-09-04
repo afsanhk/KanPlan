@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import DashboardIcon from '@material-ui/icons/Dashboard'; // Project Overview
@@ -13,7 +13,7 @@ import { Backdrop, Fade, Modal } from '@material-ui/core';
 import ProjectUsers from './ProjectUsers';
 
 const useStyles = makeStyles(() => ({
-  selected:{
+  selected: {
     backgroundColor: 'rgba(189, 189, 189, 0.3)'
   },
   buttonText: {
