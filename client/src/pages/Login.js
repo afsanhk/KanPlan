@@ -6,6 +6,7 @@ export default function Login({ users }) {
   const [password, setPassword] = useState("");
   const { login } = useContext(authContext);
 
+  console.log("users inside Login", users);
   const onEmailChange = function (event) {
     setEmail(event.target.value);
   };
