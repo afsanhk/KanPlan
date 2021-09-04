@@ -4,6 +4,9 @@ import { Draggable } from 'react-beautiful-dnd';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Avatar, Tooltip } from '@material-ui/core';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
+
+//helpers
+import avatarBGColor from '../helpers/avatarBG'
 import { makeStyles } from '@material-ui/styles';
 
 import '../styles/KanbanTask.scss';
@@ -37,7 +40,13 @@ function KanbanTask({ task, index, state }) {
 
   const parsedUsers = task.task_users.map((user) => {
     const userDetails = state.users[user];
-    return <Avatar alt={userDetails.user_name}>{userDetails.user_name[0]}</Avatar>;
+    let avatarBG = avatarBGColor(userDetails.id)
+
+    return (
+      <Tooltip title={userDetails.user_name}>
+        <Avatar alt={userDetails.user_name} src={`https://robohash.org/${userDetails.id}`} style={{'background-color': avatarBG}} />
+      </Tooltip>
+    )
   });
 
   useEffect(() => {
@@ -58,7 +67,9 @@ function KanbanTask({ task, index, state }) {
           </header>
 
           <div className="kanban-task-body">
-            <p>{task.task_description}</p>
+            <p>
+              <span>{task.task_description}</span>
+            </p>
           </div>
 
           <footer className="kanban-task-footer">

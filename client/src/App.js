@@ -45,7 +45,7 @@ const theme = createTheme({
         "font-size": "15px",
       },
       colorDefault: {
-        "background-color": "#1e88e5",
+        "background-color": "#54aeff",
       },
     },
     MuiLinearProgress: {
@@ -95,7 +95,7 @@ function App() {
         {!auth && <Login users={state.users} />}
         {auth && <h1>Logged In!</h1>}
         <Router>
-          <NavBar />
+          <NavBar userID={userID} />
           {loading ? (
             <LoadingCircle />
           ) : (

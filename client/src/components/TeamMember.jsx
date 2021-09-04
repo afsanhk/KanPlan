@@ -19,7 +19,7 @@ function TeamMember({ id, name, add, remove, border, removeUser, addUser }) {
 
   return (
     <div className={`team-member ${border ? 'team-member-border' : ''}`}>
-      <TeamMemberName name={name} />
+      <TeamMemberName name={name} id={id}/>
       {add && (
         <IconButton size="small" onClick={() => addUser(id)}>
           <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />

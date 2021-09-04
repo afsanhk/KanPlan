@@ -7,7 +7,9 @@
   border: 3px #757575 solid;
   border-radius: 8px;
   height: 70vh;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .project-users-header {
     border-bottom: 2px solid base.$dark-grey;

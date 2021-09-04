@@ -1,0 +1,9 @@
+.task-list-item-title {
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 500px;
+    width: 330px;
+    text-overflow: ellipsis;
+  }
+}
