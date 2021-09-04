@@ -16,8 +16,6 @@ const useStyles = makeStyles({
   }
 }) 
 
-
-
 function SFGantt({ projectTasks }) {
   const [showDates, setShowDates] = useState(true);
   const taskValues = {
