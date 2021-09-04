@@ -83,7 +83,7 @@ function App() {
     updateKanbanOrder,
   } = useApplicationData();
 
-  const { auth, userID, logout } = useContext(authContext);
+  const { auth, userID } = useContext(authContext);
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   console.log("Inside App.js userID is:", userID);
