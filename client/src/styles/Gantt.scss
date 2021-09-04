@@ -1,50 +1,72 @@
 @use './base';
 @import url("https://cdn.syncfusion.com/ej2/material.css");
 
+// Controls entire chart height and can also change background color for tracks
+.e-content {
+  height: 60vh; // Fixed height will cause white space below.
+  background-color: lightgrey;
+}
+
 // https://ej2.syncfusion.com/react/documentation/gantt/style-and-appearance/
-// .e-task-label {
-//   color: red;
-// }
+// Table-side header font control (no sizing)
+// Controls table header font color, entire table font family, but not size
+.e-table {
+  color: red;
+  // font-family: ;
+}
 
-// .e-chart-row {
-//   background-color: red;
-// }
+// Table header overrides .e-table (Task Names, start date, end date) -- font color
+.e-columnheader {
+  // color: aqua;
+}
 
-// .e-table {
-// }
+// Table-side content
+// Controls background color for table rows
+.e-row {
+  background-color: lightpink;
+}
+// Controls background color for alternate rows
+.e-altrow {
+  background-color: lightblue;
+}
 
-// .e-row {
-//   background-color: grey;
-// }
+// Controls background color for all cells, couldn't do fonts.
+.e-rowcell {
+  // background-color: cadetblue;
+}
 
-// .e-altrow {
-//   background-color: white;
-// }
+// Gantt-side content
+.e-chart-row {
+  background-color: cadetblue;
+}
 
-// .e-columnheader {
-//   background-color: yellow;
-// }
+// Controls background color for Month and Day headers except weekends
+.e-timeline-top-header-cell {
+  background-color: lightgoldenrodyellow;
+}
+// Doesn't work!
+.e-weekend-header-cell {
+}
+// Controls font color for month overlays
+.e-gantt-top-cell-text {
+  color: black;
+}
 
-// .e-header-cell-label {
-//   background-color: yellowgreen;
-// }
+// Controls font color for all of top headers (overrides top-cell if used after)
+.e-header-cell-label {
+  color: firebrick;
+}
 
-// .e-weekend-header-cell {
-//   background-color: black;
-// }
-
-// .e-task-label {
-//   background-color: yellow;
-// }
-
-// .e-right-label-container {
-//   background-color: yellow;
-// }
-
-// .e-left-label-container {
-//   background-color: yellow;
-// }
-
-// .e-gantt-child-taskbar-inner-div {
-//   background-color: yellow;
-// }
+// Progress bar colors and borders
+.e-gantt {
+  .e-gantt-chart {
+    .e-taskbar-main-container {
+      background-color: black; //Make sure this matches background
+      .e-gantt-child-taskbar-inner-div {
+        background-color: salmon;
+        border: 1px solid green;
+        border-radius: 4px;
+      }
+    }
+  }
+}
