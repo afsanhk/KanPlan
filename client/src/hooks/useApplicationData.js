@@ -136,9 +136,10 @@ export default function useApplicationData() {
     });
   };
 
-  const updateKanbanBoard = (newState, taskIds) => {
-    console.log(taskIds);
-    // setState((prev) => ({ ...prev, ...newState }));
+  const updateKanbanBoard = (newState, taskIDs) => {
+    console.log(taskIDs);
+    setState((prev) => ({ ...prev, ...newState }));
+    return axios.put('http://localhost:8001/api/tasks/', { tasks: newState.tasks, task_ids: taskIDs }).catch((error) => console.log(error));
   };
 
   //

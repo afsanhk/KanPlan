@@ -83,7 +83,7 @@ const ProjectKanban = ({ state, addTask, updateKanbanBoard, getKanbanStatus, kan
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
-    const stateCopy = JSON.parse(JSON.stringify(state.tasks));
+    // const stateCopy = JSON.parse(JSON.stringify(state));
 
     if (!destination) {
       return;
