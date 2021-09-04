@@ -1,12 +1,12 @@
 import { createContext, useState } from 'react';
 
-export default function AuthProvider(props) {
+export default function AuthProvider({state.users}}) {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState({ email: "", name: "", id: "" });
 
   // Perform login process for the user & save authID, etc
   const login = function (email, password) {
-    setUser({ email, id, name: "Test User" });
+    setUser({userID});
     setAuth(true);
   };
 
