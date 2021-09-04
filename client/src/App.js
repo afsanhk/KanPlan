@@ -1,7 +1,7 @@
 // Libraries and frameworks
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { authContext } from "./providers/AuthProvider";
+import { authContext } from "./providers/AuthProvider.js";
 
 import useApplicationData from "./hooks/useApplicationData";
 

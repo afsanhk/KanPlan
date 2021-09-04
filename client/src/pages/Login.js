@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { authContext } from "../providers/AuthProvider";
+import { authContext } from "../providers/AuthProvider.js";
 
 export default function Login({ users }) {
   const [email, setEmail] = useState("");
