@@ -123,7 +123,6 @@ function App() {
                     getKanbanStatus={getKanbanStatus}
                     kanbanStatus={kanbanStatus}
                     updateProjectUsers={updateProjectUsers}
-                    updateTaskStatus={updateTaskStatus}
                   />
                 </Route>
                 <Route path="/project/:projectID/gantt">

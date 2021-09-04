@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ConfirmButton from './ConfirmButton'
+import ConfirmButton from './ConfirmButton';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 import '../styles/DeleteTaskForm.scss';
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     top: '22vh',
     left: '40.2vw',
     position: 'fixed',
+    minWidth: '450px'
   },
   cross: {
     alignSelf: 'flex-end',
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   error: {
-    fontSize: '150px',
+    fontSize: '150px'
   }
 }));
 
@@ -67,42 +68,42 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
 
   return (
     <>
-      {task &&
-        <div className={[classes.paper]}> 
-          <ErrorOutlineIcon className={classes.error} color='secondary'/>
-          <p className={'delete-modal-text-a'}>
-            Are you sure you want to delete the task:
-          </p>
-          <p className={'delete-modal-prop-data'}>
-          '<u><em>{task.title}</em></u>'?
-          </p>
-          <p className={'delete-modal-text-b'}>
-            This action cannot be undone!
-          </p>
+      {task && (
+        <div className={[classes.paper]}>
+          <ErrorOutlineIcon className={classes.error} color="secondary" />
+          <p className={'delete-modal-text-a'}>Are you sure you want to delete the task:</p>
+          <span className={'delete-modal-prop-data'}>
+            <u>
+              <em>
+                <span>{task.title}</span>
+              </em>
+            </u>
+          </span>
+          <p className={'delete-modal-text-b'}>This action cannot be undone!</p>
           <div className={'delete-modal-footer'}>
             <ConfirmButton cancelling close={close} />
             <ConfirmButton deleting deleteTaskOrProj={deleteSingleTask} />
           </div>
         </div>
-      }
-      {project &&
-        <div className={[classes.paper]}> 
-          <ErrorOutlineIcon className={classes.error} color='secondary'/>
-          <p className={'delete-modal-text-a'}>
-            Are you sure you want to delete the project:
-          </p>
+      )}
+      {project && (
+        <div className={[classes.paper]}>
+          <ErrorOutlineIcon className={classes.error} color="secondary" />
+          <p className={'delete-modal-text-a'}>Are you sure you want to delete the project:</p>
           <p className={'delete-modal-prop-data'}>
-          '<u><em>{project.proj_name}</em></u>'?
+            '
+            <u>
+              <em>{project.proj_name}</em>
+            </u>
+            '?
           </p>
-          <p className={'delete-modal-text-b'}>
-            This action cannot be undone !
-          </p>
+          <p className={'delete-modal-text-b'}>This action cannot be undone !</p>
           <div className={'delete-modal-footer'}>
-            <ConfirmButton cancelling close={close}/>
-            <ConfirmButton deleting deleteTaskOrProj={deleteSingleProject}/>
+            <ConfirmButton cancelling close={close} />
+            <ConfirmButton deleting deleteTaskOrProj={deleteSingleProject} />
           </div>
         </div>
-      }
-  </>
+      )}
+    </>
   );
 }

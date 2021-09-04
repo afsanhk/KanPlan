@@ -1,50 +1,75 @@
 @use './base';
 @import url("https://cdn.syncfusion.com/ej2/material.css");
 
+// Controls entire chart height
+.e-content {
+  height: 60vh; // Fixed height will cause white space below.
+  background-color: lightgrey;
+}
+
 // https://ej2.syncfusion.com/react/documentation/gantt/style-and-appearance/
-// .e-task-label {
-//   color: red;
-// }
+// // Table-side content
+// Table-side header font control (no sizing)
+// Controls table header font color, entire table font family, but not size
+.e-table {
+  color: red;
+  // font-family: ;
+  // Table header overrides .e-table (Task Names, start date, end date) -- font color
+  .e-columnheader {
+    // color: aqua;
+  }
+  // Controls background color for table rows
+  .e-row {
+    background-color: lightpink;
+  }
+  // Controls background color for alternate rows
+  .e-altrow {
+    background-color: lightblue;
+  }
+  // Controls background color for all cells, couldn't do fonts. Overrides row and altrow
+  .e-rowcell {
+    // background-color: cadetblue;
+  }
+}
 
-// .e-chart-row {
-//   background-color: red;
-// }
-
-// .e-table {
-// }
-
-// .e-row {
-//   background-color: grey;
-// }
-
-// .e-altrow {
-//   background-color: white;
-// }
-
-// .e-columnheader {
-//   background-color: yellow;
-// }
-
-// .e-header-cell-label {
-//   background-color: yellowgreen;
-// }
-
-// .e-weekend-header-cell {
-//   background-color: black;
-// }
-
-// .e-task-label {
-//   background-color: yellow;
-// }
-
-// .e-right-label-container {
-//   background-color: yellow;
-// }
-
-// .e-left-label-container {
-//   background-color: yellow;
-// }
-
-// .e-gantt-child-taskbar-inner-div {
-//   background-color: yellow;
-// }
+// Progress bar colors and borders
+.e-gantt {
+  .e-gantt-chart {
+    // Controls background color for Month and Day headers except weekends
+    .e-timeline-top-header-cell {
+      background-color: lightgoldenrodyellow;
+      // Background color for saturday and sunday header
+      .e-weekend-header-cell {
+        background: sandybrown;
+      }
+      // Controls font color for all of top headers (overrides top-cell if used after)
+      .e-header-cell-label {
+        color: firebrick;
+      }
+      // Controls font color for month overlays
+      .e-gantt-top-cell-text {
+        color: black;
+      }
+    }
+    // Gantt Side
+    // Track Color
+    .e-chart-row {
+      background-color: cadetblue;
+      // Progress Bar Colors
+      .e-taskbar-main-container {
+        background-color: black; //Make sure this matches background
+        .e-gantt-child-taskbar-inner-div {
+          background-color: salmon; // This should match .e-milestone top and bottom border-bottom-color for the rhombus shaped milestone
+          border: 1px solid green;
+          border-radius: 4px;
+        }
+        .e-milestone-top {
+          border-bottom-color: salmon;
+        }
+        .e-milestone-bottom {
+          border-bottom-color: salmon;
+        }
+      }
+    }
+  }
+}

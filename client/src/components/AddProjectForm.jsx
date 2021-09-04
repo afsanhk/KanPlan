@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   // This defines the styling for the 'field' that contains the name 'chips'
   chips: {
     display: 'grid',
-    gridTemplateColumns: '150px 150px 150px',
+    gridTemplateColumns: '140px 140px 140px',
     backgroundColor: 'white'
   },
   // This defines the styling for the actual name 'chips'
@@ -43,7 +43,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: '30px'
-  }
+  },
+  // Required in conjunction with classes prop for <Select /> to set background color on focus. 
+  selectRoot: {
+      '&:focus':{
+        backgroundColor:'white'
+      }
+    }
+  
 }));
 
 // Styling for the drop-down
@@ -54,9 +61,12 @@ const MenuProps = {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       width: 250,
-      marginTop: 52
+      marginTop:5
     }
-  }
+  },
+  // Needed to ensure the checkbox position is fixed
+  variant:"menu",
+  getContentAnchorEl: null
 };
 
 // Prep date data
@@ -112,7 +122,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
   return (
     <div className="add-project-form-container">
       <div className="add-project-form-top">
-        <h1 className="add-project-form-title">Add a project</h1>
+        <h1 className="add-project-form-title">Add Project</h1>
         <div className="add-project-form-body">
           <form className="add-project-form">
             <TextField
@@ -167,7 +177,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
             </div>
 
             <div className="add-project-form-team-members">
-              <h3>Choose some additional team members!</h3>
+              <h3>Choose team members!</h3>
               {/* Checkbox Dropdown Code */}
               <div className="team-member-container">
                 <Select
@@ -177,6 +187,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                   value={personName}
                   onChange={handleChange}
                   input={<Input />}
+                  classes={{root:classes.selectRoot}} // Works in conjunction with selectRoot in makeThemes to remove grey background on checkbox drop-down.
                   style={{width: "440px"}}
                   renderValue={(selected) => (
                     <div className={classes.chips}>
@@ -184,12 +195,13 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                         <Chip key={value} label={value} className={classes.chip} />
                       ))}
                     </div>
-                  )}
+                  )
+                }
                   MenuProps={MenuProps}
                 > 
                   {names.map((name) => (
                     <MenuItem key={name} value={name}>
-                      <Checkbox checked={personName.indexOf(name) > -1} />
+                      <Checkbox checked={personName.indexOf(name) > -1} disableRipple={true}/>
                       <ListItemText primary={name} />
                     </MenuItem>
                   ))}

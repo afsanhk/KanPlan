@@ -7,8 +7,14 @@
 }
 
 .delete-modal-prop-data {
+  width: 100%;
   font-size: 22px;
   margin: 10px 10px 20px 10px;
+
+  text-align: center;
+  max-width: 400px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .delete-modal-text-b {

@@ -9,6 +9,8 @@
 
   h1 {
     margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid;
   }
 
   .add-project-form {
@@ -24,14 +26,12 @@
       grid-template-columns: 250px 250px;
     }
     margin-bottom: 20px;
-  } 
- 
+  }
 
   .add-project-form-buttons {
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    
   }
 }

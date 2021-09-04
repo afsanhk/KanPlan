@@ -12,6 +12,10 @@
 .overview-table-task-name {
   max-height: 50px;
   overflow: auto;
+  white-space: nowrap;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .overview-table-task-name::-webkit-scrollbar {

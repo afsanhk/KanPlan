@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,12 +9,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import FlagIcon from '@material-ui/icons/Flag';
 import Avatar from '@material-ui/core/Avatar';
-import Tooltip from '@material-ui/core/Tooltip';
 
 // Refer to EditTaskForm
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
@@ -85,13 +84,13 @@ const useStyles = makeStyles((theme) => ({
   },
   columnTasks: {
     padding: '0 10px 0 30px',
-    minWidth: '300px',
-    maxWidth: '300px'
+    minWidth: '270px',
+    maxWidth: '270px'
   },
   columnTaskTitle: {
     color: '#545454',
-    borderLeft: 0,
-    overflowWrap: 'break-word'
+    borderLeft: 0
+    // overflowWrap: 'break-word'
   },
   columnActions: {
     padding: '10px',
@@ -146,7 +145,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   const classes = useStyles();
 
   //how modal knows which task to pass in
-  const [rowID, setRowID] = React.useState('');
+  const [rowID, setRowID] = useState('');
 
   // status to status_id
   const statusToID = {
@@ -184,7 +183,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   // modal state
   const [openEdit, setOpenEdit] = useState(false); // modal state -- edit modal
   const [openDelete, setOpenDelete] = useState(false); // modal state -- delete modal
-  const [openAddTask, setOpenAddTask] = React.useState(false); // add task modal state
+  const [openAddTask, setOpenAddTask] = useState(false); // add task modal state
 
   const projectsArray = getProjectsForUser(state, userID).map((key) => state.projects[key]);
 
@@ -229,9 +228,11 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     };
   }
 
-  const rows = projectTasks[0] && projectTasks.map((el) => createData(el));
+  // Because projectTasks come in as [null] for new projects in state. With new tasks it's [null, task, task]... filter out the null.
+  // const rows = projectTasks.filter((el) => el).map((el) => createData(el));
+  const rows = projectTasks.filter((el) => el).map((el) => createData(el));
 
-  const statusClickHandler = (row) => {
+  const statusClickHandler = (row, index) => {
     let nextStatus;
     if (row.status === 'Done') {
       nextStatus = 'To-Do';
@@ -242,7 +243,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     updateTaskStatus({ status: nextStatus, status_id: statusToID[nextStatus] }, row.id);
   };
 
-  const priorityClickHandler = (row) => {
+  const priorityClickHandler = (row, index) => {
     let nextPriority;
     if (row.priority_name === 'High') {
       nextPriority = 'None';
@@ -276,12 +277,13 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
             </TableRow>
           </TableHead>
           <TableBody>
-            {projectTasks[0] &&
-              rows.map((row) => (
-                <StyledTableRow key={row.id}>
-                  <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
+            {rows.map((row, index) => (
+              <StyledTableRow key={row.id}>
+                <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
+                  <Tooltip title={row.title} placement="top-start">
                     <div className="overview-table-task-name">{row.title}</div>
-                  </StyledTableCell>
+                 </Tooltip>
+                </StyledTableCell>
                   <StyledTableCell>
                     <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
                       {row.task_users.map((userID, index) => {
@@ -305,77 +307,81 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                           </Tooltip>
                         );
                       })}
-                    </AvatarGroup>
-                  </StyledTableCell>
-                  {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-                  <StyledTableCell
-                    align="center"
-                    style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }}
-                    onClick={() => statusClickHandler(row)}
-                  >
-                    {row.status && row.status.toUpperCase()}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
-                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <TextField
-                      id="date"
-                      // label="Start Date"
-                      type="date"
-                      value={row.plan_start.substring(0, 10)}
-                      size="small"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true
+                  </AvatarGroup>
+                </StyledTableCell>
+                {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
+                <StyledTableCell
+                  align="center"
+                  style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }}
+                  onClick={() => statusClickHandler(row, index)}
+                >
+                  {row.status && row.status.toUpperCase()}
+                </StyledTableCell>
+                <StyledTableCell align="center" onClick={() => priorityClickHandler(row, index)}>
+                  <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <TextField
+                    id="date"
+                    // label="Start Date"
+                    type="date"
+                    value={row.plan_start.substring(0, 10)}
+                    size="small"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    InputProps={{
+                      className: classes.input
+                    }}
+                    onChange={(event) => {
+                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
+                    }}
+                  />
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <TextField
+                    id="date"
+                    // label="End Date"
+                    type="date"
+                    value={row.plan_end.substring(0, 10)}
+                    size="small"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    InputProps={{
+                      className: classes.input
+                    }}
+                    onChange={(event) => {
+                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
+                    }}
+                  />
+                </StyledTableCell>
+                <StyledTableCell align="center" className={classes.columnActions}>
+                  <IconButton size="small">
+                    <EditOutlinedIcon
+                      className={classes.icon}
+                      fontSize="small"
+                      onClick={() => {
+                        changeRowID(row.id);
+                        handleOpenEdit();
                       }}
-                      InputProps={{
-                        className: classes.input
-                      }}
-                      onChange={(event) => editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <TextField
-                      id="date"
-                      // label="End Date"
-                      type="date"
-                      value={row.plan_end.substring(0, 10)}
-                      size="small"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true
+                  </IconButton>
+                  <IconButton size="small">
+                    <DeleteIcon
+                      className={classes.icon}
+                      fontSize="small"
+                      onClick={() => {
+                        changeRowID(row.id);
+                        handleOpenDelete();
                       }}
-                      InputProps={{
-                        className: classes.input
-                      }}
-                      onChange={(event) => editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.columnActions}>
-                    <IconButton size="small">
-                      <EditOutlinedIcon
-                        className={classes.icon}
-                        fontSize="small"
-                        onClick={() => {
-                          changeRowID(row.id);
-                          handleOpenEdit();
-                        }}
-                      />
-                    </IconButton>
-                    <IconButton size="small">
-                      <DeleteIcon
-                        className={classes.icon}
-                        fontSize="small"
-                        onClick={() => {
-                          changeRowID(row.id);
-                          handleOpenDelete();
-                        }}
-                      />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+                  </IconButton>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
 
             {/* <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={handleOpenAddTask}>
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomLeftRadius: '5px' }}>
