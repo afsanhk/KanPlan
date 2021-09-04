@@ -1,67 +1,69 @@
 // Libraries and frameworks
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { authContext } from "./providers/AuthProvider";
 
-import useApplicationData from './hooks/useApplicationData';
+import useApplicationData from "./hooks/useApplicationData";
 
 // Components & Pages
-import NavBar from './components/NavBar';
-import UserDashboard from './pages/UserDashboard';
-import UserProjects from './pages/UserProjects';
-import ProjectOverview from './pages/ProjectOverview';
-import ProjectKanban from './pages/ProjectKanban';
-import ProjectGantt from './pages/ProjectGantt';
-import LoadingCircle from './components/LoadingCircle';
+import NavBar from "./components/NavBar";
+import UserDashboard from "./pages/UserDashboard";
+import UserProjects from "./pages/UserProjects";
+import ProjectOverview from "./pages/ProjectOverview";
+import ProjectKanban from "./pages/ProjectKanban";
+import ProjectGantt from "./pages/ProjectGantt";
+import LoadingCircle from "./components/LoadingCircle";
+import Login from "./pages/Login";
 
 // Styling
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-import './styles/App.scss';
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import "./styles/App.scss";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1e88e5',
-      dark: '#4b9fea' //this color is actually lighter, is visible when hovering over buttons
+      main: "#1e88e5",
+      dark: "#4b9fea", //this color is actually lighter, is visible when hovering over buttons
     },
     secondary: {
-      main: '#e03838',
-      dark: '#ff5252' //this color is actually lighter, is visible when hovering over buttons
-    }
+      main: "#e03838",
+      dark: "#ff5252", //this color is actually lighter, is visible when hovering over buttons
+    },
   },
   typography: {
     fontSize: 16,
     h3: {
-      fontSize: '3.4rem'
-    }
+      fontSize: "3.4rem",
+    },
   },
   overrides: {
     // Style sheet name ⚛️
     MuiAvatar: {
       root: {
-        width: '30px',
-        height: '30px',
-        'font-size': '15px'
+        width: "30px",
+        height: "30px",
+        "font-size": "15px",
       },
       colorDefault: {
-        'background-color': '#1e88e5'
-      }
+        "background-color": "#1e88e5",
+      },
     },
     MuiLinearProgress: {
       barColorPrimary: {
-        'background-color': '#3d6bb3'
-      }
+        "background-color": "#3d6bb3",
+      },
     },
     MuiTableCell: {
       stickyHeader: {
-        'z-index': 10
-      }
+        "z-index": 10,
+      },
     },
     MuiBackdrop: {
       root: {
-        'background-color': 'rgba(0, 0, 0, 0.3)'
-      }
-    }
-  }
+        "background-color": "rgba(0, 0, 0, 0.3)",
+      },
+    },
+  },
 });
 
 function App() {
@@ -78,9 +80,10 @@ function App() {
     deleteProject,
     updateProjectUsers,
     updateTaskPriority,
-    updateKanbanOrder
+    updateKanbanOrder,
   } = useApplicationData();
 
+  const { auth } = useContext(authContext);
   // Change this projectID to see reflected changes in gantt based on state.
   // In reality we will need to pass this in based on which project we are routing from
   const projectID = 8;
@@ -100,7 +103,13 @@ function App() {
                   <UserDashboard state={state} userID={userID} deleteTask={deleteTask} editTask={editTask} />
                 </Route>
                 <Route path="/projects">
-                  <UserProjects state={state} userID={userID} addProject={addProject} deleteProject={deleteProject} updateProjectUsers={updateProjectUsers} />
+                  <UserProjects
+                    state={state}
+                    userID={userID}
+                    addProject={addProject}
+                    deleteProject={deleteProject}
+                    updateProjectUsers={updateProjectUsers}
+                  />
                 </Route>
                 <Route path="/project/:projectID/overview">
                   <ProjectOverview
