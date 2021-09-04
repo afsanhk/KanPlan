@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   // This defines the styling for the 'field' that contains the name 'chips'
   chips: {
     display: 'grid',
-    gridTemplateColumns: '150px 150px 150px',
+    gridTemplateColumns: '140px 140px 140px',
     backgroundColor: 'white'
   },
   // This defines the styling for the actual name 'chips'
