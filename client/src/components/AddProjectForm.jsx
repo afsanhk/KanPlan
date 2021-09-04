@@ -115,7 +115,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
   return (
     <div className="add-project-form-container">
       <div className="add-project-form-top">
-        <h1 className="add-project-form-title">Add a project</h1>
+        <h1 className="add-project-form-title">Add Project</h1>
         <div className="add-project-form-body">
           <form className="add-project-form">
             <TextField
@@ -170,7 +170,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
             </div>
 
             <div className="add-project-form-team-members">
-              <h3>Choose some additional team members!</h3>
+              <h3>Choose team members!</h3>
               {/* Checkbox Dropdown Code */}
               <div className="team-member-container">
                 <Select
