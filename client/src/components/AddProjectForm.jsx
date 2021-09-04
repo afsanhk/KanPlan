@@ -43,7 +43,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     marginTop: '30px'
-  }
+  },
+  // Required in conjunction with classes prop for <Select /> to set background color on focus. 
+  selectRoot: {
+      '&:focus':{
+        backgroundColor:'white'
+      }
+    }
+  
 }));
 
 // Styling for the drop-down
@@ -180,6 +187,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                   value={personName}
                   onChange={handleChange}
                   input={<Input />}
+                  classes={{root:classes.selectRoot}} // Works in conjunction with selectRoot in makeThemes to remove grey background on checkbox drop-down.
                   style={{width: "440px"}}
                   renderValue={(selected) => (
                     <div className={classes.chips}>
