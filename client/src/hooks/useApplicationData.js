@@ -23,7 +23,7 @@ export default function useApplicationData() {
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
-  const addTask = async (newTask, projectID, taskUsersID) => {
+  const addTask = (newTask, projectID, taskUsersID) => {
     let taskID;
     return axios
       .post(`http://localhost:8001/api/tasks/`, newTask)
@@ -34,7 +34,7 @@ export default function useApplicationData() {
         const stateCopy = JSON.parse(JSON.stringify(state));
 
         stateCopy.tasks[taskID] = { ...newTask, id: taskID, kanban_order: -1 };
-        stateCopy.projects[projectID].project_tasks = [...state.projects[projectID].project_tasks, taskID];
+        stateCopy.projects[projectID].project_tasks = [...stateCopy.projects[projectID].project_tasks, taskID];
 
         taskUsersID.forEach((id) => {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
