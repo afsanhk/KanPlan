@@ -18,11 +18,10 @@
 
   .kanban-task-body {
     margin: 5px;
-    overflow: scroll;
+    // overflow: scroll;
     // white-space: nowrap;
     word-wrap: break-word;
-    max-height: 90px;
-    text-overflow: ellipsis;
+    // max-height: 90px;
   }
 
   .kanban-task-body::-webkit-scrollbar {
