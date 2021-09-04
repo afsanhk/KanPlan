@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -21,6 +21,9 @@ import DeleteTaskForm from './DeleteTaskForm';
 
 //helpers
 import { getProjectsForUser } from '../helpers/selectors';
+import { Tooltip } from '@material-ui/core';
+
+import '../styles/TaskListItem.scss';
 
 const useStyles = makeStyles({
   listItem: {
@@ -67,9 +70,21 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
     setOpenDelete(false);
   };
 
+  const titleRef = useRef(null);
+  const [disableHover, setDisableHover] = useState(true);
+
+  useEffect(() => {
+    console.log(titleRef);
+    if (titleRef.current.firstChild.clientWidth < titleRef.current.firstChild.scrollWidth) {
+      setDisableHover(false);
+    } else {
+      setDisableHover(true);
+    }
+  }, [task.title]);
+
   return (
     <>
-      <ListItem 
+      <ListItem
         divider
         className={classes.listItem}
         onMouseEnter={() => {
@@ -79,7 +94,9 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
           setVisibility({ display: 'none' });
         }}
       >
-        <ListItemText primary={task.title} />
+        <Tooltip title={task.title} placement="top-start" disableHoverListener={disableHover}>
+          <ListItemText primary={task.title} ref={titleRef} className="task-list-item-title" />
+        </Tooltip>
 
         <ListItemIcon>
           {/* onClick will trigger the edit modal */}
