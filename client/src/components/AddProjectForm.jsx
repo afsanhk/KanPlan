@@ -29,6 +29,20 @@ const useStyles = makeStyles((theme) => ({
     margin: 2,
     backgroundColor: "white",
     border: "solid 1px #4b9fea"
+  },
+  projectNameDesc: {
+    // marginTop: '10px',
+    marginBottom: '20px',
+  },
+  textField: {
+    marginTop: '10px',
+    marginBottom: '20px',
+    width: '180px'
+  },
+  calendars: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '30px'
   }
 }));
 
@@ -99,91 +113,93 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
 
   return (
     <div className="add-project-form-container">
-      <h1 className="add-project-form-title">Add a project</h1>
-      <div className="add-project-form-body">
-        <form className="add-project-form">
-          <TextField
-            id="standard-full-width"
-            label="Project Name"
-            value={projectName}
-            style={{ margin: 8 }}
-            placeholder="Write project name here..."
-            multiline
-            margin="normal"
-            onChange={(event) => setProjectName(event.target.value)}
-          />
+      <div className="add-project-form-top">
+        <h1 className="add-project-form-title">Add a project</h1>
+        <div className="add-project-form-body">
+          <form className="add-project-form">
+            <TextField
+              id="standard-full-width"
+              label="Project Name"
+              value={projectName}
+              className={classes.projectNameDesc}
+              multiline
+              margin="normal"
+              onChange={(event) => setProjectName(event.target.value)}
+            />
 
-          <TextField
-            id="standard-full-width"
-            label="Project Description"
-            value={projectDesc}
-            style={{ margin: 8 }}
-            placeholder="Write project name here..."
-            multiline
-            margin="normal"
-            onChange={(event) => setProjectDesc(event.target.value)}
-          />
+            <TextField
+              id="standard-full-width"
+              label="Project Description"
+              value={projectDesc}
+              className={classes.projectNameDesc}
+              multiline
+              margin="normal"
+              onChange={(event) => setProjectDesc(event.target.value)}
+            />
 
-          <TextField
-            id="date"
-            label="Start Date"
-            type="date"
-            defaultValue={planStartString}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={(event) => setPlanStart(event.target.value)}
-          />
+            <div className={classes.calendars}>
+              <TextField
+                id="date"
+                label="Start Date"
+                type="date"
+                defaultValue={planStartString}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={(event) => setPlanStart(event.target.value)}
+              />
 
-          <TextField
-            id="date"
-            label="End Date"
-            type="date"
-            defaultValue={planEndString}
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={(event) => setPlanEnd(event.target.value)}
-          />
-
-          <div className="add-project-form-PM">
-            <h3>Project Manager</h3>
-            <TeamMember name={managerName} />
-          </div>
-
-          <div className="add-project-form-team-members">
-            <h3>Choose some additional team members!</h3>
-            {/* Checkbox Dropdown Code */}
-            <div className="team-member-container">
-              <Select
-                labelId="demo-mutiple-checkbox-label"
-                id="mutiple-checkbox"
-                multiple
-                value={personName}
-                onChange={handleChange}
-                input={<Input />}
-                style={{width: "490px"}}
-                renderValue={(selected) => (
-                  <div className={classes.chips}>
-                    {selected.map((value) => (
-                      <Chip key={value} label={value} className={classes.chip} />
-                    ))}
-                  </div>
-                )}
-                MenuProps={MenuProps}
-              >
-                {names.map((name) => (
-                  <MenuItem key={name} value={name}>
-                    <Checkbox checked={personName.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
-                  </MenuItem>
-                ))}
-              </Select>
+              <TextField
+                id="date"
+                label="End Date"
+                type="date"
+                defaultValue={planEndString}
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={(event) => setPlanEnd(event.target.value)}
+              />
             </div>
-          </div>
-        </form>
+
+            <div className="add-project-form-PM">
+              <h3>Project Manager</h3>
+              <TeamMember name={managerName} border/>
+            </div>
+
+            <div className="add-project-form-team-members">
+              <h3>Choose some additional team members!</h3>
+              {/* Checkbox Dropdown Code */}
+              <div className="team-member-container">
+                <Select
+                  labelId="demo-mutiple-checkbox-label"
+                  id="mutiple-checkbox"
+                  multiple
+                  value={personName}
+                  onChange={handleChange}
+                  input={<Input />}
+                  style={{width: "490px"}}
+                  renderValue={(selected) => (
+                    <div className={classes.chips}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} className={classes.chip} />
+                      ))}
+                    </div>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {names.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      <Checkbox checked={personName.indexOf(name) > -1} />
+                      <ListItemText primary={name} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="add-project-form-buttons">
         <ConfirmButton saving updateData={clickSave} />

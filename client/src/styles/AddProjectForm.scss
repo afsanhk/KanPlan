@@ -1,32 +1,42 @@
 .add-project-form-container {
-  padding: 20px;
+  padding: 40px;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   h1 {
-    margin: 8px;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
-  .add-project-form-body {
-    .add-project-form {
-      display: flex;
-      flex-direction: column;
-      h3 {
-        margin-top: 20px;
-        margin-bottom: 0px;
-        padding-left: 8px;
-      }
-      .team-member-container {
-        display: grid;
-        grid-template-columns: 250px 250px;
-      }
-      margin-bottom: 20px;
+  .add-project-form {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 0px;
+      padding-left: 8px;
     }
+    .team-member-container {
+      display: grid;
+      grid-template-columns: 250px 250px;
+    }
+    margin-bottom: 20px;
+  } 
+
+  .add-project-form-PM {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+
+ 
 
   .add-project-form-buttons {
-    margin-top: 40px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    
   }
 }
