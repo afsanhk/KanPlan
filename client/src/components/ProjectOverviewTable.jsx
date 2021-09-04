@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 // Refer to EditTaskForm
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
@@ -82,13 +82,13 @@ const useStyles = makeStyles((theme) => ({
   },
   columnTasks: {
     padding: '0 10px 0 30px',
-    minWidth: '300px',
-    maxWidth: '300px'
+    minWidth: '270px',
+    maxWidth: '270px'
   },
   columnTaskTitle: {
     color: '#545454',
-    borderLeft: 0,
-    overflowWrap: 'break-word'
+    borderLeft: 0
+    // overflowWrap: 'break-word'
   },
   columnActions: {
     padding: '10px',
@@ -181,7 +181,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   // modal state
   const [openEdit, setOpenEdit] = useState(false); // modal state -- edit modal
   const [openDelete, setOpenDelete] = useState(false); // modal state -- delete modal
-  const [openAddTask, setOpenAddTask] = React.useState(false); // add task modal state
+  const [openAddTask, setOpenAddTask] = useState(false); // add task modal state
 
   const projectsArray = getProjectsForUser(state, userID).map((key) => state.projects[key]);
 
@@ -227,9 +227,10 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   }
 
   // Because projectTasks come in as [null] for new projects in state. With new tasks it's [null, task, task]... filter out the null.
+  // const rows = projectTasks.filter((el) => el).map((el) => createData(el));
   const rows = projectTasks.filter((el) => el).map((el) => createData(el));
 
-  const statusClickHandler = (row) => {
+  const statusClickHandler = (row, index) => {
     let nextStatus;
     if (row.status === 'Done') {
       nextStatus = 'To-Do';
@@ -240,7 +241,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     updateTaskStatus({ status: nextStatus, status_id: statusToID[nextStatus] }, row.id);
   };
 
-  const priorityClickHandler = (row) => {
+  const priorityClickHandler = (row, index) => {
     let nextPriority;
     if (row.priority_name === 'High') {
       nextPriority = 'None';
@@ -274,10 +275,12 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row, index) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
-                  <div className="overview-table-task-name">{row.title}</div>
+                  <Tooltip title={row.title} placement="top-start">
+                    <div className="overview-table-task-name">{row.title}</div>
+                  </Tooltip>
                 </StyledTableCell>
                 <StyledTableCell>
                   <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
@@ -304,10 +307,14 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                   </AvatarGroup>
                 </StyledTableCell>
                 {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-                <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }} onClick={() => statusClickHandler(row)}>
+                <StyledTableCell
+                  align="center"
+                  style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }}
+                  onClick={() => statusClickHandler(row, index)}
+                >
                   {row.status && row.status.toUpperCase()}
                 </StyledTableCell>
-                <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
+                <StyledTableCell align="center" onClick={() => priorityClickHandler(row, index)}>
                   <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
                 </StyledTableCell>
                 <StyledTableCell align="center">
@@ -324,7 +331,9 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     InputProps={{
                       className: classes.input
                     }}
-                    onChange={(event) => editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id)}
+                    onChange={(event) => {
+                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
+                    }}
                   />
                 </StyledTableCell>
                 <StyledTableCell align="center">
@@ -341,7 +350,9 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     InputProps={{
                       className: classes.input
                     }}
-                    onChange={(event) => editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id)}
+                    onChange={(event) => {
+                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
+                    }}
                   />
                 </StyledTableCell>
                 <StyledTableCell align="center" className={classes.columnActions}>

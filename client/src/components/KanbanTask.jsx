@@ -41,7 +41,7 @@ function KanbanTask({ task, index, state }) {
   });
 
   useEffect(() => {
-    setDisableHover(titleRef.current.clientWidth >= titleRef.current.scrollWidth);
+    if (titleRef.current.clientWidth < titleRef.current.scrollWidth) setDisableHover(false);
   }, []);
 
   return (
