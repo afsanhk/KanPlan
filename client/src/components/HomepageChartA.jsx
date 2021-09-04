@@ -10,6 +10,10 @@ import '../styles/HomepageCharts.scss'
 
 function HomepageChartA({ chartInformation, chartTitle, chartColor, data }) {
 
+  console.log('chartInformation:', chartInformation)
+  console.log('data:', data)
+
+
   const [isRebuildingCanvas, setIsRebuildingCanvas] = useState(false);
 
   // remove the canvas whenever chartInformation changes

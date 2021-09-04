@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -31,12 +31,13 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
+  // const tasks = projectTasks.filter((el) => el);
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const projectUsers = getUsersForProject(state, projectID);
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
-  const projectStatus = getProjectStatus(state, projectID);
+  const projectStatus = getProjectStatus(state, projectID)
   let projectStatusPercentage;
 
   if (projectStatus) {
