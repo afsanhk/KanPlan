@@ -58,7 +58,9 @@ function KanbanTask({ task, index, state }) {
           </header>
 
           <div className="kanban-task-body">
-            <p>{task.task_description}</p>
+            <p>
+              <span>{task.task_description}</span>
+            </p>
           </div>
 
           <footer className="kanban-task-footer">
