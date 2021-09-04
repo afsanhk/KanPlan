@@ -1,12 +1,16 @@
 import { useState, useContext } from "react";
 import { authContext } from "../providers/AuthProvider.js";
 
+// NOTE: THIS IS FOR DEMO PURPOSE ONLY. REAL LOGIN SHOULD NOT BE DONE THIS WAY!
 export default function Login({ users }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(authContext);
 
-  console.log("users inside Login", users);
+  // Email + userID pairs:
+  const userIDs = Object.keys(users);
+  const emails = userIDs.map((el) => users[el].email);
+  console.log(emails[0]);
   const onEmailChange = function (event) {
     setEmail(event.target.value);
   };
@@ -17,8 +21,11 @@ export default function Login({ users }) {
 
   const onSubmit = function (event) {
     event.preventDefault();
-    if (email) {
-      login(email, password);
+
+    if (emails.includes(email)) {
+      let userID = emails.findIndex((el) => el === email);
+      console.log("inside Login Page userID is:", userID);
+      login(userID);
     }
   };
 
