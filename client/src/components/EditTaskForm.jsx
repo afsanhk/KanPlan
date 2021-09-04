@@ -52,10 +52,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// get today's date yyyy-mm-dd
-const today = new Date();
-const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
-
 // task status and priority list
 const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
 const taskPriority = [{ name: 'High' }, { name: 'Low' }, { name: 'None' }];
@@ -208,7 +204,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value + 'T04:00:00.000Z' }))}
               />
               <TextField
                 id="date"
@@ -219,7 +215,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value + 'T04:00:00.000Z' }))}
               />
             </div>
           </div>
@@ -233,7 +229,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 defaultValue={{ name: tasks.status }}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"

@@ -77,10 +77,10 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableRow = withStyles((theme) => ({}))(TableRow);
 
 const useStyles = makeStyles((theme) => ({
-    tableWrapper: {
+  tableWrapper: {
     overflow: 'auto',
     maxHeight: '700px',
-    width: '100%',
+    width: '100%'
   },
   columnTasks: {
     padding: '0 10px 0 30px',
@@ -219,7 +219,8 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     return {
       id: projectTasks.id,
       title: projectTasks.title,
-      users: projectTasks.task_users,
+      task_description: projectTasks.task_description,
+      task_users: projectTasks.task_users,
       status: projectTasks.status,
       priority_name: projectTasks.priority_name,
       plan_start: projectTasks.plan_start,
@@ -282,8 +283,8 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                   </StyledTableCell>
                   <StyledTableCell>
                     <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
-                      {row.users.map((userID, index) => {
-                        if (row.users.length === 1) {
+                      {row.task_users.map((userID, index) => {
+                        if (row.task_users.length === 1) {
                           return (
                             <>
                               {projectUsers[userID] && (
@@ -316,12 +317,11 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {console.log(row)}
                     <TextField
                       id="date"
                       // label="Start Date"
                       type="date"
-                      defaultValue={convertTimestampStringToYMD(row.plan_start)}
+                      value={row.plan_start.substring(0, 10)}
                       size="small"
                       className={classes.textField}
                       InputLabelProps={{
@@ -330,7 +330,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       InputProps={{
                         className: classes.input
                       }}
-                      onChange={() => console.log('Changed something in the start date table!')}
+                      onChange={(event) => editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
                   </StyledTableCell>
                   <StyledTableCell align="center">
@@ -338,7 +338,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       id="date"
                       // label="End Date"
                       type="date"
-                      defaultValue={convertTimestampStringToYMD(row.plan_end)}
+                      value={row.plan_end.substring(0, 10)}
                       size="small"
                       className={classes.textField}
                       InputLabelProps={{
@@ -347,7 +347,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       InputProps={{
                         className: classes.input
                       }}
-                      onChange={() => console.log('Changed something in the end date table!')}
+                      onChange={(event) => editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
                   </StyledTableCell>
                   <StyledTableCell align="center" className={classes.columnActions}>
