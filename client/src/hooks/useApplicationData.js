@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { prefix } from '@fortawesome/free-brands-svg-icons';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -78,10 +79,13 @@ export default function useApplicationData() {
 
   const editTask = (newTaskData, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
+    console.log(newTaskData);
 
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;
     stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
+
     stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
+
     stateCopy.tasks[taskID].task_users = newTaskData.task_users;
 
     if (newTaskData.priority_id) {
@@ -91,7 +95,7 @@ export default function useApplicationData() {
 
     if (newTaskData.status_id) {
       stateCopy.tasks[taskID].status_id = newTaskData.status_id;
-      stateCopy.tasks[taskID].status = newTaskData.status_name;
+      stateCopy.tasks[taskID].status = newTaskData.status;
     }
 
     const newTaskFullData = stateCopy.tasks[taskID];
@@ -124,6 +128,8 @@ export default function useApplicationData() {
         users: { ...prev.users, [userID]: stateCopy.users[userID] }
       }));
     });
+
+    console.log(stateCopy);
 
     setState((prev) => ({
       ...prev,

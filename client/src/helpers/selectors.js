@@ -62,7 +62,7 @@ function getProjectStatus(state, projectID) {
   const taskIDs = state.projects[projectID].project_tasks;
 
   if (taskIDs[0]) {
-    const completed = taskIDs.filter((task) => state.tasks[task]['status'] === 'Done').length;
+    const completed = taskIDs.filter((task) => state.tasks[task].status === 'Done').length;
 
     const projectStatus = {
       totalTasks: taskIDs.length,

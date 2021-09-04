@@ -21,6 +21,8 @@ import Fade from '@material-ui/core/Fade';
 import '../styles/EditTaskForm.scss';
 import AddUserForm from './AddUserForm';
 
+import convertTimestampStringToYMD from '../helpers/dateConvert';
+
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
@@ -49,10 +51,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed'
   }
 }));
-
-// get today's date yyyy-mm-dd
-const today = new Date();
-const currentDate = `${today.getFullYear()}-${(today.getMonth() + 1).toString().length > 1 ? today.getMonth() + 1 : '0' + (today.getMonth() + 1)}-${today.getDate()}`;
 
 // task status and priority list
 const taskStatus = [{ name: 'To-Do' }, { name: 'Late' }, { name: 'In Progress' }, { name: 'Done' }];
@@ -162,6 +160,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 label="Task Description"
                 style={{ margin: 8 }}
                 placeholder="Write description"
+                defaultValue={state.task_description}
                 fullWidth
                 multiline
                 margin="normal"
@@ -200,23 +199,23 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="date"
                 label="Start Date"
                 type="date"
-                defaultValue={tasks.plan_start}
+                defaultValue={convertTimestampStringToYMD(tasks.plan_start)}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value + 'T04:00:00.000Z' }))}
               />
               <TextField
                 id="date"
                 label="End Date"
                 type="date"
-                defaultValue={tasks.plan_end}
+                defaultValue={convertTimestampStringToYMD(tasks.plan_end)}
                 className={classes.textField}
                 InputLabelProps={{
                   shrink: true
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value + 'T04:00:00.000Z' }))}
               />
             </div>
           </div>
@@ -227,14 +226,16 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="combo-box-demo"
                 options={taskStatus}
                 getOptionLabel={(option) => option.name}
+                defaultValue={{ name: tasks.status }}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, status_name: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
               />
               <Autocomplete
                 id="combo-box-demo"
                 options={taskPriority}
                 getOptionLabel={(option) => option.name}
+                defaultValue={{ name: tasks.priority_name }}
                 style={{ width: '200px' }}
                 renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
                 onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
