@@ -143,7 +143,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   const classes = useStyles();
 
   //how modal knows which task to pass in
-  const [rowID, setRowID] = React.useState('');
+  const [rowID, setRowID] = useState('');
 
   // status to status_id
   const statusToID = {
@@ -227,7 +227,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
   }
 
   // Because projectTasks come in as [null] for new projects in state. With new tasks it's [null, task, task]... filter out the null.
-  const rows = projectTasks.filter((el)=>el).map((el) => createData(el));
+  const rows = projectTasks.filter((el) => el).map((el) => createData(el));
 
   const statusClickHandler = (row) => {
     let nextStatus;
@@ -275,103 +275,99 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-                <StyledTableRow key={row.id}>
-                  <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
-                    <div className="overview-table-task-name">{row.title}</div>
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
-                      {row.task_users.map((userID, index) => {
-                        if (row.task_users.length === 1) {
-                          return (
-                            <>
-                              {projectUsers[userID] && (
-                                <>
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} />
-                                  <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
-                                </>
-                              )}
-                            </>
-                          );
-                        }
-
+              <StyledTableRow key={row.id}>
+                <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
+                  <div className="overview-table-task-name">{row.title}</div>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
+                    {row.task_users.map((userID, index) => {
+                      if (row.task_users.length === 1) {
                         return (
-                          <Avatar alt={projectUsers[userID]['user_name']} key={index}>
-                            {projectUsers[userID]['user_name'][0]}
-                          </Avatar>
+                          <>
+                            {projectUsers[userID] && (
+                              <>
+                                <Avatar name={projectUsers[userID]['user_name']} key={index} />
+                                <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                              </>
+                            )}
+                          </>
                         );
-                      })}
-                    </AvatarGroup>
-                  </StyledTableCell>
-                  {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
-                  <StyledTableCell
-                    align="center"
-                    style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }}
-                    onClick={() => statusClickHandler(row)}
-                  >
-                    {row.status && row.status.toUpperCase()}
-                  </StyledTableCell>
-                  <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
-                    <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <TextField
-                      id="date"
-                      // label="Start Date"
-                      type="date"
-                      value={row.plan_start.substring(0, 10)}
-                      size="small"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true
+                      }
+
+                      return (
+                        <Avatar alt={projectUsers[userID]['user_name']} key={index}>
+                          {projectUsers[userID]['user_name'][0]}
+                        </Avatar>
+                      );
+                    })}
+                  </AvatarGroup>
+                </StyledTableCell>
+                {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
+                <StyledTableCell align="center" style={{ backgroundColor: backgroundColor[row.status], color: '#fcfcfc', fontSize: '15px', minWidth: '110px' }} onClick={() => statusClickHandler(row)}>
+                  {row.status && row.status.toUpperCase()}
+                </StyledTableCell>
+                <StyledTableCell align="center" onClick={() => priorityClickHandler(row)}>
+                  <FlagIcon style={flagStyles[row.priority_name]} fontSize="medium" />
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <TextField
+                    id="date"
+                    // label="Start Date"
+                    type="date"
+                    value={row.plan_start.substring(0, 10)}
+                    size="small"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    InputProps={{
+                      className: classes.input
+                    }}
+                    onChange={(event) => editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id)}
+                  />
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <TextField
+                    id="date"
+                    // label="End Date"
+                    type="date"
+                    value={row.plan_end.substring(0, 10)}
+                    size="small"
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                    InputProps={{
+                      className: classes.input
+                    }}
+                    onChange={(event) => editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id)}
+                  />
+                </StyledTableCell>
+                <StyledTableCell align="center" className={classes.columnActions}>
+                  <IconButton size="small">
+                    <EditOutlinedIcon
+                      className={classes.icon}
+                      fontSize="small"
+                      onClick={() => {
+                        changeRowID(row.id);
+                        handleOpenEdit();
                       }}
-                      InputProps={{
-                        className: classes.input
-                      }}
-                      onChange={(event) => editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    <TextField
-                      id="date"
-                      // label="End Date"
-                      type="date"
-                      value={row.plan_end.substring(0, 10)}
-                      size="small"
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true
+                  </IconButton>
+                  <IconButton size="small">
+                    <DeleteIcon
+                      className={classes.icon}
+                      fontSize="small"
+                      onClick={() => {
+                        changeRowID(row.id);
+                        handleOpenDelete();
                       }}
-                      InputProps={{
-                        className: classes.input
-                      }}
-                      onChange={(event) => editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id)}
                     />
-                  </StyledTableCell>
-                  <StyledTableCell align="center" className={classes.columnActions}>
-                    <IconButton size="small">
-                      <EditOutlinedIcon
-                        className={classes.icon}
-                        fontSize="small"
-                        onClick={() => {
-                          changeRowID(row.id);
-                          handleOpenEdit();
-                        }}
-                      />
-                    </IconButton>
-                    <IconButton size="small">
-                      <DeleteIcon
-                        className={classes.icon}
-                        fontSize="small"
-                        onClick={() => {
-                          changeRowID(row.id);
-                          handleOpenDelete();
-                        }}
-                      />
-                    </IconButton>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
+                  </IconButton>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
 
             {/* <StyledTableRow className={classes.rowAddTaskHyperlink} hover onClick={handleOpenAddTask}>
               <StyledTableCell className={classes.rowAddTask} style={{ borderBottomLeftRadius: '5px' }}>
