@@ -12,8 +12,11 @@ function SFGantt({ projectTasks }) {
     endDate: 'end_date'
   };
 
-  const tasks = projectTasks[0] && 
-  projectTasks.map(el => {
+  // // Because our projectTasks come in as [null] and for new projects with new tasks it's [null, task, task]... filter out the null.
+  // (!projectTasks[0] && projectTasks.length > 1) ? projectTasks = projectTasks.filter(el => el) : projectTasks = projectTasks;
+
+  const tasks = 
+  projectTasks.filter(el=>el).map(el => {
     const startDate = new Date(Date.parse(el.plan_start))
     const endDate = new Date(Date.parse(el.plan_end))
     return {

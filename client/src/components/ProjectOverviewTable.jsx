@@ -226,7 +226,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     };
   }
 
-  const rows = projectTasks[0] && projectTasks.map((el) => createData(el));
+  const rows = projectTasks.filter((el)=>el).map((el) => createData(el));
 
   const statusClickHandler = (row) => {
     let nextStatus;
@@ -273,8 +273,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
             </TableRow>
           </TableHead>
           <TableBody>
-            {projectTasks[0] &&
-              rows.map((row) => (
+            {rows.map((row) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
                     <div className="overview-table-task-name">{row.title}</div>
