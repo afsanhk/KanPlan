@@ -67,7 +67,7 @@ module.exports = (db) => {
     const { status_id, kanban_order, id } = request.body;
 
     // console.log('id: ', id, 'status_id: ', status_id, 'kanban_order: ', kanban_order);
-    if (kanban_order) {
+    if (kanban_order > -1) {
       db.query(
         `
         UPDATE tasks 
@@ -112,6 +112,57 @@ module.exports = (db) => {
       })
       .catch((error) => console.log(error));
   });
+
+  // router.put('/tasks', (request, response) => {
+  //   const { task_ids, tasks } = request.body;
+  //   // console.log(task_ids, tasks);
+  //   task_ids.forEach((task_id) => {
+  //     db.query(
+  //       `
+  //       UPDATE tasks
+  //       SET task_description = $1,
+  //         plan_start = $2,
+  //         plan_end = $3,
+  //         priority_id = $4,
+  //         status_id = $5,
+  //         kanban_order=$6
+  //         WHERE id = $7;
+  //       `,
+  //       [tasks[task_id].task_description, tasks[task_id].plan_start, tasks[task_id].plan_end, tasks[task_id].priority_id, tasks[task_id].status_id, tasks[task_id].kanban_order, task_id]
+  //     );
+
+  //     //get current task users
+
+  //     db.query(`SELECT user_id FROM user_tasks WHERE task_id = $1;`, [task_id])
+  //       .then((res) => {
+  //         const query_users = res.rows.map((row) => row.user_id);
+  //         const new_users = tasks[task_id].task_users.filter((task_user) => !query_users.includes(task_user));
+  //         const deleted_users = query_users.filter((task_user) => !tasks[task_id].task_users.includes(task_user));
+
+  //         //adds new users
+  //         new_users.forEach((new_user) => {
+  //           db.query(
+  //             `
+  //             INSERT INTO user_tasks (user_id, task_id)
+  //             VALUES ($1, $2)
+  //             `,
+  //             [new_user, task_id]
+  //           );
+  //         });
+
+  //         //deletes new users
+  //         deleted_users.forEach((old_user) => {
+  //           db.query(
+  //             `
+  //             DELETE FROM user_tasks WHERE user_id = $1 AND task_id = $2;
+  //             `,
+  //             [old_user, task_id]
+  //           );
+  //         });
+  //       })
+  //       .catch((error) => console.log(error));
+  //   });
+  // });
 
   router.put('/tasks/:id', (request, response) => {
     const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } = request.body.newTaskFullData;

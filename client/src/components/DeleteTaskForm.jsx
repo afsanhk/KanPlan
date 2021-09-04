@@ -1,18 +1,18 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
-import { useLocation, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ConfirmButton from './ConfirmButton'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
-import '../styles/DeleteTaskForm.scss'
+import '../styles/DeleteTaskForm.scss';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   paper: {
     backgroundColor: '#fcfcfc',
@@ -45,27 +45,25 @@ const useStyles = makeStyles((theme) => ({
 //prop recieved from Delete button from ProjectListItem =>
 //  project prop = object containing all details about task
 export default function DeleteTaskForm({ close, task, deleteTask, projectID, userID, project, deleteProject }) {
-
   const classes = useStyles();
   const history = useHistory();
 
   const { pathname } = useLocation(); //extracts pathname from current url location
 
   function deleteSingleTask() {
-    deleteTask(task.id, projectID, userID)
-    close()
+    deleteTask(task.id, projectID, userID);
+    close();
   }
 
   function deleteSingleProject() {
-    deleteProject(project.id)
-      
+    deleteProject(project.id);
+
     if (pathname.includes('overview')) {
-      history.push('/')
+      history.push('/');
     } else {
-      close()
+      close();
     }
   }
-
 
   return (
     <>

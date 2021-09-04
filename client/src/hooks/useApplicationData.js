@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { prefix } from '@fortawesome/free-brands-svg-icons';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -47,20 +46,18 @@ export default function useApplicationData() {
 
   // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
-    console.log(taskState);
     const stateCopy = JSON.parse(JSON.stringify(state));
-    if (stateCopy.tasks[taskID].status) {
-      stateCopy.tasks[taskID].status = taskState.status;
-    }
-    if (stateCopy.tasks[taskID].status_id) {
-      stateCopy.tasks[taskID].status_id = taskState.status_id;
-    }
-    if (stateCopy.tasks[taskID].kanban_order) {
+    stateCopy.tasks[taskID].status = taskState.status;
+    stateCopy.tasks[taskID].status_id = taskState.status_id;
+
+    if (taskState.kanban_order) {
       stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
+      .then(() => setState((prev) => ({ ...prev, ...stateCopy })))
+      .catch((error) => console.log(error));
   };
 
   // update task's priority, priority_id
@@ -79,7 +76,6 @@ export default function useApplicationData() {
 
   const editTask = (newTaskData, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    console.log(newTaskData);
 
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;
     stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
@@ -129,8 +125,6 @@ export default function useApplicationData() {
       }));
     });
 
-    console.log(stateCopy);
-
     setState((prev) => ({
       ...prev,
       tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] }
@@ -143,6 +137,30 @@ export default function useApplicationData() {
     return axios.get(`http://localhost:8001/api/kanban/project/${projectID}`).then((res) => {
       setKanbanStatus(res.data);
     });
+  };
+
+  const updateKanbanOrder = (projectID, statusIDs, kanbanOrders) => {
+    const idToStatus = {
+      1: 'To-Do',
+      2: 'Late',
+      3: 'In Progress',
+      4: 'Done'
+    };
+    const stateCopy = JSON.parse(JSON.stringify(state));
+
+    statusIDs.forEach((statusID, index) => {
+      kanbanOrders[index].forEach((taskID, index) => {
+        stateCopy.tasks[taskID].kanban_order = index;
+        stateCopy.tasks[taskID].status_id = statusID;
+        stateCopy.tasks[taskID].status = idToStatus[statusID];
+      });
+    });
+
+    return axios
+      .put(`http://localhost:8001/api/kanban/project/${projectID}`, { statusIDs, kanbanOrders })
+      .then((res) => console.log(res))
+      .then(() => setState((prev) => ({ ...prev, ...stateCopy })))
+      .catch((error) => console.log(error));
   };
 
   //
@@ -194,7 +212,7 @@ export default function useApplicationData() {
 
   //
   function addProject(newProject) {
-    console.log(`Inside addProject: newProject  ${JSON.stringify(newProject)}`);
+    // console.log(`Inside addProject: newProject  ${JSON.stringify(newProject)}`);
     let projectID;
     return axios
       .post(`http://localhost:8001/api/projects/`, newProject)
@@ -212,7 +230,7 @@ export default function useApplicationData() {
           manager_name: newProject.manager_name,
           project_tasks: [null]
         };
-        console.log('Inside addProject: ', stateCopy.projects);
+        // console.log('Inside addProject: ', stateCopy.projects);
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.push(projectID));
         // Set state.
@@ -269,8 +287,8 @@ export default function useApplicationData() {
     deleteProject,
     addProject,
     updateProjectUsers,
-    deleteProject,
     getKanbanStatus,
-    kanbanStatus
+    kanbanStatus,
+    updateKanbanOrder
   };
 }

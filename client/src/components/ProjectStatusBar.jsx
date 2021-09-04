@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +9,7 @@ import { getProjectStatus } from '../helpers/selectors';
 
 const useStyles = makeStyles({
   root: {
-    width: '30%',
+    width: '30%'
   },
   progressBar: {
     height: '10px',
@@ -23,14 +22,14 @@ const useStyles = makeStyles({
   }
 });
 
-export default function LinearWithValueLabel({state, projectID}) {
+export default function LinearWithValueLabel({ state, projectID }) {
   const classes = useStyles();
 
-  const projectStatus = getProjectStatus(state, projectID)
+  const projectStatus = getProjectStatus(state, projectID);
 
   let projectCompletion = 0;
   if (projectStatus) {
-    projectCompletion = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks))
+    projectCompletion = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks));
   }
 
   function LinearProgressWithLabel(props) {
@@ -49,9 +48,9 @@ export default function LinearWithValueLabel({state, projectID}) {
   return (
     <>
       {/* {projectStatus &&  */}
-        <div className={classes.root}>
-          <LinearProgressWithLabel value={projectCompletion} className={classes.progressBar}/>
-        </div>
+      <div className={classes.root}>
+        <LinearProgressWithLabel value={projectCompletion} className={classes.progressBar} />
+      </div>
       {/* } */}
       {/* {!projectStatus &&
         <p>No tasks added yet!</p>

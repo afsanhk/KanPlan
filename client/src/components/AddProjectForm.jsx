@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Select from "@material-ui/core/Select";
-import Checkbox from "@material-ui/core/Checkbox";
-import Chip from "@material-ui/core/Chip";
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
 
 import ConfirmButton from './ConfirmButton';
 import TeamMember from './TeamMember';
@@ -20,9 +20,9 @@ import convertTimestampStringToYMD from '../helpers/dateConvert';
 const useStyles = makeStyles((theme) => ({
   // This defines the styling for the 'field' that contains the name 'chips'
   chips: {
-    display: "grid",
-    gridTemplateColumns: "150px 150px 150px",
-    backgroundColor: "white"
+    display: 'grid',
+    gridTemplateColumns: '150px 150px 150px',
+    backgroundColor: 'white'
   },
   // This defines the styling for the actual name 'chips'
   chip: {
@@ -63,44 +63,44 @@ const MenuProps = {
 // get today's date yyyy-mm-dd
 const planStartInit = new Date();
 const planEndInit = new Date();
-planEndInit.setDate(planEndInit.getDate() + 7); 
+planEndInit.setDate(planEndInit.getDate() + 7);
 // convert to string and return in YYYY-MM-DD format
-const planStartString = convertTimestampStringToYMD(planStartInit.toString())
-const planEndString = convertTimestampStringToYMD(planEndInit.toString())
+const planStartString = convertTimestampStringToYMD(planStartInit.toString());
+const planEndString = convertTimestampStringToYMD(planEndInit.toString());
 
-// Note that the usage duplicate names is troublesome due to the implementation of the checkbox dropdown, as we have to retrieve the ID later. 
+// Note that the usage duplicate names is troublesome due to the implementation of the checkbox dropdown, as we have to retrieve the ID later.
 // Avoid duplicate names for users.
 export default function AddProjectForm({ state, userID, close, addProject }) {
   const classes = useStyles();
   const [projectName, setProjectName] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
-  const [planStart,setPlanStart] = useState(planStartString);
-  const [planEnd,setPlanEnd] = useState(planEndString);
+  const [planStart, setPlanStart] = useState(planStartString);
+  const [planEnd, setPlanEnd] = useState(planEndString);
   const [personName, setPersonName] = useState([]);
 
   const handleChange = (event) => {
     setPersonName(event.target.value);
   };
-  
+
   let managerID = Number(userID);
   const managerObj = state && state.users[managerID];
   const managerName = managerObj.user_name;
-  const ids = Object.keys(state.users).filter(userids => userids !== managerID.toString());
-  const names = ids.map(userids => state.users[userids].user_name);
+  const ids = Object.keys(state.users).filter((userids) => userids !== managerID.toString());
+  const names = ids.map((userids) => state.users[userids].user_name);
 
   const clickSave = (event) => {
     // Looks for the index of each team member in 'names' array, then returns corresponding 'id'.
-    const teamIDs = [managerID, ...personName.map(selectedName => names.findIndex(name => name === selectedName)).map(index => Number(ids[index]))]; 
+    const teamIDs = [managerID, ...personName.map((selectedName) => names.findIndex((name) => name === selectedName)).map((index) => Number(ids[index]))];
     const newProject = {
-      proj_name: projectName, 
-      manager_id: managerID, 
+      proj_name: projectName,
+      manager_id: managerID,
       manager_name: managerName,
-      planned_start: planStart, 
-      planned_end: planEnd, 
+      planned_start: planStart,
+      planned_end: planEnd,
       proj_description: projectDesc,
       team_members: teamIDs
-    }
-    console.log(newProject);
+    };
+    // console.log(newProject);
     addProject(newProject, teamIDs);
     setProjectName('');
     setProjectDesc('');
@@ -108,8 +108,6 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
     setPlanEnd(planEndString);
     close(event);
   };
-
- 
 
   return (
     <div className="add-project-form-container">

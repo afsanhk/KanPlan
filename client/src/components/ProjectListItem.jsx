@@ -7,7 +7,6 @@ import '../styles/ProjectListItem.scss';
 
 import LinkIconContainer from './LinkIconContainer';
 import LinearWithValueLabel from './ProjectStatusBar';
-import ConfirmButton from './ConfirmButton';
 
 //For the edit and delete modals
 import Modal from '@material-ui/core/Modal';

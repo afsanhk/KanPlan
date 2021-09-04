@@ -1,5 +1,5 @@
 // Libraries and frameworks
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import useApplicationData from './hooks/useApplicationData';
@@ -78,6 +78,7 @@ function App() {
     deleteProject,
     updateProjectUsers,
     updateTaskPriority,
+    updateKanbanOrder
   } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
@@ -118,10 +119,11 @@ function App() {
                   <ProjectKanban
                     state={state}
                     addTask={addTask}
-                    updateTaskStatus={updateTaskStatus}
+                    updateKanbanOrder={updateKanbanOrder}
                     getKanbanStatus={getKanbanStatus}
                     kanbanStatus={kanbanStatus}
                     updateProjectUsers={updateProjectUsers}
+                    updateTaskStatus={updateTaskStatus}
                   />
                 </Route>
                 <Route path="/project/:projectID/gantt">
