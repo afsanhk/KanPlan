@@ -5,16 +5,17 @@
   border-radius: 10px;
   min-width: 350px;
   margin-bottom: 30px;
-  width: 22%;
+  width: 23%;
   max-height: 720px;
   overflow: auto;
   position: relative;
+  border: 2px solid grey;
 
   .kanban-board-header {
     background: white;
     display: flex;
     justify-content: center;
-    border: 2px solid grey;
+    border-bottom: 2px solid grey;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     position: sticky;

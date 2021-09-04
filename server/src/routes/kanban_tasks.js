@@ -32,16 +32,6 @@ module.exports = (db) => {
         } else {
           taskIDs += taskID + ',';
         }
-
-        //   db.query(
-        //     `
-        //       UPDATE tasks
-        //       SET kanban_order = $1,
-        //           status_id = $2
-        //       WHERE id = $3
-        //     `,
-        //     [index2, statusID, taskID]
-        //   ).catch((error) => console.log(error));
       });
     });
 
