@@ -31,14 +31,13 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
-  // const tasks = projectTasks.filter((el) => el);
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const projectUsers = getUsersForProject(state, projectID);
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
   const projectStatus = getProjectStatus(state, projectID)
-  let projectStatusPercentage;
+  let projectStatusPercentage = '0 tasks';
 
   if (projectStatus) {
     projectStatusPercentage = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks)) + '%';

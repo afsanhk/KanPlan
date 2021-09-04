@@ -18,8 +18,9 @@ function UpcomingTaskList({ projectTasks, userID }) {
 
     const upcomingTasks = tasks.filter((task) => {
       const taskDue = convertTimestampStringToYMD(task.plan_end);
+
       const taskDueMonth = taskDue[5] !== '0' ? parseInt(taskDue[5] + taskDue[6]) : parseInt(taskDue[6]);
-      const taskDueDay = taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9]);
+      const taskDueDay = (taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9])) + 1;
 
       const todayFullDate = new Date();
       const todayMonth = Number(todayFullDate.getMonth()) + 1;
@@ -28,8 +29,6 @@ function UpcomingTaskList({ projectTasks, userID }) {
       let sevenDaysFromToday = todayDay + 7;
 
       const possibleDays = { [todayMonth]: [todayDay] };
-
-      console.log('possibleDays1', possibleDays)
 
       let nextMonth = todayMonth; //if dueDate is at the beginning of the month, will need a new month
 
@@ -68,14 +67,14 @@ function UpcomingTaskList({ projectTasks, userID }) {
         }
       }
 
-      // console.log('pd:',possibleDays)
-
       if (possibleDays[taskDueMonth] && possibleDays[taskDueMonth].includes(taskDueDay) && task.status !== 'Done') {
         return true;
       }
 
       return false;
     });
+
+    upcomingTasks.filter(el => el)
 
     if (upcomingTasks[0]) {
       parsedTaskList = upcomingTasks.map((task, index) => {
