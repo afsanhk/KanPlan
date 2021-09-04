@@ -11,6 +11,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@syncfusion/ej2-react-gantt": "^19.2.59",
+    "@tensorflow-models/blazeface": "0.0.7",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
