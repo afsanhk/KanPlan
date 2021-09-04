@@ -51,12 +51,12 @@ function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName, a
           userIdToName.length ? (
             <h2>Add user(s) from {projectName} project</h2>
           ) : (
-            <h2>No more user!</h2>
+            <h2>No more users!</h2>
           )
         ) : allUsersWithoutCurrent.length ? (
-          <h2>Add user from all projects</h2>
+          <h2>Add users from all projects</h2>
         ) : (
-          <h2>No more user!</h2>
+          <h2>No more users!</h2>
         )}
       </div>
 

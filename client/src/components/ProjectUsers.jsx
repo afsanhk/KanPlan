@@ -10,7 +10,6 @@ import { Backdrop, Fade, IconButton, makeStyles, Modal } from '@material-ui/core
 
 // material-ui icons
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CloseIcon from '@material-ui/icons/Close';
 
 // scss
 import '../styles/ProjectUsers.scss';
@@ -19,7 +18,7 @@ import axios from 'axios';
 // material-ui styles
 const useStyles = makeStyles((theme) => ({
   teamMemberButton: {
-    color: '#bdbdbd'
+    color: '#bdbdbd',
   },
   icon: {
     margin: '5px'
@@ -110,9 +109,9 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
     <div className="project-users">
       <header className="project-users-header">
         <h1>Users</h1>
-        <IconButton size="small" onClick={closeModal} className={classes.closeButton}>
+        {/* <IconButton size="small" onClick={closeModal} className={classes.closeButton}>
           <CloseIcon />
-        </IconButton>
+        </IconButton> */}
       </header>
 
       <div className="project-users-body">
@@ -125,7 +124,12 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
           )}
         </div>
         <div className="project-users-body-users">
-          <h2>Team Members</h2>
+          <div className='project-users-title-add'>
+            <h2>Team Members</h2>
+            <IconButton size="small" onClick={handleOpen}>
+                <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />
+              </IconButton>
+          </div>
           <div className="project-users-body-users-div">
             {currentUsers.map((id, index) => (
               <>{id !== managerId && <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />}</>
@@ -133,10 +137,22 @@ function ProjectUsers({ users, project, closeModal, updateProjectUsers }) {
           </div>
           <div className="project-users-body-add-user">
             <div className="project-users-body-add-user-div">
-              <IconButton size="small" onClick={handleOpen}>
-                <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
-              </IconButton>
-              <p>Add new user</p>
+              {/* <Button
+                onClick={handleOpen}  
+                disableRipple 
+                variant='contained'
+                
+                style={{ 
+                //   backgroundColor: 'transparent', 
+                  textTransform: 'none', 
+                  padding: '5px'
+                //   '&:hover': {
+                //     border: '2px solid black'
+                //   } 
+                }}
+              >
+                <p>Add new user</p>
+              </Button> */}
               <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

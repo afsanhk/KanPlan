@@ -1,19 +1,24 @@
+@use './base';
+
 .project-users {
-  background-color: white;
-  width: 600px;
-  padding-bottom: 50px;
-  border-radius: 5px;
-  border: 2px solid black;
+  background-color: base.$off-white;
+  width: 500px;
+  padding: 40px 40px 60px 40px;
+  border: 3px #757575 solid;
+  border-radius: 8px;
+  height: 70vh;
+
 
   .project-users-header {
-    padding: 20px 20px 0px 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid base.$dark-grey;
     display: flex;
     justify-content: center;
     position: relative;
 
     h1 {
-      width: 80%;
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 20px;
     }
   }
   .project-users-body {
@@ -23,7 +28,7 @@
 
     .project-users-body-div {
       margin-top: 30px;
-      width: 80%;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -31,35 +36,57 @@
 
       .project-users-body-manager {
         margin-right: 15px;
-        font-weight: bold;
+        font-weight: 500;
+        font-size: 20px;
       }
+
     }
 
     .project-users-body-users {
-      width: 80%;
-      height: 500px;
+      width: 100%;
+
+      .project-users-title-add {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+        // border-bottom: 2px solid base.$dark-grey;
+
+        h2 { 
+          margin-bottom: 10px;
+          font-weight: 500;
+        }
+      }
 
       .project-users-body-users-div {
+        padding: 0 10px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        max-height: 350px;
+        max-height: 290px;
         overflow: auto;
-        margin-bottom: 25px;
+        margin-bottom: 10px;
+        border: 2px solid base.$medium-grey;
+        border-radius: 8px;
       }
 
       .project-users-body-add-user {
-        width: 80%;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
 
         .project-users-body-add-user-div {
-          margin-left: 10px;
           display: flex;
           align-items: center;
 
           p {
-            font-size: 20px;
+            font-size: 18px;
             margin: 0;
-            margin-left: 10px;
+            margin-left: 7px;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
       }
@@ -68,5 +95,6 @@
   .project-users-footer {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
   }
 }
