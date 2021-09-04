@@ -1,3 +1,5 @@
+@use './base';
+
 .add-project-form-container {
   padding: 40px;
   height: 100vh;
@@ -15,7 +17,7 @@
     h3 {
       margin-top: 20px;
       margin-bottom: 0px;
-      padding-left: 8px;
+      font-weight: normal;
     }
     .team-member-container {
       display: grid;
@@ -23,13 +25,6 @@
     }
     margin-bottom: 20px;
   } 
-
-  .add-project-form-PM {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
  
 
   .add-project-form-buttons {

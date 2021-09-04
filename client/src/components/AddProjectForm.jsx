@@ -188,7 +188,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                     </div>
                   )}
                   MenuProps={MenuProps}
-                >
+                > 
                   {names.map((name) => (
                     <MenuItem key={name} value={name}>
                       <Checkbox checked={personName.indexOf(name) > -1} />
