@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: '530px',
     height: '350px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   header: {
     paddingTop: '5px',
@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   container: {
-    padding: '10px',
+    padding: '20px',
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    maxHeight: '200px',
+    maxHeight: '240px',
     overflow: 'auto'
   }
 }));
@@ -49,14 +49,14 @@ function AddUserForm({ users, teamMembers, currentUsers, addUser, projectName, a
       <div className={classes.header}>
         {!all ? (
           userIdToName.length ? (
-            <h1>Add user from {projectName} project</h1>
+            <h2>Add user(s) from {projectName} project</h2>
           ) : (
-            <h1>No more user!</h1>
+            <h2>No more user!</h2>
           )
         ) : allUsersWithoutCurrent.length ? (
-          <h1>Add user from all projects</h1>
+          <h2>Add user from all projects</h2>
         ) : (
-          <h1>No more user!</h1>
+          <h2>No more user!</h2>
         )}
       </div>
 

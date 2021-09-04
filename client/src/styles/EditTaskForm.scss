@@ -8,7 +8,6 @@
 //   // border: 2px solid black;
 // }
 .edit-task-form {
-  background-color: white;
   width: 550px;
   padding: 40px 60px 60px 60px;
   background-color: #fcfcfc;
@@ -22,13 +21,9 @@
 
   .task-form-header {
     border-bottom: 2px solid base.$dark-grey;
-    // padding: 20px 20px 0px 20px;
-    // display: flex;
-    // justify-content: center;
-
+ 
     h1 {
-      margin-top: 10px;
-      width: 100%;
+      width: 80%;
     }
   }
 

@@ -1,41 +1,44 @@
+@use './base';
+
 .task-form {
-  background-color: white;
-  width: 750px;
-  padding-bottom: 50px;
-  border-radius: 5px;
-  border: 2px solid black;
-  height: 90vh;
+  width: 550px;
+  padding: 30px 55px 60px 55px;
+  background-color: #fcfcfc;
+  border: 3px #757575 solid;
+  border-radius: 8px;
+  height: 85vh;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .task-form-header {
-    padding: 20px 20px 0px 20px;
-    border-bottom: 2px solid black;
-    display: flex;
-    justify-content: center;
+    border-bottom: 2px solid base.$dark-grey;
 
-    h1 {
+    h2 {
       width: 80%;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
   }
 
   .task-form-project_name {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
-    justify-content: center;
 
     .task-form-project_name-div {
       width: 80%;
-      padding-left: 10px;
 
       .MuiListItemText-primary {
-        padding-left: 3px;
         font-size: 0.8em;
         color: grey;
       }
       .MuiListItemText-secondary {
+        padding-bottom: 3px;
         font-size: 1.5em;
-        font-weight: bold;
-        color: black;
+        font-weight: 500;
+        color: base.$dark-dark-grey;
+
       }
     }
   }
@@ -43,71 +46,63 @@
   .task-form-body {
     .task-form-body-title {
       display: flex;
-      justify-content: center;
 
       .task-form-body-title-div {
-        width: 80%;
+        width: 100%;
       }
     }
+
     .task-form-body-description {
-      font-size: 1.3em;
       display: flex;
-      justify-content: center;
       position: relative;
+      margin-top: 10px;
+
 
       div.task-form-body-description-div {
-        width: 80%;
+        width: 100%;
 
-        button {
-          position: absolute;
-          top: 25px;
-          right: 20px;
-        }
       }
     }
 
-    .task-form-body-dropdowns {
-      margin-top: 0px;
-      display: flex;
-      flex-direction: column;
+    // .task-form-body-dropdowns {
+    //   margin-top: 0px;
+    //   display: flex;
+    //   flex-direction: column;
 
-      .task-form-body-dropdowns-project {
-        display: flex;
-        justify-content: center;
-      }
-    }
+    //   .task-form-body-dropdowns-project {
+    //     display: flex;
+    //     justify-content: center;
+    //   }
+    // }
 
     .task-form-body-dropdowns-date {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
+      margin-top: 25px;
 
       div.task-form-body-dropdowns-date-helper {
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
 
     .task-form-body-dropdowns-status {
       margin-top: 30px;
-      display: flex;
-      justify-content: center;
 
       div.task-form-body-dropdowns-status-div {
         display: flex;
         width: 100%;
-        justify-content: space-around;
+        justify-content: space-between;
       }
     }
 
     .task-form-body-members-title {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 10px;
 
       div.task-form-body-members-title-div {
-        width: 80%;
+        border-bottom: 2px solid black;
+        width: 100%;
         justify-content: space-between;
         display: flex;
         align-items: center;
@@ -126,21 +121,18 @@
     }
 
     .task-form-body-members {
-      margin-top: 30px;
+      margin-top: 10px;
       display: flex;
       justify-content: center;
 
       div.task-form-body-members-div {
         display: flex;
-        width: 80%;
+        width: 100%;
+        max-height: 200px;
         justify-content: space-around;
-        max-height: 160px;
         flex-wrap: wrap;
         overflow: auto;
 
-        div.team-member {
-          margin-bottom: 20px;
-        }
       }
     }
   }
@@ -152,8 +144,8 @@
 
     div {
       display: flex;
-      width: 40%;
-      justify-content: space-around;
+      width: 50%;
+      justify-content: space-between;
     }
   }
 }

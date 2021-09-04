@@ -112,159 +112,167 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
 
   return (
     <div className="task-form">
-      <header className="task-form-header">
-        <h1>Add New Task</h1>
-      </header>
+      <div className="task-form-header-body">
+        <header className="task-form-header">
+          <h2>Add New Task</h2>
+        </header>
 
-      <div className="task-form-project_name">
-        <div className="task-form-project_name-div">
-          <ListItemText primary="Project Name" secondary={proj_name} />
-        </div>
-      </div>
-
-      <div className="task-form-body">
-        <div className="task-form-body-title">
-          <div className="task-form-body-title-div">
-            <TextField
-              id="standard-full-width"
-              label="Task title"
-              style={{ margin: 8 }}
-              placeholder="Write task title"
-              multiline
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
-            />
-          </div>
-        </div>
-        <div className="task-form-body-description">
-          <div className="task-form-body-description-div">
-            <TextField
-              id="standard-full-width"
-              label="Task Description"
-              style={{ margin: 8 }}
-              placeholder="Write task description"
-              fullWidth
-              multiline
-              margin="normal"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
-            />
+        <div className="task-form-project_name">
+          <div className="task-form-project_name-div">
+            <ListItemText primary="Project Name" secondary={proj_name} style={{marginBottom: 0}}/>
           </div>
         </div>
 
-        <div className="task-form-body-dropdowns">
-          {/* <div className="task-form-body-dropdowns-project">
-            <h1>{proj_name}</h1>
-          </div> */}
-
-          <div className="task-form-body-dropdowns-date">
-            <div className="task-form-body-dropdowns-date-helper">
+        <div className="task-form-body">
+          <div className="task-form-body-title">
+            <div className="task-form-body-title-div">
               <TextField
-                id="date"
-                label="Start Date"
-                type="date"
-                defaultValue={currentDate}
-                className={classes.textField}
+                id="standard-full-width"
+                label="Task title"
+                placeholder="Write task title"
+                multiline
+                fullWidth
+                margin="normal"
                 InputLabelProps={{
-                  shrink: true
+                  shrink: true,
+                  style: {fontSize: '1.1em', marginTop: 0}
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
+                InputProps={{
+                  style: {fontSize: '1.3em', color: '#545454', fontWeight: 500}
+                }}
+                onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
               />
+            </div>
+          </div>
+          <div className="task-form-body-description">
+            <div className="task-form-body-description-div">
               <TextField
-                id="date"
-                label="End Date"
-                type="date"
-                defaultValue={currentDate}
-                className={classes.textField}
+                id="standard-full-width"
+                label="Task Description"
+                placeholder="Write task description"
+                fullWidth
+                multiline
+                margin="normal"
                 InputLabelProps={{
-                  shrink: true
+                  shrink: true,
+                  style: {fontSize: '1.1em', marginTop: 0}
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
+                InputProps={{
+                  style: {fontSize: '1.3em', color: '#545454', fontWeight: 500}
+                }}
+                onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
               />
             </div>
           </div>
 
-          <div className="task-form-body-dropdowns-status">
-            <div className="task-form-body-dropdowns-status-div">
-              {status ? (
-                <Autocomplete
-                  id="combo-box-demo"
-                  options={taskStatus}
-                  inputValue={status}
-                  getOptionLabel={(option) => option.name}
-                  style={{ width: '200px' }}
-                  renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                  onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
-                />
-              ) : (
-                <Autocomplete
-                  id="combo-box-demo"
-                  options={taskStatus}
-                  getOptionLabel={(option) => option.name}
-                  style={{ width: '200px' }}
-                  renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
-                  onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
-                />
-              )}
-              <Autocomplete
-                id="combo-box-demo"
-                options={taskPriority}
-                getOptionLabel={(option) => option.name}
-                style={{ width: '200px' }}
-                renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
-                onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
-              />
-            </div>
-          </div>
-        </div>
+          <div className="task-form-body-dropdowns">
+            {/* <div className="task-form-body-dropdowns-project">
+              <h1>{proj_name}</h1>
+            </div> */}
 
-        {currentUsers && (
-          <>
-            <div className="task-form-body-members-title">
-              <div className="task-form-body-members-title-div">
-                <h2>Assignees</h2>
-                <IconButton size="small" onClick={handleOpen}>
-                  <AddCircleIcon className={classes.teamMemberButton} fontSize="large" />
-                </IconButton>
-                <Modal
-                  aria-labelledby="transition-modal-title"
-                  aria-describedby="transition-modal-description"
-                  className={classes.modal}
-                  open={open}
-                  onClose={handleClose}
-                  closeAfterTransition
-                  BackdropComponent={Backdrop}
-                  BackdropProps={{
-                    timeout: 500
+            <div className="task-form-body-dropdowns-date">
+              <div className="task-form-body-dropdowns-date-helper">
+                <TextField
+                  id="date"
+                  label="Start Date"
+                  type="date"
+                  defaultValue={currentDate}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
                   }}
-                >
-                  <Fade in={open}>
-                    <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} projectName={proj_name} />
-                  </Fade>
-                </Modal>
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
+                />
+                <TextField
+                  id="date"
+                  label="End Date"
+                  type="date"
+                  defaultValue={currentDate}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
+                />
               </div>
             </div>
 
-            <div className="task-form-body-members">
-              <div className="task-form-body-members-div">
-                {currentUsers.map((id, index) => (
-                  <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
-                ))}
+            <div className="task-form-body-dropdowns-status">
+              <div className="task-form-body-dropdowns-status-div">
+                {status ? (
+                  <Autocomplete
+                    id="combo-box-demo"
+                    options={taskStatus}
+                    inputValue={status}
+                    getOptionLabel={(option) => option.name}
+                    style={{ width: '200px' }}
+                    renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                    onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                  />
+                ) : (
+                  <Autocomplete
+                    id="combo-box-demo"
+                    options={taskStatus}
+                    getOptionLabel={(option) => option.name}
+                    style={{ width: '200px' }}
+                    renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
+                    onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                  />
+                )}
+                <Autocomplete
+                  id="combo-box-demo"
+                  options={taskPriority}
+                  getOptionLabel={(option) => option.name}
+                  style={{ width: '200px' }}
+                  renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
+                  onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                />
               </div>
             </div>
-          </>
-        )}
+          </div>
+
+          {currentUsers && (
+            <>
+              <div className="task-form-body-members-title">
+                <div className="task-form-body-members-title-div">
+                  <h2>Assignees</h2>
+                  <IconButton size="small" onClick={handleOpen}>
+                    <AddCircleIcon className={classes.teamMemberButton} fontSize="medium" />
+                  </IconButton>
+                  <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                      timeout: 500
+                    }}
+                  >
+                    <Fade in={open}>
+                      <AddUserForm users={users} teamMembers={teamMembers} currentUsers={currentUsers} addUser={addUser} projectName={proj_name} />
+                    </Fade>
+                  </Modal>
+                </div>
+              </div>
+
+              <div className="task-form-body-members">
+                <div className="task-form-body-members-div">
+                  {currentUsers.map((id, index) => (
+                    <TeamMember key={index} id={id} name={users[id].user_name} remove border removeUser={removeUser} />
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-
       <footer className="task-form-footer">
         <div>
-          {error ? <ConfirmButton saving error /> : <ConfirmButton saving consoleData={consoleData} updateData={updateData} />}
           <ConfirmButton cancelling close={close} />
+          {error ? <ConfirmButton saving error /> : <ConfirmButton saving consoleData={consoleData} updateData={updateData} />}
         </div>
       </footer>
     </div>
