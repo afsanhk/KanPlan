@@ -184,12 +184,13 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
                         <Chip key={value} label={value} className={classes.chip} />
                       ))}
                     </div>
-                  )}
+                  )
+                }
                   MenuProps={MenuProps}
                 > 
                   {names.map((name) => (
                     <MenuItem key={name} value={name}>
-                      <Checkbox checked={personName.indexOf(name) > -1} />
+                      <Checkbox checked={personName.indexOf(name) > -1} disableRipple={true}/>
                       <ListItemText primary={name} />
                     </MenuItem>
                   ))}
