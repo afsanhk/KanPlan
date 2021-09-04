@@ -10,7 +10,7 @@ export default function Login({ users }) {
   // Email + userID pairs:
   const userIDs = Object.keys(users);
   const emails = userIDs.map((el) => users[el].email);
-  console.log(emails[0]);
+  console.log(emails);
   const onEmailChange = function (event) {
     setEmail(event.target.value);
   };
@@ -23,7 +23,7 @@ export default function Login({ users }) {
     event.preventDefault();
 
     if (emails.includes(email)) {
-      let userID = emails.findIndex((el) => el === email);
+      let userID = userIDs[emails.findIndex((el) => el === email)];
       console.log("inside Login Page userID is:", userID);
       login(userID);
     }
