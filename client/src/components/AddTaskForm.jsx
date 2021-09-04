@@ -107,7 +107,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   useEffect(() => {
-    setError(!state.title || !state.task_description || !state.priority_name || !state.task_users.length);
+    setError(!state.title || !state.task_description || !state.priority_name || !state.task_users.length || !state.status);
   }, [state]);
 
   return (
