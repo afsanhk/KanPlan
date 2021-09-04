@@ -49,7 +49,10 @@ export default function useApplicationData() {
     const stateCopy = JSON.parse(JSON.stringify(state));
     stateCopy.tasks[taskID].status = taskState.status;
     stateCopy.tasks[taskID].status_id = taskState.status_id;
-    stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+
+    if (taskState.kanban_order) {
+      stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    }
 
     return axios
       .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
@@ -136,10 +139,28 @@ export default function useApplicationData() {
     });
   };
 
-  const updateKanbanBoard = (newState, taskIDs) => {
-    console.log(taskIDs);
-    setState((prev) => ({ ...prev, ...newState }));
-    return axios.put('http://localhost:8001/api/tasks/', { tasks: newState.tasks, task_ids: taskIDs }).catch((error) => console.log(error));
+  const updateKanbanOrder = (projectID, statusIDs, kanbanOrders) => {
+    const idToStatus = {
+      1: 'To-Do',
+      2: 'Late',
+      3: 'In Progress',
+      4: 'Done'
+    };
+    const stateCopy = JSON.parse(JSON.stringify(state));
+
+    statusIDs.forEach((statusID, index) => {
+      kanbanOrders[index].forEach((taskID, index) => {
+        stateCopy.tasks[taskID].kanban_order = index;
+        stateCopy.tasks[taskID].status_id = statusID;
+        stateCopy.tasks[taskID].status = idToStatus[statusID];
+      });
+    });
+
+    return axios
+      .put(`http://localhost:8001/api/kanban/project/${projectID}`, { statusIDs, kanbanOrders })
+      .then((res) => console.log(res))
+      .then(() => setState((prev) => ({ ...prev, ...stateCopy })))
+      .catch((error) => console.log(error));
   };
 
   //
@@ -268,6 +289,6 @@ export default function useApplicationData() {
     updateProjectUsers,
     getKanbanStatus,
     kanbanStatus,
-    updateKanbanBoard
+    updateKanbanOrder
   };
 }

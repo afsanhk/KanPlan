@@ -73,7 +73,7 @@ function App() {
     deleteProject,
     updateProjectUsers,
     updateTaskPriority,
-    updateKanbanBoard
+    updateKanbanOrder
   } = useApplicationData();
 
   // Change this projectID to see reflected changes in gantt based on state.
@@ -114,7 +114,7 @@ function App() {
                   <ProjectKanban
                     state={state}
                     addTask={addTask}
-                    updateKanbanBoard={updateKanbanBoard}
+                    updateKanbanOrder={updateKanbanOrder}
                     getKanbanStatus={getKanbanStatus}
                     kanbanStatus={kanbanStatus}
                     updateProjectUsers={updateProjectUsers}

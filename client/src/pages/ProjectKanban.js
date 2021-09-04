@@ -11,7 +11,7 @@ import LinkIconContainer from '../components/LinkIconContainer';
 // import css
 import '../styles/ProjectKanban.scss';
 
-const ProjectKanban = ({ state, addTask, updateKanbanBoard, getKanbanStatus, kanbanStatus, updateProjectUsers, updateTaskStatus }) => {
+const ProjectKanban = ({ state, addTask, updateKanbanOrder, getKanbanStatus, kanbanStatus, updateProjectUsers, updateTaskStatus }) => {
   // Taking it from Params causes issues with projects that don't have tasks. To remove the error, put projectID in state and comment out below lines.
   let { projectID } = useParams();
   projectID = Number(projectID);
@@ -125,10 +125,10 @@ const ProjectKanban = ({ state, addTask, updateKanbanBoard, getKanbanStatus, kan
         // stateCopy.tasks[id].status = finish.title;
         // stateCopy.tasks[id].status_id = statusToID[finish.title];
         // stateCopy.tasks[id].kanban_order = index;
-        updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, parseInt(id));
+        // updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, parseInt(id));
       });
 
-      // updateKanbanBoard(stateCopy, newTaskIds);
+      updateKanbanOrder(projectID, [statusToID[finish.title]], [newTaskIds]);
 
       setKanbanState(newState);
       return;
@@ -154,16 +154,16 @@ const ProjectKanban = ({ state, addTask, updateKanbanBoard, getKanbanStatus, kan
       // stateCopy.tasks[id].status = start.title;
       // stateCopy.tasks[id].status_id = statusToID[start.title];
       // stateCopy.tasks[id].kanban_order = index;
-      updateTaskStatus({ status: start.title, status_id: statusToID[start.title], kanban_order: index }, parseInt(id));
+      // updateTaskStatus({ status: start.title, status_id: statusToID[start.title], kanban_order: index }, parseInt(id));
     });
     finishTaskIds.forEach((id, index) => {
       // stateCopy.tasks[id].status = finish.title;
       // stateCopy.tasks[id].status_id = statusToID[finish.title];
       // stateCopy.tasks[id].kanban_order = index;
-      updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, parseInt(id));
+      // updateTaskStatus({ status: finish.title, status_id: statusToID[finish.title], kanban_order: index }, parseInt(id));
     });
 
-    // updateKanbanBoard(stateCopy, [...startTaskIds, ...finishTaskIds]);
+    updateKanbanOrder(projectID, [statusToID[start.title], statusToID[finish.title]], [startTaskIds, finishTaskIds]);
 
     const columnToStatus = {
       'column-1': {
