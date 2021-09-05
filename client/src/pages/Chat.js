@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useMessages from "../hooks/useMessages";
 import io from "socket.io-client"; // Browser-side socket.io
 
 import ChatMessageList from "../components/ChatMessageList";
 import ChatInput from "../components/ChatInput";
 
+let socket;
+
 export default function Chat({ userID, users }) {
   const { messageHistory, setMessageHistory } = useMessages();
   const [message, setMessage] = useState(""); // For the ChatInput form
+  const ENDPOINT = "localhost:8001";
 
-  // // Function to send messages
+  useEffect(() => {
+    socket = io(ENDPOINT, { transports: ["websocket"], upgrade: false });
+
+    return () => {
+      socket.disconnect();
+      socket.off();
+    };
+  }, []);
+
+  // Function to send messages
   const sendMessage = (event) => {
     event.preventDefault(); // Very important so that a page refresh doesn't happen
 
