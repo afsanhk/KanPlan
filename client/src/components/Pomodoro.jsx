@@ -9,13 +9,8 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import Slider from '@material-ui/core/Slider';
 
-function Pomodoro() {
-  // const [minutes, setMinutes] = useState(1);
-  // const [seconds, setSeconds] = useState(0);
-  // const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
+function Pomodoro({ onTimerStart }) {
 
-  // const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  // const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
   const [workInterval, setWorkInterval] = useState(25)
   const [shortBreak, setShortBreak] = useState(5)
@@ -54,7 +49,7 @@ function Pomodoro() {
     <div className='pomodoro'>
       <div className='buttons'>
         <IconButton size="small">  
-          <PlayCircleOutlineIcon onClick={() => console.log('workInterval', workInterval)}/>
+          <PlayCircleOutlineIcon onClick={onTimerStart}/>
         </IconButton>
         <Button size="small">RESET</Button>
       </div>
