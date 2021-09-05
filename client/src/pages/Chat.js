@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useMessages from "../hooks/useMessages";
+import io from "socket.io-client"; // Browser-side socket.io
 
 import ChatMessageList from "../components/ChatMessageList";
 import ChatInput from "../components/ChatInput";
