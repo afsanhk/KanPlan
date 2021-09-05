@@ -172,7 +172,7 @@ export default function AddProjectForm({ state, userID, close, addProject }) {
 
             <div className="add-project-form-PM">
               <h3>Project Manager</h3>
-              <TeamMember name={managerName} id={managerID} border />
+              <TeamMember name={managerName} border />
             </div>
 
             <div className="add-project-form-team-members">

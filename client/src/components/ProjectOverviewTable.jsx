@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,11 +33,6 @@ import AddTaskForm from './AddTaskForm';
 //helper functions
 import { getProjectsForUser } from '../helpers/selectors';
 import avatarBGColor from '../helpers/avatarBG';
-<<<<<<< HEAD
-=======
-
-import { imageContext } from '../providers/ImagePorvider';
->>>>>>> master
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -147,7 +142,6 @@ const backgroundColor = {
 
 export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, editTask, userID, addTask, updateTaskStatus, updateTaskPriority }) {
   const classes = useStyles();
-  const { imageSrc, imageUserID } = useContext(imageContext);
 
   //how modal knows which task to pass in
   const [rowID, setRowID] = useState('');
@@ -298,11 +292,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                           <>
                             {projectUsers[userID] && (
                               <>
-                                {userID === imageUserID ? (
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={imageSrc} style={{ 'background-color': avatarBG }} />
-                                ) : (
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
-                                )}
+                                <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
                                 <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
                               </>
                             )}
@@ -312,11 +302,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
 
                       return (
                         <Tooltip title={projectUsers[userID]['user_name']}>
-                          {userID === imageUserID ? (
-                            <Avatar alt={projectUsers[userID]['user_name']} src={imageSrc} style={{ 'background-color': avatarBG }} />
-                          ) : (
-                            <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
-                          )}
+                          <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
                         </Tooltip>
                       );
                     })}
@@ -348,7 +334,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_start: event.target.value }, row.id);
+                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
                     }}
                   />
                 </StyledTableCell>
@@ -367,7 +353,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_end: event.target.value }, row.id);
+                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
                     }}
                   />
                 </StyledTableCell>
