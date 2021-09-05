@@ -10,7 +10,13 @@ loggedIn: determines styling
 
 users: get users data 
 */
- export default function ChatMessage({message, loggedIn, users}){
+ export default function ChatMessage({message, userID, users}){
+
+  let loggedIn = false;
+
+  if (message.user_id === userID) {
+    loggedIn = true;
+  }
 
   return loggedIn ? (
     <div className="messageContainer justifyEnd">
