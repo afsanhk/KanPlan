@@ -151,7 +151,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }, []);
 
   useEffect(() => {
-    setError(!state.task_title || !state.task_description );
+    setError(!state.task_title || !state.task_description);
   }, [state]);
 
   return (
@@ -160,7 +160,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
         <header className="task-form-header">
           {!clickTitle ? (
             <div className="task-form-header-title">
-              <ListItemText primary="Task Title" secondary={state.task_title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px'}}/>
+              <ListItemText primary="Task Title" secondary={state.task_title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -200,7 +200,12 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
           <div className="task-form-body-description">
             {!clickDesc ? (
               <div className="task-form-body-description-div">
-                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '7px'}}/>
+                <ListItemText
+                  primary="Task Description"
+                  secondary={state.task_description}
+                  secondaryTypographyProps={{ style: { marginTop: '2px' } }}
+                  style={{ marginTop: '16px', marginBottom: '7px' }}
+                />
                 <IconButton size="small" className={classes.icon} onClick={handleDescClick}>
                   <EditOutlinedIcon />
                 </IconButton>
@@ -259,7 +264,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
                 />
                 <TextField
                   id="date"
@@ -270,7 +275,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
                 />
               </div>
             </div>

@@ -32,8 +32,7 @@ import AddTaskForm from './AddTaskForm';
 
 //helper functions
 import { getProjectsForUser } from '../helpers/selectors';
-import avatarBGColor from '../helpers/avatarBG'
-
+import avatarBGColor from '../helpers/avatarBG';
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -282,31 +281,31 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                 <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
                   <Tooltip title={row.title} placement="top-start">
                     <div className="overview-table-task-name">{row.title}</div>
-                 </Tooltip>
+                  </Tooltip>
                 </StyledTableCell>
-                  <StyledTableCell>
-                    <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
-                      {row.task_users.map((userID, index) => {
-                        let avatarBG = avatarBGColor(userID)
-                        if (row.task_users.length === 1) {
-                          return (
-                            <>
-                              {projectUsers[userID] && (
-                                <>
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}}/>
-                                  <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
-                                </>
-                              )}
-                            </>
-                          );
-                        }
-
+                <StyledTableCell>
+                  <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
+                    {row.task_users.map((userID, index) => {
+                      let avatarBG = avatarBGColor(userID);
+                      if (row.task_users.length === 1) {
                         return (
-                          <Tooltip title={projectUsers[userID]['user_name']}>
-                            <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}} />
-                          </Tooltip>
+                          <>
+                            {projectUsers[userID] && (
+                              <>
+                                <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
+                                <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                              </>
+                            )}
+                          </>
                         );
-                      })}
+                      }
+
+                      return (
+                        <Tooltip title={projectUsers[userID]['user_name']}>
+                          <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
+                        </Tooltip>
+                      );
+                    })}
                   </AvatarGroup>
                 </StyledTableCell>
                 {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}
@@ -335,7 +334,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_start: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>
@@ -354,7 +353,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_end: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>
