@@ -12,5 +12,5 @@ export default function useApplicationData() {
     });
   }, []); //empty square brackets ensures that this useEffect is only ran once during page load
 
-  return { messageHistory };
+  return { messageHistory, setMessageHistory };
 }
