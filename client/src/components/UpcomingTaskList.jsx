@@ -7,17 +7,20 @@ import UpcomingTaskListItem from './UpcomingTaskListItem';
 //helpers
 import convertTimestampStringToYMD from '../helpers/dateConvert';
 
-//projectTasks is a list of task objects cross-referenced by projectID with end_date within 2 days
+//projectTasks is a list of task objects cross-referenced by projectID with end_date within 7 days
 //pass in 'myTask' as a prop to UpcomingTaskListItem to trigger the star (assigned to me)
 function UpcomingTaskList({ projectTasks, userID }) {
   let parsedTaskList;
 
-  //from all projectTasks, narrow it down to which tasks are due in the next 2 days
-  if (projectTasks[0]) {
-    const upcomingTasks = projectTasks.filter((task) => {
+  const tasks = projectTasks.filter((el) => el);
+  //from all projectTasks, narrow it down to which tasks are due in the next 7 days
+  if (tasks[0]) {
+
+    const upcomingTasks = tasks.filter((task) => {
       const taskDue = convertTimestampStringToYMD(task.plan_end);
+
       const taskDueMonth = taskDue[5] !== '0' ? parseInt(taskDue[5] + taskDue[6]) : parseInt(taskDue[6]);
-      const taskDueDay = taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9]);
+      const taskDueDay = (taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9])) + 1;
 
       const todayFullDate = new Date();
       const todayMonth = Number(todayFullDate.getMonth()) + 1;
@@ -64,14 +67,14 @@ function UpcomingTaskList({ projectTasks, userID }) {
         }
       }
 
-      // console.log('pd:',possibleDays)
-
       if (possibleDays[taskDueMonth] && possibleDays[taskDueMonth].includes(taskDueDay) && task.status !== 'Done') {
         return true;
       }
 
       return false;
     });
+
+    upcomingTasks.filter(el => el)
 
     if (upcomingTasks[0]) {
       parsedTaskList = upcomingTasks.map((task, index) => {

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-
 import KanPlanLogo from '../images/KanPlanLogo.png';
 import '../styles/NavBar.scss';
 
@@ -13,10 +12,13 @@ import HomeIcon from '@material-ui/icons/Home';
 import AppsIcon from '@material-ui/icons/Apps';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import ForumIcon from '@material-ui/icons/Forum';
+import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { authContext } from '../providers/AuthProvider';
 
 //helpers
 import avatarBGColor from '../helpers/avatarBG'
@@ -55,6 +57,7 @@ const useStyles = makeStyles({
 
 function NavBar({userID}) {
   const { pathname } = useLocation(); //extracts pathname from current url location
+  const { logout } = useContext(authContext);
   const classes = useStyles();
 
   const activePage = function () {
@@ -111,6 +114,7 @@ function NavBar({userID}) {
             </ListItem>
           </List>
           <Avatar alt="" src="" className={classes.navBarAvatar} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}}/>
+          <Button onClick={() => logout()}>Logout</Button>
         </div>
       </Drawer>
     </ThemeProvider>

@@ -82,9 +82,11 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
 
   const [currentUsers, setCurrentUsers] = useState(tasks.task_users);
   const [teamMembers, setTeamMembers] = useState(null);
-  // const [currentProject, setCurrentProject] = useState(null);
+  const [error, setError] = useState(true);
+  const [clickTitle, setClickTitle] = useState(false);
   const [clickDesc, setClickDesc] = useState(false);
   const [state, setState] = useState({
+    task_title: tasks.title,
     task_description: tasks.task_description,
     plan_start: tasks.plan_start,
     plan_end: tasks.plan_end
@@ -94,7 +96,11 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
 
   const taskID = tasks.id;
 
-  const handleClick = () => {
+  const handleTitleClick = () => {
+    setClickTitle(!clickTitle);
+  };
+
+  const handleDescClick = () => {
     setClickDesc(!clickDesc);
   };
 
@@ -133,32 +139,69 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }
 
   const titleRef = useRef(null);
-  const [disableHover, setDisableHover] = useState(true);
+  // const [disableHover, setDisableHover] = useState(true);
 
   useEffect(() => {
     // setCurrentUsers(getTeamMembers(currentProject));
     setTeamMembers(getTeamMembers(tasks.proj_name));
     setState((prev) => ({ ...prev, proj_name: tasks.proj_name, task_users: currentUsers }));
-    if (titleRef.current.clientWidth < titleRef.current.scrollWidth) {
-      setDisableHover(false);
-    }
+    // if (titleRef.current.clientWidth < titleRef.current.scrollWidth) {
+    //   setDisableHover(false);
+    // }
   }, []);
+
+  useEffect(() => {
+    setError(!state.task_title || !state.task_description );
+  }, [state]);
 
   return (
     <div className="edit-task-form">
       <div className="task-form-header-body">
         <header className="task-form-header">
-          <Tooltip title={tasks.title} placement="top-start" disableHoverListener={disableHover}>
+          {!clickTitle ? (
+            <div className="task-form-header-title">
+              <ListItemText primary="Task Title" secondary={state.task_title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px'}}/>
+              <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
+                <EditOutlinedIcon />
+              </IconButton>
+            </div>
+          ) : (
+            <div className="task-form-header-title">
+              <TextField
+                id="standard-full-width"
+                label="Task Title"
+                placeholder="Write Title"
+                defaultValue={state.task_title}
+                fullWidth
+                multiline
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { fontSize: '1em', marginTop: 0 }
+                }}
+                InputProps={{
+                  // disableUnderline: true,
+                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
+                }}
+                onChange={(event) => setState((prev) => ({ ...prev, task_title: event.target.value }))}
+              />
+
+              <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
+                <SaveOutlinedIcon />
+              </IconButton>
+            </div>
+          )}
+          {/* <Tooltip title={tasks.title} placement="top-start" c={disableHover}>
             <h1 ref={titleRef}>{tasks.title}</h1>
-          </Tooltip>
+          </Tooltip> */}
         </header>
 
         <div className="task-form-body">
           <div className="task-form-body-description">
             {!clickDesc ? (
               <div className="task-form-body-description-div">
-                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{ style: { marginTop: '2px' } }} />
-                <IconButton size="small" className={classes.icon} onClick={handleClick}>
+                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '7px'}}/>
+                <IconButton size="small" className={classes.icon} onClick={handleDescClick}>
                   <EditOutlinedIcon />
                 </IconButton>
               </div>
@@ -174,7 +217,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   margin="normal"
                   InputLabelProps={{
                     shrink: true,
-                    style: { fontSize: '0.8em', marginTop: 0 }
+                    style: { fontSize: '1em', marginTop: 2, paddingBottom: '3px' }
                   }}
                   InputProps={{
                     style: { fontSize: '1.5em', color: '#757575', width: '100%' }
@@ -182,7 +225,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
                 />
 
-                <IconButton size="small" className={classes.icon} onClick={handleClick}>
+                <IconButton size="small" className={classes.icon} onClick={handleDescClick}>
                   <SaveOutlinedIcon />
                 </IconButton>
               </div>
@@ -242,6 +285,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   style={{ width: '200px' }}
                   renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
                   onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                  disableClearable
                 />
                 <Autocomplete
                   id="combo-box-demo"
@@ -251,6 +295,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   style={{ width: '200px' }}
                   renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
                   onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                  disableClearable
                 />
               </div>
             </div>
@@ -298,7 +343,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
       <footer className="task-form-footer">
         <div>
           <ConfirmButton cancelling close={close} />
-          <ConfirmButton saving updateData={updateData} />
+          {error ? <ConfirmButton saving error /> : <ConfirmButton saving updateData={updateData} />}
         </div>
       </footer>
     </div>

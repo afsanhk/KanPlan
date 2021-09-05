@@ -59,8 +59,9 @@ function getUsersForProject(state, projectID) {
 
 //Returns obj containing total, completed and incomplete tasks of a project
 function getProjectStatus(state, projectID) {
-  const taskIDs = state.projects[projectID].project_tasks;
+  const taskIDs = state.projects[projectID].project_tasks.filter((el) => el)
 
+  
   if (taskIDs[0]) {
     const completed = taskIDs.filter((task) => state.tasks[task].status === 'Done').length;
 

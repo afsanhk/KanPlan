@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     fontSize: 13,
     marginBottom: 5,
     marginRight: 5,
+    marginTop: 20,
     color: '#fcfcfc',
     '&:hover': {
       backgroundColor: '#1e88e5',
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
 }) 
 
 function SFGantt({ projectTasks }) {
-  const [showDates, setShowDates] = useState(true);
+  const [showDates, setShowDates] = useState(false);
   const [showDone, setShowDone] = useState(true);
   const taskValues = {
     id: 'id',
@@ -47,15 +48,17 @@ function SFGantt({ projectTasks }) {
 
   return (
     <div>
-      <Button onClick={() => setShowDates(!showDates)} className={classes.ganttButton}>{showDates?'Task Names':'Dates'}</Button>
-      <Button onClick={() => setShowDone(!showDone)} className={classes.ganttButton}>{showDone?'Hide Completed Tasks':'Show Completed Tasks'}</Button>
-      <GanttComponent dataSource={tasks} taskFields={taskValues}>
+      <GanttComponent dataSource={tasks} taskFields={taskValues} rowHeight={45} splitterSettings={{position: "20%"}} >
         <ColumnsDirective>
           <ColumnDirective field="name" headerText="Task Names" headerTextAlign="Center"></ColumnDirective>
           {showDates && <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>}
           {showDates && <ColumnDirective field="end_date" format="dd-MMM-yy"></ColumnDirective>}
         </ColumnsDirective>
       </GanttComponent>
+      <div className='buttons'>
+        <Button onClick={() => setShowDates(!showDates)} className={classes.ganttButton}>{showDates?'Task Names':'Dates'}</Button>
+        <Button onClick={() => setShowDone(!showDone)} className={classes.ganttButton}>{showDone?'Hide Completed Tasks':'Show Completed Tasks'}</Button>
+      </div>
     </div>
   );
 }

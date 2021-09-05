@@ -87,11 +87,11 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   // console log data
   const consoleData = () => {
     setState((prev) => ({ ...prev, task_users: currentUsers }));
-    console.log(state);
+    // console.log(state);
   };
 
   const updateData = () => {
-    // console.log({ ...state, project_id: projectID }, projectID, currentUsers);
+    console.log({ ...state, project_id: projectID }, projectID, currentUsers);
     addTask({ ...state, project_id: projectID }, projectID, currentUsers);
     close();
   };
@@ -107,7 +107,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
   };
 
   useEffect(() => {
-    setError(!state.title || !state.task_description || !state.priority_name || !state.task_users.length);
+    setError(!state.title || !state.task_description || !state.priority_name || !state.task_users.length || !state.status);
   }, [state]);
 
   return (

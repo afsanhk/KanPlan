@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -36,8 +36,8 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
   const projectUsers = getUsersForProject(state, projectID);
   const projectTitle = state.projects[projectID].proj_name;
   const projectDescription = state.projects[projectID].proj_description;
-  const projectStatus = getProjectStatus(state, projectID);
-  let projectStatusPercentage;
+  const projectStatus = getProjectStatus(state, projectID)
+  let projectStatusPercentage = '0 tasks';
 
   if (projectStatus) {
     projectStatusPercentage = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks)) + '%';
