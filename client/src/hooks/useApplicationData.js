@@ -54,8 +54,12 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].status_id = taskState.status_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+      })
+      .catch((error) => console.log(error));
   };
 
   // update task's priority, priority_id
@@ -68,13 +72,18 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].priority_id = priorityState.priority_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+      })
+      .catch((error) => console.log(error));
   };
 
   const editTask = (newTaskData, taskID) => {
     // console.log(newTaskData.plan_end, newTaskData.status);
     const stateCopy = JSON.parse(JSON.stringify(state));
+    console.log(newTaskData.plan_start, newTaskData.plan_end);
 
     stateCopy.tasks[taskID].title = newTaskData.title;
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;

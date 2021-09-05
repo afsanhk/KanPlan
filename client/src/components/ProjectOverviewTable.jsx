@@ -345,7 +345,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_start: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>
@@ -364,7 +364,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_end: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>
