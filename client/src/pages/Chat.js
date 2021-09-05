@@ -8,9 +8,6 @@ export default function Chat({ userID, users }) {
   const { messageHistory, setMessageHistory } = useMessages();
   const [message, setMessage] = useState(""); // For the ChatInput form
 
-  // console.log(messageHistory);
-  // let messageHistoryCopy = JSON.parse(JSON.stringify(messageHistory));
-
   // // Function to send messages
   const sendMessage = (event) => {
     event.preventDefault(); // Very important so that a page refresh doesn't happen
