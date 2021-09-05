@@ -13,6 +13,16 @@ const io = socketio(server, {
 io.on("connection", (socket) => {
   console.log("We have a new connection: ", socket.id);
 
+  socket.join("Chat", () => {
+    console.log("Joined Chat");
+  }); // All users join this 'chat' room
+
+  socket.emit("hello", "world");
+
+  socket.on("sendMessage", (newMessageObj, callback) => {
+    callback(); // Clears the field and sets history
+  });
+
   socket.on("disconnect", () => {
     console.log("Connection disconnected for: ", socket.id);
   });
