@@ -13,27 +13,55 @@
   background-color: #fcfcfc;
   border: 3px #757575 solid;
   border-radius: 8px;
-  height: 80vh;
+  height: 82vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   .task-form-header {
-    border-bottom: 2px solid base.$dark-grey;
-    white-space: nowrap;
+    // border-bottom: 2px solid base.$dark-grey;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    margin-top: 0;
+    overflow: auto;
+    overflow-wrap: break-word;
+    
+    .task-form-header-title {
+      width: 93%;
+      overflow: auto;
+      overflow-wrap: break-word;
+      display: flex;
 
-    h1 {
-      max-width: 800px;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      width: 80%;
+      .MuiFormControl-root {
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+      
+      .MuiListItemText-primary {
+        font-size: 0.8em;
+        color: grey;
+      }
+      .MuiListItemText-secondary {
+        padding-bottom: 3px;
+        font-size: 1.7em;
+        color: base.$dark-dark-grey;
+        font-weight: 500;
+        min-height: 38px;
+
+      }
+
+      button {
+        position: absolute;
+        top: 25px;
+        right: -5px;
+      }
     }
   }
 
-  .test {
-    margin-top: 5px;
-  }
+  
 
   .task-form-body {
     div.task-form-body-description {
@@ -46,6 +74,14 @@
         overflow: auto;
         overflow-wrap: break-word;
 
+        .MuiListItemText {
+          margin-top: 16px;
+          margin-bottom: 8px;
+          overflow: auto;
+          overflow-wrap: break-word;
+          // max-height: 57px;
+        }
+
         .MuiListItemText-primary {
           margin-top: 15px;
           font-size: 0.8em;
@@ -56,6 +92,7 @@
           font-size: 1.5em;
           color: base.$dark-dark-grey;
           font-weight: 500;
+          min-height: 34px;
         }
       }
 

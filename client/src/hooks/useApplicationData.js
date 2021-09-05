@@ -88,11 +88,10 @@ export default function useApplicationData() {
   const editTask = (newTaskData, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
 
+    stateCopy.tasks[taskID].title = newTaskData.task_title;
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;
     stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
-
     stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
-
     stateCopy.tasks[taskID].task_users = newTaskData.task_users;
 
     if (newTaskData.priority_id) {
