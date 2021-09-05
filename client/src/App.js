@@ -143,7 +143,7 @@ function App() {
                   <ProjectGantt state={state} updateProjectUsers={updateProjectUsers} />
                 </Route>
                 <Route path="/chat">
-                  <Chat userID={userID} />
+                  <Chat userID={userID} users={state.users} />
                 </Route>
                 <Route path="*">
                   <h1>404 - Not Found</h1>

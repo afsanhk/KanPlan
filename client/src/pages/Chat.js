@@ -1,3 +1,4 @@
+import ChatMessageList from "../components/ChatMessageList";
 import useMessages from "../hooks/useMessages";
 
 export default function Chat({ userID, users }) {
@@ -7,9 +8,9 @@ export default function Chat({ userID, users }) {
   let messageHistoryCopy = JSON.parse(JSON.stringify(messageHistory));
 
   return (
-    <>
-      <h1>This page will show chat messages!</h1>
-      <p>{messageHistoryCopy.map((el) => el.message_text)}</p>
-    </>
+    <div className="container">
+      <ChatMessageList messages={messageHistoryCopy} userID={userID} users={users} />
+      {/* <Input message={message} setMessage={setMessage} sendMessage={sendMessage} /> */}
+    </div>
   );
 }
