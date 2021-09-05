@@ -30,7 +30,8 @@ import '../styles/ProjectOverview.scss';
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    marginLeft: theme.spacing(3)
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(3)
   }
 }));
 
@@ -46,16 +47,9 @@ const ProjectOverview = ({
   updateTaskPriority, 
   editProject 
 }) => {
-  
+
   const classes = useStyles();
   let { projectID } = useParams();
-  const [open, setOpen] = useState(false); // modal state
-  const [clickProjectEdit, setProjectEdit] = useState(false); //open or close the project edit options
-  const [projData, setProjData] = useState({
-    proj_name: state.projects[projectID].proj_name,
-    proj_description: state.projects[projectID].proj_description,
-  });
-
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const projectUsers = getUsersForProject(state, projectID);
@@ -64,6 +58,23 @@ const ProjectOverview = ({
   const projectStatus = getProjectStatus(state, projectID)
   let projectStatusPercentage = '0 tasks';
 
+  const [open, setOpen] = useState(false); // modal state
+  const [clickProjectEdit, setProjectEdit] = useState(false); //open or close the project edit options
+  const [projData, setProjData] = useState({
+    proj_name: projectTitle,
+    proj_description: projectDescription,
+  });
+  
+  
+  // const [inputWidth, setInputWidth] = useState('60');
+
+  // useEffect(() => {
+  //   if (projData.proj_name.length * 20 > 60) {
+  //     setInputWidth((projData.proj_name.length + 1) * 20);
+  //   } 
+  // }, [projData.proj_name]);
+
+  
   if (projectStatus) {
     projectStatusPercentage = Math.round(100 * (projectStatus.completedTasks / projectStatus.totalTasks)) + '%';
   }
@@ -105,19 +116,13 @@ const ProjectOverview = ({
               <div className="project-overview-edit">
                 <TextField
                 id="standard-full-width"
-                label="Project Title"
                 placeholder="Write project title"
                 defaultValue={projectTitle}
+                value={projData.proj_name}
                 fullWidth
-                multiline
                 margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                  style: { fontSize: '1em', marginTop: 0 }
-                }}
                 InputProps={{
-                  // disableUnderline: true,
-                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
+                  style: { fontSize: '30px', fontWeight: 'bold', color: '#757575', width: `${projData.proj_name.length * 20}px`, minWidth: '300px', maxWidth: '100%' }
                 }}
                 onChange={(event) => setProjData((prev) => ({ ...prev, proj_name: event.target.value }))}
               />
@@ -136,27 +141,26 @@ const ProjectOverview = ({
             </div>
           </div>
           { !clickProjectEdit ? (
-            <p>{projectDescription}</p>
+            <p className='project-desc'>{projectDescription}</p>
           ) : (
 
             <TextField
-                id="standard-full-width"
-                label="Project Description"
-                placeholder="Write project description"
-                defaultValue={projectDescription}
-                fullWidth
-                multiline
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                  style: { fontSize: '1em', marginTop: 0 }
-                }}
-                InputProps={{
-                  // disableUnderline: true,
-                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
-                }}
-                onChange={(event) => setProjData((prev) => ({ ...prev, proj_description: event.target.value }))}
-              />
+              id="standard-full-width"
+              label="Project Description"
+              placeholder="Write project description"
+              defaultValue={projectDescription}
+              fullWidth
+              multiline
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+                style: { fontSize: '1em', marginTop: 0 }
+              }}
+              InputProps={{
+                style: { fontSize: '16px', color: '#757575', width: '96.2%' }
+              }}
+              onChange={(event) => setProjData((prev) => ({ ...prev, proj_description: event.target.value }))}
+            />
 
           )}
         </div>
