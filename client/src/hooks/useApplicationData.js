@@ -76,7 +76,6 @@ export default function useApplicationData() {
 
   const editTask = (newTaskData, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    console.log(newTaskData);
 
     stateCopy.tasks[taskID].title = newTaskData.title;
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;
