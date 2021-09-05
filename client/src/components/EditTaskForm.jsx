@@ -82,7 +82,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
 
   const [currentUsers, setCurrentUsers] = useState(tasks.task_users);
   const [teamMembers, setTeamMembers] = useState(null);
-  // const [currentProject, setCurrentProject] = useState(null);
+  const [error, setError] = useState(true);
   const [clickTitle, setClickTitle] = useState(false);
   const [clickDesc, setClickDesc] = useState(false);
   const [state, setState] = useState({
@@ -149,6 +149,10 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
     //   setDisableHover(false);
     // }
   }, []);
+
+  useEffect(() => {
+    setError(!state.task_title || !state.task_description );
+  }, [state]);
 
   return (
     <div className="edit-task-form">
@@ -281,6 +285,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   style={{ width: '200px' }}
                   renderInput={(params) => <TextField {...params} label="Status" variant="outlined" />}
                   onChange={(value) => setState((prev) => ({ ...prev, status: value.target.innerText, status_id: status_id[value.target.innerText] }))}
+                  disableClearable
                 />
                 <Autocomplete
                   id="combo-box-demo"
@@ -290,6 +295,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   style={{ width: '200px' }}
                   renderInput={(params) => <TextField {...params} label="Priority" variant="outlined" />}
                   onChange={(value) => setState((prev) => ({ ...prev, priority_name: value.target.innerText, priority_id: priority_id[value.target.innerText] }))}
+                  disableClearable
                 />
               </div>
             </div>
@@ -337,7 +343,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
       <footer className="task-form-footer">
         <div>
           <ConfirmButton cancelling close={close} />
-          <ConfirmButton saving updateData={updateData} />
+          {error ? <ConfirmButton saving error /> : <ConfirmButton saving updateData={updateData} />}
         </div>
       </footer>
     </div>
