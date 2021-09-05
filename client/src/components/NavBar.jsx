@@ -134,35 +134,45 @@ function NavBar({ userID }) {
   useEffect(() => {
     if (secondsLeft === 0 && shortBreak !== 0) {
       setSecondsLeft(shortBreak)
-      console.log('shortBreak')
       setShortBreak(0)
+      
+    } else if (secondsLeft === 0) {
+      clearInterval(timer);
     }    
-    clearInterval(timer);
   }, [secondsLeft, timer]);
+
+
+
+
+  // useEffect(() => {
+  //   if (secondsLeft === 0 && longBreak === 0) {
+  //     clearInterval(timer);
+  
+  //   } else if (secondsLeft === 0 && intervalCount === 8) {
+  //     setSecondsLeft(longBreak)
+  //     console.log('longBreak' + intervalCount)
+  //     setLongBreak(0)
+  
+  //   } else if (secondsLeft === 0 && intervalCount % 2 === 0) {
+  //     intervalCount = intervalCount + 1
+  //     setSecondsLeft(shortBreak)
+  //     console.log('shortBreak' + intervalCount)
+  
+  //   } else if (secondsLeft === 0 && intervalCount % 2 === 1) {
+  //     intervalCount = intervalCount + 1
+  //     setSecondsLeft(workInterval)
+  //     console.log('workInterval' + intervalCount)
+  //   }
+  // }, [secondsLeft, timer]);
+
+
+
+
 
   useEffect(() => {
     return () => clearInterval(timer);
   }, [timer]);
 
-
-
-  // if (secondsLeft === 0 && longBreak === 0) {
-  //   clearInterval(timer);
-
-  // } else if (secondsLeft === 0 && intervalCount === 8) {
-  //   setSecondsLeft(longBreak)
-  //   console.log('longBreak' + intervalCount)
-  //   setLongBreak(0)
-
-  // } else if (secondsLeft === 0 && intervalCount % 2 === 0) {
-  //   intervalCount = intervalCount + 1
-  //   setSecondsLeft(shortBreak)
-  //   console.log('shortBreak' + intervalCount)
-
-  // } else if (secondsLeft === 0 && intervalCount % 2 === 1) {
-  //   intervalCount = intervalCount + 1
-  //   setSecondsLeft(workInterval)
-  //   console.log('workInterval' + intervalCount)
 
 
   // useEffect(() => {
