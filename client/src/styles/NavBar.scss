@@ -1,7 +1,5 @@
 @use './base';
 
-
-
 .nav-top {
   display: flex;
   flex-direction: column;
@@ -23,5 +21,5 @@
 
 .navlink {
   text-decoration: none;
-  color: base.$dark-grey; //changes color of icons 
+  color: base.$dark-grey; //changes color of icons
 }
