@@ -26,7 +26,6 @@ export default function Chat({ userID, users }) {
     event.preventDefault(); // Very important so that a page refresh doesn't happen
 
     if (message) {
-      setMessage("");
       let newMessageID = 1 + Math.max(...messageHistory.map((el) => el.id));
       let newMessageObj = {
         id: newMessageID,
@@ -36,11 +35,8 @@ export default function Chat({ userID, users }) {
       };
       console.log(newMessageObj);
       setMessageHistory((prev) => [...prev, newMessageObj]); // This should go inside socket.on but it works
+      socket.emit("sendMessage", newMessageObj, () => setMessage("")); // This callback clears the input
     }
-
-    //   if (message) {
-    //     socket.emit("sendMessage", message, () => setMessage("")); // This callback clears the input
-    //   }
   };
 
   return (
