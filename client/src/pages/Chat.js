@@ -13,13 +13,13 @@ export default function Chat({ userID, users }) {
   const ENDPOINT = "localhost:8001";
 
   useEffect(() => {
-    socket = io(ENDPOINT, { transports: ["websocket"], upgrade: false });
+    socket = io(ENDPOINT, { transports: ["websocket"] });
 
     return () => {
       socket.disconnect();
       socket.off();
     };
-  }, []);
+  }, [ENDPOINT]);
 
   useEffect(() => {
     socket.on("hello", (data) => console.log(data));
