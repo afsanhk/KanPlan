@@ -12,17 +12,41 @@
   background-color: base.$off-white;
   padding: 3vh 40px;
   border-bottom: 3px dashed base.$blue-secondary-dark;
+  width: 100%;
+
+  .project-desc {
+    margin-top: 30px;
+  }
 }
 
 .project-overview-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  align-content: center;
+}
+
+.project-overview-edit {
+  display: flex;
+  align-items: center;
+  max-width: 55%;
+
+  button {
+    margin-left: 10px;
+    color: #bdbdbd;
+
+    &:hover {
+      color: #757575;
+    }
+  }
 }
 
 .project-overview-links {
   display: flex;
   justify-content: center;
+  width: 40%;
+
 }
 
 .project-overview-body {

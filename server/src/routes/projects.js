@@ -64,5 +64,21 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
+  router.put("/projects/:id", (request, response) => {
+    const { proj_name, proj_description, id } = request.body.newProjectFullData
+
+    db.query(
+      `
+      UPDATE projects
+      SET proj_name = $1, proj_description = $2
+      WHERE id = $3;
+      `,
+      [proj_name, proj_description, id]
+    ).then(() => {
+      response.status(204).json({});
+    })
+    .catch((error) => console.log(error));
+  })
+
   return router;
 };

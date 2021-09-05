@@ -288,6 +288,26 @@ export default function useApplicationData() {
     });
   }
 
+  //this function updates the project's title and description
+  function editProject(newProjectData, projectID) {
+    const stateCopy = JSON.parse(JSON.stringify(state));
+
+    stateCopy.projects[projectID].proj_name = newProjectData.proj_name;
+    stateCopy.projects[projectID].proj_description = newProjectData.proj_description;
+
+    const newProjectFullData = stateCopy.projects[projectID];
+
+    setState((prev) => ({
+      ...prev,
+      projects: { ...prev.projects, [projectID]: stateCopy.projects[projectID] },
+    }));
+
+    return axios
+      .put(`http://localhost:8001/api/projects/${projectID}`, { newProjectFullData })
+      .catch((error) => console.log(error));
+  }
+
+
   return {
     state,
     loading,
@@ -302,5 +322,6 @@ export default function useApplicationData() {
     getKanbanStatus,
     kanbanStatus,
     updateKanbanOrder,
+    editProject
   };
 }

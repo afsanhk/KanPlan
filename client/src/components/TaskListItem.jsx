@@ -74,7 +74,6 @@ export default function TaskListItem({ task, deleteTask, editTask, userID, proje
   const [disableHover, setDisableHover] = useState(true);
 
   useEffect(() => {
-    console.log(titleRef);
     if (titleRef.current.firstChild.clientWidth < titleRef.current.firstChild.scrollWidth) {
       setDisableHover(false);
     } else {
