@@ -151,11 +151,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }, []);
 
   useEffect(() => {
-<<<<<<< HEAD
-    setError(!state.task_title || !state.task_description);
-=======
     setError(!state.title || !state.task_description);
->>>>>>> master
   }, [state]);
 
   return (
@@ -164,11 +160,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
         <header className="task-form-header">
           {!clickTitle ? (
             <div className="task-form-header-title">
-<<<<<<< HEAD
-              <ListItemText primary="Task Title" secondary={state.task_title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
-=======
               <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
->>>>>>> master
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
                 <EditOutlinedIcon />
               </IconButton>
