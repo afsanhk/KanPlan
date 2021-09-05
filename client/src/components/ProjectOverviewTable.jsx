@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -32,8 +32,9 @@ import AddTaskForm from './AddTaskForm';
 
 //helper functions
 import { getProjectsForUser } from '../helpers/selectors';
-import avatarBGColor from '../helpers/avatarBG'
+import avatarBGColor from '../helpers/avatarBG';
 
+import { imageContext } from '../providers/ImagePorvider';
 
 // Helper function -- converts String Timestamp to String Date in DMY format
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
@@ -143,6 +144,7 @@ const backgroundColor = {
 
 export default function ProjectOverviewTable({ state, projectID, projectTasks, projectUsers, deleteTask, editTask, userID, addTask, updateTaskStatus, updateTaskPriority }) {
   const classes = useStyles();
+  const { imageSrc, imageUserID } = useContext(imageContext);
 
   //how modal knows which task to pass in
   const [rowID, setRowID] = useState('');
@@ -282,31 +284,39 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                 <StyledTableCell component="th" scope="row" className={[classes.columnTasks, classes.columnTaskTitle]}>
                   <Tooltip title={row.title} placement="top-start">
                     <div className="overview-table-task-name">{row.title}</div>
-                 </Tooltip>
+                  </Tooltip>
                 </StyledTableCell>
-                  <StyledTableCell>
-                    <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
-                      {row.task_users.map((userID, index) => {
-                        let avatarBG = avatarBGColor(userID)
-                        if (row.task_users.length === 1) {
-                          return (
-                            <>
-                              {projectUsers[userID] && (
-                                <>
-                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}}/>
-                                  <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
-                                </>
-                              )}
-                            </>
-                          );
-                        }
-
+                <StyledTableCell>
+                  <AvatarGroup className="overview-table-avatar" style={{ minWidth: '135px' }}>
+                    {row.task_users.map((userID, index) => {
+                      let avatarBG = avatarBGColor(userID);
+                      if (row.task_users.length === 1) {
                         return (
-                          <Tooltip title={projectUsers[userID]['user_name']}>
-                            <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{'background-color': avatarBG}} />
-                          </Tooltip>
+                          <>
+                            {projectUsers[userID] && (
+                              <>
+                                {userID === imageUserID ? (
+                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={imageSrc} style={{ 'background-color': avatarBG }} />
+                                ) : (
+                                  <Avatar name={projectUsers[userID]['user_name']} key={index} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
+                                )}
+                                <p className="overview-table-avatar-name">{projectUsers[userID]['user_name'].split(' ')[0]}</p>
+                              </>
+                            )}
+                          </>
                         );
-                      })}
+                      }
+
+                      return (
+                        <Tooltip title={projectUsers[userID]['user_name']}>
+                          {userID === imageUserID ? (
+                            <Avatar alt={projectUsers[userID]['user_name']} src={imageSrc} style={{ 'background-color': avatarBG }} />
+                          ) : (
+                            <Avatar alt={projectUsers[userID]['user_name']} src={`https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} />
+                          )}
+                        </Tooltip>
+                      );
+                    })}
                   </AvatarGroup>
                 </StyledTableCell>
                 {/* Afsan: Inline styling is one way to override the material-UI styles... doesn't look great.*/}

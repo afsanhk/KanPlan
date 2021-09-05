@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 import FlagIcon from '@material-ui/icons/Flag';
@@ -6,10 +6,11 @@ import { Avatar, Tooltip } from '@material-ui/core';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 
 //helpers
-import avatarBGColor from '../helpers/avatarBG'
+import avatarBGColor from '../helpers/avatarBG';
 import { makeStyles } from '@material-ui/styles';
 
 import '../styles/KanbanTask.scss';
+import { imageContext } from '../providers/ImagePorvider';
 
 const useStyles = makeStyles((theme) => ({
   taskTitle: {
@@ -34,19 +35,23 @@ const flagStyles = {
 };
 function KanbanTask({ task, index, state }) {
   const classes = useStyles();
-
+  const { imageSrc, imageUserID } = useContext(imageContext);
   const titleRef = useRef(null);
   const [disableHover, setDisableHover] = useState(true);
 
   const parsedUsers = task.task_users.map((user) => {
     const userDetails = state.users[user];
-    let avatarBG = avatarBGColor(userDetails.id)
+    let avatarBG = avatarBGColor(userDetails.id);
 
     return (
       <Tooltip title={userDetails.user_name}>
-        <Avatar alt={userDetails.user_name} src={`https://robohash.org/${userDetails.id}`} style={{'background-color': avatarBG}} />
+        {imageUserID === userDetails.id ? (
+          <Avatar alt={userDetails.user_name} src={imageSrc} style={{ 'background-color': avatarBG }} />
+        ) : (
+          <Avatar alt={userDetails.user_name} src={`https://robohash.org/${userDetails.id}`} style={{ 'background-color': avatarBG }} />
+        )}
       </Tooltip>
-    )
+    );
   });
 
   useEffect(() => {
