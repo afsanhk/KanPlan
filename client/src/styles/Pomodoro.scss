@@ -1,0 +1,40 @@
+@use './base';
+
+.pomodoro {
+  position: absolute;
+  height: 260px;
+  width: 500px;
+  bottom: 140px;
+  left: 120px;
+  background: base.$off-white;
+  border: base.$border-grey;
+  border-radius: 0 15px 15px 0;
+  padding: 20px 40px;
+  z-index: 99;
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+}
+
+.sliders {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  p {
+    margin: 0;
+    margin-bottom: 20px;
+    width: 150px;
+  }
+
+}
+
+.interval-counter {
+  display: flex;
+  justify-content: flex-end;
+  // margin-bottom: 10px;
+}

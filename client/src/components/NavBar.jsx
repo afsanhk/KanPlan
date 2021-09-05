@@ -23,6 +23,7 @@ import { imageContext } from '../providers/ImagePorvider';
 
 //helpers
 import avatarBGColor from '../helpers/avatarBG';
+import Pomodoro from './Pomodoro';
 import FaceDetection from './FaceDetection';
 
 const theme = createTheme({
@@ -62,10 +63,15 @@ function NavBar({ userID }) {
   const { imageSrc } = useContext(imageContext);
   const classes = useStyles();
 
-  const [show, setShow] = useState(false);
+  const [showPomodoro, setShowPomodoro] = useState(false);
+  const [showFaceDetect, setShowFaceDetect] = useState(false);
 
-  const handleShow = () => {
-    setShow(!show);
+  const handleShowPomodoro = () => {
+    setShowPomodoro(!showPomodoro)
+  }
+
+  const handleShowFaceDetect = () => {
+    setShowFaceDetect(!showFaceDetect);
   };
 
   const activePage = function () {
@@ -105,15 +111,19 @@ function NavBar({ userID }) {
         </div>
         <div className="nav-bottom">
           <List className="nav-bottom-list">
+            <ListItem>
+              <ListItemText primary={'Work Interval'} secondary={'05:00'} />
+            </ListItem>
             <ListItem button className={classes.navBarButton}>
-              <ListItemText primary={<AlarmIcon fontSize="large" className={classes.navBarIcon} />} secondary={<Typography>Pomodoro</Typography>} />
+              <ListItemText primary={<AlarmIcon fontSize="large" className={classes.navBarIcon} />} secondary={<Typography>Pomodoro</Typography>} onClick={handleShowPomodoro}/>
             </ListItem>
           </List>
-          <Avatar alt="" className={classes.navBarAvatar} src={imageSrc ? imageSrc : `https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} onClick={handleShow} />
+          <Avatar alt="" className={classes.navBarAvatar} src={imageSrc ? imageSrc : `https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} onClick={handleShowFaceDetect} />
           <Button onClick={() => logout()}>Logout</Button>
         </div>
       </Drawer>
-      {show && <FaceDetection userID={userID} show={show} />}
+      {showPomodoro && <Pomodoro />}
+      {showFaceDetect && <FaceDetection userID={userID} show={showFaceDetect} />}
     </ThemeProvider>
   );
 }
