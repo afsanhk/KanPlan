@@ -54,8 +54,12 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].status_id = taskState.status_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, ...stateCopy }));
+      })
+      .catch((error) => console.log(error));
   };
 
   // update task's priority, priority_id
@@ -68,8 +72,12 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].priority_id = priorityState.priority_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, ...stateCopy }));
+      })
+      .catch((error) => console.log(error));
   };
 
   const editTask = (newTaskData, taskID) => {
@@ -106,7 +114,7 @@ export default function useApplicationData() {
 
       setState((prev) => ({
         ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] }
+        ...stateCopy
       }));
     });
 
@@ -119,13 +127,13 @@ export default function useApplicationData() {
 
       setState((prev) => ({
         ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] }
+        ...stateCopy
       }));
     });
 
     setState((prev) => ({
       ...prev,
-      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] }
+      ...stateCopy
     }));
     return axios.put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData }).catch((error) => console.log(error));
   };

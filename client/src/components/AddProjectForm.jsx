@@ -74,8 +74,8 @@ const planStartInit = new Date();
 const planEndInit = new Date();
 planEndInit.setDate(planEndInit.getDate() + 7);
 // convert to string and return in YYYY-MM-DD format
-const planStartString = convertTimestampStringToYMD(planStartInit.toString());
-const planEndString = convertTimestampStringToYMD(planEndInit.toString());
+const planStartString = planStartInit.toString().substring(0, 10);
+const planEndString = planEndInit.toString().substring(0, 10);
 
 // Note that the usage duplicate names is troublesome due to the implementation of the checkbox dropdown, as we have to retrieve the ID later.
 // Avoid duplicate names for users.

@@ -16,7 +16,7 @@ function UpcomingTaskList({ projectTasks, userID }) {
   //from all projectTasks, narrow it down to which tasks are due in the next 7 days
   if (tasks[0]) {
     const upcomingTasks = tasks.filter((task) => {
-      const taskDue = convertTimestampStringToYMD(task.plan_end);
+      const taskDue = task.plan_end.substring(0, 10);
 
       const taskDueMonth = taskDue[5] !== '0' ? parseInt(taskDue[5] + taskDue[6]) : parseInt(taskDue[6]);
       const taskDueDay = (taskDue[8] !== '0' ? parseInt(taskDue[8] + taskDue[9]) : parseInt(taskDue[9])) + 1;

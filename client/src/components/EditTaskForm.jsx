@@ -259,23 +259,23 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   id="date"
                   label="Start Date"
                   type="date"
-                  defaultValue={convertTimestampStringToYMD(tasks.plan_start)}
+                  defaultValue={tasks.plan_start.substring(0, 10)}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
                 />
                 <TextField
                   id="date"
                   label="End Date"
                   type="date"
-                  defaultValue={convertTimestampStringToYMD(tasks.plan_end)}
+                  defaultValue={tasks.plan_end.substring(0, 10)}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
                 />
               </div>
             </div>

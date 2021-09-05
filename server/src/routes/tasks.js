@@ -7,6 +7,8 @@ module.exports = (db) => {
               proj_name, 
               priority_name, 
               status,
+              tasks.plan_start AT TIME ZONE 'AST' AS plan_start,
+              tasks.plan_end AT TIME ZONE 'AST' AS plan_end,
               CASE 
                 WHEN user_tasks.task_id IS NULL
                 THEN ARRAY[]::integer[]
