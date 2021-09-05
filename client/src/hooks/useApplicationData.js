@@ -47,17 +47,16 @@ export default function useApplicationData() {
   // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    stateCopy.tasks[taskID].status = taskState.status;
-    stateCopy.tasks[taskID].status_id = taskState.status_id;
-
-    if (taskState.kanban_order) {
-      stateCopy.tasks[taskID].kanban_order = taskState.kanban_order;
+    console.log(taskState);
+    if (stateCopy.tasks[taskID].status) {
+      stateCopy.tasks[taskID].status = taskState.status;
+    }
+    if (stateCopy.tasks[taskID].status_id) {
+      stateCopy.tasks[taskID].status_id = taskState.status_id;
     }
 
-    return axios
-      .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
-      .then(() => setState((prev) => ({ ...prev, ...stateCopy })))
-      .catch((error) => console.log(error));
+    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
   };
 
   // update task's priority, priority_id
@@ -75,6 +74,7 @@ export default function useApplicationData() {
   };
 
   const editTask = (newTaskData, taskID) => {
+    console.log(newTaskData.plan_end, newTaskData.status);
     const stateCopy = JSON.parse(JSON.stringify(state));
 
     stateCopy.tasks[taskID].title = newTaskData.title;
