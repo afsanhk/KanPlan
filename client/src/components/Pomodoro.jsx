@@ -12,9 +12,9 @@ import Slider from '@material-ui/core/Slider';
 function Pomodoro({ onTimerStart }) {
 
 
-  const [workInterval, setWorkInterval] = useState(25)
-  const [shortBreak, setShortBreak] = useState(5)
-  const [longBreak, setLongBreak] = useState(15)
+  const [workInterval, setWorkInterval] = useState(1500) //1500 seconds = 25 mins
+  const [shortBreak, setShortBreak] = useState(300) //300 seconds = 5 mins
+  const [longBreak, setLongBreak] = useState(900)//900 seconds = 15 mins
 
   // slider labels
   const marks = [
@@ -33,23 +33,27 @@ function Pomodoro({ onTimerStart }) {
   ];
 
   const handleWorkSliderChange = (event, val) => {
-    setWorkInterval(val)
+    setWorkInterval(() => val * 60)
   }
   
   const handleSBreakSliderChange = (event, val) => {
-    setShortBreak(val)
+    setShortBreak(val * 60)
   }
 
   const handleLBreakSliderChange = (event, val) => {
-    setLongBreak(val)
+    setLongBreak(val * 60)
   }
 
+  const clickPlay = function () {
+    console.log(workInterval)
+    onTimerStart(workInterval)
+  }
 
   return (
     <div className='pomodoro'>
       <div className='buttons'>
         <IconButton size="small">  
-          <PlayCircleOutlineIcon onClick={onTimerStart}/>
+          <PlayCircleOutlineIcon onClick={clickPlay}/>
         </IconButton>
         <Button size="small">RESET</Button>
       </div>

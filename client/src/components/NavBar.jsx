@@ -86,29 +86,43 @@ function NavBar({ userID }) {
 
   //pomodoro logic
   const [pomodoroTimer, showPomodoroTimer] = useState(false)
-  const [minutesLeft, setMinutesLeft] = useState(1);
-  const [secondsLeft, setSecondsLeft] = useState(59);
+  const [secondsLeft, setSecondsLeft] = useState(20); //1500 seconds = 25 mins
   const [timer, setTimer] = useState()
   const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
 
-  // const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  // const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
+  // const timerMinutes = minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft;
+  const timerSeconds = secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft;
 
-  const onTimerStart = () => {
-    showPomodoroTimer(true)
+  const countdown = function (secondsLeft) {
+    let timerMinutes = Math.floor(secondsLeft / 60);
+    let timerSeconds = (secondsLeft % 60);
 
-    const timer = setInterval(() => {
-      setSecondsLeft((secondsLeft) => secondsLeft - 1);
-      if (secondsLeft === 0) {
-        clearInterval(timer)
-      }
-    }, 1000);
+    if (timerSeconds < 10) {
+      timerSeconds = `0${timerSeconds}`
+    }
 
-    setTimer(timer)
+    return `${timerMinutes}:${timerSeconds}`
   }
+
+  const onTimerStart = (totalSeconds) => {
+    showPomodoroTimer(true)
+    setSecondsLeft(totalSeconds)
+
+    const minusOneSecond = setInterval(() => {
+        setSecondsLeft((secondsLeft) => secondsLeft - 1);
+        if (secondsLeft === 0) {
+          clearInterval(timer);
+        }
+    }, 250);
+
+    //creates a loop with the above setInterval, until no seconds are left
+    setTimer(minusOneSecond)
+  }
+  
 
   useEffect(() => {
     if (secondsLeft === 0) {
+      console.log('DONE')
       clearInterval(timer);
     }
   }, [secondsLeft, timer]);
@@ -116,6 +130,9 @@ function NavBar({ userID }) {
   useEffect(() => {
     return () => clearInterval(timer);
   }, [timer]);
+
+
+
 
   // useEffect(() => {
   //   let interval = setInterval(() => {
@@ -172,7 +189,7 @@ function NavBar({ userID }) {
           <List className="nav-bottom-list">
             {pomodoroTimer && 
               <ListItem>
-                <ListItemText primary={'Work Interval'} secondary={`${secondsLeft}`} />
+                <ListItemText primary={'Work Interval'} secondary={countdown(secondsLeft)} />
               </ListItem>
             }
             <ListItem button className={classes.navBarButton}>
