@@ -88,11 +88,15 @@ function NavBar({ userID }) {
   const [pomodoroTimer, showPomodoroTimer] = useState(false)
   const [secondsLeft, setSecondsLeft] = useState(20); //1500 seconds = 25 mins
   const [timer, setTimer] = useState()
+
+  const [workInterval, setWorkInterval] = useState(0)
+  const [shortBreak, setShortBreak] = useState(0)
+  const [longBreak, setLongBreak] = useState(0)
   const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
 
-  // const timerMinutes = minutesLeft < 10 ? `0${minutesLeft}` : minutesLeft;
-  const timerSeconds = secondsLeft < 10 ? `0${secondsLeft}` : secondsLeft;
+  
 
+  //turn seconds into human readable format
   const countdown = function (secondsLeft) {
     let timerMinutes = Math.floor(secondsLeft / 60);
     let timerSeconds = (secondsLeft % 60);
@@ -104,27 +108,36 @@ function NavBar({ userID }) {
     return `${timerMinutes}:${timerSeconds}`
   }
 
-  const onTimerStart = (totalSeconds) => {
+  const onTimerStart = (workInterval, shortBreak, longBreak) => {
     showPomodoroTimer(true)
-    setSecondsLeft(totalSeconds)
+
+    setWorkInterval(workInterval)
+    setShortBreak(shortBreak)
+    setLongBreak(longBreak)
+    
+    setSecondsLeft(workInterval)
 
     const minusOneSecond = setInterval(() => {
         setSecondsLeft((secondsLeft) => secondsLeft - 1);
         if (secondsLeft === 0) {
+          console.log('DONE')
           clearInterval(timer);
         }
-    }, 250);
+    }, 100);
 
     //creates a loop with the above setInterval, until no seconds are left
     setTimer(minusOneSecond)
   }
-  
+
+  let intervalCount = 2; //should start at 1, but technically interval 1 automatically starts, so by the time this value needs to be read, interval 1 has already passed, making it interval 2. 
 
   useEffect(() => {
-    if (secondsLeft === 0) {
-      console.log('DONE')
-      clearInterval(timer);
-    }
+    if (secondsLeft === 0 && shortBreak !== 0) {
+      setSecondsLeft(shortBreak)
+      console.log('shortBreak')
+      setShortBreak(0)
+    }    
+    clearInterval(timer);
   }, [secondsLeft, timer]);
 
   useEffect(() => {
@@ -132,6 +145,24 @@ function NavBar({ userID }) {
   }, [timer]);
 
 
+
+  // if (secondsLeft === 0 && longBreak === 0) {
+  //   clearInterval(timer);
+
+  // } else if (secondsLeft === 0 && intervalCount === 8) {
+  //   setSecondsLeft(longBreak)
+  //   console.log('longBreak' + intervalCount)
+  //   setLongBreak(0)
+
+  // } else if (secondsLeft === 0 && intervalCount % 2 === 0) {
+  //   intervalCount = intervalCount + 1
+  //   setSecondsLeft(shortBreak)
+  //   console.log('shortBreak' + intervalCount)
+
+  // } else if (secondsLeft === 0 && intervalCount % 2 === 1) {
+  //   intervalCount = intervalCount + 1
+  //   setSecondsLeft(workInterval)
+  //   console.log('workInterval' + intervalCount)
 
 
   // useEffect(() => {

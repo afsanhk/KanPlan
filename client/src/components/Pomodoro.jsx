@@ -46,7 +46,7 @@ function Pomodoro({ onTimerStart }) {
 
   const clickPlay = function () {
     console.log(workInterval)
-    onTimerStart(workInterval)
+    onTimerStart(workInterval, shortBreak, longBreak)
   }
 
   return (
@@ -61,7 +61,7 @@ function Pomodoro({ onTimerStart }) {
         <p>Work Interval</p>
         <Slider 
           defaultValue={25}
-          step={2}
+          step={1}
           marks={marks}
           valueLabelDisplay="auto"
           max={60}
@@ -72,7 +72,7 @@ function Pomodoro({ onTimerStart }) {
         <p>Short Break</p>
         <Slider 
           defaultValue={5}
-          step={2}
+          step={1}
           marks={marks}
           valueLabelDisplay="auto"
           max={60}
@@ -83,7 +83,7 @@ function Pomodoro({ onTimerStart }) {
         <p>Long Break</p>
         <Slider 
           defaultValue={15}
-          step={2}
+          step={1}
           marks={marks}
           valueLabelDisplay="auto"
           max={60}
