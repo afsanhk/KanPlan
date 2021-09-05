@@ -11,7 +11,11 @@ const io = socketio(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("We have a new connection!", socket.id);
+  console.log("We have a new connection: ", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Connection disconnected for: ", socket.id);
+  });
 });
 
 server.listen(PORT, () => {
