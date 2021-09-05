@@ -15,6 +15,7 @@ const projects = require('./routes/projects');
 const tasks = require('./routes/tasks');
 const kanbanTasks = require('./routes/kanban_tasks');
 const projectMembers = require('./routes/project_members');
+const messages = require('./routes/messages');
 
 function read(file) {
   return new Promise((resolve, reject) => {
@@ -41,6 +42,7 @@ module.exports = function application(ENV) {
   app.use('/api', tasks(db));
   app.use('/api', kanbanTasks(db));
   app.use('/api', projectMembers(db));
+  app.use('/api', messages(db));
 
   if (ENV === 'development' || ENV === 'test') {
     Promise.all([read(path.resolve(__dirname, `db/schema/create.sql`)), read(path.resolve(__dirname, `db/schema/${ENV}.sql`))])

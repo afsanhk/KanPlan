@@ -328,3 +328,13 @@ VALUES
   (27,1), (27,2), (27,3),
   (28,1), (28,2), (28,3),
                   (29,3);
+
+-- Messages
+INSERT INTO messages (user_id, message_text, created_at)
+VALUES
+  (1, 'What is KanPlan?', '2021-09-01 12:33:33'),
+  (2, 'KanPlan is a project management web app to make organizing your ideas easier!', '2021-09-01 00:05:00'),
+  (1, 'How does it work?', '2021-09-01 01:10:00'),
+  (3, 'KanPlan has 5 different pages which are Project Dashboard, All projects, Project overview, Gantt chart and Kanban', '2021-09-01 01:15:00'),
+  (1, 'Awesome!', '2021-09-01 02:20:00'),
+  (2, 'Do you have any other question?', '2021-09-01 02:25:00');
