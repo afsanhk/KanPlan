@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS kanban_status CASCADE;
 DROP TABLE IF EXISTS projects CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
+SET timezone = 'America/Toronto';
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   user_name VARCHAR(255) NOT NULL,

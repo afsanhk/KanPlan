@@ -1,9 +1,11 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 module.exports = (db) => {
-  router.get("/projects", (request, response) => {
+  router.get('/projects', (request, response) => {
     db.query(
       `SELECT projects.*,
+              projects.planned_start AS planned_start,
+              projects.planned_end AS planned_end,
               users.user_name as manager_name,
               array_agg(DISTINCT project_members.user_id) AS team_members,
               array_agg(DISTINCT tasks.id) AS project_tasks
@@ -18,7 +20,7 @@ module.exports = (db) => {
     });
   });
 
-  router.post("/projects", (request, response) => {
+  router.post('/projects', (request, response) => {
     console.log(`Server is receiving a post request to projects with payload:`, request.body);
     const { proj_name, manager_id, planned_start, planned_end, proj_description, team_members } = request.body;
     // First query inserts into projects
@@ -32,12 +34,12 @@ module.exports = (db) => {
       // Second query creates relations for team members and project in project_members table
       .then((res) => {
         if (team_members.length) {
-          let query = "";
+          let query = '';
           const project_id = res.rows[0].id;
           for (const user_id of team_members) {
-            query += "(" + project_id + "," + user_id + ")";
+            query += '(' + project_id + ',' + user_id + ')';
             if (!(team_members.indexOf(user_id) === team_members.length - 1)) {
-              query += ",\n";
+              query += ',\n';
             }
           }
           db.query(
@@ -56,16 +58,16 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.delete("/projects/:id", (request, response) => {
-    db.query("DELETE FROM projects WHERE id = $1::integer", [request.params.id])
+  router.delete('/projects/:id', (request, response) => {
+    db.query('DELETE FROM projects WHERE id = $1::integer', [request.params.id])
       .then(() => {
         response.status(204).json({});
       })
       .catch((error) => console.log(error));
   });
 
-  router.put("/projects/:id", (request, response) => {
-    const { proj_name, proj_description, id } = request.body.newProjectFullData
+  router.put('/projects/:id', (request, response) => {
+    const { proj_name, proj_description, id } = request.body.newProjectFullData;
 
     db.query(
       `
@@ -74,11 +76,12 @@ module.exports = (db) => {
       WHERE id = $3;
       `,
       [proj_name, proj_description, id]
-    ).then(() => {
-      response.status(204).json({});
-    })
-    .catch((error) => console.log(error));
-  })
+    )
+      .then(() => {
+        response.status(204).json({});
+      })
+      .catch((error) => console.log(error));
+  });
 
   return router;
 };
