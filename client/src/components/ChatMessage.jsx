@@ -10,7 +10,7 @@ loggedIn: determines styling
 
 users: get users data 
 */
- export default function ChatMessage({message, userID, users}){
+export default function ChatMessage({message, userID, users}){
 
   let loggedIn = false;
 
@@ -23,6 +23,7 @@ users: get users data
       <p className="sentText pr-10">{message.user_id}</p>
       <div className="messageBox backgroundBlue">
         <p className="messagetext colorWhite">{message.message_text}</p>
+        <p className="messageTime">{(message.created_at)}</p>
       </div>
     </div>
   ) : (
@@ -31,8 +32,7 @@ users: get users data
         <p className="messagetext colorDark">{message.message_text}</p>
       </div>
       <p className="sentText pl-10">{message.user_id}</p>
+      <p className="messageTime">{(message.created_at)}</p>
     </div>
   )
-
-
 } 
