@@ -11,6 +11,8 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@syncfusion/ej2-react-gantt": "^19.2.59",
+    "@tensorflow-models/blazeface": "0.0.7",
+    "@tensorflow/tfjs": "^3.9.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -24,6 +26,7 @@
     "react-google-charts": "^3.0.15",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-webcam": "^6.0.0",
     "sass": "^1.38.1",
     "web-vitals": "^1.1.2"
   },
