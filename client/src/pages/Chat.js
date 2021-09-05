@@ -1,6 +1,6 @@
 import useMessages from "../hooks/useMessages";
 
-export default function Chat({ userID }) {
+export default function Chat({ userID, users }) {
   const { messageHistory } = useMessages();
 
   console.log(messageHistory);
