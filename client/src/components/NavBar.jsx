@@ -113,7 +113,7 @@ function NavBar({ userID }) {
           <Button onClick={() => logout()}>Logout</Button>
         </div>
       </Drawer>
-      {show && <FaceDetection userID={userID} />}
+      {show && <FaceDetection userID={userID} show={show} />}
     </ThemeProvider>
   );
 }

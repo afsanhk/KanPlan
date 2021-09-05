@@ -7,7 +7,7 @@ import { imageContext } from '../providers/ImagePorvider';
 
 const blazeface = require('@tensorflow-models/blazeface');
 
-function FaceDetection({ userID }) {
+function FaceDetection({ userID, show }) {
   const { setImage } = useContext(imageContext);
 
   const webcamRef = useRef(null);
@@ -24,13 +24,16 @@ function FaceDetection({ userID }) {
         if (webcamRef.current !== null && webcamRef.current.video.readyState === 4 && typeof webcamRef.current !== undefined) {
           const { video } = webcamRef.current;
           const { videoWidth, videoHeight } = video;
+          let ctx;
 
           ctxRef.current.width = videoWidth;
           ctxRef.current.height = videoHeight;
 
           const detections = await net.estimateFaces(video, returnTensors);
 
-          const ctx = ctxRef.current.getContext('2d');
+          if (ctxRef) {
+            ctx = ctxRef.current.getContext('2d');
+          }
 
           if (detections.length) {
             count++;
@@ -54,7 +57,7 @@ function FaceDetection({ userID }) {
     return () => {
       clearInterval(timerIntervalId);
     };
-  }, []);
+  }, [show]);
 
   const capture = () => {
     console.log('Taking picture!');
