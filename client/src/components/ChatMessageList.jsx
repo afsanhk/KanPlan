@@ -7,9 +7,7 @@ const ChatMessageList = ({ messages, userID, users }) => {
   return (
     <ScrollToBottom className="messages">
       {messages.map((message) => (
-        <div key={messages.id}>
-          <ChatMessage message={message} userID={userID} users={users}/>
-        </div>
+        <ChatMessage key={messages.id} message={message} userID={userID} users={users}/>
       ))}
     </ScrollToBottom>
   );

@@ -21,6 +21,9 @@ export default function Chat({ userID, users }) {
     };
   }, []);
 
+  useEffect(() => {
+    socket.on("hello", (data) => console.log(data));
+  });
   // Function to send messages
   const sendMessage = (event) => {
     event.preventDefault(); // Very important so that a page refresh doesn't happen
@@ -35,7 +38,7 @@ export default function Chat({ userID, users }) {
       };
       console.log(newMessageObj);
       setMessageHistory((prev) => [...prev, newMessageObj]); // This should go inside socket.on but it works
-      socket.emit("sendMessage", newMessageObj, () => setMessage("")); // This callback clears the input
+      socket.emit("sendMessage", { ...newMessageObj }, () => setMessage("")); // This callback clears the input
     }
   };
 
