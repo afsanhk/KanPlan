@@ -81,6 +81,7 @@ function App() {
     updateProjectUsers,
     updateTaskPriority,
     updateKanbanOrder,
+    editProject,
   } = useApplicationData();
 
   // const { auth, userID } = useContext(authContext);
@@ -124,6 +125,7 @@ function App() {
                       editTask={editTask}
                       updateTaskStatus={updateTaskStatus}
                       updateTaskPriority={updateTaskPriority}
+                      editProject={editProject}
                     />
                   </Route>
                   <Route path="/project/:projectID/kanban">

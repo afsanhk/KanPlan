@@ -16,6 +16,13 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
+//for edit project title and desc
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+
+
 import DeleteTaskForm from '../components/DeleteTaskForm';
 import ProjectOverviewUpcomingTasks from '../components/ProjectOverviewUpcomingTasks';
 
@@ -27,10 +34,28 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, updateProjectUsers, addTask, updateTaskStatus, updateTaskPriority }) => {
+const ProjectOverview = ({ 
+  state, 
+  deleteTask, 
+  editTask, 
+  userID, 
+  deleteProject, 
+  updateProjectUsers, 
+  addTask, 
+  updateTaskStatus, 
+  updateTaskPriority, 
+  editProject 
+}) => {
+  
   const classes = useStyles();
   let { projectID } = useParams();
   const [open, setOpen] = useState(false); // modal state
+  const [clickProjectEdit, setProjectEdit] = useState(false); //open or close the project edit options
+  const [projData, setProjData] = useState({
+    proj_name: state.projects[projectID].proj_name,
+    proj_description: state.projects[projectID].proj_description,
+  });
+
 
   const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
   const projectUsers = getUsersForProject(state, projectID);
@@ -53,12 +78,56 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
     setOpen(false);
   };
 
+  // open proj title and desc function
+  const handleProjectEditClick = () => {
+    setProjectEdit(!clickProjectEdit);
+  };
+
+  //save proj title and desc edits
+  const updateData = () => {
+    handleProjectEditClick()
+    editProject(projData, projectID)
+  }
+
   return (
     <>
       <div className="project-overview">
         <div className="project-overview-header">
           <div className="project-overview-title">
-            <h1>{projectTitle}</h1>
+            { !clickProjectEdit ? (
+              <div className="project-overview-edit">
+                <h1>{projectTitle}</h1>
+                <IconButton size="small" >
+                  <EditOutlinedIcon onClick={handleProjectEditClick}/>
+                </IconButton>
+              </div>
+            ) : (
+              <div className="project-overview-edit">
+                <TextField
+                id="standard-full-width"
+                label="Project Title"
+                placeholder="Write project title"
+                defaultValue={projectTitle}
+                fullWidth
+                multiline
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { fontSize: '1em', marginTop: 0 }
+                }}
+                InputProps={{
+                  // disableUnderline: true,
+                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
+                }}
+                onChange={(event) => setProjData((prev) => ({ ...prev, proj_name: event.target.value }))}
+              />
+                <IconButton size="small" >
+                  <SaveOutlinedIcon onClick={updateData}/>
+                </IconButton>
+              </div>
+            )}
+            
+            
             <div className="project-overview-links">
               <LinkIconContainer projectID={projectID} text state={state} updateProjectUsers={updateProjectUsers} />
               <Button variant="outlined" color="secondary" className={classes.button} onClick={handleOpen}>
@@ -66,7 +135,30 @@ const ProjectOverview = ({ state, deleteTask, editTask, userID, deleteProject, u
               </Button>
             </div>
           </div>
-          <p>{projectDescription}</p>
+          { !clickProjectEdit ? (
+            <p>{projectDescription}</p>
+          ) : (
+
+            <TextField
+                id="standard-full-width"
+                label="Project Description"
+                placeholder="Write project description"
+                defaultValue={projectDescription}
+                fullWidth
+                multiline
+                margin="normal"
+                InputLabelProps={{
+                  shrink: true,
+                  style: { fontSize: '1em', marginTop: 0 }
+                }}
+                InputProps={{
+                  // disableUnderline: true,
+                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
+                }}
+                onChange={(event) => setProjData((prev) => ({ ...prev, proj_description: event.target.value }))}
+              />
+
+          )}
         </div>
         <div className="project-overview-body">
           <div className="project-overview-table">
