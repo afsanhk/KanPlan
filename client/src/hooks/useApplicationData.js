@@ -1,32 +1,23 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tasks: {},
     projects: {},
-    users: {},
+    users: {}
   });
-  const [kanbanStatus, setKanbanStatus] = useState([
-    { task_id: [] },
-    { task_id: [] },
-    { task_id: [] },
-    { task_id: [] },
-  ]);
+  const [kanbanStatus, setKanbanStatus] = useState([{ task_id: [] }, { task_id: [] }, { task_id: [] }, { task_id: [] }]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      axios.get("http://localhost:8001/api/tasks"),
-      axios.get("http://localhost:8001/api/projects"),
-      axios.get("http://localhost:8001/api/users"),
-    ]).then((all) => {
+    Promise.all([axios.get('http://localhost:8001/api/tasks'), axios.get('http://localhost:8001/api/projects'), axios.get('http://localhost:8001/api/users')]).then((all) => {
       //updates the state with all the information received from the axios get requests
       setState((prev) => ({
         ...prev,
         tasks: all[0].data,
         projects: all[1].data,
-        users: all[2].data,
+        users: all[2].data
       }));
       setLoading(false);
     });
@@ -49,7 +40,7 @@ export default function useApplicationData() {
           stateCopy.users[id].user_tasks = [...stateCopy.users[id].user_tasks, taskID];
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log("Inside add Task STATECOPY:", stateCopy); //.tasks[taskID].status); //no status?
+        console.log('Inside add Task STATECOPY:', stateCopy); //.tasks[taskID].status); //no status?
       });
   };
 
@@ -80,15 +71,14 @@ export default function useApplicationData() {
     }
 
     setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios
-      .put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID })
-      .catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
   };
 
   const editTask = (newTaskData, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
+    console.log(newTaskData);
 
-    stateCopy.tasks[taskID].title = newTaskData.task_title;
+    stateCopy.tasks[taskID].title = newTaskData.title;
     stateCopy.tasks[taskID].task_description = newTaskData.task_description;
     stateCopy.tasks[taskID].plan_start = newTaskData.plan_start;
     stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
@@ -118,7 +108,7 @@ export default function useApplicationData() {
 
       setState((prev) => ({
         ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] },
+        users: { ...prev.users, [userID]: stateCopy.users[userID] }
       }));
     });
 
@@ -131,17 +121,15 @@ export default function useApplicationData() {
 
       setState((prev) => ({
         ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] },
+        users: { ...prev.users, [userID]: stateCopy.users[userID] }
       }));
     });
 
     setState((prev) => ({
       ...prev,
-      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] },
+      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] }
     }));
-    return axios
-      .put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData })
-      .catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData }).catch((error) => console.log(error));
   };
 
   // get kanban status from api
@@ -153,10 +141,10 @@ export default function useApplicationData() {
 
   const updateKanbanOrder = (projectID, statusIDs, kanbanOrders) => {
     const idToStatus = {
-      1: "To-Do",
-      2: "Late",
-      3: "In Progress",
-      4: "Done",
+      1: 'To-Do',
+      2: 'Late',
+      3: 'In Progress',
+      4: 'Done'
     };
     const stateCopy = JSON.parse(JSON.stringify(state));
 
@@ -240,9 +228,9 @@ export default function useApplicationData() {
           ...newProject,
           id: projectID,
           manager_name: newProject.manager_name,
-          project_tasks: [null],
+          project_tasks: [null]
         };
-        console.log("State Inside addProject: ", stateCopy.projects);
+        console.log('State Inside addProject: ', stateCopy.projects);
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.push(projectID));
         // Set state.
@@ -299,14 +287,11 @@ export default function useApplicationData() {
 
     setState((prev) => ({
       ...prev,
-      projects: { ...prev.projects, [projectID]: stateCopy.projects[projectID] },
+      projects: { ...prev.projects, [projectID]: stateCopy.projects[projectID] }
     }));
 
-    return axios
-      .put(`http://localhost:8001/api/projects/${projectID}`, { newProjectFullData })
-      .catch((error) => console.log(error));
+    return axios.put(`http://localhost:8001/api/projects/${projectID}`, { newProjectFullData }).catch((error) => console.log(error));
   }
-
 
   return {
     state,

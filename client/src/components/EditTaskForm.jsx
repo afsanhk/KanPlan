@@ -86,7 +86,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   const [clickTitle, setClickTitle] = useState(false);
   const [clickDesc, setClickDesc] = useState(false);
   const [state, setState] = useState({
-    task_title: tasks.title,
+    title: tasks.title,
     task_description: tasks.task_description,
     plan_start: tasks.plan_start,
     plan_end: tasks.plan_end
@@ -151,7 +151,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
   }, []);
 
   useEffect(() => {
-    setError(!state.task_title || !state.task_description );
+    setError(!state.title || !state.task_description);
   }, [state]);
 
   return (
@@ -160,7 +160,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
         <header className="task-form-header">
           {!clickTitle ? (
             <div className="task-form-header-title">
-              <ListItemText primary="Task Title" secondary={state.task_title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px'}}/>
+              <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -171,7 +171,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 id="standard-full-width"
                 label="Task Title"
                 placeholder="Write Title"
-                defaultValue={state.task_title}
+                defaultValue={state.title}
                 fullWidth
                 multiline
                 margin="normal"
@@ -183,7 +183,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   // disableUnderline: true,
                   style: { fontSize: '1.7em', color: '#757575', width: '100%' }
                 }}
-                onChange={(event) => setState((prev) => ({ ...prev, task_title: event.target.value }))}
+                onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
               />
 
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
@@ -200,7 +200,12 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
           <div className="task-form-body-description">
             {!clickDesc ? (
               <div className="task-form-body-description-div">
-                <ListItemText primary="Task Description" secondary={state.task_description} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '7px'}}/>
+                <ListItemText
+                  primary="Task Description"
+                  secondary={state.task_description}
+                  secondaryTypographyProps={{ style: { marginTop: '2px' } }}
+                  style={{ marginTop: '16px', marginBottom: '7px' }}
+                />
                 <IconButton size="small" className={classes.icon} onClick={handleDescClick}>
                   <EditOutlinedIcon />
                 </IconButton>
