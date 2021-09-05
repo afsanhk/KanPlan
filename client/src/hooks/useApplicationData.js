@@ -47,7 +47,6 @@ export default function useApplicationData() {
   // update task's status, status_id, kanban_order
   const updateTaskStatus = (taskState, taskID) => {
     const stateCopy = JSON.parse(JSON.stringify(state));
-    console.log(taskState);
     if (stateCopy.tasks[taskID].status) {
       stateCopy.tasks[taskID].status = taskState.status;
     }
@@ -74,7 +73,7 @@ export default function useApplicationData() {
   };
 
   const editTask = (newTaskData, taskID) => {
-    console.log(newTaskData.plan_end, newTaskData.status);
+    // console.log(newTaskData.plan_end, newTaskData.status);
     const stateCopy = JSON.parse(JSON.stringify(state));
 
     stateCopy.tasks[taskID].title = newTaskData.title;
