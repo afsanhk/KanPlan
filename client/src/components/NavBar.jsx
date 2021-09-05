@@ -95,12 +95,14 @@ function NavBar({userID}) {
                   />
                 </ListItem>
               </NavLink>
-              <ListItem button className={classes.navBarButton}>
+              <NavLink to="/chat" className="navlink">
+                <ListItem button className={classes.navBarButton}>
                   <ListItemText 
                     primary={<ForumIcon className={classes.navBarIcon} />} 
                     secondary={<Typography>Chat</Typography>}
                   />
                 </ListItem>
+              </NavLink>
             </List>
           </div>
         </div>
