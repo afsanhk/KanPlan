@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -64,15 +64,13 @@ const ProjectOverview = ({
     proj_name: projectTitle,
     proj_description: projectDescription,
   });
-  
-  
-  // const [inputWidth, setInputWidth] = useState('60');
 
-  // useEffect(() => {
-  //   if (projData.proj_name.length * 20 > 60) {
-  //     setInputWidth((projData.proj_name.length + 1) * 20);
-  //   } 
-  // }, [projData.proj_name]);
+  const projectTitleField = useRef(projectTitle)
+  const projectDescField = useRef(projectDescription)
+  
+  useEffect(() => {
+    editProject(projData, projectID)      
+  }, [clickProjectEdit === false]);
 
   
   if (projectStatus) {
@@ -93,12 +91,15 @@ const ProjectOverview = ({
   const handleProjectEditClick = () => {
     setProjectEdit(!clickProjectEdit);
   };
+  
 
   //save proj title and desc edits
   const updateData = () => {
     handleProjectEditClick()
-    editProject(projData, projectID)
+    setProjData((prev) => ({ ...prev, proj_name: projectTitleField.current.value, proj_description: projectDescField.current.value })) 
   }
+
+  const CHARACTER_LIMIT = 30;
 
   return (
     <>
@@ -118,13 +119,14 @@ const ProjectOverview = ({
                 id="standard-full-width"
                 placeholder="Write project title"
                 defaultValue={projectTitle}
-                value={projData.proj_name}
                 fullWidth
                 margin="normal"
-                InputProps={{
-                  style: { fontSize: '30px', fontWeight: 'bold', color: '#757575', width: `${projData.proj_name.length * 20}px`, minWidth: '300px', maxWidth: '100%' }
+                inputProps={{
+                  style: { fontSize: '30px', fontWeight: 'bold', color: '#757575', width: `500px`, minWidth: '300px', maxWidth: '800px' },
+                  maxLength: CHARACTER_LIMIT
                 }}
-                onChange={(event) => setProjData((prev) => ({ ...prev, proj_name: event.target.value }))}
+                inputRef={projectTitleField}
+
               />
                 <IconButton size="small" >
                   <SaveOutlinedIcon onClick={updateData}/>
@@ -159,7 +161,7 @@ const ProjectOverview = ({
               InputProps={{
                 style: { fontSize: '16px', color: '#757575', width: '96.2%' }
               }}
-              onChange={(event) => setProjData((prev) => ({ ...prev, proj_description: event.target.value }))}
+              inputRef={projectDescField}
             />
 
           )}
