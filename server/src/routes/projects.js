@@ -4,8 +4,6 @@ module.exports = (db) => {
   router.get('/projects', (request, response) => {
     db.query(
       `SELECT projects.*,
-              projects.planned_start AS planned_start,
-              projects.planned_end AS planned_end,
               users.user_name as manager_name,
               array_agg(DISTINCT project_members.user_id) AS team_members,
               array_agg(DISTINCT tasks.id) AS project_tasks
