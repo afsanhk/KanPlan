@@ -3,7 +3,7 @@
 
 // Controls entire chart height
 .e-content {
-  height: 60vh; // Fixed height will cause white space below.
+  max-height: 60vh; // Fixed height will cause white space below.
   background-color: lightgrey;
 }
 
@@ -12,24 +12,45 @@
 // Table-side header font control (no sizing)
 // Controls table header font color, entire table font family, but not size
 .e-table {
-  color: red;
+  // color: red;
+
   // font-family: ;
   // Table header overrides .e-table (Task Names, start date, end date) -- font color
   .e-columnheader {
-    // color: aqua;
+    color: #545454;
   }
   // Controls background color for table rows
   .e-row {
-    background-color: lightpink;
+    background-color: #acd2f3;
+    tr {
+      height: 50px;
+    }
   }
   // Controls background color for alternate rows
   .e-altrow {
-    background-color: lightblue;
+    background-color: #d3e7f8;
   }
   // Controls background color for all cells, couldn't do fonts. Overrides row and altrow
-  .e-rowcell {
-    // background-color: cadetblue;
-  }
+  // .e-rowcell {
+  //   // background-color: #acd2f3;
+  // }
+}
+
+
+
+.e-gantt .e-gantt-chart .e-timeline-top-header-cell, .e-gantt .e-gantt-chart .e-timeline-single-header-cell {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+//font size for column name
+.e-grid .e-headercelldiv {
+  font-size: 20px;
+}
+
+//column font 
+.e-grid .e-rowcell {
+  font-size: 16px;
 }
 
 // Progress bar colors and borders
@@ -37,39 +58,49 @@
   .e-gantt-chart {
     // Controls background color for Month and Day headers except weekends
     .e-timeline-top-header-cell {
-      background-color: lightgoldenrodyellow;
+      background-color: #3d6bb3;
       // Background color for saturday and sunday header
-      .e-weekend-header-cell {
-        background: sandybrown;
-      }
+      // .e-weekend-header-cell {
+      //   background: red;
+      // }
       // Controls font color for all of top headers (overrides top-cell if used after)
       .e-header-cell-label {
-        color: firebrick;
+        color: #fcfcfc;
+        font-size: 13px;
       }
       // Controls font color for month overlays
       .e-gantt-top-cell-text {
-        color: black;
+        font-size: 15px;
+        font-weight: 500;
+        color: #fcfcfc;
+        text-align: center;
       }
     }
     // Gantt Side
     // Track Color
     .e-chart-row {
-      background-color: cadetblue;
+      background-color: #fcfcfc;
       // Progress Bar Colors
       .e-taskbar-main-container {
-        background-color: black; //Make sure this matches background
+        background-color: #fcfcfc; //Make sure this matches background
         .e-gantt-child-taskbar-inner-div {
-          background-color: salmon; // This should match .e-milestone top and bottom border-bottom-color for the rhombus shaped milestone
-          border: 1px solid green;
+          background-color: #bdbdbd; // This should match .e-milestone top and bottom border-bottom-color for the rhombus shaped milestone
+          border: 2px solid #9b9a9a;
           border-radius: 4px;
         }
         .e-milestone-top {
-          border-bottom-color: salmon;
+          border-bottom-color: #bdbdbd;
         }
         .e-milestone-bottom {
-          border-bottom-color: salmon;
+          border-bottom-color: #bdbdbd;
         }
       }
     }
   }
 }
+
+
+// .buttons {
+//   display: flex;
+//   justify-content: flex-end;
+// }
