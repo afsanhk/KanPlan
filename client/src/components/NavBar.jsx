@@ -90,6 +90,10 @@ function NavBar({ userID }) {
     if (['/projects'].includes(pathname)) {
       return 'projects';
     }
+
+    if (['/chat'].includes(pathname)) {
+      return 'chat';
+    }
   };
 
   //pomodoro logic
@@ -223,7 +227,7 @@ function NavBar({ userID }) {
                 </ListItem>
               </NavLink>
               <NavLink to="/chat" className="navlink">
-                <ListItem button className={classes.navBarButton}>
+                <ListItem button className={[activePage() === 'chat' ? classes.selected : '', classes.navBarButton]}>
                   <ListItemText 
                     primary={<ForumIcon className={classes.navBarIcon} />} 
                     secondary={<Typography>Chat</Typography>}
