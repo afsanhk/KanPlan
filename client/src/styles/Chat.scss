@@ -1,44 +1,70 @@
+@use './base';
+
+.user-chats {
+  padding: 3vh 40px;
+  min-height: 94vh;
+  background-color: base.$light-grey;
+}
+
+h1 {
+  height: 6vh;
+}
+
 // Fonts sizes -sender and -time are repeated again below for margins
 .message-sender {
   font-weight: bold;
 }
 .message-time {
-  font-size: 10px;
+  font-size: 12px;
   padding-top: 3px;
 }
 .chat-container {
-  height: 90vh;
+  height: 74vh;
+
   .all-messages {
-    height: 82%;
-    border: steelblue solid 1px;
-    border-radius: 8px;
-    background: white;
-    padding: 10px;
-    padding-bottom: 0;
+    height: 100%;
+    border: base.$border-grey;
+    border-radius: base.$border-radius;
+    background: base.$off-white;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+
     .message-container {
       display: flex;
       flex-direction: column;
+      margin: 15px 20px;
 
       p {
         margin: 0;
       }
+
+      .message-text.not-mine{
+        text-align: right;        
+      }
+
+      .message-text.mine{
+        text-align: left;        
+      }
+
+
       .message-box {
-        padding: 5px;
+        padding: 15px;
         align-self: flex-end;
         width: fit-content;
-        border: #9f89d6 solid 1px;
+        border: base.$blue-primary-dark solid 1px;
         border-radius: 8px;
-        margin-bottom: 10px;
+        // margin-top: 10px;
+        // margin-bottom: 10px;
+
         .sent-text-header {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          margin-bottom: 5px;
+          margin-bottom: 10px;
+
           .message-sender {
-            margin-left: 10px;
+            margin-left: 20px;
           }
         }
       }
@@ -46,8 +72,9 @@
       .message-box.logged-in {
         align-self: flex-start;
         width: fit-content;
-        background: #d0bdff;
+        background: base.$blue-dark;
         color: black;
+
         .sent-text-header {
           display: flex;
           flex-direction: row;
@@ -63,20 +90,25 @@
 
   .chat-input {
     width: 100%;
-    height: 60px;
+    // height: 60px;
     text-align: start;
     display: flex;
     flex-direction: row;
 
     .input {
       width: 95%;
-      height: 100%;
+      // height: 100%;
+      background-color: base.$off-white;
+      border-radius: 5px 0px 0px 5px;
     }
     .send-button {
       background: #4b9fea;
-      color: white;
+      color: base.$off-white;
       width: 5%;
-      height: 100%;
+      // height: 100%;
+
+      border: #bdbdbd 1px;
+      border-style: solid solid solid none;
     }
   }
 }

@@ -85,14 +85,14 @@ function App() {
     editProject,
   } = useApplicationData();
 
-  const { auth, userID } = useContext(authContext);
-  // const userID = 1;
+  // const { auth, userID } = useContext(authContext);
+  const userID = 1;
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        {!auth && <Login users={state.users} />}
-        {auth && (
+        {/* {!auth && <Login users={state.users} />}
+        {auth && ( */}
           <Router>
             <NavBar userID={userID} />
             {loading ? (
@@ -149,7 +149,7 @@ function App() {
               </div>
             )}
           </Router>
-        )}
+        {/* )} */}
       </div>
     </ThemeProvider>
   );

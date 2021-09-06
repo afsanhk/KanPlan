@@ -13,7 +13,7 @@ export default function ChatMessage({message, users, loggedIn}){
           <p className="message-sender">{username}</p>
           <p className="message-time">{time}</p>
         </div>
-        <p className="message-text">{messageContent}</p>
+        <p className="message-text mine">{messageContent}</p>
       </div>
     </div>
   ) : (
@@ -23,7 +23,7 @@ export default function ChatMessage({message, users, loggedIn}){
         <p className="message-time">{time}</p>
         <p className="message-sender">{username}</p>
       </div>
-      <p className="message-text">{messageContent}</p>  
+      <p className="message-text not-mine">{messageContent}</p>  
       </div>
     </div>
   )

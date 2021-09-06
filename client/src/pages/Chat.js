@@ -44,8 +44,8 @@ export default function Chat({ userID, users }) {
   };
 
   return (
-    <div className="user-projects">
-      <h1>Welcome to the chat {users[userID].user_name}!</h1>
+    <div className="user-chats">
+      <h1>Welcome to the chat, {users[userID].user_name}!</h1>
       <div className="chat-container">
         <ChatMessageList messages={messageHistory} userID={userID} users={users} />
         <ChatInput message={message} setMessage={setMessage} sendMessage={sendMessage} />

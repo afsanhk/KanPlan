@@ -48,7 +48,7 @@ function SFGantt({ projectTasks }) {
 
   return (
     <div>
-      <GanttComponent dataSource={tasks} taskFields={taskValues} rowHeight={45} splitterSettings={{position: "20%"}} >
+      <GanttComponent dataSource={tasks} taskFields={taskValues} rowHeight={40} splitterSettings={{position: "20%"}} >
         <ColumnsDirective>
           <ColumnDirective field="name" headerText="Task Names" headerTextAlign="Center"></ColumnDirective>
           {showDates && <ColumnDirective field="start_date" format="dd-MMM-yy"></ColumnDirective>}
