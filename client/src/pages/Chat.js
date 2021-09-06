@@ -33,7 +33,6 @@ export default function Chat({ userID, users }) {
         message_text: message,
         created_at: Date.now(),
       };
-      console.log(newMessageObj);
       setMessageHistory((prev) => [...prev, newMessageObj]); // This should go inside socket.on but it works
       socket.emit("sendMessage", { ...newMessageObj }, () => setMessage("")); // This callback clears the input
     }

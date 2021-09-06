@@ -17,6 +17,8 @@ io.on("connection", (socket) => {
   console.log("We have a new connection: ", socket.id);
 
   socket.on("sendMessage", (newMessageObj, callback) => {
+    console.log("Websocket server received a new message:", newMessageObj);
+    socket.broadcast.emit("message", newMessageObj);
     callback(); // Clears the field and sets history
   });
 
