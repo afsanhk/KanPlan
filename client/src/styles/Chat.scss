@@ -1,3 +1,11 @@
+// Fonts sizes
+.message-sender {
+  font-weight: bold;
+}
+.message-time {
+  font-size: 10px;
+  padding-top: 3px;
+}
 .chat-container {
   height: 90vh;
   .all-messages {
@@ -13,6 +21,7 @@
     .message-container {
       display: flex;
       flex-direction: column;
+
       p {
         margin: 0;
       }
@@ -26,7 +35,7 @@
         .sent-text-header {
           display: flex;
           flex-direction: row;
-          justify-content: flex-end;
+          justify-content: space-between;
           margin-bottom: 5px;
         }
       }
@@ -34,11 +43,12 @@
       .message-box.logged-in {
         align-self: flex-start;
         width: fit-content;
-        background: hsl(256, 100%, 94%);
+        background: #d0bdff;
+        color: black;
         .sent-text-header {
           display: flex;
           flex-direction: row;
-          justify-content: flex-start;
+          justify-content: space-between;
         }
       }
     }
