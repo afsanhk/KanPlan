@@ -7,6 +7,7 @@ const ChatInput = ({ message, setMessage, sendMessage }) => {
     <div className="chat-input">
       <TextField
           id="outlined-multiline-static"
+          className="input"
           multiline
           variant="outlined"
           value={message}
