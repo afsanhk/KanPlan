@@ -2,21 +2,24 @@
 
 .pomodoro {
   position: absolute;
-  height: 260px;
+  height: 160px;
   width: 500px;
   bottom: 140px;
   left: 120px;
   background: base.$off-white;
   border: base.$border-grey;
   border-radius: 0 15px 15px 0;
-  padding: 20px 40px;
+  padding: 35px 40px;
   z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   .buttons {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
   }
 }
 
@@ -31,10 +34,4 @@
     width: 150px;
   }
 
-}
-
-.interval-counter {
-  display: flex;
-  justify-content: flex-end;
-  // margin-bottom: 10px;
 }

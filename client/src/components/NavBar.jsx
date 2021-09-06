@@ -86,13 +86,13 @@ function NavBar({ userID }) {
 
   //pomodoro logic
   const [pomodoroTimer, showPomodoroTimer] = useState(false)
-  const [secondsLeft, setSecondsLeft] = useState(20); //1500 seconds = 25 mins
   const [timer, setTimer] = useState()
+  const [secondsLeft, setSecondsLeft] = useState(20); //1500 seconds = 25 mins
+  const [pauseSeconds, setPauseSeconds] = useState(0); //value saved if the user pauses
 
-  const [workInterval, setWorkInterval] = useState(0)
   const [shortBreak, setShortBreak] = useState(0)
-  const [longBreak, setLongBreak] = useState(0)
-  const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
+  const [pomodoroMode, setPomodoroMode] = useState('Work interval')
+  // const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
 
   
 
@@ -108,97 +108,58 @@ function NavBar({ userID }) {
     return `${timerMinutes}:${timerSeconds}`
   }
 
-  const onTimerStart = (workInterval, shortBreak, longBreak) => {
+
+  const onTimerStart = (workInterval, shortBreak) => {
     showPomodoroTimer(true)
 
-    setWorkInterval(workInterval)
     setShortBreak(shortBreak)
-    setLongBreak(longBreak)
-    
-    setSecondsLeft(workInterval)
+    if (pauseSeconds === 0) {
+      setSecondsLeft(workInterval)
+    } else {
+      setSecondsLeft(pauseSeconds)
+    }
 
     const minusOneSecond = setInterval(() => {
         setSecondsLeft((secondsLeft) => secondsLeft - 1);
         if (secondsLeft === 0) {
-          console.log('DONE')
           clearInterval(timer);
         }
     }, 100);
 
-    //creates a loop with the above setInterval, until no seconds are left
+    //makes sure that we can reference the setInterval later, to clear or pause it
     setTimer(minusOneSecond)
   }
 
-  let intervalCount = 2; //should start at 1, but technically interval 1 automatically starts, so by the time this value needs to be read, interval 1 has already passed, making it interval 2. 
-
+  const onTimerPause = () => {
+    setPauseSeconds(secondsLeft)
+    clearInterval(timer)
+  }
+  
+  const onTimerReset = () => {
+    setSecondsLeft(0)
+    setShortBreak(0)
+    setPauseSeconds(0)
+    setPomodoroMode('Work Interval')
+    setShortBreak(0)
+  }
+  
+  
   useEffect(() => {
     if (secondsLeft === 0 && shortBreak !== 0) {
+      setPomodoroMode('Break Time!')
       setSecondsLeft(shortBreak)
       setShortBreak(0)
-      
+
     } else if (secondsLeft === 0) {
       clearInterval(timer);
+      showPomodoroTimer(false)
     }    
   }, [secondsLeft, timer]);
-
-
-
-
-  // useEffect(() => {
-  //   if (secondsLeft === 0 && longBreak === 0) {
-  //     clearInterval(timer);
-  
-  //   } else if (secondsLeft === 0 && intervalCount === 8) {
-  //     setSecondsLeft(longBreak)
-  //     console.log('longBreak' + intervalCount)
-  //     setLongBreak(0)
-  
-  //   } else if (secondsLeft === 0 && intervalCount % 2 === 0) {
-  //     intervalCount = intervalCount + 1
-  //     setSecondsLeft(shortBreak)
-  //     console.log('shortBreak' + intervalCount)
-  
-  //   } else if (secondsLeft === 0 && intervalCount % 2 === 1) {
-  //     intervalCount = intervalCount + 1
-  //     setSecondsLeft(workInterval)
-  //     console.log('workInterval' + intervalCount)
-  //   }
-  // }, [secondsLeft, timer]);
-
-
-
-
+    
 
   useEffect(() => {
     return () => clearInterval(timer);
   }, [timer]);
-
-
-
-  // useEffect(() => {
-  //   let interval = setInterval(() => {
-  //     clearInterval(interval);
-
-  //     if (seconds === 0) {
-  //       if (minutes !== 0) {
-  //         setSeconds(59);
-  //         setMinutes(minutes - 1);
-  //       } else {
-  //         // let minutes = displayMessage ? 24 : 0;
-  //         let seconds = 10;
-
-  //         setSeconds(seconds);
-  //         setMinutes(minutes);
-  //         // setDisplayMessage(!displayMessage);
-  //       }
-  //     } else {
-  //       setSeconds(seconds - 1);
-  //     }
-  //   }, 1000);
-  // }, [onTimerStart === true]);
-
-
-
 
 
   let avatarBG = avatarBGColor(userID);
@@ -230,7 +191,7 @@ function NavBar({ userID }) {
           <List className="nav-bottom-list">
             {pomodoroTimer && 
               <ListItem>
-                <ListItemText primary={'Work Interval'} secondary={countdown(secondsLeft)} />
+                <ListItemText primary={`${pomodoroMode}`} secondary={countdown(secondsLeft)} />
               </ListItem>
             }
             <ListItem button className={classes.navBarButton}>
@@ -241,7 +202,7 @@ function NavBar({ userID }) {
           <Button onClick={() => logout()}>Logout</Button>
         </div>
       </Drawer>
-      {showPomodoro && <Pomodoro onTimerStart={onTimerStart}/>}
+      {showPomodoro && <Pomodoro onTimerStart={onTimerStart} onTimerPause={onTimerPause} onTimerReset={onTimerReset}/>}
       {showFaceDetect && <FaceDetection userID={userID} show={showFaceDetect} />}
     </ThemeProvider>
   );

@@ -9,12 +9,12 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import Slider from '@material-ui/core/Slider';
 
-function Pomodoro({ onTimerStart }) {
+function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
 
 
-  const [workInterval, setWorkInterval] = useState(1500) //1500 seconds = 25 mins
-  const [shortBreak, setShortBreak] = useState(300) //300 seconds = 5 mins
-  const [longBreak, setLongBreak] = useState(900)//900 seconds = 15 mins
+  const [workInterval, setWorkInterval] = useState(60) //1500 seconds = 25 mins
+  const [shortBreak, setShortBreak] = useState(60) //300 seconds = 5 mins
+  const [clickButton, setClickButton] = useState(false)
 
   // slider labels
   const marks = [
@@ -32,6 +32,8 @@ function Pomodoro({ onTimerStart }) {
     },
   ];
 
+
+
   const handleWorkSliderChange = (event, val) => {
     setWorkInterval(() => val * 60)
   }
@@ -40,22 +42,31 @@ function Pomodoro({ onTimerStart }) {
     setShortBreak(val * 60)
   }
 
-  const handleLBreakSliderChange = (event, val) => {
-    setLongBreak(val * 60)
+  const clickPlay = function () {
+    setClickButton(true)
+    onTimerStart(workInterval, shortBreak)
   }
 
-  const clickPlay = function () {
-    console.log(workInterval)
-    onTimerStart(workInterval, shortBreak, longBreak)
+  const clickPause = function () {
+    setClickButton(false)
+    onTimerPause()
   }
+
 
   return (
     <div className='pomodoro'>
       <div className='buttons'>
-        <IconButton size="small">  
-          <PlayCircleOutlineIcon onClick={clickPlay}/>
-        </IconButton>
-        <Button size="small">RESET</Button>
+        {!clickButton ? (
+          <IconButton size="small">  
+            <PlayCircleOutlineIcon onClick={clickPlay}/>
+          </IconButton>
+        ) : (
+          <IconButton size="small">  
+            <PauseCircleOutlineIcon onClick={clickPause}/>
+          </IconButton>
+        )
+        }
+        <Button size="small" onClick={onTimerReset}>RESET</Button>
       </div>
       <div className='sliders'>
         <p>Work Interval</p>
@@ -78,20 +89,6 @@ function Pomodoro({ onTimerStart }) {
           max={60}
           onChange={ handleSBreakSliderChange }  
         />
-      </div>
-      <div className='sliders'>
-        <p>Long Break</p>
-        <Slider 
-          defaultValue={15}
-          step={1}
-          marks={marks}
-          valueLabelDisplay="auto"
-          max={60}
-          onChange={ handleLBreakSliderChange }  
-        />
-      </div>
-      <div className='interval-counter'>
-        1/4
       </div>
     </div>
   )
