@@ -23,7 +23,7 @@ export default function Chat({ userID, users }) {
 
   useEffect(() => {
     socket.on("message", (newMessageObj) => {
-      setMessageHistory([...messageHistory, newMessageObj]);
+      setMessageHistory([...messageHistory, newMessageObj]); // Do not use prev here, it will show multiple messages on the non-typing browser!
     });
   }, [messageHistory]);
 
