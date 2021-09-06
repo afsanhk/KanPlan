@@ -142,10 +142,6 @@ function NavBar({ userID }) {
     clearInterval(timer)
     setButtonMode('pause')
   }
-
-  // const onTimerUnpause = () => {
-  //   setSecondsLeft()
-  // }
   
   const onTimerReset = () => {
     setSecondsLeft(0)
@@ -155,10 +151,6 @@ function NavBar({ userID }) {
     setPomodoroMode('Work Interval')
     setButtonMode('stop')
   }
-
-  // const onTimerEnd = () => {
-  //   setButtonMode('stop')
-  // }
   
   useEffect(() => {
     if (secondsLeft === 0 && shortBreak !== 0) {
