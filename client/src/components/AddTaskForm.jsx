@@ -117,7 +117,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
 
         <div className="task-form-project_name">
           <div className="task-form-project_name-div">
-            <ListItemText primary="Project Name" secondary={proj_name} style={{marginBottom: 0}}/>
+            <ListItemText primary="Project Name" secondary={proj_name} style={{ marginBottom: 0 }} />
           </div>
         </div>
 
@@ -133,10 +133,10 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
-                  style: {fontSize: '1.1em', marginTop: 0}
+                  style: { fontSize: '1.1em', marginTop: 0 }
                 }}
                 InputProps={{
-                  style: {fontSize: '1.3em', color: '#545454', fontWeight: 500}
+                  style: { fontSize: '1.3em', color: '#545454', fontWeight: 500 }
                 }}
                 onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
               />
@@ -153,10 +153,10 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
-                  style: {fontSize: '1.1em', marginTop: 0}
+                  style: { fontSize: '1.1em', marginTop: 0 }
                 }}
                 InputProps={{
-                  style: {fontSize: '1.3em', color: '#545454', fontWeight: 500}
+                  style: { fontSize: '1.3em', color: '#545454', fontWeight: 500 }
                 }}
                 onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
               />
