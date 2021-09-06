@@ -1,7 +1,7 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get('/member/project/:id', (request, response) => {
+  router.get("/member/project/:id", (request, response) => {
     const values = [request.params.id];
     db.query(
       `SELECT projects.manager_id, projects.id as project_id,
@@ -14,15 +14,15 @@ module.exports = (db) => {
       `,
       values
     ).then(({ rows: project_members }) => {
-      response.json(project_members.reduce((previous, current) => ({ ...previous, [current.project_id]: current }), {}));
+      response.json(
+        project_members.reduce((previous, current) => ({ ...previous, [current.project_id]: current }), {})
+      );
     });
   });
 
-  router.put('/member/project/:id', (request, response) => {
+  router.put("/member/project/:id", (request, response) => {
     const { team_members, deleted_members, deleted_tasks } = request.body;
     const project_id = request.params.id;
-
-    // console.log(deleted_members, deleted_tasks);
 
     if (deleted_members) {
       deleted_members.forEach((member_id, index) => {
@@ -45,7 +45,7 @@ module.exports = (db) => {
         });
       });
     } else {
-      let value = '';
+      let value = "";
 
       team_members.forEach((member_id, index) => {
         if (index !== team_members.length - 1) {
@@ -59,7 +59,6 @@ module.exports = (db) => {
       VALUES ${value}
       `;
 
-      // console.log(query);
       db.query(query).then(() => {
         response.status(204).json({});
       });

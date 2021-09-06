@@ -24,7 +24,6 @@ export default function Login({ users }) {
 
     if (emails.includes(email)) {
       let userID = userIDs[emails.findIndex((el) => el === email)];
-      console.log("inside Login Page userID is:", userID);
       login(userID);
     }
   };

@@ -1,7 +1,7 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
 module.exports = (db) => {
-  router.get('/tasks', (request, response) => {
+  router.get("/tasks", (request, response) => {
     db.query(
       `SELECT tasks.*, 
               proj_name,
@@ -23,16 +23,34 @@ module.exports = (db) => {
     ).then(({ rows: tasks }) => {
       response.json(
         tasks.reduce(
-          (previous, current) => ({ ...previous, [current.id]: { ...current, plan_start: current.plan_start.toISOString().split('T')[0], plan_end: current.plan_end.toISOString().split('T')[0] } }),
+          (previous, current) => ({
+            ...previous,
+            [current.id]: {
+              ...current,
+              plan_start: current.plan_start.toISOString().split("T")[0],
+              plan_end: current.plan_end.toISOString().split("T")[0],
+            },
+          }),
           {}
         )
       );
     });
   });
 
-  router.post('/tasks', (request, response) => {
-    const { title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users, project_id } = request.body;
-    // console.log(title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users);
+  router.post("/tasks", (request, response) => {
+    const {
+      title,
+      task_description,
+      priority_id,
+      status_id,
+      plan_start,
+      plan_end,
+      proj_name,
+      priority_name,
+      status,
+      task_users,
+      project_id,
+    } = request.body;
 
     db.query(
       `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
@@ -43,12 +61,12 @@ module.exports = (db) => {
     )
       .then((res) => {
         if (task_users.length) {
-          let query = '';
+          let query = "";
           const task_id = res.rows[0].id;
           for (const user_id of task_users) {
-            query += '(' + task_id + ',' + user_id + ')';
+            query += "(" + task_id + "," + user_id + ")";
             if (!(task_users.indexOf(user_id) === task_users.length - 1)) {
-              query += ',\n';
+              query += ",\n";
             }
           }
           db.query(
@@ -59,7 +77,6 @@ module.exports = (db) => {
             `
           )
             .then((res) => {
-              // console.log(res.rows[0]);
               response.send(res.rows[0]);
             })
             .catch((error) => console.log(error));
@@ -68,10 +85,9 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.put('/tasks/:id/status', (request, response) => {
+  router.put("/tasks/:id/status", (request, response) => {
     const { status_id, kanban_order, id } = request.body;
 
-    // console.log('id: ', id, 'status_id: ', status_id, 'kanban_order: ', kanban_order);
     if (kanban_order > -1) {
       db.query(
         `
@@ -101,7 +117,7 @@ module.exports = (db) => {
     }
   });
 
-  router.put('/tasks/:id/priority', (request, response) => {
+  router.put("/tasks/:id/priority", (request, response) => {
     const { priority_id, id } = request.body;
 
     db.query(
@@ -118,8 +134,9 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.put('/tasks/:id', (request, response) => {
-    const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } = request.body.newTaskFullData;
+  router.put("/tasks/:id", (request, response) => {
+    const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } =
+      request.body.newTaskFullData;
 
     db.query(
       `
@@ -169,8 +186,8 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.delete('/tasks/:id', (request, response) => {
-    db.query('DELETE FROM tasks WHERE id = $1::integer', [request.params.id])
+  router.delete("/tasks/:id", (request, response) => {
+    db.query("DELETE FROM tasks WHERE id = $1::integer", [request.params.id])
       .then(() => {
         response.status(204).json({});
       })

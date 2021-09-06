@@ -241,7 +241,6 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     } else {
       nextStatus = IDToStatus[statusToID[row.status] + 1];
     }
-    // console.log('task_id: ', row.id, 'task_status: ', nextStatus, 'task_status_id', statusToID[nextStatus]);
     updateTaskStatus({ status: nextStatus, status_id: statusToID[nextStatus] }, row.id);
   };
 
@@ -252,7 +251,6 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
     } else {
       nextPriority = IDToPriority[priorityToID[row.priority_name] + 1];
     }
-    // console.log(row);
     updateTaskPriority({ priority_name: nextPriority, priority_id: priorityToID[nextPriority] }, row.id);
   };
 

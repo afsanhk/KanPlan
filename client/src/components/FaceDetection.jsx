@@ -36,9 +36,9 @@ function FaceDetection({ userID, show }) {
           } else {
             count = 0;
           }
-          // console.log(count, videoWidth, videoHeight);
+    
           if (count === countDown) {
-            console.log('Count Down!');
+          
           } else if (count === countDown + 5) {
             capture(count, countDown);
           }
@@ -56,7 +56,6 @@ function FaceDetection({ userID, show }) {
   }, []);
 
   const capture = () => {
-    console.log('Taking picture!');
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc, userID);
   };

@@ -248,7 +248,6 @@ export default function useApplicationData() {
 
   //
   function addProject(newProject) {
-    // console.log(`Inside addProject: newProject  ${JSON.stringify(newProject)}`);
     let projectID;
     return axios
       .post(`http://localhost:8001/api/projects/`, newProject)
@@ -266,7 +265,6 @@ export default function useApplicationData() {
           manager_name: newProject.manager_name,
           project_tasks: [null],
         };
-        console.log("State Inside addProject: ", stateCopy.projects);
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.unshift(projectID));
         // Set state.

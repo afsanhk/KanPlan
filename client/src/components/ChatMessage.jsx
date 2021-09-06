@@ -6,8 +6,6 @@ export default function ChatMessage({message, users, loggedIn}){
   const time = <Moment format="YYYY/MM/DD hh:mm a">{message.created_at}</Moment>
   const messageContent = message.message_text;
 
-  console.log(loggedIn)
-
   return loggedIn ? (
     <div className="message-container ">
       <div className="message-box logged-in">
