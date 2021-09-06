@@ -4,7 +4,7 @@ export default function ChatMessage({message, userID, users}){
 
   let loggedIn = false;
 
-  if (message.user_id === userID) {
+  if (message.user_id === Number(userID)) {
     loggedIn = true;
   }
 
