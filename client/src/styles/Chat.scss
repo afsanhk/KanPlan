@@ -37,6 +37,9 @@
           flex-direction: row;
           justify-content: space-between;
           margin-bottom: 5px;
+          .message-sender {
+            margin-left: 10px;
+          }
         }
       }
 
@@ -49,6 +52,9 @@
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+          .message-sender {
+            margin-right: 10px;
+          }
         }
       }
     }
