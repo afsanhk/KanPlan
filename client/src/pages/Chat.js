@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useMessages from "../hooks/useMessages";
 import io from "socket.io-client"; // Browser-side socket.io
-
+import axios from "axios";
 import ChatMessageList from "../components/ChatMessageList";
 import ChatInput from "../components/ChatInput";
 
@@ -37,7 +37,7 @@ export default function Chat({ userID, users }) {
         id: newMessageID,
         user_id: userID,
         message_text: message,
-        created_at: Date.now(),
+        created_at: new Date().toString().substr(0, 24),
       };
       setMessageHistory((prev) => [...prev, newMessageObj]); // This should go inside socket.on but it works
       socket.emit("sendMessage", { ...newMessageObj }, () => setMessage("")); // This callback clears the input

@@ -16,9 +16,9 @@ module.exports = (db) => {
     let query = `INSERT INTO messages (user_id, message_text, created_at)
     VALUES ($1, $2, $3)`;
 
-    db.query(query, values).then((res) => {
-      console.log(res);
-    });
+    db.query(query, values)
+      .then((res) => console.log("Insertion successful"))
+      .catch((err) => console.log(err));
   });
 
   return router;
