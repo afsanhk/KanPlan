@@ -30,13 +30,11 @@ export default function Chat({ userID, users }) {
 
   // Function to send messages
   const sendMessage = (event) => {
-    event.preventDefault(); // Very important so that a page refresh doesn't happen
-
     if (message) {
       let newMessageID = 1 + Math.max(...messageHistory.map((el) => el.id));
       let newMessageObj = {
         id: newMessageID,
-        user_id: userID,
+        user_id: Number(userID),
         message_text: message,
         created_at: new Date().toString().substr(0, 24),
       };
@@ -50,7 +48,7 @@ export default function Chat({ userID, users }) {
       <h1>Welcome to the chat {users[userID].user_name}!</h1>
       <div className="chat-container">
         <ChatMessageList messages={messageHistory} userID={userID} users={users} />
-        <ChatInput message={message} setMessage={setMessage} userID={userID} sendMessage={sendMessage} />
+        <ChatInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
     </div>
   );

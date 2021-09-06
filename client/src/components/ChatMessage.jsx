@@ -1,16 +1,12 @@
 import Moment from 'react-moment';
 
-export default function ChatMessage({message, userID, users}){
-
-  let loggedIn = false;
-
-  if (message.user_id === Number(userID)) {
-    loggedIn = true;
-  }
+export default function ChatMessage({message, users, loggedIn}){
 
   const username = users[message.user_id].user_name;
   const time = <Moment format="YYYY/MM/DD hh:mm a">{message.created_at}</Moment>
   const messageContent = message.message_text;
+
+  console.log(loggedIn)
 
   return loggedIn ? (
     <div className="message-container ">
