@@ -4,6 +4,7 @@ import io from "socket.io-client"; // Browser-side socket.io
 import axios from "axios";
 import ChatMessageList from "../components/ChatMessageList";
 import ChatInput from "../components/ChatInput";
+import "../styles/Chat.scss";
 
 let socket;
 

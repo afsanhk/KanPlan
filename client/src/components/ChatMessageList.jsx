@@ -4,7 +4,6 @@ import ChatMessage from "./ChatMessage";
 
 // We use react-scroll-to-bottom here. It auto scrolls to bottom when height of messages exceeds the height of the container.
 const ChatMessageList = ({ messages, userID, users }) => {
-  console.log('Inside ChatMessageList messages', messages)
   return (
     <ScrollToBottom className="all-messages">
       {messages.map((message) => (
