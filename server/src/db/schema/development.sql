@@ -332,9 +332,13 @@ VALUES
 -- Messages
 INSERT INTO messages (user_id, message_text, created_at)
 VALUES
-  (1, 'What is KanPlan?', '2021-09-01 12:33:33'),
-  (2, 'KanPlan is a project management web app to make organizing your ideas easier!', '2021-09-01 00:05:00'),
-  (1, 'How does it work?', '2021-09-01 01:10:00'),
-  (3, 'KanPlan has 5 different pages which are Project Dashboard, All projects, Project overview, Gantt chart and Kanban', '2021-09-01 01:15:00'),
-  (1, 'Awesome!', '2021-09-01 02:20:00'),
-  (2, 'Do you have any other question?', '2021-09-01 02:25:00');
+  (1, 'What is KanPlan?', '2021-09-01 08:33:33'),
+  (2, 'KanPlan is a project management web app to make organizing your ideas easier!', '2021-09-01 09:15:00'),
+  (1, 'How does it work?', '2021-09-01 13:10:00'),
+  (3, 'KanPlan has 5 different pages which can help with project management: 1. Project Dashboard, 2. All projects, 3. Project Overview, 4. Gantt Chart, and 5. Kanban', '2021-09-03 15:15:00'),
+  (1, 'Awesome!', '2021-09-04 16:20:00'),
+  (1, 'Is there anything else you can do on the website?','2021-09-04 16:21:00'),
+  (3, 'So much! We have a pomodoro timer if you need help with time management and...','2021-09-04 16:21:00'),
+  (2, 'We also have a chat room where all the users can ask questions!','2021-09-04 16:26:00'),
+  (2, 'Do you have any other questions?', '2021-09-05 14:25:00'),
+  (1, 'That sounds great - I wonder what else you''ll add in the future!', '2021-09-05 14:30:00');
