@@ -7,17 +7,20 @@ const server = require("http").Server(app);
 
 // Socket IO Connections
 const io = socketio(server, {
-  cors: { origin: "http://localhost:8000", methods: ["GET", "POST", "PUT", "DELETE"] },
+  cors: {
+    origin: "http://localhost:8000",
+    methods: ["GET", "POST"],
+  },
 });
 
 io.on("connection", (socket) => {
   console.log("We have a new connection: ", socket.id);
 
-  socket.join("Chat", () => {
-    console.log("Joined Chat");
-  }); // All users join this 'chat' room
+  // socket.join("Chat", () => {
+  //   console.log("Joined Chat");
+  // }); // All users join this 'chat' room
 
-  socket.emit("hello", "world");
+  setInterval(() => socket.emit("hello", "world"), 10000);
 
   socket.on("sendMessage", (newMessageObj, callback) => {
     callback(); // Clears the field and sets history
