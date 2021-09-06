@@ -1,3 +1,5 @@
+const axios = require("axios").default;
+
 const PORT = process.env.PORT || 8001;
 const ENV = require("./environment");
 
@@ -20,6 +22,11 @@ io.on("connection", (socket) => {
     console.log("Websocket server received a new message:", newMessageObj);
     socket.broadcast.emit("message", newMessageObj);
     callback(); // Clears the field and sets history
+
+    axios
+      .post(`http://localhost:8001/api/messages/`, newMessageObj)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   });
 
   socket.on("disconnect", () => {
