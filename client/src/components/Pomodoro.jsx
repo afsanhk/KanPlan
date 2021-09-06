@@ -12,8 +12,8 @@ import Slider from '@material-ui/core/Slider';
 function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
 
 
-  const [workInterval, setWorkInterval] = useState(60) //1500 seconds = 25 mins
-  const [shortBreak, setShortBreak] = useState(60) //300 seconds = 5 mins
+  const [workInterval, setWorkInterval] = useState(1500) //1500 seconds = 25 mins
+  const [shortBreak, setShortBreak] = useState(300) //300 seconds = 5 mins
   const [clickButton, setClickButton] = useState(false)
 
   // slider labels
@@ -32,6 +32,7 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
     },
   ];
 
+  const workIntervalDefaultValue = 25;
 
 
   const handleWorkSliderChange = (event, val) => {
@@ -52,43 +53,55 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
     onTimerPause()
   }
 
+  const clickReset = function () {
+    setClickButton(false)
+    onTimerReset()
+  }
+
 
   return (
     <div className='pomodoro'>
-      <div className='buttons'>
-        {!clickButton ? (
-          <IconButton size="small">  
-            <PlayCircleOutlineIcon onClick={clickPlay}/>
-          </IconButton>
-        ) : (
-          <IconButton size="small">  
-            <PauseCircleOutlineIcon onClick={clickPause}/>
-          </IconButton>
-        )
-        }
-        <Button size="small" onClick={onTimerReset}>RESET</Button>
+      <div className='pomodoro-header'>
+        <div className='title'>
+          <p>Set intervals:</p>
+        </div>
+        <div className='buttons'>
+          {!clickButton ? (
+            <IconButton size="small">  
+              <PlayCircleOutlineIcon onClick={clickPlay} style={{color: '#6aa84f'}}/>
+            </IconButton>
+          ) : (
+            <IconButton size="small">  
+              <PauseCircleOutlineIcon onClick={clickPause} style={{color: '#757575'}}/>
+            </IconButton>
+          )
+          }
+          <p className='button-reset' onClick={clickReset}>RESET</p>
+        </div>
       </div>
-      <div className='sliders'>
-        <p>Work Interval</p>
-        <Slider 
-          defaultValue={25}
-          step={1}
-          marks={marks}
-          valueLabelDisplay="auto"
-          max={60}
-          onChange={ handleWorkSliderChange }  
-        />
-      </div>
-      <div className='sliders'>
-        <p>Short Break</p>
-        <Slider 
-          defaultValue={5}
-          step={1}
-          marks={marks}
-          valueLabelDisplay="auto"
-          max={60}
-          onChange={ handleSBreakSliderChange }  
-        />
+      <div className='pomodoro-body'>  
+        <div className='sliders'>
+          <p>Work Interval</p>
+          <Slider 
+            defaultValue={25}
+            step={1}
+            marks={marks}
+            valueLabelDisplay="auto"
+            max={60}
+            onChange={ handleWorkSliderChange }  
+          />
+        </div>
+        <div className='sliders'>
+          <p>Short Break</p>
+          <Slider 
+            defaultValue={5}
+            step={1}
+            marks={marks}
+            valueLabelDisplay="auto"
+            max={60}
+            onChange={ handleSBreakSliderChange }  
+          />
+        </div>
       </div>
     </div>
   )

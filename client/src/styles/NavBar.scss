@@ -19,6 +19,26 @@
   width: 100%;
 }
 
+.pomodoro-list-item {
+  text-align: center;
+
+  .pomodoro-mode {
+    // text-decoration: underline;
+    font-weight: 600;
+    color: #757575;
+    margin-bottom: 0; 
+  }
+
+  .pomodoro-countdown {
+    margin-top: 5px;
+    margin-bottom: 40px;
+    color: #757575;
+
+  }
+
+
+}
+
 .navlink {
   text-decoration: none;
   color: base.$dark-grey; //changes color of icons

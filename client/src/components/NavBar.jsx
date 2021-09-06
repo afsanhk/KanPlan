@@ -75,6 +75,10 @@ function NavBar({ userID }) {
   };
 
   const activePage = function () {
+    if (showPomodoro === true) {
+      return 'pomodoro';
+    }
+
     if (['/'].includes(pathname)) {
       return 'homepage';
     }
@@ -139,8 +143,8 @@ function NavBar({ userID }) {
     setSecondsLeft(0)
     setShortBreak(0)
     setPauseSeconds(0)
-    setPomodoroMode('Work Interval')
     setShortBreak(0)
+    setPomodoroMode('Work Interval')
   }
   
   
@@ -190,11 +194,12 @@ function NavBar({ userID }) {
         <div className="nav-bottom">
           <List className="nav-bottom-list">
             {pomodoroTimer && 
-              <ListItem>
-                <ListItemText primary={`${pomodoroMode}`} secondary={countdown(secondsLeft)} />
-              </ListItem>
+              <div className='pomodoro-list-item'>
+                <p className='pomodoro-mode'>{pomodoroMode}</p>
+                <p className='pomodoro-countdown'>{countdown(secondsLeft)}</p>
+              </div>
             }
-            <ListItem button className={classes.navBarButton}>
+            <ListItem button className={[activePage() === 'pomodoro' ? classes.selected : '', classes.navBarButton]}>
               <ListItemText primary={<AlarmIcon fontSize="large" className={classes.navBarIcon} />} secondary={<Typography>Pomodoro</Typography>} onClick={handleShowPomodoro}/>
             </ListItem>
           </List>

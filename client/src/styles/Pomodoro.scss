@@ -1,37 +1,72 @@
 @use './base';
 
 .pomodoro {
-  position: absolute;
-  height: 160px;
-  width: 500px;
-  bottom: 140px;
+  position: fixed;
+  height: 185px;
+  width: 320px;
+  bottom: 100px;
   left: 120px;
   background: base.$off-white;
   border: base.$border-grey;
-  border-radius: 0 15px 15px 0;
-  padding: 35px 40px;
+  border-style: solid solid solid none;
+  border-radius: 8px 15px 15px 8px;
+  padding: 18px 20px 0 20px;
   z-index: 99;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 
-  .buttons {
+
+  .pomodoro-header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    // margin-bottom: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    p {
+      margin: 0;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .button-reset {
+      font-size: 14px;
+      margin: 0;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-weight: 500;
+      color: #757575;
+
+      &:hover {
+        // text-decoration: underline;
+        cursor: pointer;
+        color: #545454;
+      }
+    }
+
   }
+
+  
 }
 
 .sliders {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  width: 95%;
+  // flex-direction: column;
 
   p {
     margin: 0;
     margin-bottom: 20px;
     width: 150px;
+    padding-right: 15px;
+    font-weight: 500;
   }
 
 }
