@@ -1,8 +1,23 @@
 .chat-container {
   border: black solid 1px;
   padding: 10px;
+  height: 80vh;
   .all-messages {
+    height: 82%;
+    padding: 40px;
     border: steelblue solid 1px;
+    display: flex;
+    flex-direction: column;
+    .message-container {
+      display: flex;
+      flex-direction: column;
+      .message-box.logged-in {
+        text-align: start;
+      }
+      .message-box {
+        text-align: end;
+      }
+    }
   }
   .chat-input {
     width: 100%;
