@@ -16,12 +16,6 @@ const io = socketio(server, {
 io.on("connection", (socket) => {
   console.log("We have a new connection: ", socket.id);
 
-  // socket.join("Chat", () => {
-  //   console.log("Joined Chat");
-  // }); // All users join this 'chat' room
-
-  setInterval(() => socket.emit("hello", "world"), 10000);
-
   socket.on("sendMessage", (newMessageObj, callback) => {
     callback(); // Clears the field and sets history
   });

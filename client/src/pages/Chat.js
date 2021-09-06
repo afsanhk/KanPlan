@@ -21,8 +21,6 @@ export default function Chat({ userID, users }) {
     };
   }, [ENDPOINT]);
 
-  useEffect(() => socket.on("hello", (data) => console.log(data)));
-
   // Function to send messages
   const sendMessage = (event) => {
     event.preventDefault(); // Very important so that a page refresh doesn't happen
