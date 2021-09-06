@@ -7,7 +7,7 @@ export default function AuthProvider(props) {
   // Perform login process for the user & save authID, etc
   const login = function (ID) {
     console.log("This is the ID passed into login", ID);
-    setUserID(ID);
+    setUserID(Number(ID));
     setAuth(true);
   };
 
