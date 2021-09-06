@@ -23,7 +23,7 @@
     justify-content: space-between;
     margin-bottom: 10px;
 
-    p {
+    .title p {
       margin: 0;
       text-decoration: underline;
       font-weight: 500;
@@ -40,12 +40,11 @@
       margin-left: 10px;
       margin-right: 10px;
       font-weight: 500;
-      color: #757575;
+      color: #db4f4f;
 
       &:hover {
-        // text-decoration: underline;
         cursor: pointer;
-        color: #545454;
+        color: #f35858;
       }
     }
 
