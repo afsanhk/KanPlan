@@ -112,7 +112,7 @@ function AddTaskForm({ proj_name, team_members, users, close, projectID, status,
     <div className="task-form">
       <div className="task-form-header-body">
         <header className="task-form-header">
-          <h2>Add New Task</h2>
+          <h1>Add New Task</h1>
         </header>
 
         <div className="task-form-project_name">

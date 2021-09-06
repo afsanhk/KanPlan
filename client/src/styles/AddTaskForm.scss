@@ -15,15 +15,16 @@
   .task-form-header {
     border-bottom: 2px solid base.$dark-grey;
 
-    h2 {
+    h1 {
       width: 80%;
-      margin-top: 20px;
+      margin-top: 10px;
+
       margin-bottom: 10px;
     }
   }
 
   .task-form-project_name {
-    margin-top: 15px;
+    margin-top: 20px;
     display: flex;
 
     .task-form-project_name-div {

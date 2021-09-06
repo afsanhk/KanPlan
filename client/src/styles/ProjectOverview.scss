@@ -12,7 +12,7 @@
   background-color: base.$off-white;
   padding: 3vh 40px;
   border-bottom: 3px dashed base.$blue-secondary-dark;
-  width: 100%;
+  width: auto;
 
   .project-desc {
     margin-top: 30px;
@@ -44,7 +44,7 @@
 
 .project-overview-links {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: 40%;
 
 }

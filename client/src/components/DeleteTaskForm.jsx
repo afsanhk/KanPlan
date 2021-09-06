@@ -97,7 +97,7 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
             </u>
             '?
           </p>
-          <p className={'delete-modal-text-b'}>This action cannot be undone !</p>
+          <p className={'delete-modal-text-b'}>This action cannot be undone!</p>
           <div className={'delete-modal-footer'}>
             <ConfirmButton cancelling close={close} />
             <ConfirmButton deleting deleteTaskOrProj={deleteSingleProject} />

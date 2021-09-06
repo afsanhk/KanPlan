@@ -31,7 +31,7 @@ import '../styles/ProjectOverview.scss';
 const useStyles = makeStyles((theme) => ({
   button: {
     marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(3)
+    // marginRight: theme.spacing(3)
   }
 }));
 
@@ -159,7 +159,7 @@ const ProjectOverview = ({
                 style: { fontSize: '1em', marginTop: 0 }
               }}
               InputProps={{
-                style: { fontSize: '16px', color: '#757575', width: '96.2%' }
+                style: { fontSize: '16px', color: '#757575', width: '100%' }
               }}
               inputRef={projectDescField}
             />

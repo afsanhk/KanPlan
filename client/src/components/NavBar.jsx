@@ -57,6 +57,11 @@ const useStyles = makeStyles({
     width: '80px',
     height: '80px',
     marginBottom: '20px'
+  },
+  logout: {
+    marginBottom: '10px',
+    color: '#545454',
+    fontWeight: '600'
   }
 });
 
@@ -241,7 +246,7 @@ function NavBar({ userID }) {
             </ListItem>
           </List>
           <Avatar alt="" className={classes.navBarAvatar} src={imageSrc ? imageSrc : `https://robohash.org/${userID}`} style={{ 'background-color': avatarBG }} onClick={handleShowFaceDetect} />
-          <Button onClick={() => logout()}>Logout</Button>
+          <Button className={classes.logout} onClick={() => logout()}>Log out</Button>
         </div>
       </Drawer>
       {showPomodoro && <Pomodoro onTimerStart={onTimerStart} onTimerPause={onTimerPause} onTimerReset={onTimerReset} secondsLeft={secondsLeft} buttonMode={buttonMode} showPomodoroTime={showPomodoroTimer}/>}

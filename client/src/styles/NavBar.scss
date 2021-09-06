@@ -24,19 +24,23 @@
 
   .pomodoro-mode {
     // text-decoration: underline;
-    font-weight: 600;
+    font-weight: 500;
     color: #757575;
     margin-bottom: 0; 
   }
 
   .pomodoro-countdown {
     margin-top: 5px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     color: #757575;
 
   }
 
 
+}
+
+.logout-button {
+  margin-bottom: 20px;
 }
 
 .navlink {
