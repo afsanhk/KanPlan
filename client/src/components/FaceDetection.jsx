@@ -31,10 +31,6 @@ function FaceDetection({ userID, show }) {
 
           const detections = await net.estimateFaces(video, returnTensors);
 
-          if (ctxRef) {
-            ctx = ctxRef.current.getContext('2d');
-          }
-
           if (detections.length) {
             count++;
           } else {
@@ -43,13 +39,13 @@ function FaceDetection({ userID, show }) {
           // console.log(count, videoWidth, videoHeight);
           if (count === countDown) {
             console.log('Count Down!');
-            setTimeout(() => {
-              if (count >= countDown) {
-                capture(detections);
-              }
-            }, 5000);
+          } else if (count === countDown + 5) {
+            capture(count, countDown);
           }
-          drawFaceContainer(ctx, detections, ctxRef.current.width, ctxRef.current.height, count, countDown);
+          if (ctxRef.current) {
+            ctx = ctxRef.current.getContext('2d');
+            drawFaceContainer(ctx, detections, ctxRef.current.width, ctxRef.current.height, count, countDown);
+          }
         }
       })();
     }, 1000);
@@ -57,7 +53,7 @@ function FaceDetection({ userID, show }) {
     return () => {
       clearInterval(timerIntervalId);
     };
-  }, [show]);
+  }, []);
 
   const capture = () => {
     console.log('Taking picture!');
