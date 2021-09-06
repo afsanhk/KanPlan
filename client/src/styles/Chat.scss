@@ -85,6 +85,17 @@ h1 {
           }
         }
       }
+
+    }
+    button {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-image: url("../images/scrollToBottomIcon.png");
+
+      &:hover {
+        background-image: url("../images/scrollToBottomIconHover.png")
+      }
     }
   }
 
@@ -111,4 +122,9 @@ h1 {
       border-style: solid solid solid none;
     }
   }
+}
+
+.react-scroll-to-bottom--css-xlicd-1tj0vk3 {
+  height: 70px;
+  width: 70px;
 }
