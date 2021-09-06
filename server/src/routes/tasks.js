@@ -1,7 +1,7 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
 module.exports = (db) => {
-  router.get("/tasks", (request, response) => {
+  router.get('/tasks', (request, response) => {
     db.query(
       `SELECT tasks.*, 
               proj_name,
@@ -27,9 +27,9 @@ module.exports = (db) => {
             ...previous,
             [current.id]: {
               ...current,
-              plan_start: current.plan_start.toISOString().split("T")[0],
-              plan_end: current.plan_end.toISOString().split("T")[0],
-            },
+              plan_start: current.plan_start.toISOString().split('T')[0],
+              plan_end: current.plan_end.toISOString().split('T')[0]
+            }
           }),
           {}
         )
@@ -37,36 +37,24 @@ module.exports = (db) => {
     });
   });
 
-  router.post("/tasks", (request, response) => {
-    const {
-      title,
-      task_description,
-      priority_id,
-      status_id,
-      plan_start,
-      plan_end,
-      proj_name,
-      priority_name,
-      status,
-      task_users,
-      project_id,
-    } = request.body;
+  router.post('/tasks', (request, response) => {
+    const { title, task_description, priority_id, status_id, plan_start, plan_end, proj_name, priority_name, status, task_users, project_id, kanban_order } = request.body;
 
     db.query(
-      `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
-       VALUES ($1::text, $2::text, $3::integer, $4::integer, $5::integer, $6, $7)
+      `INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end, kanban_order)
+       VALUES ($1::text, $2::text, $3::integer, $4::integer, $5::integer, $6, $7, $8)
        RETURNING id;
       `,
-      [title, task_description, priority_id, status_id, project_id, plan_start, plan_end]
+      [title, task_description, priority_id, status_id, project_id, plan_start, plan_end, kanban_order]
     )
       .then((res) => {
         if (task_users.length) {
-          let query = "";
+          let query = '';
           const task_id = res.rows[0].id;
           for (const user_id of task_users) {
-            query += "(" + task_id + "," + user_id + ")";
+            query += '(' + task_id + ',' + user_id + ')';
             if (!(task_users.indexOf(user_id) === task_users.length - 1)) {
-              query += ",\n";
+              query += ',\n';
             }
           }
           db.query(
@@ -85,7 +73,7 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.put("/tasks/:id/status", (request, response) => {
+  router.put('/tasks/:id/status', (request, response) => {
     const { status_id, kanban_order, id } = request.body;
 
     if (kanban_order > -1) {
@@ -117,7 +105,7 @@ module.exports = (db) => {
     }
   });
 
-  router.put("/tasks/:id/priority", (request, response) => {
+  router.put('/tasks/:id/priority', (request, response) => {
     const { priority_id, id } = request.body;
 
     db.query(
@@ -134,9 +122,8 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.put("/tasks/:id", (request, response) => {
-    const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } =
-      request.body.newTaskFullData;
+  router.put('/tasks/:id', (request, response) => {
+    const { task_description, plan_start, plan_end, task_users, priority_id, status_id, id } = request.body.newTaskFullData;
 
     db.query(
       `
@@ -186,8 +173,8 @@ module.exports = (db) => {
       .catch((error) => console.log(error));
   });
 
-  router.delete("/tasks/:id", (request, response) => {
-    db.query("DELETE FROM tasks WHERE id = $1::integer", [request.params.id])
+  router.delete('/tasks/:id', (request, response) => {
+    db.query('DELETE FROM tasks WHERE id = $1::integer', [request.params.id])
       .then(() => {
         response.status(204).json({});
       })

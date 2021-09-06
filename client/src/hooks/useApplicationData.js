@@ -25,15 +25,16 @@ export default function useApplicationData() {
 
   const addTask = (newTask, projectID, taskUsersID) => {
     let taskID;
+    const totalTasks = Object.keys(state.tasks).length;
     return axios
-      .post(`http://localhost:8001/api/tasks/`, newTask)
+      .post(`http://localhost:8001/api/tasks/`, { ...newTask, kanban_order: totalTasks })
       .then((res) => {
         taskID = res.data.task_id;
       })
       .then(() => {
         const stateCopy = JSON.parse(JSON.stringify(state));
 
-        stateCopy.tasks[taskID] = { ...newTask, id: taskID };
+        stateCopy.tasks[taskID] = { ...newTask, id: taskID, kanban_order: totalTasks };
         stateCopy.projects[projectID].project_tasks.push(taskID);
 
         taskUsersID.forEach((id) => {
