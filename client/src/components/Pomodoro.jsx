@@ -9,7 +9,7 @@ import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
 import Slider from '@material-ui/core/Slider';
 
-function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
+function Pomodoro({ onTimerStart, onTimerPause, onTimerReset, secondsLeft, buttonMode, showPomodoroTime}) {
 
 
   const [workInterval, setWorkInterval] = useState(1500) //1500 seconds = 25 mins
@@ -58,6 +58,20 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
     onTimerReset()
   }
 
+  
+  //ensures that when the timer is counting down or paused, the correct button shows even if menu is closed and reopened
+  //clickButton/false = showing play
+  //clickButton/true = showing pause button
+  useEffect(() => {
+    if (buttonMode === 'stop') {
+      setClickButton(false)
+    } else if (buttonMode === 'start') {
+      setClickButton(true)
+    } else if (buttonMode === 'pause') {
+      setClickButton(false)
+    }
+  }, [secondsLeft]);
+
 
   return (
     <div className='pomodoro'>
@@ -88,7 +102,8 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
             marks={marks}
             valueLabelDisplay="auto"
             max={60}
-            onChange={ handleWorkSliderChange }  
+            min={1}  
+            onChange={ handleWorkSliderChange }
           />
         </div>
         <div className='sliders'>
@@ -99,6 +114,7 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset }) {
             marks={marks}
             valueLabelDisplay="auto"
             max={60}
+            min={1}  
             onChange={ handleSBreakSliderChange }  
           />
         </div>

@@ -14,6 +14,9 @@ import AlarmIcon from '@material-ui/icons/Alarm';
 import ForumIcon from '@material-ui/icons/Forum';
 import { Button } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -63,17 +66,13 @@ function NavBar({ userID }) {
   const { imageSrc } = useContext(imageContext);
   const classes = useStyles();
 
-  const [showPomodoro, setShowPomodoro] = useState(false);
   const [showFaceDetect, setShowFaceDetect] = useState(false);
-
-  const handleShowPomodoro = () => {
-    setShowPomodoro(!showPomodoro)
-  }
 
   const handleShowFaceDetect = () => {
     setShowFaceDetect(!showFaceDetect);
   };
 
+  //to highlight the page user is currently on
   const activePage = function () {
     if (showPomodoro === true) {
       return 'pomodoro';
@@ -89,16 +88,19 @@ function NavBar({ userID }) {
   };
 
   //pomodoro logic
+  const [showPomodoro, setShowPomodoro] = useState(false);
   const [pomodoroTimer, showPomodoroTimer] = useState(false)
   const [timer, setTimer] = useState()
-  const [secondsLeft, setSecondsLeft] = useState(20); //1500 seconds = 25 mins
+  const [secondsLeft, setSecondsLeft] = useState(0); //1500 seconds = 25 mins
   const [pauseSeconds, setPauseSeconds] = useState(0); //value saved if the user pauses
+  const [buttonMode, setButtonMode] = useState('stop') // 'pause', 'start', 'stop' - to ensure the correct button (pause or start) is showing in the Pomodoro
 
   const [shortBreak, setShortBreak] = useState(0)
   const [pomodoroMode, setPomodoroMode] = useState('Work interval')
-  // const [showShortBreakMsg, setShowShortBreakMsg] = useState(false)
 
-  
+  const handleShowPomodoro = () => {
+    setShowPomodoro(!showPomodoro)
+  }
 
   //turn seconds into human readable format
   const countdown = function (secondsLeft) {
@@ -115,6 +117,7 @@ function NavBar({ userID }) {
 
   const onTimerStart = (workInterval, shortBreak) => {
     showPomodoroTimer(true)
+    setButtonMode('start')
 
     setShortBreak(shortBreak)
     if (pauseSeconds === 0) {
@@ -137,6 +140,7 @@ function NavBar({ userID }) {
   const onTimerPause = () => {
     setPauseSeconds(secondsLeft)
     clearInterval(timer)
+    setButtonMode('pause')
   }
   
   const onTimerReset = () => {
@@ -145,25 +149,57 @@ function NavBar({ userID }) {
     setPauseSeconds(0)
     setShortBreak(0)
     setPomodoroMode('Work Interval')
+    setButtonMode('stop')
   }
-  
+
+  // const onTimerEnd = () => {
+  //   setButtonMode('stop')
+  // }
   
   useEffect(() => {
     if (secondsLeft === 0 && shortBreak !== 0) {
+      handleShowSnackbar()
       setPomodoroMode('Break Time!')
       setSecondsLeft(shortBreak)
       setShortBreak(0)
 
     } else if (secondsLeft === 0) {
-      clearInterval(timer);
+      setButtonMode('stop')
       showPomodoroTimer(false)
-    }    
+      setPomodoroMode('Work Interval')
+      
+    } else if (secondsLeft === -1) {
+      clearInterval(timer);
+      
+    }   
   }, [secondsLeft, timer]);
     
 
   useEffect(() => {
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+    }
   }, [timer]);
+
+
+  //snackbar logic
+  const [showSnackbar, setShowSnackbar] = useState(false)
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const handleShowSnackbar = function () {
+    setShowSnackbar(true)
+  }
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setShowSnackbar(false);
+  };
 
 
   let avatarBG = avatarBGColor(userID);
@@ -207,8 +243,19 @@ function NavBar({ userID }) {
           <Button onClick={() => logout()}>Logout</Button>
         </div>
       </Drawer>
-      {showPomodoro && <Pomodoro onTimerStart={onTimerStart} onTimerPause={onTimerPause} onTimerReset={onTimerReset}/>}
+      {showPomodoro && <Pomodoro onTimerStart={onTimerStart} onTimerPause={onTimerPause} onTimerReset={onTimerReset} secondsLeft={secondsLeft} buttonMode={buttonMode} showPomodoroTime={showPomodoroTimer}/>}
       {showFaceDetect && <FaceDetection userID={userID} show={showFaceDetect} />}
+
+      <Snackbar 
+        open={showSnackbar} 
+        autoHideDuration={6000} 
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+      >
+          <Alert onClose={handleCloseSnackbar} severity="success">
+            Time for a quick break!
+          </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
