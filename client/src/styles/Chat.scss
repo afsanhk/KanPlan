@@ -1,4 +1,4 @@
-// Fonts sizes
+// Fonts sizes -sender and -time are repeated again below for margins
 .message-sender {
   font-weight: bold;
 }
@@ -53,6 +53,7 @@
           flex-direction: row;
           justify-content: space-between;
           .message-sender {
+            margin-left: 0;
             margin-right: 10px;
           }
         }
