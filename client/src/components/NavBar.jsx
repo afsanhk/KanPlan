@@ -119,9 +119,9 @@ function NavBar({ userID }) {
     showPomodoroTimer(true)
     setButtonMode('start')
 
-    setShortBreak(shortBreak)
     if (pauseSeconds === 0) {
       setSecondsLeft(workInterval)
+      setShortBreak(shortBreak)
     } else {
       setSecondsLeft(pauseSeconds)
     }
@@ -142,6 +142,10 @@ function NavBar({ userID }) {
     clearInterval(timer)
     setButtonMode('pause')
   }
+
+  // const onTimerUnpause = () => {
+  //   setSecondsLeft()
+  // }
   
   const onTimerReset = () => {
     setSecondsLeft(0)
