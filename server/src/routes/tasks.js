@@ -4,7 +4,7 @@ module.exports = (db) => {
   router.get('/tasks', (request, response) => {
     db.query(
       `SELECT tasks.*, 
-              proj_name, 
+              proj_name,
               priority_name, 
               status,
               CASE 
@@ -21,7 +21,12 @@ module.exports = (db) => {
       GROUP BY tasks.id, proj_name, priority_name, status, user_tasks.task_id
       `
     ).then(({ rows: tasks }) => {
-      response.json(tasks.reduce((previous, current) => ({ ...previous, [current.id]: current }), {}));
+      response.json(
+        tasks.reduce(
+          (previous, current) => ({ ...previous, [current.id]: { ...current, plan_start: current.plan_start.toISOString().split('T')[0], plan_end: current.plan_end.toISOString().split('T')[0] } }),
+          {}
+        )
+      );
     });
   });
 
@@ -157,6 +162,9 @@ module.exports = (db) => {
             [old_user, id]
           );
         });
+      })
+      .then(() => {
+        response.status(204).json({});
       })
       .catch((error) => console.log(error));
   });

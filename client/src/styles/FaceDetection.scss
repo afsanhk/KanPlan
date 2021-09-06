@@ -1,0 +1,41 @@
+.face-detection {
+  position: absolute;
+  bottom: 20px;
+  left: 150px;
+  background: black;
+  border-radius: 15px;
+  padding: 20px;
+  z-index: 100;
+}
+
+.face-detection:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 30px 30px 30px 0;
+  border-color: transparent black;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -30px;
+  top: 300px;
+}
+
+.face-detection-container {
+  position: relative;
+}
+
+.face-detection-webcam {
+  width: 480px;
+  height: 360px;
+  border-radius: 15px;
+}
+
+.face-detection-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 360px;
+  border-radius: 15px;
+}

@@ -89,7 +89,11 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
     title: tasks.title,
     task_description: tasks.task_description,
     plan_start: tasks.plan_start,
-    plan_end: tasks.plan_end
+    plan_end: tasks.plan_end,
+    status: tasks.status,
+    status_id: tasks.status_id,
+    priority_name: tasks.priority_name,
+    priority_id: tasks.priority_id
   });
 
   const [open, setOpen] = React.useState(false);
@@ -259,23 +263,23 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   id="date"
                   label="Start Date"
                   type="date"
-                  defaultValue={convertTimestampStringToYMD(tasks.plan_start)}
+                  defaultValue={tasks.plan_start}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_start: event.target.value }))}
                 />
                 <TextField
                   id="date"
                   label="End Date"
                   type="date"
-                  defaultValue={convertTimestampStringToYMD(tasks.plan_end)}
+                  defaultValue={tasks.plan_end}
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true
                   }}
-                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value + 'T04:00:00.000Z' }))}
+                  onChange={(event) => setState((prev) => ({ ...prev, plan_end: event.target.value }))}
                 />
               </div>
             </div>
