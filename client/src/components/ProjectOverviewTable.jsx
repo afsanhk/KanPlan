@@ -335,7 +335,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     id="date"
                     // label="Start Date"
                     type="date"
-                    value={row.plan_start.substring(0, 10)}
+                    value={row.plan_start}
                     size="small"
                     className={classes.textField}
                     InputLabelProps={{
@@ -345,7 +345,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_start: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_start: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>
@@ -354,7 +354,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                     id="date"
                     // label="End Date"
                     type="date"
-                    value={row.plan_end.substring(0, 10)}
+                    value={row.plan_end}
                     size="small"
                     className={classes.textField}
                     InputLabelProps={{
@@ -364,7 +364,7 @@ export default function ProjectOverviewTable({ state, projectID, projectTasks, p
                       className: classes.input
                     }}
                     onChange={(event) => {
-                      editTask({ ...row, plan_end: event.target.value + 'T04:00:00.000Z' }, row.id);
+                      editTask({ ...row, plan_end: event.target.value }, row.id);
                     }}
                   />
                 </StyledTableCell>

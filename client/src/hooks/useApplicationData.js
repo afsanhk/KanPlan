@@ -54,8 +54,12 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].status_id = taskState.status_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/status`, { ...taskState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+      })
+      .catch((error) => console.log(error));
   };
 
   // update task's priority, priority_id
@@ -68,12 +72,26 @@ export default function useApplicationData() {
       stateCopy.tasks[taskID].priority_id = priorityState.priority_id;
     }
 
-    setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}/priority`, { ...priorityState, id: taskID })
+      .then(() => {
+        setState((prev) => ({ ...prev, tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] } }));
+      })
+      .catch((error) => console.log(error));
   };
 
-  const editTask = (newTaskData, taskID) => {
-    // console.log(newTaskData.plan_end, newTaskData.status);
+  const editTask = async (newTaskData, taskID) => {
+    const statusToID = {
+      'To-Do': 1,
+      Late: 2,
+      'In Progress': 3,
+      Done: 4
+    };
+    const priorityToID = {
+      None: 1,
+      Low: 2,
+      High: 3
+    };
     const stateCopy = JSON.parse(JSON.stringify(state));
 
     stateCopy.tasks[taskID].title = newTaskData.title;
@@ -82,13 +100,13 @@ export default function useApplicationData() {
     stateCopy.tasks[taskID].plan_end = newTaskData.plan_end;
     stateCopy.tasks[taskID].task_users = newTaskData.task_users;
 
-    if (newTaskData.priority_id) {
-      stateCopy.tasks[taskID].priority_id = newTaskData.priority_id;
+    if (newTaskData.priority_name) {
+      stateCopy.tasks[taskID].priority_id = priorityToID[newTaskData.priority_name];
       stateCopy.tasks[taskID].priority_name = newTaskData.priority_name;
     }
 
-    if (newTaskData.status_id) {
-      stateCopy.tasks[taskID].status_id = newTaskData.status_id;
+    if (newTaskData.status) {
+      stateCopy.tasks[taskID].status_id = statusToID[newTaskData.status];
       stateCopy.tasks[taskID].status = newTaskData.status;
     }
 
@@ -100,34 +118,45 @@ export default function useApplicationData() {
 
     const deletedUsers = oldArrayOfUsers.filter((task_user) => !newArrayOfUsers.includes(task_user));
 
-    deletedUsers.forEach((userID) => {
-      const taskIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
-      stateCopy.users[userID].user_tasks.splice(taskIndex, 1);
+    if (deletedUsers.length) {
+      deletedUsers.forEach((userID) => {
+        const taskIndex = stateCopy.users[userID].user_tasks.indexOf(taskID);
+        stateCopy.users[userID].user_tasks.splice(taskIndex, 1);
 
-      setState((prev) => ({
-        ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] }
-      }));
-    });
+        // setState((prev) => ({
+        //   ...prev,
+        //   ...stateCopy
+        // }));
+      });
+    }
 
     //find out who are the new users, go to that users/user_tasks and add task_id
 
     const newUsers = newArrayOfUsers.filter((task_user) => !oldArrayOfUsers.includes(task_user));
 
-    newUsers.forEach((userID) => {
-      stateCopy.users[userID].user_tasks.push(taskID);
+    if (newUsers.length) {
+      newUsers.forEach((userID) => {
+        stateCopy.users[userID].user_tasks.push(taskID);
 
-      setState((prev) => ({
-        ...prev,
-        users: { ...prev.users, [userID]: stateCopy.users[userID] }
-      }));
-    });
+        // setState((prev) => ({
+        //   ...prev,
+        //   ...stateCopy
+        // }));
+      });
+    }
 
-    setState((prev) => ({
-      ...prev,
-      tasks: { ...prev.tasks, [taskID]: stateCopy.tasks[taskID] }
-    }));
-    return axios.put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData })
+      .then(() => {
+        setState((prev) => {
+          console.log({ ...prev, ...stateCopy });
+          return {
+            ...prev,
+            ...stateCopy
+          };
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   // get kanban status from api
