@@ -3,10 +3,13 @@
   .all-messages {
     height: 82%;
     border: steelblue solid 1px;
+    border-radius: 8px;
+    background: #d4e8f9;
     padding: 10px;
     padding-bottom: 0;
     display: flex;
     flex-direction: column;
+    margin-bottom: 5px;
     .message-container {
       display: flex;
       flex-direction: column;
@@ -31,6 +34,7 @@
     }
     .send-button {
       background: #4b9fea;
+      color: white;
       width: 5%;
       height: 100%;
     }
