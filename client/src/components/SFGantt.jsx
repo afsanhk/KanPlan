@@ -57,7 +57,7 @@ function SFGantt({ projectTasks }) {
       </GanttComponent>
       <div className='buttons'>
         <Button onClick={() => setShowDates(!showDates)} className={classes.ganttButton}>{showDates?'Task Names':'Dates'}</Button>
-        <Button onClick={() => setShowDone(!showDone)} className={classes.ganttButton}>{showDone?'Hide Completed Tasks':'Show Completed Tasks'}</Button>
+        {projectTasks.length > 1 && <Button onClick={() => setShowDone(!showDone)} className={classes.ganttButton}>{showDone?'Hide Completed Tasks':'Show Completed Tasks'}</Button>}
       </div>
     </div>
   );
