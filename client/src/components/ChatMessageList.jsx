@@ -6,7 +6,7 @@ import ChatMessage from "./ChatMessage";
 const ChatMessageList = ({ messages, userID, users }) => {
   console.log('Inside ChatMessageList messages', messages)
   return (
-    <ScrollToBottom className="messages">
+    <ScrollToBottom className="all-messages">
       {messages.map((message) => (
         <ChatMessage key={messages.id} message={message} userID={userID} users={users}/>
       ))}
