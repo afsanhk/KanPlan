@@ -175,7 +175,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
           <div className="task-form-body-title">          
         {!clickTitle ? (
             <div className="task-form-header-title">
-              <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '0px' }} />
+              <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px'} }} style={{ marginTop: '16px', marginBottom: '0px' }} />
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
                 <EditOutlinedIcon />
               </IconButton>
