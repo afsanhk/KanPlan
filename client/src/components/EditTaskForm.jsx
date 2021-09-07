@@ -162,7 +162,18 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
     <div className="edit-task-form">
       <div className="task-form-header-body">
         <header className="task-form-header">
-          {!clickTitle ? (
+          <h1>Edit Task</h1>
+        </header>
+
+        <div className="task-form-project_name">
+          <div className="task-form-project_name-div">
+            <ListItemText primary="Project Name" secondary={tasks.proj_name} style={{ marginBottom: 0 }}/>
+          </div>
+        </div>
+
+        <div className="task-form-body">
+          <div className="task-form-body-title">          
+        {!clickTitle ? (
             <div className="task-form-header-title">
               <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
@@ -198,9 +209,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
           {/* <Tooltip title={tasks.title} placement="top-start" c={disableHover}>
             <h1 ref={titleRef}>{tasks.title}</h1>
           </Tooltip> */}
-        </header>
-
-        <div className="task-form-body">
+          </div>
           <div className="task-form-body-description">
             {!clickDesc ? (
               <div className="task-form-body-description-div">
@@ -240,23 +249,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
               </div>
             )}
           </div>
-          <div className="task-form-body-dropdowns">
-            <div className="task-form-body-dropdowns-project">
-              {/* <Autocomplete
-                id="combo-box-demo"
-                options={projects}
-                getOptionLabel={(option) => option.proj_name}
-                style={{ width: '80%' }}
-                renderInput={(params) => <TextField {...params} label="Project Title" variant="outlined" />}
-                onChange={(value) => {
-                  setCurrentProject(value.target.innerText);
-                }}
-              /> */}
-              <div className="task-form-body-dropdowns-project-div">
-                <ListItemText primary="Project Name" secondary={tasks.proj_name} />
-              </div>
-            </div>
-
+          <div className="task-form-body-dropdowns">       
             <div className="task-form-body-dropdowns-date">
               <div className="task-form-body-dropdowns-date-helper">
                 <TextField
