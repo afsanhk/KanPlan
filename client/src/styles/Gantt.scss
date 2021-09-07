@@ -28,17 +28,16 @@
   }
   // Controls background color for alternate rows
   .e-altrow {
-    background-color: #d3e7f8;
+    //  background-color: #d3e7f8;
   }
   // Controls background color for all cells, couldn't do fonts. Overrides row and altrow
   .e-rowcell {
-    background-color: #d3e7f8;
+    background-color: #fcfcfc;
   }
 }
 
-
-
-.e-gantt .e-gantt-chart .e-timeline-top-header-cell, .e-gantt .e-gantt-chart .e-timeline-single-header-cell {
+.e-gantt .e-gantt-chart .e-timeline-top-header-cell,
+.e-gantt .e-gantt-chart .e-timeline-single-header-cell {
   font-size: 15px;
   font-weight: normal;
 }
@@ -48,18 +47,26 @@
   font-size: 20px;
 }
 
-//column font 
+//column font
 .e-grid .e-rowcell {
   font-size: 16px;
 }
 
 //for the column dividers
-.e-grid .e-rowcell, .e-grid .e-groupcaption, .e-grid .e-indentcell, .e-grid .e-recordplusexpand, .e-grid .e-recordpluscollapse, .e-grid .e-detailrowcollapse, .e-grid .e-detailrowexpand, .e-grid .e-detailindentcell, .e-grid .e-detailcell {
-  border-color: base.$medium-grey
+.e-grid .e-rowcell,
+.e-grid .e-groupcaption,
+.e-grid .e-indentcell,
+.e-grid .e-recordplusexpand,
+.e-grid .e-recordpluscollapse,
+.e-grid .e-detailrowcollapse,
+.e-grid .e-detailrowexpand,
+.e-grid .e-detailindentcell,
+.e-grid .e-detailcell {
+  border-color: base.$medium-grey;
 }
 
 .e-gantt .e-gantt-chart .e-chart-row-border {
-  border-color: rgba(189, 189, 189, 0.6)
+  border-color: rgba(189, 189, 189, 0.6);
 }
 
 // Progress bar colors and borders
@@ -101,13 +108,12 @@
           border-bottom-color: #bdbdbd;
         }
         .e-milestone-bottom {
-          border-bottom-color: #bdbdbd;
+          border-top-color: #bdbdbd;
         }
       }
     }
   }
 }
-
 
 // .buttons {
 //   display: flex;
