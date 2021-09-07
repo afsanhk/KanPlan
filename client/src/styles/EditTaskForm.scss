@@ -21,13 +21,6 @@
 
   .task-form-header {
     border-bottom: 2px solid base.$dark-grey;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    width: 100%;
-    margin-top: 0;
-    overflow: auto;
-    overflow-wrap: break-word;
 
     h1 {
       width: 80%;
@@ -62,6 +55,26 @@
         position: absolute;
         top: 25px;
         right: -5px;
+      }
+    }
+  }
+
+  .task-form-project_name {
+    margin-top: 20px;
+    display: flex;
+
+    .task-form-project_name-div {
+      width: 80%;
+
+      .MuiListItemText-primary {
+        font-size: 0.8em;
+        color: grey;
+      }
+      .MuiListItemText-secondary {
+        padding-bottom: 3px;
+        font-size: 1.5em;
+        font-weight: 500;
+        color: base.$dark-dark-grey;
       }
     }
   }
