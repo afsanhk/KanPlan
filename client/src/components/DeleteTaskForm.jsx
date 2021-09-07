@@ -71,12 +71,10 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
       {task && (
         <div className={[classes.paper]}>
           <ErrorOutlineIcon className={classes.error} color="secondary" />
-          <p className={'delete-modal-text-a'}>Are you sure you want to delete the task:</p>
+          <p className={'delete-modal-text-a'}>You are about to delete the task:</p>
           <span className={'delete-modal-prop-data'}>
             <u>
-              <em>
-                <span>{task.title}</span>
-              </em>
+              <span>{task.title}</span>       
             </u>
           </span>
           <p className={'delete-modal-text-b'}>This action cannot be undone!</p>
@@ -89,13 +87,13 @@ export default function DeleteTaskForm({ close, task, deleteTask, projectID, use
       {project && (
         <div className={[classes.paper]}>
           <ErrorOutlineIcon className={classes.error} color="secondary" />
-          <p className={'delete-modal-text-a'}>Are you sure you want to delete the project:</p>
+          <p className={'delete-modal-text-a'}>You are about to delete the project:</p>
           <p className={'delete-modal-prop-data'}>
-            '
+            
             <u>
-              <em>{project.proj_name}</em>
+              {project.proj_name}
             </u>
-            '?
+            
           </p>
           <p className={'delete-modal-text-b'}>This action cannot be undone!</p>
           <div className={'delete-modal-footer'}>
