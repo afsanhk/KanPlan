@@ -1,6 +1,6 @@
 @use './base';
 
-article {
+.project {
   border: 3px base.$medium-grey solid;
   margin: 20px 0;
   border-radius: base.$border-radius;
