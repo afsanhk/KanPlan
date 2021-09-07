@@ -150,7 +150,6 @@ export default function useApplicationData() {
       .put(`http://localhost:8001/api/tasks/${taskID}`, { newTaskFullData })
       .then(() => {
         setState((prev) => {
-          console.log({ ...prev, ...stateCopy });
           return {
             ...prev,
             ...stateCopy
@@ -171,7 +170,6 @@ export default function useApplicationData() {
   };
 
   const updateKanbanOrder = (projectID, statusIDs, kanbanOrders) => {
-    console.log(statusIDs, kanbanOrders);
     const idToStatus = {
       1: 'To-Do',
       2: 'Late',

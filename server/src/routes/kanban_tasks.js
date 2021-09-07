@@ -35,8 +35,6 @@ module.exports = (db) => {
       });
     });
 
-    // console.log(orderCondition, statusCondition, taskIDs);
-
     db.query(
       `
           UPDATE tasks
