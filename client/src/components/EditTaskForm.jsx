@@ -175,7 +175,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
           <div className="task-form-body-title">          
         {!clickTitle ? (
             <div className="task-form-header-title">
-              <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '8px' }} />
+              <ListItemText primary="Task Title" secondary={state.title} secondaryTypographyProps={{ style: { marginTop: '2px' } }} style={{ marginTop: '16px', marginBottom: '0px' }} />
               <IconButton size="small" className={classes.icon} onClick={handleTitleClick}>
                 <EditOutlinedIcon />
               </IconButton>
@@ -192,11 +192,11 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                 margin="normal"
                 InputLabelProps={{
                   shrink: true,
-                  style: { fontSize: '1em', marginTop: 0 }
+                  style: { fontSize: '1.1em', marginTop: 0 }
                 }}
                 InputProps={{
                   // disableUnderline: true,
-                  style: { fontSize: '1.7em', color: '#757575', width: '100%' }
+                  style: { fontSize: '1.3em', color: '#545454', width: '100%' }
                 }}
                 onChange={(event) => setState((prev) => ({ ...prev, title: event.target.value }))}
               />
@@ -217,7 +217,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                   primary="Task Description"
                   secondary={state.task_description}
                   secondaryTypographyProps={{ style: { marginTop: '2px' } }}
-                  style={{ marginTop: '16px', marginBottom: '7px' }}
+                  style={{ marginTop: '0px', marginBottom: '0px' }}
                 />
                 <IconButton size="small" className={classes.icon} onClick={handleDescClick}>
                   <EditOutlinedIcon />
@@ -238,7 +238,7 @@ function EditTaskForm({ tasks, projects, users, close, editTask }) {
                     style: { fontSize: '1em', marginTop: 2, paddingBottom: '3px' }
                   }}
                   InputProps={{
-                    style: { fontSize: '1.5em', color: '#757575', width: '100%' }
+                    style: { fontSize: '1.3em', color: '#545454', width: '100%' }
                   }}
                   onChange={(event) => setState((prev) => ({ ...prev, task_description: event.target.value }))}
                 />
