@@ -53,7 +53,6 @@ const ProjectKanban = ({ state, addTask, updateKanbanOrder, getKanbanStatus, kan
   useEffect(() => {
     const projectTasks = getTasksForProject(state, projectID).map((i) => state.tasks[i]);
 
-    console.log(kanbanStatus);
     if (kanbanStatus.length) {
       kanbanStatus.forEach((obj) => {
         if (obj.status === 'Late') {
@@ -79,6 +78,8 @@ const ProjectKanban = ({ state, addTask, updateKanbanOrder, getKanbanStatus, kan
           initialData.tasks[task.id] = task;
         }
       });
+      setKanbanState((prev) => ({ ...prev, ...initialData }));
+    } else {
       setKanbanState((prev) => ({ ...prev, ...initialData }));
     }
   }, [kanbanStatus]);
