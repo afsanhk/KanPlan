@@ -1,23 +1,27 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
     tasks: {},
     projects: {},
-    users: {}
+    users: {},
   });
   const [kanbanStatus, setKanbanStatus] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([axios.get('http://localhost:8001/api/tasks'), axios.get('http://localhost:8001/api/projects'), axios.get('http://localhost:8001/api/users')]).then((all) => {
+    Promise.all([
+      axios.get("http://localhost:8001/api/tasks"),
+      axios.get("http://localhost:8001/api/projects"),
+      axios.get("http://localhost:8001/api/users"),
+    ]).then((all) => {
       //updates the state with all the information received from the axios get requests
       setState((prev) => ({
         ...prev,
         tasks: all[0].data,
         projects: all[1].data,
-        users: all[2].data
+        users: all[2].data,
       }));
       setLoading(false);
     });
@@ -35,13 +39,13 @@ export default function useApplicationData() {
         const stateCopy = JSON.parse(JSON.stringify(state));
 
         stateCopy.tasks[taskID] = { ...newTask, id: taskID, kanban_order: totalTasks };
-        stateCopy.projects[projectID].project_tasks.push(taskID);
+        stateCopy.projects[projectID].project_tasks.unshift(taskID); // This was push before
 
         taskUsersID.forEach((id) => {
-          stateCopy.users[id].user_tasks.push(taskID);
+          stateCopy.users[id].user_tasks.unshift(taskID); // This was push before
           setState((prev) => ({ ...prev, ...stateCopy }));
         });
-        console.log('Inside add Task STATECOPY:', stateCopy); //.tasks[taskID].status); //no status?
+        console.log("Inside add Task STATECOPY:", stateCopy); //.tasks[taskID].status); //no status?
       });
   };
 
@@ -83,15 +87,15 @@ export default function useApplicationData() {
 
   const editTask = async (newTaskData, taskID) => {
     const statusToID = {
-      'To-Do': 1,
+      "To-Do": 1,
       Late: 2,
-      'In Progress': 3,
-      Done: 4
+      "In Progress": 3,
+      Done: 4,
     };
     const priorityToID = {
       None: 1,
       Low: 2,
-      High: 3
+      High: 3,
     };
     const stateCopy = JSON.parse(JSON.stringify(state));
 
@@ -152,7 +156,7 @@ export default function useApplicationData() {
         setState((prev) => {
           return {
             ...prev,
-            ...stateCopy
+            ...stateCopy,
           };
         });
       })
@@ -171,10 +175,10 @@ export default function useApplicationData() {
 
   const updateKanbanOrder = (projectID, statusIDs, kanbanOrders) => {
     const idToStatus = {
-      1: 'To-Do',
-      2: 'Late',
-      3: 'In Progress',
-      4: 'Done'
+      1: "To-Do",
+      2: "Late",
+      3: "In Progress",
+      4: "Done",
     };
     const stateCopy = JSON.parse(JSON.stringify(state));
 
@@ -256,7 +260,7 @@ export default function useApplicationData() {
           ...newProject,
           id: projectID,
           manager_name: newProject.manager_name,
-          project_tasks: [null]
+          project_tasks: [null],
         };
         // For each team member, add the project ID user_projects
         newProject.team_members.forEach((memberID) => stateCopy.users[memberID].user_projects.unshift(projectID));
@@ -314,10 +318,12 @@ export default function useApplicationData() {
 
     setState((prev) => ({
       ...prev,
-      projects: { ...prev.projects, [projectID]: stateCopy.projects[projectID] }
+      projects: { ...prev.projects, [projectID]: stateCopy.projects[projectID] },
     }));
 
-    return axios.put(`http://localhost:8001/api/projects/${projectID}`, { newProjectFullData }).catch((error) => console.log(error));
+    return axios
+      .put(`http://localhost:8001/api/projects/${projectID}`, { newProjectFullData })
+      .catch((error) => console.log(error));
   }
 
   return {
@@ -334,6 +340,6 @@ export default function useApplicationData() {
     getKanbanStatus,
     kanbanStatus,
     updateKanbanOrder,
-    editProject
+    editProject,
   };
 }
