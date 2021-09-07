@@ -140,7 +140,7 @@ function NavBar({ userID }) {
         if (secondsLeft === 0) {
           clearInterval(timer);
         }
-    }, 100);
+    }, 1000);
 
     //makes sure that we can reference the setInterval later, to clear or pause it
     setTimer(minusOneSecond)

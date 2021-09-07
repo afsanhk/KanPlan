@@ -4,11 +4,12 @@
   padding: 3vh 40px;
   min-height: 94vh;
   background-color: base.$light-grey;
+  
+  h1 {
+    height: 6vh;
+  }
 }
 
-h1 {
-  height: 6vh;
-}
 
 // Fonts sizes -sender and -time are repeated again below for margins
 .message-sender {
