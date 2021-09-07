@@ -17,7 +17,7 @@
   // font-family: ;
   // Table header overrides .e-table (Task Names, start date, end date) -- font color
   .e-columnheader {
-    color: #545454;
+    color: #fcfcfc;
   }
   // Controls background color for table rows
   .e-row {
@@ -69,6 +69,11 @@
   border-color: rgba(189, 189, 189, 0.6);
 }
 
+.e-grid .e-headercell,
+.e-grid .e-detailheadercell {
+  background-color: #3d6bb3;
+}
+
 // Progress bar colors and borders
 .e-gantt {
   .e-gantt-chart {
@@ -114,8 +119,3 @@
     }
   }
 }
-
-// .buttons {
-//   display: flex;
-//   justify-content: flex-end;
-// }
