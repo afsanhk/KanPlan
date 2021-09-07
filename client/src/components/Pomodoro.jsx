@@ -92,11 +92,11 @@ function Pomodoro({ onTimerStart, onTimerPause, onTimerReset, secondsLeft, butto
       <div className="pomodoro-body">
         <div className="sliders">
           <p>Work Interval</p>
-          <Slider defaultValue={25} step={1} marks={marks} valueLabelDisplay="auto" max={60} min={1} onChange={handleWorkSliderChange} />
+          <Slider defaultValue={25} step={0.5} marks={marks} valueLabelDisplay="auto" max={60} min={1.5} onChange={handleWorkSliderChange} />
         </div>
         <div className="sliders">
           <p>Short Break</p>
-          <Slider defaultValue={5} step={1} marks={marks} valueLabelDisplay="auto" max={60} min={1} onChange={handleSBreakSliderChange} />
+          <Slider defaultValue={5} step={0.5} marks={marks} valueLabelDisplay="auto" max={60} min={1.5} onChange={handleSBreakSliderChange} />
         </div>
       </div>
     </div>

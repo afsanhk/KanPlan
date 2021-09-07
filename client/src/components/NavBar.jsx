@@ -258,7 +258,7 @@ function NavBar({ userID }) {
 
       <Snackbar 
         open={showSnackbar} 
-        autoHideDuration={6000} 
+        autoHideDuration={20000} 
         onClose={handleCloseSnackbar}
         anchorOrigin={{vertical: 'top', horizontal: 'center'}}
       >

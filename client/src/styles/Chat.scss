@@ -41,10 +41,12 @@
       }
 
       .message-text.not-mine{
-        text-align: right;        
+        text-align: right;   
+        // line-height: 25px;     
       }
 
       .message-text.mine{
+        // line-height: 25px;     
         text-align: left;        
       }
 
