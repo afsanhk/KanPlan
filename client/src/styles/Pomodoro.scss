@@ -7,9 +7,9 @@
   bottom: 111px;
   left: 120px;
   background: base.$off-white;
-  border: base.$border-grey;
-  border-style: solid solid solid none;
-  border-radius: 0px 15px 15px 0px;
+  border: 3px solid rgba(189, 189, 189, 0.3);
+  border-style: solid solid solid solid;
+  border-radius: 15px;
   padding: 18px 20px 0 20px;
   z-index: 99;
   display: flex;
