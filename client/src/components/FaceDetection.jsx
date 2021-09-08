@@ -12,7 +12,7 @@ function FaceDetection({ userID, show }) {
 
   const webcamRef = useRef(null);
   const ctxRef = useRef(null);
-  const countDown = 5;
+  const countDown = 4;
   let count = 0;
 
   useEffect(() => {
@@ -36,9 +36,8 @@ function FaceDetection({ userID, show }) {
           } else {
             count = 0;
           }
-    
+
           if (count === countDown) {
-          
           } else if (count === countDown + 5) {
             capture(count, countDown);
           }
