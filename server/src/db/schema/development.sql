@@ -44,8 +44,7 @@ VALUES
   ('Kyle Cruz', 'kyle@example.com'), -- ID 41
   ('Sylas Serne', 'sylas@example.com'), -- ID 42
   ('William Wang', 'william@example.com'), -- ID 43
-  ('Minghui Tan', 'minghui@example.com'), -- ID 44
-  ('Multi User', 'multi@example.com'); -- ID 45
+  ('Minghui Tan', 'minghui@example.com'); -- ID 44
 
 -- Projects
 INSERT INTO projects (proj_name, manager_id, proj_description)
@@ -87,11 +86,9 @@ VALUES
   (1,1), -- KanPlan
   (1,2),
   (1,3),
-  (1,45),
   (2,4), -- OF
   (2,5), 
   (2,6),
-  (2,45),
   (3,7), -- Dev Community
   (3,8),
   (4,9), -- Fete 
@@ -140,7 +137,7 @@ VALUES
 -- Kanplan
   -- To-Do (ID1)
   ('API Routes', 'Set up API Routes', 2, 4, 1,'2021-08-27','2021-08-28'), -- These 3 are actually done now, but not moved due to ID requirements in task_users seeding.
-  ('React Components', 'Build react components', 3, 4, 1,'2021-08-27','2021-09-01'),
+  ('Edit this!', 'Build react components', 3, 4, 1,'2021-08-27','2021-09-01'),
   ('Kanban DnD', 'Build Kanban containers and drag and drop', 3, 4, 1,'2021-08-27','2021-09-01'),
   -- Late (ID2)
   ('Relax', 'Relax a bit', 1, 2, 1,'2021-08-13','2021-09-11'),
@@ -155,23 +152,15 @@ VALUES
   ('User Stories', 'Create user stories to develop ERD and Wireframes', 1, 4, 1,'2021-08-25','2021-08-25'),
 
 -- OnlyFriends
-  -- To-Do (ID1)
-  ('Learn react-native', 'Mobile stuff is fun', 3, 1, 2,'2021-08-31','2021-12-12'),
-  -- Late (ID2)
-  ('Make friends', 'That''s why we''re making this app!', 3, 2, 2,'2021-08-31','2021-12-12'),
-  -- In-progress (ID3)
-  ('Figure out the back-end', 'Server no bueno', 2, 3, 2,'2021-08-31','2021-12-12'),
-  -- Done (ID4)
+  ('Learn react-native', 'Mobile stuff is fun', 3, 4, 2,'2021-08-31','2021-12-12'),
+  ('Make friends', 'That''s why we''re making this app!', 3, 4, 2,'2021-08-31','2021-12-12'),
+  ('Figure out the back-end', 'Server no bueno', 2, 4, 2,'2021-08-31','2021-12-12'),
   ('Figure out a name!', 'onlyFrands', 1, 4, 2,'2021-08-31','2021-12-12'),
 
 -- DevCommunity 
-  -- To-Do (ID1)
-  ('Build the DBs', 'Mobile stuff is fun', 3, 1, 3,'2021-08-31','2021-12-12'),
-  -- Late (ID2)
-  ('Don''t stress', 'The entire bootcamp has been stress', 3, 2, 3,'2021-08-31','2021-12-12'),
-  -- In-progress (ID3)
-  ('Planning!', 'So many documents so little time.', 2, 3, 3,'2021-08-31','2021-12-12'),
-  -- Done (ID4)
+  ('Build the DBs', 'Mobile stuff is fun', 3, 4, 3,'2021-08-31','2021-12-12'),
+  ('Don''t stress', 'The entire bootcamp has been stress', 3, 4, 3,'2021-08-31','2021-12-12'),
+  ('Planning!', 'So many documents so little time.', 2, 4, 3,'2021-08-31','2021-12-12'),
   ('Find teammates!', 'Eliza and Maggie gonna kill it!', 1, 4, 3,'2021-08-31','2021-12-12');
 
 -- user_tasks
@@ -222,22 +211,32 @@ VALUES
 INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, plan_start, plan_end)
 VALUES
 -- Kanplan(ID1)
-  -- To-Do (ID1)
-  ('Practice demos', 'Prepare pitch and flow', 2, 1, 1, '2021-09-07','2021-09-07'),
-  ('Dry run demo!', 'Show the mentors our work...', 1, 1, 1, '2021-09-08','2021-09-08'),
-  ('Demo the project!', 'Time to show everyone what we''ve been working on!', 3, 1, 1, '2021-09-09','2021-09-09'),
+  ('Practice demos', 'Prepare pitch and flow', 2, 4, 1, '2021-09-07','2021-09-07'),
+  ('Dry run demo!', 'Show the mentors our work...', 1, 3, 1, '2021-09-08','2021-09-08'),
+  ('Demo the project!', 'Time to show everyone what we''ve been working on!', 3, 3, 1, '2021-09-09','2021-09-09'),
   ('Enjoy some well-deserved time off.', 'Bootcamp is over!', 1, 1, 1, '2021-09-09','2021-09-30'),
-  -- Late (ID2)
-
-  -- In-progress (ID3)
-  ('Small bug and styling fixes', 'Polishing up the app.', 3,3,1,'2021-09-03','2021-09-06'),
-
-  -- Done (ID4)
+  ('Small bug and styling fixes', 'Polishing up the app.', 3,4,1,'2021-09-03','2021-09-06'),
   ('Find teammates!', 'TJ, Veronica and Afsan', 1, 4, 1, '2021-08-10','2021-08-13'),
   ('What features to work on?', 'Drag n Drop, Gantt Chart', 2, 4, 1, '2021-08-13','2021-08-25'),
   ('Agree on project', 'Project Management', 3, 4, 1, '2021-08-13','2021-08-25'),
   ('Decide stack', 'PostgreSQL,Express, React, Node', 3, 4, 1, '2021-08-23','2021-08-25'),
-  ('Build user dashboard', 'Storybook testing and react renderimg', 3, 4, 1, '2021-08-27','2021-09-02');
+  ('Build user dashboard', 'Storybook testing and react rendering', 3, 4, 1, '2021-08-27','2021-09-02'),
+
+-- More seeds for other projects to show done
+  ('Just some seed data!', 'Finished the project!', 3, 4, 5, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 4, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 6, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 7, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 8, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 9, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 10, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 11, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 12, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 13, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 14, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 15, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 16, '2021-08-27','2021-09-30'),
+  ('Just some seed data!', 'Finished the project!', 3, 4, 17, '2021-08-27','2021-09-30');
 
 INSERT INTO user_tasks(task_id, user_id)
 VALUES
