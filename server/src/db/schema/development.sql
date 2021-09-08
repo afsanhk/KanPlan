@@ -212,7 +212,7 @@ INSERT INTO tasks (title, task_description, priority_id, status_id, project_id, 
 VALUES
 -- Kanplan(ID1)
   ('Practice demos', 'Prepare pitch and flow', 2, 4, 1, '2021-09-07','2021-09-07'),
-  ('Dry run demo!', 'Show the mentors our work...', 1, 3, 1, '2021-09-08','2021-09-08'),
+  ('Dry run demo!', 'Show the mentors our work...', 1, 4, 1, '2021-09-08','2021-09-08'),
   ('Demo the project!', 'Time to show everyone what we''ve been working on!', 3, 3, 1, '2021-09-09','2021-09-09'),
   ('Enjoy some well-deserved time off.', 'Bootcamp is over!', 1, 1, 1, '2021-09-09','2021-09-30'),
   ('Small bug and styling fixes', 'Polishing up the app.', 3,4,1,'2021-09-03','2021-09-06'),
