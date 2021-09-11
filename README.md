@@ -2,35 +2,33 @@
 
 KanPlan is a project management web app to make organizing your ideas easier!
 
-### Categories
+### Pages
 
-1. Films
-2. TV Series
-3. Books
-4. Restaurants and Cafes
-5. Shopping and Other
-
-<sub><sup> ** Note: As of first release, only these 5 categories are supported. ** </sup></sub>
+1. Home Page
+2. Project Page
+3. Project Overview Page
+4. Gantt Page
+5. Kanban Page
 
 ## Final Product
 
-### Login Page
+### Home Page
 
 ![login](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/login-page.png?raw=true)
 
-### Registration Page
+### Project Page
 
 ![registration](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/register-page.png?raw=true)
 
-### All Tasks Page
+### Project Overview Page
 
 ![allTasks](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/tasks-page.png?raw=true)
 
-### All Tasks - Category Page
+### Gantt Page
 
 ![allTasksCategorized](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/categories-page.png?raw=true)
 
-### Individual Category Pages
+### Kanban Page
 
 ![categoryTasks](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/subcategory-page.png?raw=true)
 
@@ -60,31 +58,172 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ## Getting Started
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+### Setup API (/server)
 
-- Important - Please acquire API Keys for the following APIs and enter in your .env file with the following names:
-  - OMDB_API_KEY - [OMDB](https://www.omdbapi.com/)
-  - YELP_API_KEY - [Yelp Fusion](https://www.yelp.com/developers/documentation/v3)
-  - GOOGLE_API_KEY - [Google Books API](https://developers.google.com/books/docs/v1/using)
-  - SERP_API_KEY - [Google Search API - SERP API](https://serpapi.com/)
+Install dependencies with `npm install`
 
-2. Update the .env file with your correct local information
+### Creating the DB
 
-- username: `labber`
-- password: `labber`
-- database: `midterm`
+User the `psql -U development` command to login to the PostgreSQL server with the username `development` and the password `development`. This command **MUST** be run in a vagrant terminal, we used the PostgreSQL installation provided in the vagrant environment.
 
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
+Create a database with the command `CREATE DATABASE kanplan_development;`.
 
-- Check the db folder to see what gets created and seeded in the SDB
+Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. The `none-postgres` library uses these environment variables by default.
 
-7. Run the server: `npm run local`
+```
+PGHOST=localhost
+PGUSER=development
+PGDATABASE=kanplan_development
+PGPASSWORD=development
+PGPORT=5432
+```
 
-- Note: nodemon is used, so you should not have to restart your server
+### Seeding
 
-8. Visit `http://localhost:8080/`
+Run the development server with `npm start` in the Host environment.
+
+- Make a `GET` request to `/api/debug/reset` with `curl http://localhost:8001/api/debug/reset`.
+- Use the browser to navigate to `http://localhost:8001/api/debug/reset`.
+
+### Run The Server
+
+Running the server normally
+
+```sh
+npm start
+```
+
+### API
+
+#### Projects
+
+`GET /api/projects`
+
+Response
+
+```json
+{
+  {
+    "id": 1,
+    "proj_name": "KanPlan",
+    "manager_id": 1,
+    "planned_start": "2021-09-11T02:56:02.261Z",
+    "planned_end": "2021-09-11T02:56:02.261Z",
+    "proj_description": "KanPlan is a project management web app to make organizing your ideas easier!",
+    "manager_name": "TJ Jung",
+    "team_members": [
+      1,
+      2,
+      3
+    ],
+    "project_tasks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ]
+  }
+}
+```
+
+#### Tasks
+
+`GET /api/tasks`
+
+Response
+
+```json
+{
+  {
+    "id": 1,
+    "title": "API Routes",
+    "task_description": "Set up API Routes",
+    "priority_id": 2,
+    "status_id": 4,
+    "project_id": 1,
+    "plan_start": "2021-08-27",
+    "plan_end": "2021-08-28",
+    "kanban_order": -1,
+    "proj_name": "KanPlan",
+    "priority_name": "Low",
+    "status": "Done",
+    "task_users": [
+      2
+    ]
+  }
+}
+```
+
+#### Users
+
+`GET /api/users`
+Response
+
+```json
+{
+  {
+    "id": 1,
+    "user_name": "TJ Jung",
+    "email": "thisis@email.com",
+    "last_login": "2021-09-11T02:56:02.261Z",
+    "user_tasks": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9,
+      11,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "user_projects": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  }
+}
+```
 
 ## Warnings & Tips
 
