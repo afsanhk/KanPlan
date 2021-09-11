@@ -98,7 +98,7 @@ Use the `psql -U development` command to login to the PostgreSQL server with the
 
 Create a database with the command `CREATE DATABASE kanplan_development;`.
 
-Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. The `none-postgres` library uses these environment variables by default.
+Copy the `.env.example` file to `.env.development` and fill in the necessary PostgreSQL configuration. The `node-postgres` library uses these environment variables by default.
 
 ```
 PGHOST=localhost
@@ -246,7 +246,7 @@ Install dependencies with `npm install`
 
 ## Running
 
-Running Webpack Development Server by `npm start`
+Running Webpack Development client by `npm start`
 
 # Others
 
