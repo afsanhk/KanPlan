@@ -12,51 +12,79 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ## Home Page
 
-![homepage]()
+![homepage](https://github.com/afsanhk/KanPlan/blob/master/docs/homepage.png)
 
 ### Edit Task
 
-![editTask]()
+![editTask](https://github.com/afsanhk/KanPlan/blob/master/docs/editTask.png)
 
 ### Delete Task
 
-![deleteTask]()
+![deleteTask](https://github.com/afsanhk/KanPlan/blob/master/docs/deleteTask.png)
+
+### Pomodoro
+
+![pomodoro](https://github.com/afsanhk/KanPlan/blob/master/docs/pomodoro.gif)
 
 ## Project Page
 
-![projectpage]()
+![projectpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectPage.png)
 
 ### Add Project
 
-![addproject]()
+![addproject](https://github.com/afsanhk/KanPlan/blob/master/docs/addProject.png)
 
 ### Delete Project
 
-![deleteproject]()
+![deleteproject](https://github.com/afsanhk/KanPlan/blob/master/docs/deleteProject.png)
 
 ## Project Overview Page
 
-![projectoverviewpage]()
+![projectoverviewpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectOverviewPage.png)
 
 ### Add Task
 
-![addTask]()
+![addTask](https://github.com/afsanhk/KanPlan/blob/master/docs/addTask.png)
 
 ### Edit Status
 
-![editstatus]()
+![editstatus](https://github.com/afsanhk/KanPlan/blob/master/docs/editStatus.gif)
 
 ### Edit Priority
 
-![editpriority]()
+![editpriority](https://github.com/afsanhk/KanPlan/blob/master/docs/editPriority.gif)
+
+### Project Users
+
+![projectUsers](https://github.com/afsanhk/KanPlan/blob/master/docs/projectUsers.png)
+
+### Edit Project Users
+
+![editUsers](https://github.com/afsanhk/KanPlan/blob/master/docs/editUsers.gif)
 
 ## Gantt Page
 
-![ganttpage]()
+![ganttpage](https://github.com/afsanhk/KanPlan/blob/master/docs/ganttPage.png)
 
 ## Kanban Page
 
-![kanbanpage]()
+![kanbanpage](https://github.com/afsanhk/KanPlan/blob/master/docs/kanbanPage.png)
+
+### Drag and Drop
+
+![dnd](https://github.com/afsanhk/KanPlan/blob/master/docs/dnd.gif)
+
+## Chat Room
+
+![chatroom](https://github.com/afsanhk/KanPlan/blob/master/docs/chatroom.png)
+
+## Add Chat
+
+![addChat](https://github.com/afsanhk/KanPlan/blob/master/docs/addChat.gif)
+
+## User Profile Image Generator
+
+![profileImage]()
 
 # Getting Started (/server)
 
