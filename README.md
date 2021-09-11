@@ -14,47 +14,51 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ### Home Page
 
-![login](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/login-page.png?raw=true)
+![homepage]()
 
 ### Project Page
 
-![registration](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/register-page.png?raw=true)
+![projectpage]()
+
+### Add Project
+
+![addproject]()
+
+### Delete Project
+
+![deleteproject]()
 
 ### Project Overview Page
 
-![allTasks](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/tasks-page.png?raw=true)
+![projectoverviewpage]()
 
 ### Gantt Page
 
-![allTasksCategorized](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/categories-page.png?raw=true)
+![ganttpage]()
 
 ### Kanban Page
 
-![categoryTasks](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/subcategory-page.png?raw=true)
+![kanbanpage]()
 
 ### Add Task
 
-![addTask](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/add-task.gif)
+![addTask]()
 
 ### Edit Task
 
-![editTask](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/edit-button.gif?raw=true)
+![editTask]()
 
-### Edit Category
+### Edit Status
 
-![editCategory](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/edit-category.gif?raw=true)
+![editstatus]()
 
-### Complete Task
+### Edit Priority
 
-![completeTask](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/complete-task.gif)
+![editpriority]()
 
 ### Delete Task
 
-![deleteTask](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/delete-task.gif)
-
-### Complete List
-
-![completeList](https://github.com/mhmozaffari1985/LHL-midterm-project/blob/master/docs/complete-list.gif)
+![deleteTask]()
 
 # Getting Started
 
