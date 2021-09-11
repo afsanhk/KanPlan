@@ -112,32 +112,10 @@ Response
     "proj_description": "KanPlan is a project management web app to make organizing your ideas easier!",
     "manager_name": "TJ Jung",
     "team_members": [
-      1,
-      2,
-      3
+      ...
     ],
     "project_tasks": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29
+      ...
     ]
   }
 }
@@ -165,7 +143,7 @@ Response
     "priority_name": "Low",
     "status": "Done",
     "task_users": [
-      2
+      ...
     ]
   }
 }
@@ -174,6 +152,7 @@ Response
 #### Users
 
 `GET /api/users`
+
 Response
 
 ```json
@@ -184,42 +163,28 @@ Response
     "email": "thisis@email.com",
     "last_login": "2021-09-11T02:56:02.261Z",
     "user_tasks": [
-      2,
-      3,
-      4,
-      5,
-      6,
-      8,
-      9,
-      11,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28
+      ...
     ],
     "user_projects": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17
+      ...
+    ]
+  }
+}
+```
+
+#### Members
+
+`GET /api/member/project/:id`
+
+Response
+
+```json
+{
+  {
+    "manager_id": 1,
+    "project_id": 1,
+    "team_members": [
+      ...
     ]
   }
 }
