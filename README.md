@@ -94,7 +94,7 @@ Install dependencies with `npm install`
 
 ## Creating the DB
 
-User the `psql -U development` command to login to the PostgreSQL server with the username `development` and the password `development`. This command **MUST** be run in a vagrant terminal, we used the PostgreSQL installation provided in the vagrant environment.
+Use the `psql -U development` command to login to the PostgreSQL server with the username `development` and the password `development`. This command **MUST** be run in a vagrant terminal, we used the PostgreSQL installation provided in the vagrant environment.
 
 Create a database with the command `CREATE DATABASE kanplan_development;`.
 
