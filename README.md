@@ -10,7 +10,7 @@ KanPlan is a project management web app to make organizing your ideas easier!
 4. Gantt Page
 5. Kanban Page
 
-### Home Page
+## Home Page
 
 ![homepage](https://github.com/afsanhk/KanPlan/blob/master/docs/homepage.png)
 
@@ -26,7 +26,7 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![pomodoro](https://github.com/afsanhk/KanPlan/blob/master/docs/pomodoro.gif)
 
-### Project Page
+## Project Page
 
 ![projectpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectPage.png)
 
@@ -38,7 +38,7 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![deleteproject](https://github.com/afsanhk/KanPlan/blob/master/docs/deleteProject.png)
 
-### Project Overview Page
+## Project Overview Page
 
 ![projectoverviewpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectOverviewPage.png)
 
@@ -62,11 +62,11 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![editUsers](https://github.com/afsanhk/KanPlan/blob/master/docs/editUsers.gif)
 
-### Gantt Page
+## Gantt Page
 
 ![ganttpage](https://github.com/afsanhk/KanPlan/blob/master/docs/ganttPage.png)
 
-### Kanban Page
+## Kanban Page
 
 ![kanbanpage](https://github.com/afsanhk/KanPlan/blob/master/docs/kanbanPage.png)
 
@@ -74,7 +74,7 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![dnd](https://github.com/afsanhk/KanPlan/blob/master/docs/dnd.gif)
 
-### Chat Room
+## Chat Room
 
 ![chatroom](https://github.com/afsanhk/KanPlan/blob/master/docs/chatroom.png)
 
