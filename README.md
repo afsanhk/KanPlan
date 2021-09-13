@@ -10,9 +10,13 @@ KanPlan is a project management web app to make organizing your ideas easier!
 4. Gantt Page
 5. Kanban Page
 
-## Home Page
+### Home Page
 
 ![homepage](https://github.com/afsanhk/KanPlan/blob/master/docs/homepage.png)
+
+### Add Task
+
+![addTask](https://github.com/afsanhk/KanPlan/blob/master/docs/addTask.png)
 
 ### Edit Task
 
@@ -26,7 +30,7 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![pomodoro](https://github.com/afsanhk/KanPlan/blob/master/docs/pomodoro.gif)
 
-## Project Page
+### Project Page
 
 ![projectpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectPage.png)
 
@@ -38,13 +42,9 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![deleteproject](https://github.com/afsanhk/KanPlan/blob/master/docs/deleteProject.png)
 
-## Project Overview Page
+### Project Overview Page
 
 ![projectoverviewpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectOverviewPage.png)
-
-### Add Task
-
-![addTask](https://github.com/afsanhk/KanPlan/blob/master/docs/addTask.png)
 
 ### Edit Status
 
@@ -62,11 +62,11 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![editUsers](https://github.com/afsanhk/KanPlan/blob/master/docs/editUsers.gif)
 
-## Gantt Page
+### Gantt Page
 
 ![ganttpage](https://github.com/afsanhk/KanPlan/blob/master/docs/ganttPage.png)
 
-## Kanban Page
+### Kanban Page
 
 ![kanbanpage](https://github.com/afsanhk/KanPlan/blob/master/docs/kanbanPage.png)
 
@@ -74,17 +74,34 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![dnd](https://github.com/afsanhk/KanPlan/blob/master/docs/dnd.gif)
 
-## Chat Room
+### Chat Room
 
 ![chatroom](https://github.com/afsanhk/KanPlan/blob/master/docs/chatroom.png)
 
-## Add Chat
+### Chat
 
 ![addChat](https://github.com/afsanhk/KanPlan/blob/master/docs/addChat.gif)
 
-## User Profile Image Generator
+### User Profile Image Generator
 
 ![profileImage]()
+
+# Contributors
+
+- [Taejin (TJ) Jung](https://github.com/taejin5314)
+- [Veronica Leung](https://github.com/tungtung233)
+- [Afsanul H. Khan](https://github.com/afsanhk)
+
+# Stack
+
+- Built using React, Node, Express and PostgreSQL.
+- React-beautiful-DND used for drag and drop on the Kanban page.
+- Syncfusion gantt (used under free community license) for the Gantt Chart.
+- Tensorflow-blazeface & react-webcam for profile picture change feature.
+- Socket.io used for chat feature with websockets.
+- Chart.js and react-chartjs-2 for charts.
+- Material UI for pre-made components.
+- Styled with Material UI overrides and CSS/SASS.
 
 # Getting Started (/server)
 
@@ -273,7 +290,7 @@ Running Webpack Development client by `npm start`
 - socket.io
 - storybook
 - material-ui
-- syncfunsion
+- syncfusion/ej2-react-gantt
 - chart.js
 - moment
 - react
@@ -281,4 +298,12 @@ Running Webpack Development client by `npm start`
 - react-dom
 - react-router-dom
 - react-webcam
+- react-chartjs-2
+- react-scripts
+- react-scroll-to-bottom
+- socket.io-client
 - sass
+
+## Licenses
+
+The syncfusion library used for the Gantt chart was utilized under the free community license provided by syncfusion.
