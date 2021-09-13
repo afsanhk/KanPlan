@@ -14,10 +14,6 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ![homepage](https://github.com/afsanhk/KanPlan/blob/master/docs/homepage.png)
 
-### Add Task
-
-![addTask](https://github.com/afsanhk/KanPlan/blob/master/docs/addTask.png)
-
 ### Edit Task
 
 ![editTask](https://github.com/afsanhk/KanPlan/blob/master/docs/editTask.png)
@@ -45,6 +41,10 @@ KanPlan is a project management web app to make organizing your ideas easier!
 ### Project Overview Page
 
 ![projectoverviewpage](https://github.com/afsanhk/KanPlan/blob/master/docs/projectOverviewPage.png)
+
+### Add Task
+
+![addTask](https://github.com/afsanhk/KanPlan/blob/master/docs/addTask.png)
 
 ### Edit Status
 
