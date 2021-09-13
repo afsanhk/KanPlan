@@ -80,11 +80,11 @@ KanPlan is a project management web app to make organizing your ideas easier!
 
 ### Chat
 
-![addChat](https://github.com/afsanhk/KanPlan/blob/master/docs/addChat.gif)
+![addChat](https://github.com/afsanhk/KanPlan/blob/master/docs/websocketchat.gif?raw=true)
 
 ### User Profile Image Generator
 
-![profileImage]()
+![profileImage](https://github.com/afsanhk/KanPlan/blob/master/docs/webcamCapture.gif?raw=true)
 
 # Contributors
 
